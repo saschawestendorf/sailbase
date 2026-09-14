@@ -5,10 +5,12 @@ import SearchForm from "@/components/SearchForm";
 import {
   ApiError,
   type Base,
+  type BoatClass,
   getBases,
   getBoatClasses,
   getRegions,
   searchBoats,
+  type Region,
   type SearchResult,
 } from "@/lib/api";
 import { addDays, isoDay } from "@/lib/format";
@@ -31,17 +33,22 @@ export default async function SearchPage(props: PageProps<"/search">) {
   const endDate = first(sp.end_date) ?? addDays(startDate, 7);
   const sort = first(sp.sort) ?? "fit";
 
-  const [regions, bases, boatClasses] = await Promise.all([
-    getRegions(),
-    getBases(),
-    getBoatClasses(),
-  ]);
+  let regions: Region[] = [];
+  let bases: Base[] = [];
+  let boatClasses: BoatClass[] = [];
+  let catalogError: string | null = null;
+  try {
+    [regions, bases, boatClasses] = await Promise.all([getRegions(), getBases(), getBoatClasses()]);
+  } catch (err) {
+    if (!(err instanceof ApiError)) throw err;
+    catalogError = "Die Suchfilter konnten nicht geladen werden. Bitte versuche es erneut.";
+  }
   const basesById: Record<string, Base> = Object.fromEntries(bases.map((b) => [b.id, b]));
 
   const query = {
     start_date: startDate,
     end_date: endDate,
-    persons: first(sp.persons) ?? "2",
+    persons: first(sp.persons) ?? "4",
     min_nights: first(sp.min_nights),
     max_nights: first(sp.max_nights),
     region: first(sp.region),
@@ -91,6 +98,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8">
       <SearchForm regions={regions} bases={bases} boatClasses={boatClasses} />
+      {catalogError ? <p role="alert" className="card mt-4 p-5 text-sm text-warn">{catalogError}</p> : null}
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-lg font-semibold">
