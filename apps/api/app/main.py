@@ -6,7 +6,18 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from app.api.routes import auth, catalog, charterer, commerce, operations, partner, search, uploads
+from app.api.routes import (
+    auth,
+    catalog,
+    catalog_master,
+    charterer,
+    commerce,
+    operations,
+    partner,
+    reviews,
+    search,
+    uploads,
+)
 from app.core.config import get_settings
 from app.core.db import Base, engine
 
@@ -46,6 +57,8 @@ def create_app() -> FastAPI:
     )
     app.include_router(auth.router)
     app.include_router(catalog.router)
+    app.include_router(catalog_master.router)
+    app.include_router(reviews.router)
     app.include_router(search.router)
     app.include_router(commerce.router)
     app.include_router(charterer.router)

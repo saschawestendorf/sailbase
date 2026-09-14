@@ -3,6 +3,7 @@ from datetime import date
 from pydantic import BaseModel, Field
 
 from app.schemas.common import ORMModel
+from app.schemas.reviews import BoatImageOut, RatingSummaryOut
 
 
 class RegionOut(ORMModel):
@@ -96,6 +97,14 @@ class BoatOut(ORMModel):
 
 class BoatDetailOut(BoatOut):
     pricing: PricingPolicyOut | None
+    model_version_id: str | None = None
+    variant_ids: list = Field(default_factory=list)
+    spec_overrides: dict = Field(default_factory=dict)
+    spec_sources: dict = Field(default_factory=dict)
+    unknown_specs: list = Field(default_factory=list)
+    gallery: list["BoatImageOut"] = Field(default_factory=list)
+    ratings: "RatingSummaryOut | None" = None
+    model_info: dict = Field(default_factory=dict)
 
 
 class PriceBreakdown(BaseModel):

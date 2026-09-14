@@ -13,14 +13,28 @@ from app.models import (
     BlockType,
     Boat,
     BoatClass,
+    BoatImage,
+    BoatModel,
+    Booking,
+    BookingStatus,
     Charterer,
+    ImageOrigin,
+    Manufacturer,
+    ModelVersion,
     PricingPolicy,
+    Quote,
     Region,
+    Review,
+    ReviewStatus,
     ServicePartner,
     User,
     UserRole,
+    VariantOption,
 )
-from app.seed import data
+from app.models.entities import utcnow
+from app.seed import catalog_data, data
+from app.services import catalog as catalog_service
+from app.services.slugs import slugify
 
 
 def availability_free(db: Session, boat_id: str, start: date, end: date) -> bool:
@@ -36,9 +50,202 @@ def availability_free(db: Session, boat_id: str, start: date, end: date) -> bool
 
 
 def _slug(name: str) -> str:
-    import re
+    return slugify(name, fallback="boot")
 
-    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+def seed_catalog(db: Session) -> dict[str, ModelVersion]:
+    """Manufacturers, models, generations and factory options. Idempotent."""
+    manufacturers: dict[str, Manufacturer] = {}
+    for m in catalog_data.MANUFACTURERS:
+        obj = db.query(Manufacturer).filter(Manufacturer.slug == m["slug"]).one_or_none()
+        if obj is None:
+            obj = Manufacturer(slug=m["slug"])
+        obj.name, obj.country = m["name"], m["country"]
+        db.add(obj)
+        manufacturers[m["slug"]] = obj
+    db.flush()
+
+    versions: dict[str, ModelVersion] = {}
+    for entry in catalog_data.MODELS:
+        manufacturer = manufacturers[entry["manufacturer"]]
+        model = (
+            db.query(BoatModel)
+            .filter(BoatModel.manufacturer_id == manufacturer.id, BoatModel.slug == entry["slug"])
+            .one_or_none()
+        )
+        if model is None:
+            model = BoatModel(manufacturer_id=manufacturer.id, slug=entry["slug"])
+        model.name, model.designer = entry["name"], entry["designer"]
+        db.add(model)
+        db.flush()
+
+        spec = entry["version"]
+        version = (
+            db.query(ModelVersion)
+            .filter(ModelVersion.model_id == model.id, ModelVersion.name == spec["name"])
+            .one_or_none()
+        )
+        if version is None:
+            version = ModelVersion(
+                model_id=model.id, name=spec["name"], length_m=spec["length_m"], year_from=spec["year_from"]
+            )
+        for field, value in spec.items():
+            setattr(version, field, value)
+        version.source = catalog_data.DEMO_SOURCE
+        version.model_images = [
+            f"https://picsum.photos/seed/model-{entry['manufacturer']}-{entry['slug']}/1200/800"
+        ]
+        db.add(version)
+        db.flush()
+
+        for variant in entry["variants"]:
+            option = (
+                db.query(VariantOption)
+                .filter(
+                    VariantOption.version_id == version.id,
+                    VariantOption.code == variant["code"],
+                    VariantOption.kind == variant["kind"],
+                )
+                .one_or_none()
+            )
+            if option is None:
+                option = VariantOption(
+                    version_id=version.id, kind=variant["kind"], code=variant["code"], name=variant["name"]
+                )
+            for field, value in variant.items():
+                setattr(option, field, value)
+            db.add(option)
+        versions[f"{entry['manufacturer']}/{entry['slug']}"] = version
+    db.flush()
+    return versions
+
+
+def _link_boat_to_catalog(db: Session, boat: Boat, versions: dict[str, ModelVersion]) -> None:
+    link = catalog_data.BOAT_CATALOG_LINK.get(boat.slug)
+    if link is None:
+        return
+    manufacturer_slug, model_slug, variant_codes = link
+    version = versions.get(f"{manufacturer_slug}/{model_slug}")
+    if version is None:
+        return
+    chosen: list[VariantOption] = []
+    seen: set[str] = set()
+    for code in variant_codes:
+        option = next((v for v in version.variants if v.code == code and v.kind not in seen), None)
+        if option is not None:
+            seen.add(option.kind)
+            chosen.append(option)
+    spec = catalog_service.resolve(version, chosen)
+    boat.model_version_id = version.id
+    boat.variant_ids = [v.id for v in chosen]
+    boat.spec_sources = spec.sources
+    boat.unknown_specs = spec.unknown
+    # The demo boats carry hand-written specs; keep them and record where they deviate.
+    boat.spec_overrides = {
+        field: getattr(boat, field)
+        for field, value in spec.values.items()
+        if value is not None and getattr(boat, field, None) not in (None, value)
+    }
+
+
+def _seed_gallery(db: Session, boat: Boat) -> None:
+    if any(i.origin == ImageOrigin.OWNER.value for i in boat.gallery):
+        return
+    db.add(
+        BoatImage(
+            boat_id=boat.id,
+            url=f"https://picsum.photos/seed/{boat.slug}/1200/800",
+            origin=ImageOrigin.OWNER.value,
+            caption="Aufnahme des Vercharterers",
+            credit=boat.charterer.name if boat.charterer else "",
+            sort_order=0,
+        )
+    )
+    version = db.get(ModelVersion, boat.model_version_id) if boat.model_version_id else None
+    for offset, url in enumerate(list(version.model_images or []) if version else []):
+        db.add(
+            BoatImage(
+                boat_id=boat.id,
+                url=url,
+                origin=ImageOrigin.MODEL.value,
+                caption="Modellfoto des Herstellers",
+                credit="Hersteller",
+                sort_order=1000 + offset,
+            )
+        )
+
+
+def _seed_reviews(db: Session, boats_by_slug: dict[str, Boat]) -> None:
+    """Reviews hang off a finished booking, so the demo creates that booking too."""
+    if db.query(Review).first():
+        return
+    today = date.today()
+    for index, entry in enumerate(catalog_data.DEMO_REVIEWS):
+        boat = boats_by_slug.get(entry["boat"])
+        if boat is None:
+            continue
+        month = today.replace(day=1) + timedelta(days=31 * entry["month_offset"])
+        start = month.replace(day=8)
+        end = start + timedelta(days=7)
+        total = (boat.pricing.reference_price_cents if boat.pricing else 20000) * 7
+        quote = Quote(
+            boat_id=boat.id,
+            start_date=start,
+            end_date=end,
+            persons=min(4, boat.max_persons or 4),
+            total_cents=total,
+            breakdown={},
+            expires_at=utcnow(),
+        )
+        db.add(quote)
+        db.flush()
+        booking = Booking(
+            reference=f"SB-DEMO{index:02d}",
+            boat_id=boat.id,
+            quote_id=quote.id,
+            customer_email=f"demo{index}@example.com",
+            customer_name=entry["author"],
+            persons=min(4, boat.max_persons or 4),
+            start_date=start,
+            end_date=end,
+            pickup_base_id=boat.base_id,
+            dropoff_base_id=boat.base_id,
+            status=BookingStatus.SETTLED.value,
+            total_cents=total,
+            deposit_cents=0,
+            security_deposit_cents=boat.deposit_cents,
+        )
+        db.add(booking)
+        db.flush()
+        review = Review(
+            booking_id=booking.id,
+            boat_id=boat.id,
+            charterer_id=boat.charterer_id,
+            model_version_id=boat.model_version_id,
+            author_name=entry["author"],
+            charter_month=start.strftime("%Y-%m"),
+            title=entry["title"],
+            body=entry["body"],
+            status=ReviewStatus.PUBLISHED.value,
+            published_at=utcnow(),
+            **entry["ratings"],
+        )
+        db.add(review)
+        db.flush()
+        db.add(
+            BoatImage(
+                boat_id=boat.id,
+                url=f"https://picsum.photos/seed/guest-{boat.slug}-{index}/1200/800",
+                origin=ImageOrigin.GUEST.value,
+                caption=entry["title"],
+                credit=entry["author"],
+                charter_month=start.strftime("%Y-%m"),
+                booking_id=booking.id,
+                review_id=review.id,
+                sort_order=100 + index,
+            )
+        )
+    db.flush()
 
 
 def seed(db: Session, *, with_demo_bookings: bool = True) -> dict:
@@ -99,6 +306,8 @@ def seed(db: Session, *, with_demo_bookings: bool = True) -> dict:
         charterers[c["slug"]] = obj
     db.flush()
 
+    versions = seed_catalog(db)
+
     boats = []
     for b in data.BOATS:
         slug = _slug(b["name"])
@@ -146,8 +355,13 @@ def seed(db: Session, *, with_demo_bookings: bool = True) -> dict:
         policy.floor_price_cents = b["floor"] * 100
         policy.ceiling_price_cents = b["ceiling"] * 100
         db.add(policy)
+        _link_boat_to_catalog(db, obj, versions)
+        _seed_gallery(db, obj)
         boats.append(obj)
     db.flush()
+    if with_demo_bookings:
+        # Demo reviews hang off demo bookings, so they belong to the same switch.
+        _seed_reviews(db, {b.slug: b for b in boats})
 
     # Service partners
     for pdata in data.PARTNERS:
@@ -224,7 +438,13 @@ def seed(db: Session, *, with_demo_bookings: bool = True) -> dict:
                     )
                     db.flush()
     db.commit()
-    return {"regions": len(regions), "bases": len(bases), "boats": len(boats)}
+    return {
+        "regions": len(regions),
+        "bases": len(bases),
+        "boats": len(boats),
+        "models": len(versions),
+        "reviews": db.query(Review).count(),
+    }
 
 
 def main() -> None:

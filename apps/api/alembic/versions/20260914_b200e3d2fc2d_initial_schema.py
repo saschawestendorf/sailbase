@@ -1,14 +1,14 @@
 """initial schema
 
-Revision ID: 4d1594f8819e
+Revision ID: b200e3d2fc2d
 Revises: 
-Create Date: 2026-09-14 15:02:46.095861
+Create Date: 2026-09-14 16:32:22.356544
 """
 from alembic import op
 import sqlalchemy as sa
 
 
-revision = '4d1594f8819e'
+revision = 'b200e3d2fc2d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,16 @@ def upgrade() -> None:
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('min_length_m', sa.Float(), nullable=False),
     sa.Column('max_length_m', sa.Float(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('slug')
+    )
+    op.create_table('manufacturers',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('slug', sa.String(length=100), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
+    sa.Column('country', sa.String(length=2), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('slug')
     )
@@ -62,6 +72,19 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['region_id'], ['regions.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('boat_models',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('manufacturer_id', sa.String(length=32), nullable=False),
+    sa.Column('slug', sa.String(length=120), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
+    sa.Column('designer', sa.String(length=255), nullable=False),
+    sa.Column('hull_type', sa.String(length=40), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['manufacturer_id'], ['manufacturers.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('manufacturer_id', 'slug', name='uq_model_slug')
+    )
     op.create_table('charterers',
     sa.Column('id', sa.String(length=32), nullable=False),
     sa.Column('owner_user_id', sa.String(length=32), nullable=False),
@@ -95,11 +118,49 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('user_id')
     )
+    op.create_table('model_versions',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('model_id', sa.String(length=32), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
+    sa.Column('year_from', sa.Integer(), nullable=False),
+    sa.Column('year_to', sa.Integer(), nullable=True),
+    sa.Column('length_m', sa.Float(), nullable=False),
+    sa.Column('beam_m', sa.Float(), nullable=True),
+    sa.Column('draft_m', sa.Float(), nullable=True),
+    sa.Column('displacement_kg', sa.Integer(), nullable=True),
+    sa.Column('sail_area_m2', sa.Float(), nullable=True),
+    sa.Column('engine_hp', sa.Integer(), nullable=True),
+    sa.Column('headroom_cm', sa.Integer(), nullable=True),
+    sa.Column('max_berth_length_cm', sa.Integer(), nullable=True),
+    sa.Column('cabins', sa.Integer(), nullable=True),
+    sa.Column('berths', sa.Integer(), nullable=True),
+    sa.Column('heads', sa.Integer(), nullable=True),
+    sa.Column('max_persons', sa.Integer(), nullable=True),
+    sa.Column('water_tank_l', sa.Integer(), nullable=True),
+    sa.Column('fuel_tank_l', sa.Integer(), nullable=True),
+    sa.Column('character', sa.JSON(), nullable=False),
+    sa.Column('standard_features', sa.JSON(), nullable=False),
+    sa.Column('description', sa.Text(), nullable=False),
+    sa.Column('model_images', sa.JSON(), nullable=False),
+    sa.Column('source', sa.String(length=255), nullable=False),
+    sa.Column('source_url', sa.Text(), nullable=False),
+    sa.Column('verified_on', sa.Date(), nullable=True),
+    sa.Column('revision', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['model_id'], ['boat_models.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('boats',
     sa.Column('id', sa.String(length=32), nullable=False),
     sa.Column('charterer_id', sa.String(length=32), nullable=False),
     sa.Column('base_id', sa.String(length=32), nullable=False),
     sa.Column('boat_class_id', sa.String(length=32), nullable=False),
+    sa.Column('model_version_id', sa.String(length=32), nullable=True),
+    sa.Column('variant_ids', sa.JSON(), nullable=False),
+    sa.Column('spec_overrides', sa.JSON(), nullable=False),
+    sa.Column('spec_sources', sa.JSON(), nullable=False),
+    sa.Column('unknown_specs', sa.JSON(), nullable=False),
     sa.Column('slug', sa.String(length=255), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('manufacturer', sa.String(length=255), nullable=False),
@@ -146,8 +207,32 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['base_id'], ['bases.id'], ),
     sa.ForeignKeyConstraint(['boat_class_id'], ['boat_classes.id'], ),
     sa.ForeignKeyConstraint(['charterer_id'], ['charterers.id'], ),
+    sa.ForeignKeyConstraint(['model_version_id'], ['model_versions.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('slug')
+    )
+    op.create_table('variant_options',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('version_id', sa.String(length=32), nullable=False),
+    sa.Column('kind', sa.String(length=20), nullable=False),
+    sa.Column('code', sa.String(length=60), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
+    sa.Column('is_default', sa.Boolean(), nullable=False),
+    sa.Column('draft_m', sa.Float(), nullable=True),
+    sa.Column('sail_area_m2', sa.Float(), nullable=True),
+    sa.Column('engine_hp', sa.Integer(), nullable=True),
+    sa.Column('cabins', sa.Integer(), nullable=True),
+    sa.Column('berths', sa.Integer(), nullable=True),
+    sa.Column('heads', sa.Integer(), nullable=True),
+    sa.Column('max_persons', sa.Integer(), nullable=True),
+    sa.Column('headroom_cm', sa.Integer(), nullable=True),
+    sa.Column('max_berth_length_cm', sa.Integer(), nullable=True),
+    sa.Column('adds_features', sa.JSON(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['version_id'], ['model_versions.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('version_id', 'kind', 'code', name='uq_variant_code')
     )
     op.create_table('pricing_policies',
     sa.Column('id', sa.String(length=32), nullable=False),
@@ -287,6 +372,38 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('booking_id')
     )
+    op.create_table('reviews',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('booking_id', sa.String(length=32), nullable=False),
+    sa.Column('boat_id', sa.String(length=32), nullable=False),
+    sa.Column('charterer_id', sa.String(length=32), nullable=False),
+    sa.Column('model_version_id', sa.String(length=32), nullable=True),
+    sa.Column('author_user_id', sa.String(length=32), nullable=True),
+    sa.Column('author_name', sa.String(length=255), nullable=False),
+    sa.Column('charter_month', sa.String(length=7), nullable=False),
+    sa.Column('rating_model', sa.Integer(), nullable=True),
+    sa.Column('rating_condition', sa.Integer(), nullable=True),
+    sa.Column('rating_service', sa.Integer(), nullable=True),
+    sa.Column('rating_care', sa.Integer(), nullable=True),
+    sa.Column('rating_cleanliness', sa.Integer(), nullable=True),
+    sa.Column('rating_accuracy', sa.Integer(), nullable=True),
+    sa.Column('rating_equipment', sa.Integer(), nullable=True),
+    sa.Column('rating_organisation', sa.Integer(), nullable=True),
+    sa.Column('rating_handover', sa.Integer(), nullable=True),
+    sa.Column('title', sa.String(length=255), nullable=False),
+    sa.Column('body', sa.Text(), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('published_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['author_user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['boat_id'], ['boats.id'], ),
+    sa.ForeignKeyConstraint(['booking_id'], ['bookings.id'], ),
+    sa.ForeignKeyConstraint(['charterer_id'], ['charterers.id'], ),
+    sa.ForeignKeyConstraint(['model_version_id'], ['model_versions.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('booking_id', name='uq_review_booking')
+    )
     op.create_table('service_orders',
     sa.Column('id', sa.String(length=32), nullable=False),
     sa.Column('booking_id', sa.String(length=32), nullable=False),
@@ -309,6 +426,31 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['partner_id'], ['service_partners.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('boat_images',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('boat_id', sa.String(length=32), nullable=False),
+    sa.Column('url', sa.Text(), nullable=False),
+    sa.Column('origin', sa.String(length=20), nullable=False),
+    sa.Column('caption', sa.String(length=255), nullable=False),
+    sa.Column('sort_order', sa.Integer(), nullable=False),
+    sa.Column('is_public', sa.Boolean(), nullable=False),
+    sa.Column('charter_month', sa.String(length=7), nullable=False),
+    sa.Column('taken_on', sa.Date(), nullable=True),
+    sa.Column('credit', sa.String(length=255), nullable=False),
+    sa.Column('booking_id', sa.String(length=32), nullable=True),
+    sa.Column('review_id', sa.String(length=32), nullable=True),
+    sa.Column('uploaded_by_user_id', sa.String(length=32), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['boat_id'], ['boats.id'], ),
+    sa.ForeignKeyConstraint(['booking_id'], ['bookings.id'], ),
+    sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ),
+    sa.ForeignKeyConstraint(['uploaded_by_user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    with op.batch_alter_table('boat_images', schema=None) as batch_op:
+        batch_op.create_index('ix_boat_images_boat', ['boat_id', 'sort_order'], unique=False)
+
     op.create_table('damage_cases',
     sa.Column('id', sa.String(length=32), nullable=False),
     sa.Column('booking_id', sa.String(length=32), nullable=False),
@@ -331,7 +473,12 @@ def upgrade() -> None:
 def downgrade() -> None:
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_table('damage_cases')
+    with op.batch_alter_table('boat_images', schema=None) as batch_op:
+        batch_op.drop_index('ix_boat_images_boat')
+
+    op.drop_table('boat_images')
     op.drop_table('service_orders')
+    op.drop_table('reviews')
     op.drop_table('payouts')
     with op.batch_alter_table('payments', schema=None) as batch_op:
         batch_op.drop_index(batch_op.f('ix_payments_provider_ref'))
@@ -344,14 +491,18 @@ def downgrade() -> None:
     op.drop_table('bookings')
     op.drop_table('quotes')
     op.drop_table('pricing_policies')
+    op.drop_table('variant_options')
     op.drop_table('boats')
+    op.drop_table('model_versions')
     op.drop_table('service_partners')
     op.drop_table('charterers')
+    op.drop_table('boat_models')
     op.drop_table('bases')
     with op.batch_alter_table('users', schema=None) as batch_op:
         batch_op.drop_index(batch_op.f('ix_users_email'))
 
     op.drop_table('users')
     op.drop_table('regions')
+    op.drop_table('manufacturers')
     op.drop_table('boat_classes')
     # ### end Alembic commands ###

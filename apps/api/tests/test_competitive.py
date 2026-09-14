@@ -10,8 +10,14 @@ from app.services.matching.competitive import similarity, similarity_components
 
 
 def boat(**changes):
-    values = dict(base_id="port", length_m=12, cabins=3, berths=6,
-                  character=["sporty"], features=["autopilot", "furling_main"])
+    values = dict(
+        base_id="port",
+        length_m=12,
+        cabins=3,
+        berths=6,
+        character=["sporty"],
+        features=["autopilot", "furling_main"],
+    )
     return Boat(**(values | changes))
 
 
@@ -55,8 +61,9 @@ def test_weighted_occupancy_merges_blocks_and_excludes_non_demand(db):
         ("owner_use", start, end, None, subject),
         ("booking", end, end + timedelta(days=2), None, far),
     ):
-        db.add(AvailabilityBlock(boat_id=target.id, block_type=kind,
-                                 start_date=s, end_date=e, expires_at=expiry))
+        db.add(
+            AvailabilityBlock(boat_id=target.id, block_type=kind, start_date=s, end_date=e, expires_at=expiry)
+        )
     db.flush()
     expected = 1 / (2 + similarity(subject, far))
     assert comparable_occupancy(db, subject, start, end, now) == pytest.approx(expected)
