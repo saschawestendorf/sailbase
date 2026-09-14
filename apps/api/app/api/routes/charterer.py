@@ -1,4 +1,3 @@
-import re
 from datetime import date, timedelta
 
 from fastapi import APIRouter, HTTPException, status
@@ -11,11 +10,14 @@ from app.models import (
     BlockType,
     Boat,
     BoatClass,
+    BoatImage,
     Booking,
     BookingStatus,
+    ModelVersion,
     PricingPolicy,
 )
 from app.schemas.catalog import BoatDetailOut, PricingPolicyOut
+from app.schemas.catalog_master import BoatFromCatalog
 from app.schemas.charterer import (
     BlockCreate,
     BlockOut,
@@ -26,23 +28,25 @@ from app.schemas.charterer import (
     PricingPolicyUpsert,
 )
 from app.schemas.commerce import BookingOut
+from app.schemas.revenue import PolicyProposal, SimulationOut
 from app.services import availability
 from app.services import bookings as booking_service
+from app.services import catalog as catalog_service
+from app.services import revenue as revenue_service
+from app.services import reviews as review_service
+from app.services.slugs import unique_slug
 
 router = APIRouter(prefix="/charterer", tags=["charterer"])
 
 
 def _slug(db, name: str, exclude_id: str | None = None) -> str:
-    base = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "boot"
-    slug, n = base, 1
-    while True:
-        q = db.query(Boat).filter(Boat.slug == slug)
+    def taken(candidate: str) -> bool:
+        q = db.query(Boat).filter(Boat.slug == candidate)
         if exclude_id:
             q = q.filter(Boat.id != exclude_id)
-        if not q.first():
-            return slug
-        n += 1
-        slug = f"{base}-{n}"
+        return q.first() is not None
+
+    return unique_slug(name, taken, fallback="boot")
 
 
 def _own_boat(db, charterer, boat_id: str) -> Boat:
@@ -275,3 +279,147 @@ def cancel(booking_id: str, db: DB, charterer: CurrentCharterer):
     o = BookingOut.model_validate(b)
     o.boat = db.get(Boat, b.boat_id)
     return o
+
+
+# --------------------------------------------------------------- listing from the catalog
+
+# Owner-supplied fields that are not part of the catalog selection.
+_OWN_FIELDS = (
+    "name",
+    "base_id",
+    "year_refit",
+    "listing_mode",
+    "description",
+    "required_license",
+    "required_experience_nm",
+    "min_days",
+    "max_days",
+    "allowed_nights",
+    "min_lead_days",
+    "turnaround_days",
+    "changeover_weekdays",
+    "handover_options",
+    "one_way_enabled",
+    "one_way_base_ids",
+    "one_way_fee_cents",
+    "deposit_cents",
+    "cleaning_fee_cents",
+    "region_restrictions",
+    "documents",
+    "insurance",
+    "is_active",
+)
+
+
+def _apply_catalog(db, boat: Boat, payload: BoatFromCatalog) -> Boat:
+    """Copy the resolved specification onto the boat.
+
+    The snapshot is deliberate: pricing, matching and contracts read these columns, so a later
+    catalog correction cannot change what a guest already booked.
+    """
+    if db.get(Base_, payload.base_id) is None:
+        raise HTTPException(422, "Unbekannter Stützpunkt")
+    try:
+        version = catalog_service.load_version(db, payload.version_id)
+        variants = catalog_service.validate_selection(
+            version, payload.year_built, payload.variant_ids
+        ) or catalog_service.default_variants(version)
+    except catalog_service.CatalogError as e:
+        raise HTTPException(422, str(e)) from e
+
+    spec = catalog_service.resolve(version, variants, payload.spec_overrides)
+    boat.model_version_id = version.id
+    boat.variant_ids = [v.id for v in variants]
+    boat.spec_overrides = {k: v for k, v in (payload.spec_overrides or {}).items() if v is not None}
+    boat.spec_sources = spec.sources
+    boat.unknown_specs = spec.unknown
+    boat.manufacturer = version.model.manufacturer.name
+    boat.model = version.model.name
+    boat.year_built = payload.year_built
+    for field, value in spec.values.items():
+        if value is not None:
+            setattr(boat, field, value)
+    boat.boat_class_id = _class_for_length(db, float(spec.values.get("length_m") or 0)).id
+
+    features = list(spec.features)
+    for extra in payload.extra_features:
+        if extra not in features:
+            features.append(extra)
+    boat.features = features
+    boat.character = payload.character or spec.character
+
+    for field in _OWN_FIELDS:
+        setattr(boat, field, getattr(payload, field))
+    return boat
+
+
+def _sync_gallery(db, boat: Boat, payload: BoatFromCatalog, version_images: list[str]) -> None:
+    review_service.add_owner_images(db, boat, payload.images, payload.image_captions)
+    # Model photos stay marked as model photos; they never stand in for the actual boat.
+    existing_model = {i.url for i in boat.gallery if i.origin == "model"}
+    for offset, url in enumerate(version_images):
+        if url in existing_model:
+            continue
+        db.add(
+            BoatImage(
+                boat_id=boat.id,
+                url=url,
+                origin="model",
+                caption="Modellfoto des Herstellers",
+                credit="Hersteller",
+                sort_order=1000 + offset,
+            )
+        )
+    boat.images = payload.images or list(version_images)
+    db.flush()
+
+
+@router.post("/boats/from-catalog", response_model=BoatDetailOut, status_code=status.HTTP_201_CREATED)
+def create_boat_from_catalog(payload: BoatFromCatalog, db: DB, charterer: CurrentCharterer):
+    boat = Boat(charterer_id=charterer.id, slug=_slug(db, payload.name), length_m=0)
+    _apply_catalog(db, boat, payload)
+    db.add(boat)
+    db.flush()
+    version = db.get(ModelVersion, boat.model_version_id)
+    _sync_gallery(db, boat, payload, list(version.model_images or []) if version else [])
+    db.commit()
+    db.refresh(boat)
+    return boat
+
+
+@router.put("/boats/{boat_id}/from-catalog", response_model=BoatDetailOut)
+def update_boat_from_catalog(boat_id: str, payload: BoatFromCatalog, db: DB, charterer: CurrentCharterer):
+    boat = _own_boat(db, charterer, boat_id)
+    previous_name = boat.name
+    _apply_catalog(db, boat, payload)
+    if previous_name != payload.name:
+        boat.slug = _slug(db, payload.name, exclude_id=boat.id)
+    version = db.get(ModelVersion, boat.model_version_id)
+    _sync_gallery(db, boat, payload, list(version.model_images or []) if version else [])
+    db.commit()
+    db.refresh(boat)
+    return boat
+
+
+# ------------------------------------------------------------------ revenue simulation
+
+
+@router.post("/boats/{boat_id}/pricing/simulate", response_model=SimulationOut)
+def simulate_pricing(boat_id: str, payload: PolicyProposal, db: DB, charterer: CurrentCharterer):
+    """What a proposed rule would earn per available boat day over the year, before saving it."""
+    boat = _own_boat(db, charterer, boat_id)
+    if boat.pricing is None and payload.reference_price_cents is None:
+        raise HTTPException(422, "Für dieses Boot ist noch keine Preisregel hinterlegt")
+    try:
+        proposal = payload.merged_policy(boat)
+    except ValueError as e:
+        raise HTTPException(422, str(e)) from e
+    comparison = revenue_service.compare(
+        db,
+        boat,
+        proposal,
+        start=payload.start,
+        days=payload.days,
+        demand_level=payload.demand_level,
+    )
+    return SimulationOut(**comparison.to_dict())

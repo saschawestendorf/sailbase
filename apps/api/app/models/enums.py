@@ -97,6 +97,20 @@ class ServiceOrderStatus(enum.StrEnum):
     CANCELLED = "cancelled"
 
 
+class ImageOrigin(enum.StrEnum):
+    """Where a picture comes from. A model photo never stands in for the actual boat."""
+
+    MODEL = "model"  # manufacturer / stock photo of the model, marked as such
+    OWNER = "owner"  # the provider's own photo of this boat
+    GUEST = "guest"  # verified charter guest, carries the charter month
+    HANDOVER = "handover"  # operational photo, never public by default
+
+
+class ReviewStatus(enum.StrEnum):
+    PUBLISHED = "published"
+    HIDDEN = "hidden"
+
+
 class DamageStatus(enum.StrEnum):
     OPEN = "open"
     ASSESSED = "assessed"

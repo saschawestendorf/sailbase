@@ -1,18 +1,16 @@
-import re
-
 from fastapi import APIRouter, HTTPException, status
 
 from app.api.deps import DB, CurrentUser
 from app.core.security import create_access_token, hash_password, verify_password
 from app.models import Charterer, ServicePartner, User
 from app.schemas.auth import LoginRequest, ProfileUpdate, RegisterRequest, TokenResponse, UserOut
+from app.services.slugs import slugify
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 def _slugify(value: str) -> str:
-    s = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
-    return s or "charterer"
+    return slugify(value, fallback="charterer")
 
 
 def _user_out(user: User) -> UserOut:

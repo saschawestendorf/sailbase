@@ -86,7 +86,7 @@ export default function BookingForm({
     );
   }
 
-  const deposit = Math.max(1, Math.round(quote.total_cents * 0.3));
+  const deposit = quote.deposit_cents;
 
   return (
     <form onSubmit={book} className="space-y-3">
@@ -141,7 +141,9 @@ export default function BookingForm({
         {busy ? "Wird gebucht …" : `Verbindlich buchen · ${money(deposit)} Anzahlung`}
       </button>
       <p className="text-center text-xs text-muted">
-        Restzahlung bis 30 Tage vor Übernahme. Kaution separat vor Törnbeginn.
+        {deposit < quote.total_cents
+          ? "Restzahlung bis 30 Tage vor Übernahme. Kaution separat vor Törnbeginn."
+          : "Vollbetrag jetzt fällig. Kaution separat vor Törnbeginn."}
       </p>
     </form>
   );

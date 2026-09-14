@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException, Query
 
 from app.api.deps import DB, OptionalUser
 from app.schemas.catalog import SearchHitOut, SearchOut
+from app.services import reviews as review_service
 from app.services.matching import CrewProfile
 from app.services.search import SearchQuery, search
 
@@ -92,8 +93,9 @@ def search_boats(
         limit=limit,
     )
     hits = search(db, q)
-    out = [
-        SearchHitOut(
+    out = []
+    for h in hits:
+        item = SearchHitOut(
             boat=h.boat,
             available=h.available,
             unavailable_reason=h.unavailable_reason,
@@ -105,6 +107,9 @@ def search_boats(
             blockers=h.blockers,
             breakdown=h.breakdown,
         )
-        for h in hits
-    ]
+        # Verified ratings travel with the card, so the list is comparable at a glance.
+        summary = review_service.summarise(h.boat.reviews)
+        item.boat.rating_overall = summary.overall
+        item.boat.rating_count = summary.count
+        out.append(item)
     return SearchOut(count=len(out), hits=out)

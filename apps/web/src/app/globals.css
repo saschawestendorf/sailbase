@@ -139,3 +139,21 @@ body {
     font-weight: 500;
   }
 }
+
+/* Chart tokens. Two categorical slots, validated against both chart surfaces
+   (adjacent-pair CVD ΔE 24.7 light / 26.8 dark, contrast ≥ 3:1 in both). */
+.viz {
+  --series-dynamic: #2a78d6;
+  --series-classic: #eb6834;
+  --viz-grid: #dbe3ec;
+  --viz-surface: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .viz {
+    --series-dynamic: #3987e5;
+    --series-classic: #d95926;
+    --viz-grid: #1d4054;
+    --viz-surface: #0d2433;
+  }
+}

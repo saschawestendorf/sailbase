@@ -70,8 +70,14 @@ def assign_partner(
         return order
     if not partner.is_active:
         raise OperationsError("Partner ist inaktiv")
-    if partner.base_ids and boat.base_id not in partner.base_ids:
-        raise OperationsError("Partner bedient diesen Hafen nicht")
+    if partner.base_ids:
+        booking = db.get(Booking, order.booking_id)
+        if order.order_type == ServiceOrderType.RETURN.value:
+            relevant_base_id = (booking.dropoff_base_id if booking else None) or boat.base_id
+        else:
+            relevant_base_id = (booking.pickup_base_id if booking else None) or boat.base_id
+        if relevant_base_id not in partner.base_ids:
+            raise OperationsError("Partner bedient diesen Hafen nicht")
     if partner.services and order.order_type not in partner.services:
         raise OperationsError("Partner bietet diese Leistung nicht an")
     order.partner_id = partner.id

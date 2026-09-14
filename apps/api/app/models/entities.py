@@ -144,6 +144,14 @@ class Boat(TimestampMixin, Base):
     base_id: Mapped[str] = mapped_column(ForeignKey("bases.id"), nullable=False)
     boat_class_id: Mapped[str] = mapped_column(ForeignKey("boat_classes.id"), nullable=False)
 
+    # Catalog link. Resolved specs are copied onto this row at listing time, so a later
+    # catalog correction never rewrites a confirmed booking or contract.
+    model_version_id: Mapped[str | None] = mapped_column(ForeignKey("model_versions.id"), nullable=True)
+    variant_ids: Mapped[list] = mapped_column(JSON, default=list)
+    spec_overrides: Mapped[dict] = mapped_column(JSON, default=dict)  # documented deviations
+    spec_sources: Mapped[dict] = mapped_column(JSON, default=dict)  # field -> version/variant/owner
+    unknown_specs: Mapped[list] = mapped_column(JSON, default=list)  # stays visibly unknown
+
     slug: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     manufacturer: Mapped[str] = mapped_column(String(255), default="")
@@ -204,6 +212,10 @@ class Boat(TimestampMixin, Base):
     blocks: Mapped[list["AvailabilityBlock"]] = relationship(
         back_populates="boat", cascade="all, delete-orphan"
     )
+    gallery: Mapped[list["BoatImage"]] = relationship(
+        back_populates="boat", cascade="all, delete-orphan", order_by="BoatImage.sort_order"
+    )
+    reviews: Mapped[list["Review"]] = relationship(back_populates="boat")
 
 
 class PricingPolicy(TimestampMixin, Base):
@@ -413,3 +425,76 @@ class Payout(TimestampMixin, Base):
     paid_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
     booking: Mapped[Booking] = relationship(back_populates="payout")
+
+
+# ------------------------------------------------------------- gallery and reviews
+
+
+class BoatImage(TimestampMixin, Base):
+    """A picture with its origin kept separate from its upload time.
+
+    Model photos never stand in for pictures of the actual boat, so the origin is stored
+    rather than inferred, and guest pictures carry the month they were taken.
+    """
+
+    __tablename__ = "boat_images"
+    __table_args__ = (Index("ix_boat_images_boat", "boat_id", "sort_order"),)
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
+    boat_id: Mapped[str] = mapped_column(ForeignKey("boats.id"), nullable=False)
+    url: Mapped[str] = mapped_column(Text, nullable=False)
+    origin: Mapped[str] = mapped_column(String(20), nullable=False)  # ImageOrigin
+    caption: Mapped[str] = mapped_column(String(255), default="")
+    sort_order: Mapped[int] = mapped_column(Integer, default=0)
+    is_public: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+
+    # Provenance: taken and uploaded are separate facts, and either may be unknown.
+    charter_month: Mapped[str] = mapped_column(String(7), default="")  # YYYY-MM, guest photos
+    taken_on: Mapped[date | None] = mapped_column(Date, nullable=True)
+    credit: Mapped[str] = mapped_column(String(255), default="")  # rights holder / licence note
+    booking_id: Mapped[str | None] = mapped_column(ForeignKey("bookings.id"), nullable=True)
+    review_id: Mapped[str | None] = mapped_column(ForeignKey("reviews.id"), nullable=True)
+    uploaded_by_user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+
+    boat: Mapped[Boat] = relationship(back_populates="gallery")
+
+
+class Review(TimestampMixin, Base):
+    """One review per completed charter. Verification is derived from the booking, never claimed."""
+
+    __tablename__ = "reviews"
+    __table_args__ = (UniqueConstraint("booking_id", name="uq_review_booking"),)
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
+    booking_id: Mapped[str] = mapped_column(ForeignKey("bookings.id"), nullable=False)
+    boat_id: Mapped[str] = mapped_column(ForeignKey("boats.id"), nullable=False)
+    charterer_id: Mapped[str] = mapped_column(ForeignKey("charterers.id"), nullable=False)
+    model_version_id: Mapped[str | None] = mapped_column(ForeignKey("model_versions.id"), nullable=True)
+    author_user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    author_name: Mapped[str] = mapped_column(String(255), default="")
+    charter_month: Mapped[str] = mapped_column(String(7), default="")  # YYYY-MM
+
+    # The three things a guest can tell apart, kept separate as the specification requires.
+    rating_model: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    rating_condition: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    rating_service: Mapped[int | None] = mapped_column(Integer, nullable=True)
+
+    # Detail dimensions behind condition and service.
+    rating_care: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    rating_cleanliness: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    rating_accuracy: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    rating_equipment: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    rating_organisation: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    rating_handover: Mapped[int | None] = mapped_column(Integer, nullable=True)
+
+    title: Mapped[str] = mapped_column(String(255), default="")
+    body: Mapped[str] = mapped_column(Text, default="")
+    status: Mapped[str] = mapped_column(String(20), default="published", nullable=False)
+    published_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    boat: Mapped[Boat] = relationship(back_populates="reviews")
+
+    @property
+    def overall(self) -> float | None:
+        values = [v for v in (self.rating_model, self.rating_condition, self.rating_service) if v is not None]
+        return round(sum(values) / len(values), 2) if values else None

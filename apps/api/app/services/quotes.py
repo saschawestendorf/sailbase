@@ -74,8 +74,16 @@ def draft_quote(
     return QuoteDraft(boat, start, end, persons, result, ctx.occupancy, gap, pickup, dropoff)
 
 
+_BALANCE_DUE_DAYS_BEFORE_START = 30
+
+
 def persist_quote(db: Session, draft: QuoteDraft, user_id: str | None) -> Quote:
     settings = get_settings()
+    now = utcnow()
+    days_until_start = (draft.start_date - now.date()).days
+    deposit = max(1, round(draft.result.total_cents * settings.deposit_percent / 100))
+    if days_until_start <= _BALANCE_DUE_DAYS_BEFORE_START:
+        deposit = draft.result.total_cents
     q = Quote(
         boat_id=draft.boat.id,
         user_id=user_id,
@@ -86,8 +94,13 @@ def persist_quote(db: Session, draft: QuoteDraft, user_id: str | None) -> Quote:
         dropoff_base_id=draft.dropoff_base_id,
         currency=draft.result.currency,
         total_cents=draft.result.total_cents,
-        breakdown={**draft.result.to_dict(), "occupancy": draft.occupancy, "gap": draft.gap},
-        expires_at=utcnow() + timedelta(minutes=settings.quote_ttl_minutes),
+        breakdown={
+            **draft.result.to_dict(),
+            "occupancy": draft.occupancy,
+            "gap": draft.gap,
+            "deposit_cents": deposit,
+        },
+        expires_at=now + timedelta(minutes=settings.quote_ttl_minutes),
     )
     db.add(q)
     db.flush()

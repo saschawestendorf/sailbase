@@ -254,6 +254,8 @@ def _confirm(db: Session, booking: Booking) -> None:
                 block_type=BlockType.BOOKING.value,
                 booking_id=booking.id,
                 note=f"Buchung {booking.reference}",
+                start_base_id=booking.pickup_base_id,
+                end_base_id=booking.dropoff_base_id,
             )
         )
 

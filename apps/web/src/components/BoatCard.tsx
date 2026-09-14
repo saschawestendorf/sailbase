@@ -50,6 +50,15 @@ export default function BoatCard({ hit, query, basesById }: Props) {
                 {boat.manufacturer} {boat.model} · {boat.length_m.toFixed(2)} m ·{" "}
                 {boat.base.name}
               </p>
+              {boat.rating_count ? (
+                <p className="mt-0.5 text-sm">
+                  <span className="text-accent">★</span> {boat.rating_overall?.toFixed(1)}
+                  <span className="ml-1 text-muted">
+                    aus {boat.rating_count} verifizierten Charter
+                    {boat.rating_count === 1 ? "" : "n"}
+                  </span>
+                </p>
+              ) : null}
             </div>
             <FitBadge score={hit.fit_score} />
           </div>

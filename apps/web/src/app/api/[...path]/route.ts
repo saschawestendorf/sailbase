@@ -4,9 +4,11 @@
  * Client components call same-origin `/api/...`, so the backend URL stays a server-side
  * runtime setting and never has to be baked into the browser bundle at build time.
  */
+import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
 import { API_BASE_URL } from "@/lib/api";
+import { SESSION_COOKIE } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +27,13 @@ async function forward(req: NextRequest, path: string[]) {
   req.headers.forEach((value, key) => {
     if (!HOP_BY_HOP.has(key.toLowerCase())) headers.set(key, value);
   });
+  // The token stays in an HttpOnly cookie and only becomes a bearer header here, so a
+  // client component can call the API without ever holding the token itself.
+  if (!headers.has("authorization")) {
+    const token = (await cookies()).get(SESSION_COOKIE)?.value;
+    if (token) headers.set("authorization", `Bearer ${token}`);
+  }
+  headers.delete("cookie");
 
   const method = req.method.toUpperCase();
   const body = method === "GET" || method === "HEAD" ? undefined : await req.arrayBuffer();

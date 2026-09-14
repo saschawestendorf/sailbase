@@ -5,7 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
 from app.api.deps import DB
-from app.models import Base_, Boat, BoatClass, Region
+from app.models import Base_, Boat, BoatClass, ModelVersion, Region
 from app.schemas.catalog import (
     BaseOut,
     BoatClassOut,
@@ -14,6 +14,8 @@ from app.schemas.catalog import (
     CalendarOut,
     RegionOut,
 )
+from app.schemas.reviews import BoatImageOut, RatingSummaryOut
+from app.services import reviews as review_service
 from app.services.offers import OfferContext
 
 router = APIRouter(tags=["catalog"])
@@ -45,6 +47,8 @@ def _load_boat(db, slug_or_id: str) -> Boat:
             selectinload(Boat.base).selectinload(Base_.region),
             selectinload(Boat.boat_class),
             selectinload(Boat.charterer),
+            selectinload(Boat.gallery),
+            selectinload(Boat.reviews),
         )
         .where((Boat.slug == slug_or_id) | (Boat.id == slug_or_id), Boat.is_active.is_(True))
     )
@@ -56,7 +60,28 @@ def _load_boat(db, slug_or_id: str) -> Boat:
 
 @router.get("/boats/{slug}", response_model=BoatDetailOut)
 def get_boat(slug: str, db: DB):
-    return _load_boat(db, slug)
+    """Detail view: gallery split by origin, rating summary and where the specs come from."""
+    boat = _load_boat(db, slug)
+    out = BoatDetailOut.model_validate(boat)
+    out.gallery = [BoatImageOut.model_validate(i) for i in review_service.public_gallery(boat)]
+    out.ratings = RatingSummaryOut(**review_service.summarise(boat.reviews).to_dict())
+    version = db.get(ModelVersion, boat.model_version_id) if boat.model_version_id else None
+    if version is not None:
+        out.model_info = {
+            "version_id": version.id,
+            "version_name": version.name,
+            "model_name": version.model.name,
+            "manufacturer": version.model.manufacturer.name,
+            "designer": version.model.designer,
+            "build_years": f"{version.year_from}–{version.year_to or 'heute'}",
+            "water_tank_l": version.water_tank_l,
+            "fuel_tank_l": version.fuel_tank_l,
+            "source": version.source,
+            "source_url": version.source_url,
+            "verified_on": version.verified_on.isoformat() if version.verified_on else None,
+            "revision": version.revision,
+        }
+    return out
 
 
 @router.get("/boats/{slug}/calendar", response_model=CalendarOut)
