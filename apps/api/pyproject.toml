@@ -41,6 +41,9 @@ select = ["E", "F", "I", "B", "UP"]
 [tool.ruff.lint.per-file-ignores]
 "app/seed/data.py" = ["E501"]
 "tests/*" = ["E501"]
+# Migrations are written by Alembic's own template; re-sorting their imports on every
+# autogenerate would be churn that says nothing about the schema change.
+"alembic/versions/*" = ["I001", "E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

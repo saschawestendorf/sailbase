@@ -35,7 +35,7 @@ class VariantOut(ORMModel):
 class ModelVersionOut(ORMModel):
     id: str
     name: str
-    year_from: int
+    year_from: int | None
     year_to: int | None
     length_m: float
     beam_m: float | None
@@ -59,6 +59,7 @@ class ModelVersionOut(ORMModel):
     source_url: str
     verified_on: date | None
     revision: int
+    caveat: str = ""
     variants: list[VariantOut] = []
 
 

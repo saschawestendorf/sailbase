@@ -207,6 +207,9 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
                     : ""}
                   {boat.model_info.fuel_tank_l ? ` · Diesel ${boat.model_info.fuel_tank_l} l` : ""}
                 </p>
+                {boat.model_info.caveat ? (
+                  <p className="mt-1 text-warn">Offen laut Quellenlage: {boat.model_info.caveat}</p>
+                ) : null}
                 {Object.keys(boat.spec_overrides ?? {}).length ? (
                   <p className="mt-1 text-warn">
                     Vom Katalog abweichend und vom Vercharterer angegeben:{" "}

@@ -87,11 +87,21 @@ def seed_catalog(db: Session) -> dict[str, ModelVersion]:
         )
         if version is None:
             version = ModelVersion(
-                model_id=model.id, name=spec["name"], length_m=spec["length_m"], year_from=spec["year_from"]
+                model_id=model.id,
+                name=spec["name"],
+                length_m=spec["length_m"],
+                year_from=spec.get("year_from") or 0,
             )
         for field, value in spec.items():
+            # A researched None means "not established". Writing it keeps the gap visible,
+            # which is the point: the portal shows it as unknown rather than implying a figure.
+            if field == "year_from" and not value:
+                continue
             setattr(version, field, value)
-        version.source = catalog_data.DEMO_SOURCE
+        version.source = entry.get("source", "")
+        version.source_url = entry.get("source_url", "")
+        version.verified_on = date.fromisoformat(entry["verified_on"]) if entry.get("verified_on") else None
+        version.caveat = entry.get("notes", "")
         version.model_images = [
             f"https://picsum.photos/seed/model-{entry['manufacturer']}-{entry['slug']}/1200/800"
         ]
@@ -121,31 +131,65 @@ def seed_catalog(db: Session) -> dict[str, ModelVersion]:
 
 
 def _link_boat_to_catalog(db: Session, boat: Boat, versions: dict[str, ModelVersion]) -> None:
+    """Point a demo boat at its catalog entry and take the technical data from there.
+
+    This is the product's own promise applied to our demo fleet: the catalog supplies what it
+    knows, the boat keeps only what is genuinely per boat. Figures the catalog has no value for
+    (headroom and berth length are rarely published) stay as the provider's own statement and
+    are recorded as such, so the boat page can tell the two apart.
+    """
     link = catalog_data.BOAT_CATALOG_LINK.get(boat.slug)
     if link is None:
         return
-    manufacturer_slug, model_slug, variant_codes = link
-    version = versions.get(f"{manufacturer_slug}/{model_slug}")
+    model_key, preferred_codes = link
+    version = versions.get(model_key)
     if version is None:
         return
+
+    # Preferred codes are a wish, not a requirement: the catalog is researched data that
+    # changes, and a demo boat must not break when a variant is renamed.
     chosen: list[VariantOption] = []
     seen: set[str] = set()
-    for code in variant_codes:
+    for code in preferred_codes:
         option = next((v for v in version.variants if v.code == code and v.kind not in seen), None)
         if option is not None:
             seen.add(option.kind)
             chosen.append(option)
+    for option in version.variants:
+        if option.is_default and option.kind not in seen:
+            seen.add(option.kind)
+            chosen.append(option)
+
     spec = catalog_service.resolve(version, chosen)
-    boat.model_version_id = version.id
-    boat.variant_ids = [v.id for v in chosen]
-    boat.spec_sources = spec.sources
-    boat.unknown_specs = spec.unknown
-    # The demo boats carry hand-written specs; keep them and record where they deviate.
-    boat.spec_overrides = {
+    owner_supplied = {
         field: getattr(boat, field)
         for field, value in spec.values.items()
-        if value is not None and getattr(boat, field, None) not in (None, value)
+        if value is None and getattr(boat, field, None) is not None
     }
+    for field, value in spec.values.items():
+        if value is not None:
+            setattr(boat, field, value)
+
+    boat.manufacturer = version.model.manufacturer.name
+    boat.model = version.model.name
+    boat.model_version_id = version.id
+    boat.variant_ids = [v.id for v in chosen]
+    boat.spec_overrides = owner_supplied
+    boat.spec_sources = {**spec.sources, **{f: "owner" for f in owner_supplied}}
+    boat.unknown_specs = [f for f in spec.unknown if f not in owner_supplied]
+    boat.features = sorted({*(boat.features or []), *spec.features})
+    boat.boat_class_id = _class_for_length_in_seed(db, boat.length_m)
+
+
+def _class_for_length_in_seed(db: Session, length_m: float) -> str:
+    row = (
+        db.query(BoatClass)
+        .filter(BoatClass.min_length_m <= length_m, BoatClass.max_length_m > length_m)
+        .first()
+    )
+    if row is None:
+        row = db.query(BoatClass).order_by(BoatClass.max_length_m.desc()).first()
+    return row.id
 
 
 def _seed_gallery(db: Session, boat: Boat) -> None:

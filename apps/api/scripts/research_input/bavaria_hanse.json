@@ -1,0 +1,451 @@
+[
+  {
+    "manufacturer": "Bavaria Yachts",
+    "model": "Cruiser 34",
+    "designer": "Farr Yacht Design",
+    "year_from": 2013,
+    "year_to": null,
+    "length_m": 9.99,
+    "beam_m": 3.42,
+    "draft_m": 2.02,
+    "displacement_kg": 5300,
+    "sail_area_m2": 51.0,
+    "engine_hp": 18,
+    "cabins": 2,
+    "berths": 6,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 150,
+    "fuel_tank_l": 150,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.02},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.57}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": null}
+    ],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-34-standard",
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-34-shoal-draft",
+      "https://itboat.com/models/6902-bavaria-cruiser-34",
+      "https://sailmagazine.com/boats/boat-review-bavaria-cruiser-34/",
+      "https://sailboatdata.com/sailboat/bavaria-cruiser-34/"
+    ],
+    "notes": "Baujahr widerspruechlich: eine Quelle nennt erste Rumpfschale/Bau seit 2013, eine andere 'seit 2016'. Segelflaeche: Gesamtangabe 51 m2, Einzelangaben Gross 27 m2 + Genua 22 m2 ergeben aber nur 49 m2. Motor 18 PS Volvo Penta D1-20F Standard, 30 PS optional. Flachkiel-Tiefgang 1,57 m aus einer Review-Angabe '5 ft 2 in' umgerechnet (boat-specs fuehrt eine Shoal-draft-Version, ohne dass in den Suchergebnissen ein Meterwert erschien) - vor Vertragsgebrauch pruefen. Berths in den Quellen als 4-6 bzw. 6 angegeben."
+  },
+  {
+    "manufacturer": "Bavaria Yachts",
+    "model": "Cruiser 37",
+    "designer": "Farr Yacht Design",
+    "year_from": 2014,
+    "year_to": null,
+    "length_m": 11.30,
+    "beam_m": 3.67,
+    "draft_m": 1.95,
+    "displacement_kg": 7000,
+    "sail_area_m2": 65.0,
+    "engine_hp": 19,
+    "cabins": 2,
+    "berths": null,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 350,
+    "fuel_tank_l": 150,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 1.95},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.63}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": null}
+    ],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-37-standard",
+      "https://itboat.com/models/943-bavaria-cruiser-37",
+      "https://www.velmundi.com/bavaria-cruiser-37.html",
+      "https://www.yachtdatabase.com/en/review.jsp?id=Bavaria+Cruiser+37",
+      "https://www.bavariayachts.com/sailing-yachts/cruiser-37/data-and-options/"
+    ],
+    "notes": "Deutlicher Quellenkonflikt beim Tiefgang: eine Gruppe von Quellen nennt 1,69-2,02 m, eine andere 1,95 m Standard / 1,63 m Flachkiel. Uebernommen wurde das explizit als Standard/Flachkiel ausgewiesene Paar 1,95/1,63. Verdraengung ebenfalls widerspruechlich: 7.000 kg vs. 7,45 t. Motor Volvo Penta D1-20 (19 PS) Standard, D1-30 (28 PS) optional. Kojenzahl in den Suchergebnissen nur als 'max. Schlafplaetze 4' bei 2-3 Kabinen - fuer die 3-Kabinen-Version kein belegter Wert, daher null."
+  },
+  {
+    "manufacturer": "Bavaria Yachts",
+    "model": "Cruiser 41",
+    "designer": "Farr Yacht Design",
+    "year_from": 2013,
+    "year_to": 2022,
+    "length_m": 12.35,
+    "beam_m": 3.96,
+    "draft_m": 2.05,
+    "displacement_kg": 8869,
+    "sail_area_m2": 82.0,
+    "engine_hp": 39.6,
+    "cabins": 3,
+    "berths": 8,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 360,
+    "fuel_tank_l": 210,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.05},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.65}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-41-standard",
+      "https://itboat.com/models/4269-bavaria-cruiser-41",
+      "https://sailboatdata.com/sailboat/bavaria-cruiser-41/",
+      "https://www.sailboat-cruising.com/Bavaria-41-Sailboat.html",
+      "https://www.velmundi.com/bavaria-cruiser-41.html"
+    ],
+    "notes": "Verdraengung 8.869 kg ist das Leergewicht (Ballast 2.736 kg). Wassertank: Quellen nennen 210 l und 360 l - offenbar Standard- und Optionstank; 360 l uebernommen, 210 l moeglich. Kojen in den Quellen als Spanne 4-8 angegeben, hier der Maximalwert der ueblichen 3-Kabinen-Version. Motor als 'Volvo Penta D2, 39,6 PS' angegeben."
+  },
+  {
+    "manufacturer": "Bavaria Yachts",
+    "model": "Cruiser 46",
+    "designer": "Farr Yacht Design",
+    "year_from": 2014,
+    "year_to": null,
+    "length_m": 14.27,
+    "beam_m": 4.35,
+    "draft_m": 2.10,
+    "displacement_kg": 11000,
+    "sail_area_m2": 108.0,
+    "engine_hp": 55,
+    "cabins": 4,
+    "berths": 8,
+    "heads": 3,
+    "max_persons": null,
+    "water_tank_l": 360,
+    "fuel_tank_l": 210,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.10},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.73}
+    ],
+    "layout_variants": [
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 6, "heads": 2},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": 8, "heads": null}
+    ],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-46-standard",
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-46-shoal-draft",
+      "https://itboat.com/models/954-bavaria-cruiser-46",
+      "https://sailboatdata.com/sailboat/bavaria-cruiser-46/",
+      "https://www.bavariayachts.com/sailing-yachts/cruiser-46/interior/",
+      "https://www.samboat.com/model/bavaria-cruiser-46"
+    ],
+    "notes": "Segelflaeche 108 m2 ist die Summe der belegten Einzelwerte Gross 56 m2 + Genua 52 m2; eine Gesamtangabe stand in den Suchergebnissen nicht. Tiefgang Standard 2,10 m (nicht 2,15 m wie im Schema-Beispiel). Nasszellen widerspruechlich: itboat nennt 3 Baeder (4-Kabinen-Version), Herstellerseite beschreibt fuer die 3-Kabinen-Version je ein Bad an beiden Achterkabinen (= 2). 4-Kabinen-Version laut Quelle 8-10 Kojen."
+  },
+  {
+    "manufacturer": "Bavaria Yachts",
+    "model": "Cruiser 51",
+    "designer": "Farr Yacht Design",
+    "year_from": 2016,
+    "year_to": null,
+    "length_m": 14.99,
+    "beam_m": 4.67,
+    "draft_m": 2.25,
+    "displacement_kg": 12920,
+    "sail_area_m2": 130.0,
+    "engine_hp": 75,
+    "cabins": 3,
+    "berths": 6,
+    "heads": 3,
+    "max_persons": null,
+    "water_tank_l": 560,
+    "fuel_tank_l": 280,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.25},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.85}
+    ],
+    "layout_variants": [
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 6, "heads": null},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": null, "heads": null},
+      {"code": "5-kab", "name": "5 Kabinen", "cabins": 5, "berths": 10, "heads": null}
+    ],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-51-standard",
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-51-shoal-draft",
+      "https://itboat.com/models/298-bavaria-cruiser-51",
+      "https://sailboatdata.com/sailboat/bavaria-cruiser-51/",
+      "https://www.samboat.com/model/bavaria-cruiser-51"
+    ],
+    "notes": "Erste Suche lieferte nur 1,85 m Tiefgang - die zweite zeigte, dass das der Flachkiel ist und der Standardkiel 2,25 m hat. Segelflaeche: Gesamtangabe 130 m2, Einzelwerte Gross 51 m2 + Rollgenua 71 m2 ergeben 122 m2 (Konflikt). Verdraengung 12,92 t bei halber Beladung. Kabinen 3/4/5 belegt, Kojenspanne 6-10, Nasszellen mit 3 angegeben (bezieht sich vermutlich auf die groesseren Layouts). Baujahr: 'seit 2016'; die Variante Cruiser 51 Style wird mit 2015-2022 angegeben. Rumpflaenge und Laenge ueber alles werden beide mit 14,99 m angegeben."
+  },
+  {
+    "manufacturer": "Bavaria Yachts",
+    "model": "C42",
+    "designer": "Cossutti Yacht Design",
+    "year_from": 2020,
+    "year_to": null,
+    "length_m": 11.98,
+    "beam_m": 4.29,
+    "draft_m": 2.10,
+    "displacement_kg": 9678,
+    "sail_area_m2": 100.6,
+    "engine_hp": 57,
+    "cabins": 3,
+    "berths": 8,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 210,
+    "fuel_tank_l": 210,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.10},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.70}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 8, "heads": 2}
+    ],
+    "sources": [
+      "https://itboat.com/models/10155-bavaria-c42",
+      "https://www.samboat.com/model/bavaria-c42",
+      "https://sailboatdata.com/sailboat/c42-bavaria/",
+      "https://www.bavariayachts.com/sailing-yachts/c42/data-and-options/",
+      "https://www.kiriacoulis.com/sales/BavariaC42_price.pdf",
+      "https://www.bavariayachts.com/sailing-yachts/c42/highlights/"
+    ],
+    "notes": "Rumpflaenge 11,98 m, Laenge ueber alles 12,38 m. Verdraengung widerspruechlich: 9.678 kg vs. 9.991 kg in einer anderen Quelle. Wassertank 210 l Standard, 460 l optional. Motor 57 PS (41,9 kW); Fabrikat in den Suchergebnissen nicht eindeutig genannt. Segelflaeche 100,6 m2 als Gesamtangabe; Einzelwerte Gross 53,8-54 m2 und Genua 47 m2."
+  },
+  {
+    "manufacturer": "Bavaria Yachts",
+    "model": "C50",
+    "designer": "Cossutti Yacht Design",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 14.99,
+    "beam_m": 4.99,
+    "draft_m": 2.30,
+    "displacement_kg": 15490,
+    "sail_area_m2": 135.0,
+    "engine_hp": 80,
+    "cabins": 5,
+    "berths": 10,
+    "heads": 3,
+    "max_persons": null,
+    "water_tank_l": 650,
+    "fuel_tank_l": 250,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.30},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.85}
+    ],
+    "layout_variants": [
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": null},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": null, "heads": null},
+      {"code": "5-kab", "name": "5 Kabinen", "cabins": 5, "berths": 10, "heads": 3}
+    ],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-c50-standard",
+      "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-c50-shoal-draft",
+      "https://itboat.com/models/8102-bavaria-c50",
+      "https://www.bavariayachts.com/sailing-yachts/c50/data-and-options/",
+      "https://www.yachtingmonthly.com/reviews/yacht-reviews/bavaria-c50",
+      "https://www.boot.com/en/Media_News/BAVARIA_C50_-_World_premiere_at_boot_2018"
+    ],
+    "notes": "Rumpflaenge 14,99 m. Laenge ueber alles widerspruechlich: 15,39 m in einer Quelle, 15,55 m in einer anderen. Segelflaeche wird als '135/147 m2' angegeben (vermutlich Standard- und Performance-Rigg); hier 135 m2 eingetragen. Motor Yanmar 4JH80, 80 PS. Layouts 3 bis 5 Kabinen belegt, eine Quelle erwaehnt sogar 6 Kabinen (nicht als Datensatz belegt, daher nicht aufgenommen). Flachkiel 1,85 m; eine fruehere Suche nannte 1,95 m - der konkretere Wert 1,85 m wurde uebernommen."
+  },
+  {
+    "manufacturer": "Hanse Yachts",
+    "model": "Hanse 315",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2015,
+    "year_to": null,
+    "length_m": 9.62,
+    "beam_m": 3.35,
+    "draft_m": 1.85,
+    "displacement_kg": 5100,
+    "sail_area_m2": 47.0,
+    "engine_hp": 13.6,
+    "cabins": 2,
+    "berths": 4,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 210,
+    "fuel_tank_l": 100,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 1.85},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.35}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-315-standard",
+      "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-315-shoal-draft",
+      "https://hanseyachts.com/gb/sailing-yachts/hanse-315/",
+      "https://hanseyachts.hr/en/range/hanse-315",
+      "https://itboat.com/models/7247-hanse-315",
+      "https://sailboatdata.com/sailboat/hanse-315/"
+    ],
+    "notes": "Achtung: Es existieren zwei verschiedene Boote mit der Bezeichnung Hanse 315 - ein aelteres Modell (Prospekt 2006, LOA 9,45 m, Tiefgang 1,75/1,40 m, Tank 50 l Diesel / 120 l Wasser, 21 PS) und das hier erfasste Modell seit 2015 (Europas Yacht of the Year 2016, Familienkreuzer). Die Suchergebnisse mischen beide. Uebernommen sind die Werte des 2015er Modells. Verdraengung 5,1 t laut boat-specs, eine andere Quelle nennt 4,3 t - Konflikt ungeklaert. Motor als 13,60 PS Standard angegeben. Rumpflaenge 9,62 m; eine Quelle nennt 9,1 m (vermutlich andere Bezugslaenge)."
+  },
+  {
+    "manufacturer": "Hanse Yachts",
+    "model": "Hanse 348",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 9.99,
+    "beam_m": 3.50,
+    "draft_m": 1.95,
+    "displacement_kg": 6560,
+    "sail_area_m2": 55.9,
+    "engine_hp": 21,
+    "cabins": 2,
+    "berths": 4,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 230,
+    "fuel_tank_l": 160,
+    "keel_variants": [
+      {"code": "standard", "name": "L-Kiel mittel", "draft_m": 1.95},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.55}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://itboat.com/models/7949-hanse-348",
+      "https://sailboatdata.com/sailboat/hanse-348/",
+      "https://hanseyachts.hr/en/range/hanse-348",
+      "https://www.newwaveyachts.com/pdf_sheets/Hanse%20348%20Specification%20and%20Pricelist.pdf",
+      "https://www.sailboat-cruising.com/Hanse-348.html"
+    ],
+    "notes": "Segelflaeche 55,90 m2 ist die Am-Wind-Flaeche (Gross 34,00 + Selbstwendefock 21,90); Vorwind 121,70 m2. Verdraengung 6,56 t bezieht sich auf die L-Kiel-Version. Motor 21 PS Standard, 29 PS optional. Kabinen-/Kojenzahl aus itboat (2 Gaestekabinen, 4 Gaeste, 1 Bad) - Angaben zu einer moeglichen 3-Kabinen-Version standen nicht in den Suchergebnissen."
+  },
+  {
+    "manufacturer": "Hanse Yachts",
+    "model": "Hanse 388",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2017,
+    "year_to": null,
+    "length_m": 11.40,
+    "beam_m": 3.90,
+    "draft_m": 2.06,
+    "displacement_kg": 8270,
+    "sail_area_m2": 72.0,
+    "engine_hp": 30,
+    "cabins": 3,
+    "berths": 6,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 295,
+    "fuel_tank_l": 160,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.06},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.62}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": null},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 6, "heads": 1}
+    ],
+    "sources": [
+      "https://itboat.com/models/7950-hanse-388",
+      "https://www.yachtingmonthly.com/reviews/yacht-reviews/hanse-388",
+      "https://sailboatdata.com/sailboat/hanse-388/",
+      "https://www.newwaveyachts.com/pdf_sheets/Hanse%20388%20Specification%20and%20Pricelist.pdf",
+      "https://www.boatbookings.com/yacht/hanse-388-bareboat-sailing-yacht-pid40012",
+      "https://hanseyachts.com/us/historical-models/hanse-388/"
+    ],
+    "notes": "Werksseitig ist die 2-Kabinen-Version Standard, die 3-Kabinen-Version Option; hier wurde die im Chartereinsatz uebliche 3-Kabinen-Konfiguration als Basisdatensatz genommen (6 Kojen, 1 Nasszelle laut Charterlisting). Quellen nennen zusaetzlich 'schlaeft bis zu 7 Personen' inkl. Salon. Segelflaeche 72 m2 als Gesamtangabe."
+  },
+  {
+    "manufacturer": "Hanse Yachts",
+    "model": "Hanse 418",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2017,
+    "year_to": null,
+    "length_m": 11.99,
+    "beam_m": 4.17,
+    "draft_m": 2.07,
+    "displacement_kg": 10150,
+    "sail_area_m2": 86.8,
+    "engine_hp": 39,
+    "cabins": 3,
+    "berths": 8,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 475,
+    "fuel_tank_l": 160,
+    "keel_variants": [
+      {"code": "standard", "name": "L-Kiel mittel", "draft_m": 2.07},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.74}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://www.hanseyachts.co.uk/files/Hanse_418_Standard_Specification.pdf",
+      "https://www.samboat.com/model/hanse-418",
+      "https://sailboatdata.com/sailboat/hanse-418/",
+      "https://hanseyachts.com/gb/historical-models/hanse-418/",
+      "https://www.newwaveyachts.com/pdf_sheets/Hanse%20418%20Specification%20and%20Pricelist.pdf",
+      "https://www.boatbookings.com/yacht/hanse-418-bareboat-sailing-yacht-pid43028"
+    ],
+    "notes": "Rumpflaenge 11,99 m, Laenge ueber alles 12,40 m. Verdraengung 10.150 kg gilt fuer den L-Kiel (mittel), fuer den Flachkiel werden ca. 10.410 kg genannt. Segelflaeche 86,80 m2 am Wind (Gross 52,20 + Selbstwendefock 34,60), Vorwind 186,90 m2. Motor 39 PS Standard, 57 PS optional. Nasszellen: eine Charterquelle nennt ausdruecklich 1 Bad / 1 WC bei 3 Kabinen und 6/8 Kojen - fuer den Charterkatalog bitte pro Schiff pruefen, 2-Bad-Versionen sind bei dieser Groesse ueblich, waren aber nicht belegt. Baujahrbeginn in den Quellen als 2017 ('launched in 2017') angegeben."
+  },
+  {
+    "manufacturer": "Hanse Yachts",
+    "model": "Hanse 458",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 13.55,
+    "beam_m": 4.38,
+    "draft_m": 2.23,
+    "displacement_kg": 11700,
+    "sail_area_m2": 103.0,
+    "engine_hp": 57,
+    "cabins": 3,
+    "berths": 6,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 450,
+    "fuel_tank_l": 210,
+    "keel_variants": [],
+    "layout_variants": [],
+    "sources": [
+      "https://itboat.com/models/11252-hanse-458",
+      "https://www.yachtingmonthly.com/reviews/yacht-reviews/hanse-458",
+      "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-458-medium-draft",
+      "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-458-shoal-draft",
+      "https://sailboatdata.com/sailboat/hanse-458/",
+      "https://hanseyachts.hr/en/range/hanse-458",
+      "https://www.velmundi.com/hanse-458.html"
+    ],
+    "notes": "Rumpflaenge 13,55 m, Laenge ueber alles 14,04 m. Tiefgang 2,23 m entspricht der Medium-/L-Kiel-Version. Eine Flachkiel-Version ist belegt (eigene boat-specs-Seite 'Shoal draft'), ein konkreter Meterwert stand in den Suchergebnissen nicht - deshalb keine keel_variants. Motor Yanmar 4JH57 mit 57 PS Standard, 80 PS optional. 4-Kabinen-Version nicht belegt."
+  },
+  {
+    "manufacturer": "Hanse Yachts",
+    "model": "Hanse 508",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 14.93,
+    "beam_m": 4.75,
+    "draft_m": 2.40,
+    "displacement_kg": 14700,
+    "sail_area_m2": 118.0,
+    "engine_hp": 80,
+    "cabins": 4,
+    "berths": 8,
+    "heads": 2,
+    "max_persons": 12,
+    "water_tank_l": 630,
+    "fuel_tank_l": 280,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.40},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.98}
+    ],
+    "layout_variants": [
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": 3},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": 8, "heads": 2},
+      {"code": "5-kab", "name": "5 Kabinen", "cabins": 5, "berths": null, "heads": null}
+    ],
+    "sources": [
+      "https://itboat.com/models/10120-hanse-508",
+      "https://www.samboat.com/model/hanse-508",
+      "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-508-medium-draft",
+      "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-508-shoal-draft",
+      "https://sailboatdata.com/sailboat/hanse-508/",
+      "https://hanseyachts.com/us/historical-models/hanse-508/"
+    ],
+    "notes": "Rumpflaenge 14,93 m, Laenge ueber alles 15,55 m. Segelflaeche 118 m2 ist die Summe der belegten Einzelwerte Gross 66,5 m2 + Selbstwendefock 51,5 m2; eine Gesamtangabe stand nicht in den Suchergebnissen (optionale Genua 87 m2, Gennaker 200 m2). Verdraengung 14,7 t bei halber Beladung fuer den Standardkiel, 15.100 kg fuer den Flachkiel. Layout-Angaben widerspruechlich: eine Quelle nennt fuer die 4-Kabinen-Version 2 Baeder, eine andere 4 Baeder bei 8/10 Kojen, eine dritte 3 Kabinen mit 3 Baedern."
+  }
+]

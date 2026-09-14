@@ -52,7 +52,9 @@ class ModelVersion(TimestampMixin, Base):
     id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
     model_id: Mapped[str] = mapped_column(ForeignKey("boat_models.id"), nullable=False)
     name: Mapped[str] = mapped_column(String(255), nullable=False)  # e.g. "Generation 2"
-    year_from: Mapped[int] = mapped_column(Integer, nullable=False)
+    # Both may be unknown: for some yards the build years are simply not published, and a
+    # guessed span would reject perfectly real boats.
+    year_from: Mapped[int | None] = mapped_column(Integer, nullable=True)
     year_to: Mapped[int | None] = mapped_column(Integer, nullable=True)  # None = still built
 
     # Factory-standard hull data. None means unknown and stays visibly unknown.
@@ -81,6 +83,10 @@ class ModelVersion(TimestampMixin, Base):
     source_url: Mapped[str] = mapped_column(Text, default="")
     verified_on: Mapped[date | None] = mapped_column(Date, nullable=True)
     revision: Mapped[int] = mapped_column(Integer, default=1)
+    # What the research could not settle: sources that disagreed, a figure that is the length
+    # overall rather than the hull, a sail area summed from individual sails. It rides with the
+    # data because a reader comparing two boats needs to know which number is soft.
+    caveat: Mapped[str] = mapped_column(Text, default="")
 
     model: Mapped[BoatModel] = relationship(back_populates="versions")
     variants: Mapped[list["VariantOption"]] = relationship(
@@ -88,10 +94,13 @@ class ModelVersion(TimestampMixin, Base):
     )
 
     @property
-    def build_years(self) -> tuple[int, int | None]:
+    def build_years(self) -> tuple[int | None, int | None]:
         return self.year_from, self.year_to
 
     def covers_year(self, year: int) -> bool:
+        """Unknown build years cannot rule a year out, so they accept it."""
+        if self.year_from is None:
+            return True
         return year >= self.year_from and (self.year_to is None or year <= self.year_to)
 
 

@@ -53,6 +53,29 @@ Variante oder eigene Angabe je Feld), `spec_overrides` für dokumentierte Abweic
 Art werden abgewiesen. Weil die Werte kopiert werden, verändert eine spätere Katalogkorrektur
 keine bestehende Buchung. `BoatClass` bleibt die Vergleichsklasse fürs Pricing.
 
+Der Katalog ist mit 50 in der Ostsee gängigen Modellen von 15 Werften gefüllt
+(`apps/api/app/seed/data/boat_catalog.json`), dazu 223 Werksvarianten: 92 Kiel-, 84 Layout-
+und 47 Motorvarianten. Die Daten stammen aus öffentlich zugänglichen Hersteller- und
+Fachdatenbankangaben und sind **nicht vom Hersteller bestätigt**. Das ist die entscheidende
+Einschränkung, und sie steht deshalb auch im Datensatz selbst:
+
+- Jedes Modell führt Quelle, Quell-URL und Prüfdatum mit.
+- Was die Recherche nicht klären konnte, steht als `caveat` am Modell und ist auf der
+  Bootsseite sichtbar – bei allen 50 Modellen gibt es mindestens einen solchen Punkt,
+  meist Rumpflänge gegen Länge über alles oder eine uneinheitlich gemessene Segelfläche.
+- Unbelegte Felder bleiben `null` statt geschätzt zu werden. Vollständig belegt sind Länge,
+  Breite, Tiefgang und Verdrängung; Segelfläche (42), Kabinen (42), Nasszellen (40) und
+  Kojen (32) lückenhaft, die maximale Personenzahl mit 6 von 50 kaum.
+- "Flachkiel" ist eine abgeleitete Einordnung der Plattform, keine Herstelleraussage: nur
+  der flachste Kiel eines Modells und nur, wenn er deutlich unter dem tiefsten liegt.
+
+Für den Betrieb heißt das: der Katalog beschleunigt das Inserieren und macht Boote
+vergleichbar, ersetzt aber keine Werftfreigabe. Vor kommerzieller Nutzung sollten die
+Stammdaten je Modell gegen das Datenblatt der Werft geprüft und `verified_on` neu gesetzt
+werden. `apps/api/tests/test_catalog_data.py` hält die Mindestqualität fest: Belege je
+Modell, Werte innerhalb plausibler Grenzen, eindeutige Schlüssel, genau ein Standard je
+Variantenart.
+
 ### Dynamic Pricing, Competitive Set und Customer Intent
 
 Zielgröße ist der erwartete Erlös pro verfügbarem Bootstag unter Berücksichtigung von

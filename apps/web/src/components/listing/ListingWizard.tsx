@@ -115,7 +115,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
   function chooseVersion(v: ModelVersion) {
     setVersionId(v.id);
-    setYearBuilt(yearBuilt ?? v.year_to ?? v.year_from);
+    setYearBuilt(yearBuilt ?? v.year_to ?? v.year_from ?? null);
     setVariantIds(v.variants.filter((x) => x.is_default).map((x) => x.id));
     if (!name) setName("");
   }
@@ -299,7 +299,10 @@ export default function ListingWizard({ bases, existing }: Props) {
                   >
                     <span className="block font-medium">{v.name}</span>
                     <span className="block text-xs">
-                      Bauzeit {v.year_from}–{v.year_to ?? "heute"} · {v.length_m.toFixed(2)} m
+                      {v.year_from
+                        ? `Bauzeit ${v.year_from}–${v.year_to ?? "heute"}`
+                        : "Bauzeit nicht belegt"}{" "}
+                      · {v.length_m.toFixed(2)} m
                     </span>
                   </button>
                 ))}

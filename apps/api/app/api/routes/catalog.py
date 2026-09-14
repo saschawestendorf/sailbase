@@ -73,13 +73,16 @@ def get_boat(slug: str, db: DB):
             "model_name": version.model.name,
             "manufacturer": version.model.manufacturer.name,
             "designer": version.model.designer,
-            "build_years": f"{version.year_from}–{version.year_to or 'heute'}",
+            "build_years": (
+                f"{version.year_from}–{version.year_to or 'heute'}" if version.year_from else "nicht belegt"
+            ),
             "water_tank_l": version.water_tank_l,
             "fuel_tank_l": version.fuel_tank_l,
             "source": version.source,
             "source_url": version.source_url,
             "verified_on": version.verified_on.isoformat() if version.verified_on else None,
             "revision": version.revision,
+            "caveat": version.caveat,
         }
     return out
 

@@ -230,7 +230,7 @@ export type Variant = {
 export type ModelVersion = {
   id: string;
   name: string;
-  year_from: number;
+  year_from: number | null;
   year_to: number | null;
   length_m: number;
   beam_m: number | null;
@@ -254,6 +254,7 @@ export type ModelVersion = {
   source_url: string;
   verified_on: string | null;
   revision: number;
+  caveat: string;
   variants: Variant[];
 };
 
