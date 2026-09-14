@@ -414,5 +414,12 @@ def simulate_pricing(boat_id: str, payload: PolicyProposal, db: DB, charterer: C
         proposal = payload.merged_policy(boat)
     except ValueError as e:
         raise HTTPException(422, str(e)) from e
-    comparison = revenue_service.compare(db, boat, proposal, start=payload.start, days=payload.days)
+    comparison = revenue_service.compare(
+        db,
+        boat,
+        proposal,
+        start=payload.start,
+        days=payload.days,
+        demand_level=payload.demand_level,
+    )
     return SimulationOut(**comparison.to_dict())

@@ -161,20 +161,41 @@ class LeadTimeFactor:
 
 
 class DurationFactor:
+    """Length-of-stay pricing, and it has to know how busy the window is.
+
+    A long-stay discount buys occupancy with yield: it is worth paying in a quiet week and
+    ruinous in a full one, where those days would have sold anyway at the full rate. So the
+    discount fades out as comparable boats fill up, and the short-stay premium grows.
+    """
+
     key = "duration"
     label = "Dauer"
 
     def multiplier(self, inp: PricingInput, params: PricingParams) -> tuple[float, str]:
         n = inp.nights
+        headroom = params.target_occupancy
+        pressure = _clamp((inp.occupancy - headroom) / max(0.05, 1.0 - headroom), 0.0, 1.0)
         if n <= params.short_stay_days:
-            return 1.0 + params.short_stay_premium, f"Kurztörn ({n} Nächte)"
+            premium = params.short_stay_premium * (1.0 + pressure)
+            return 1.0 + premium, f"Kurztörn ({n} Nächte)"
+        if n < params.week_nights and pressure > 0:
+            # Shorter than a week while the fleet fills up: those days would have gone to a
+            # full week, so the stay carries that displacement rather than undercutting it.
+            premium = params.below_week_peak_premium * pressure
+            return 1.0 + premium, f"{n} Nächte in nachgefragter Zeit"
         discount = 0.0
         for threshold in sorted(params.long_stay_tiers):
             if n >= threshold:
                 discount = params.long_stay_tiers[threshold]
-        if discount:
-            return 1.0 - discount, f"Langtörn-Rabatt ({n} Nächte)"
-        return 1.0, f"{n} Nächte"
+        if not discount:
+            return 1.0, f"{n} Nächte"
+        effective = discount * (1.0 - pressure)
+        if effective < 0.005:
+            return 1.0, f"{n} Nächte, kein Rabatt bei hoher Nachfrage"
+        detail = f"Langtörn-Rabatt ({n} Nächte)"
+        if pressure > 0.05:
+            detail += f", wegen Nachfrage auf {effective:.0%} reduziert"
+        return 1.0 - effective, detail
 
 
 DEFAULT_DAY_FACTORS: Sequence[DayFactor] = (SeasonFactor(), WeekendFactor())

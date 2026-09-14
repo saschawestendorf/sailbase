@@ -101,14 +101,21 @@ export default async function SearchPage(props: PageProps<"/search">) {
       {catalogError ? <p role="alert" className="card mt-4 p-5 text-sm text-warn">{catalogError}</p> : null}
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-lg font-semibold">
-          {result ? `${result.count} Boote gefunden` : "Suche"}
-          {query.min_nights ? (
-            <span className="ml-2 text-sm font-normal text-muted">
-              flexibel, {query.min_nights}–{query.max_nights} Nächte
-            </span>
-          ) : null}
-        </h1>
+        <div>
+          <h1 className="text-lg font-semibold">
+            {result ? `${result.count} Boote gefunden` : "Suche"}
+            {query.min_nights ? (
+              <span className="ml-2 text-sm font-normal text-muted">
+                flexibel, {query.min_nights}–{query.max_nights} Nächte
+              </span>
+            ) : null}
+          </h1>
+          <p className="text-sm text-muted">
+            {query.min_nights
+              ? "Jedes Boot zeigt die Termine, die sich in deinem Fenster wirtschaftlich anbieten lassen."
+              : "Feste Daten. Für mehr Auswahl das Zeitfenster öffnen und eine Dauer von bis angeben."}
+          </p>
+        </div>
         <div className="flex flex-wrap gap-1 text-sm">
           {sortLinks.map((s) => (
             <Link
@@ -129,10 +136,13 @@ export default async function SearchPage(props: PageProps<"/search">) {
       ) : result && result.hits.length === 0 ? (
         <div className="card mt-4 p-6 text-sm text-muted">
           <p className="font-medium text-foreground">Kein Boot passt zu diesen Angaben.</p>
-          <p className="mt-2">
-            Versuche ein größeres Zeitfenster mit flexibler Dauer, ein anderes Revier oder weniger
-            Filter. Bei fehlender Qualifikation hilft die Option „Mit Skipper“.
-          </p>
+          <ul className="mt-2 list-inside list-disc space-y-1">
+            <li>Zeitfenster öffnen und eine Dauer von bis angeben, statt feste Daten zu setzen.</li>
+            <li>Anderen Abholhafen oder ein Nachbarrevier zulassen.</li>
+            <li>
+              Fehlt die Qualifikation für die gewünschte Yacht, hilft die Option „Mit Skipper“.
+            </li>
+          </ul>
         </div>
       ) : (
         <div className="mt-4 grid gap-4">

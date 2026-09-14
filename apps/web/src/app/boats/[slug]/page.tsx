@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import BookingForm from "@/components/BookingForm";
+import Gallery from "@/components/boat/Gallery";
+import Reviews from "@/components/boat/Reviews";
 import PriceExplainer from "@/components/PriceExplainer";
 import {
   ApiError,
@@ -9,8 +11,10 @@ import {
   type CalendarResult,
   getBases,
   getBoat,
+  getBoatReviews,
   getCalendar,
   type Quote,
+  type Review,
 } from "@/lib/api";
 import {
   addDays,
@@ -60,7 +64,10 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
   const dropoffBaseId = first(sp.dropoff_base_id);
   const nights = nightsBetween(startDate, endDate);
 
-  const bases = await getBases();
+  const [bases, reviewData] = await Promise.all([
+    getBases(),
+    getBoatReviews(slug).catch(() => ({ summary: boat.ratings, reviews: [] as Review[] })),
+  ]);
   const pickupName = pickupBaseId
     ? (bases.find((b) => b.id === pickupBaseId)?.name ?? "anderer Hafen")
     : boat.base.name;
@@ -119,6 +126,13 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
             {boat.year_built ? ` · Baujahr ${boat.year_built}` : ""} · {boat.base.name},{" "}
             {boat.base.city} · {boat.charterer.name}
           </p>
+          {boat.ratings?.count ? (
+            <p className="mt-1 text-sm">
+              <span className="text-accent">★</span> {boat.ratings.overall?.toFixed(1)} aus{" "}
+              {boat.ratings.count} verifizierten Charter
+              {boat.ratings.count === 1 ? "" : "n"}
+            </p>
+          ) : null}
         </div>
         <div className="flex flex-wrap gap-1.5">
           {(boat.character ?? []).map((c) => (
@@ -129,14 +143,9 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
         </div>
       </header>
 
-      {boat.images?.[0] ? (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
-          src={boat.images[0]}
-          alt={boat.name}
-          className="mt-5 aspect-[21/9] w-full rounded-2xl object-cover"
-        />
-      ) : null}
+      <div className="mt-5">
+        <Gallery images={boat.gallery ?? []} name={boat.name} />
+      </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_22rem]">
         <div className="space-y-6">
@@ -181,7 +190,37 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
                 Revierbeschränkung: {boat.region_restrictions}
               </p>
             ) : null}
+
+            {boat.model_info?.version_name ? (
+              <div className="mt-4 border-t border-line pt-3 text-xs text-muted">
+                <p>
+                  Werksdaten aus dem Katalog: {boat.model_info.manufacturer}{" "}
+                  {boat.model_info.model_name}, {boat.model_info.version_name}, Bauzeit{" "}
+                  {boat.model_info.build_years}
+                  {boat.model_info.designer ? ` · Riss ${boat.model_info.designer}` : ""}
+                </p>
+                <p className="mt-1">
+                  Quelle: {boat.model_info.source || "nicht angegeben"} · Stand{" "}
+                  {boat.model_info.revision}
+                  {boat.model_info.water_tank_l
+                    ? ` · Wasser ${boat.model_info.water_tank_l} l`
+                    : ""}
+                  {boat.model_info.fuel_tank_l ? ` · Diesel ${boat.model_info.fuel_tank_l} l` : ""}
+                </p>
+                {Object.keys(boat.spec_overrides ?? {}).length ? (
+                  <p className="mt-1 text-warn">
+                    Vom Katalog abweichend und vom Vercharterer angegeben:{" "}
+                    {Object.keys(boat.spec_overrides).join(", ")}
+                  </p>
+                ) : null}
+                {boat.unknown_specs?.length ? (
+                  <p className="mt-1">Nicht belegt: {boat.unknown_specs.join(", ")}</p>
+                ) : null}
+              </div>
+            ) : null}
           </section>
+
+          <Reviews summary={reviewData.summary} reviews={reviewData.reviews} />
 
           <section className="card p-5">
             <div className="flex flex-wrap items-baseline justify-between gap-2">

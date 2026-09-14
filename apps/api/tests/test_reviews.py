@@ -202,3 +202,24 @@ def test_review_month_follows_the_charter_not_the_upload(client, db, dates):
         json={"rating_service": 5},
     ).json()
     assert review["charter_month"] == booking.start_date.strftime("%Y-%m")
+
+
+def test_guest_can_upload_a_photo_with_the_booking_as_proof(client, db, dates):
+    reference = _book_and_finish(client, db, dates)
+    jpeg = ("bild.jpg", b"\xff\xd8\xff", "image/jpeg")
+
+    assert client.post(f"/bookings/{reference}/uploads", files={"file": jpeg}).status_code == 403
+    r = client.post(
+        f"/bookings/{reference}/uploads",
+        params={"email": "gast@example.com"},
+        files={"file": jpeg},
+    )
+    assert r.status_code == 201 and r.json()["url"].endswith(".jpg")
+    assert (
+        client.post(
+            f"/bookings/{reference}/uploads",
+            params={"email": "fremd@example.com"},
+            files={"file": jpeg},
+        ).status_code
+        == 403
+    )

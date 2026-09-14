@@ -50,6 +50,11 @@ class PolicyProposal(BaseModel):
     overrides: dict | None = None
     start: date | None = None
     days: int = Field(default=365, ge=30, le=730)
+    demand_level: str = Field(
+        default="medium",
+        pattern="^(low|medium|high|very_high)$",
+        description="Wie gefragt das Boot heute ist. Bestimmt die angenommene Anfragehäufigkeit.",
+    )
 
     @model_validator(mode="after")
     def _corridor(self):

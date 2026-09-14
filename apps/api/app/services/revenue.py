@@ -24,7 +24,18 @@ from app.services.pricing.params import PricingParams
 
 # Daily probability that some crew looks for a boat like this one, at peak season and at the
 # reference price. Scaled by the season curve and by how the price compares to the market.
-PEAK_ARRIVAL_RATE = 0.22
+#
+# How sought-after a boat is drives the whole picture, and nobody knows it better than its
+# owner. So it is an input, not a hidden constant: the levels below are named for the season
+# occupancy they produce for a typical Baltic boat, and the preview shows which one was used.
+DEMAND_LEVELS: dict[str, float] = {
+    "low": 0.14,  # roughly a quarter of the season sold
+    "medium": 0.22,  # roughly 40 %, an ordinary boat with room to grow
+    "high": 0.35,  # roughly half
+    "very_high": 0.55,  # roughly two thirds, a boat that is already well booked
+}
+DEFAULT_DEMAND_LEVEL = "medium"
+PEAK_ARRIVAL_RATE = DEMAND_LEVELS[DEFAULT_DEMAND_LEVEL]
 # A charter far in the future is not sold a year ahead; it is sold roughly this long before it
 # starts. Without this the lead-time factor would drift from last-minute to early-bird across
 # the horizon and swamp the comparison with an artefact of where the simulation begins.
@@ -38,6 +49,10 @@ PRICE_ELASTICITY = 1.6
 # Bounds keep the model honest at the edges of the corridor.
 MIN_CONVERSION_FACTOR = 0.15
 MAX_CONVERSION_FACTOR = 3.0
+# More likely sold than not: past such a day a candidate is no longer competing for a free
+# stretch. In a quiet month that boundary is far away; in a full July it is a couple of days
+# out, which is exactly when leaving an unsellable stub starts to cost real money.
+CONTESTED_FILL = 0.5
 # Durations a crew would realistically ask for, weighted by how common they are.
 DURATION_MIX: dict[int, float] = {3: 0.15, 4: 0.15, 7: 0.45, 10: 0.15, 14: 0.10}
 # The baseline is the market as it works today: a fixed seasonal week price, Saturday to
@@ -75,6 +90,9 @@ class SimulationResult:
     revpabd_cents: int  # revenue per available boat day
     avg_price_cents: int
     months: list[MonthPoint] = field(default_factory=list)
+    # Probability each day ends up sold. The second pass reads it to bound the free stretch a
+    # candidate competes with, instead of judging every gap against an empty calendar.
+    fill: dict[date, float] = field(default_factory=dict, repr=False)
 
     def to_dict(self) -> dict:
         return {
@@ -141,8 +159,15 @@ def simulate(
     label: str = "dynamisch",
     force_static: bool = False,
     occupancy_hint: float | None = None,
+    expected_fill: dict[date, float] | None = None,
+    arrival_rate: float | None = None,
 ) -> SimulationResult:
-    """Walk the calendar once, carrying the probability that the boat is still free."""
+    """Walk the calendar once, carrying the probability that the boat is still free.
+
+    `expected_fill` is how full each day looked in an earlier pass. The gap logic reads it so a
+    candidate is judged against the calendar it will actually compete with: without it an empty
+    calendar makes every stub look harmless and the owner's strategy changes nothing.
+    """
     engine = PricingEngine()
     params = PricingParams().with_overrides(policy.overrides or None)
     season_curve = (boat.base.region.season_curve or None) if boat.base else None
@@ -177,7 +202,11 @@ def simulate(
             blocked.add(cursor)
             cursor += timedelta(days=1)
 
+    # A day more likely sold than not bounds the stretch a candidate can leave behind.
+    contested = {d for d, p in (expected_fill or {}).items() if p >= CONTESTED_FILL}
+
     releases: dict[int, float] = {}
+    fill: dict[date, float] = {}
     free = 1.0
     revenue = 0.0
     booked_days = 0.0
@@ -193,13 +222,12 @@ def simulate(
         if day in blocked:
             continue
         available_days += 1
-        bucket = monthly.setdefault(
+        monthly.setdefault(
             day.month, {"available": 0.0, "booked": 0.0, "revenue": 0.0, "pw": 0.0, "ps": 0.0}
-        )
-        bucket["available"] += 1
+        )["available"] += 1
 
         season_level = _interpolated_season(season_curve or params.default_season_curve, day)
-        arrival = PEAK_ARRIVAL_RATE * max(0.05, season_level)
+        arrival = (arrival_rate or PEAK_ARRIVAL_RATE) * max(0.05, season_level)
         market_per_day = max(1, int(round(policy.reference_price_cents * max(0.3, season_level))))
         occupancy = (
             occupancy_hint
@@ -238,7 +266,10 @@ def simulate(
                     GapInput(
                         candidate_start=day,
                         candidate_end=end,
-                        window=FreeWindow(day, _next_block_start(blocked, end, horizon_end)),
+                        window=FreeWindow(
+                            _window_start(blocked | contested, day, start),
+                            _window_end(blocked | contested, end, horizon_end),
+                        ),
                         min_sellable_nights=max(
                             1,
                             policy.max_dead_gap_days
@@ -258,6 +289,13 @@ def simulate(
                     continue
 
             share = weight / weight_sum
+            # Nights are counted on the days they occupy. Booking them all into the starting
+            # month is what made a July run past 100 % occupancy.
+            nights_in_window = [
+                day + timedelta(days=i)
+                for i in range(nights)
+                if 0 <= (day + timedelta(days=i) - start).days < days
+            ]
             if force_static:
                 # A whole week of arrivals funnels into the one Saturday that can serve them.
                 share *= 7
@@ -266,15 +304,22 @@ def simulate(
             if taken <= 0:
                 continue
             taken_total += probability
-            gross = per_day * nights
+            counted = len(nights_in_window)
+            gross = per_day * counted
             revenue += taken * gross
-            booked_days += taken * nights
-            price_weighted_sum += taken * nights * per_day
-            price_weight += taken * nights
-            bucket["booked"] += taken * nights
-            bucket["revenue"] += taken * gross
-            bucket["ps"] += taken * nights * per_day
-            bucket["pw"] += taken * nights
+            booked_days += taken * counted
+            price_weighted_sum += taken * counted * per_day
+            price_weight += taken * counted
+            for sold_day in nights_in_window:
+                fill[sold_day] = min(1.0, fill.get(sold_day, 0.0) + taken)
+                night_bucket = monthly.setdefault(
+                    sold_day.month,
+                    {"available": 0.0, "booked": 0.0, "revenue": 0.0, "pw": 0.0, "ps": 0.0},
+                )
+                night_bucket["booked"] += taken
+                night_bucket["revenue"] += taken * per_day
+                night_bucket["ps"] += taken * per_day
+                night_bucket["pw"] += taken
             releases[offset + nights + turnaround] = releases.get(offset + nights + turnaround, 0.0) + taken
 
         free = max(0.0, free - free * min(1.0, taken_total))
@@ -302,16 +347,29 @@ def simulate(
         revpabd_cents=int(round(revenue / available_days)) if available_days else 0,
         avg_price_cents=int(round(price_weighted_sum / price_weight)) if price_weight else 0,
         months=months,
+        fill=fill,
     )
 
 
-def _next_block_start(blocked: set[date], after: date, horizon: date) -> date:
+def _window_end(blocked: set[date], after: date, horizon: date) -> date:
+    """First day past `after` that the candidate cannot have, or the horizon."""
     cursor = after
     while cursor < horizon:
         if cursor in blocked:
             return cursor
         cursor += timedelta(days=1)
     return horizon
+
+
+def _window_start(blocked: set[date], before: date, floor: date) -> date:
+    """First day of the free stretch running up to `before`."""
+    cursor = before
+    while cursor > floor:
+        candidate = cursor - timedelta(days=1)
+        if candidate in blocked:
+            return cursor
+        cursor = candidate
+    return floor
 
 
 def compare(
@@ -321,12 +379,34 @@ def compare(
     *,
     start: date | None = None,
     days: int = 365,
+    demand_level: str = DEFAULT_DEMAND_LEVEL,
 ) -> Comparison:
     """The proposed rule against the classic fixed seasonal tariff, on the same calendar."""
     start = start or date.today()
-    dynamic = simulate(db, boat, policy, start=start, days=days, label="dynamisch")
+    # First pass with an empty calendar, second pass judging gaps against the fill the first
+    # pass produced. Two passes are enough: the fill barely moves after that, and a fixed
+    # number of passes keeps the result reproducible.
+    rate = DEMAND_LEVELS.get(demand_level, PEAK_ARRIVAL_RATE)
+    probe = simulate(db, boat, policy, start=start, days=days, arrival_rate=rate)
+    dynamic = simulate(
+        db,
+        boat,
+        policy,
+        start=start,
+        days=days,
+        label="dynamisch",
+        expected_fill=probe.fill,
+        arrival_rate=rate,
+    )
     static = simulate(
-        db, boat, policy, start=start, days=days, label="klassischer Wochentarif", force_static=True
+        db,
+        boat,
+        policy,
+        start=start,
+        days=days,
+        label="klassischer Wochentarif",
+        force_static=True,
+        arrival_rate=rate,
     )
     uplift = dynamic.revenue_cents - static.revenue_cents
     return Comparison(
@@ -335,7 +415,8 @@ def compare(
         uplift_cents=uplift,
         uplift_percent=(uplift / static.revenue_cents * 100) if static.revenue_cents else 0.0,
         assumptions={
-            "peak_arrival_rate": PEAK_ARRIVAL_RATE,
+            "demand_level": demand_level,
+            "peak_arrival_rate": rate,
             "price_elasticity": PRICE_ELASTICITY,
             "duration_mix": DURATION_MIX,
             "horizon_days": days,
@@ -346,7 +427,10 @@ def compare(
             ),
             "note": (
                 "Modellrechnung auf Basis angenommener Anfragehäufigkeit und Preiselastizität. "
-                "Sie zeigt die Wirkung der Regel, nicht eine zugesicherte Buchungslage."
+                "Sie zeigt die Wirkung der Regel, nicht eine zugesicherte Buchungslage. "
+                "Wie viel Flexibilität bringt, hängt stark von der Nachfrage ab: bei einem Boot "
+                "mit freien Wochen holt sie Buchungen, die eine starre Woche nie erreicht; "
+                "bei einem ohnehin ausgebuchten Boot zählt fast nur noch der Preis."
             ),
         },
     )

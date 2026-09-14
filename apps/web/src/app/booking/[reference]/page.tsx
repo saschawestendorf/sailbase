@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import BookingLookup from "@/components/BookingLookup";
+import CustomerCheck from "@/components/ops/CustomerCheck";
 import PriceExplainer from "@/components/PriceExplainer";
 import {
   ApiError,
@@ -8,6 +9,8 @@ import {
   type BookingOps,
   getBooking,
   getBookingOps,
+  getReviewEligibility,
+  type ReviewEligibility,
 } from "@/lib/api";
 import { dateLabel, label, money, nightsBetween, STATUS_LABELS } from "@/lib/format";
 
@@ -69,9 +72,13 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
 
   let booking: Booking;
   let ops: BookingOps | null = null;
+  let eligibility: ReviewEligibility | null = null;
   try {
     booking = await getBooking(reference, email);
-    ops = await getBookingOps(reference, email).catch(() => null);
+    [ops, eligibility] = await Promise.all([
+      getBookingOps(reference, email).catch(() => null),
+      getReviewEligibility(reference, email).catch(() => null),
+    ]);
   } catch (error) {
     const message =
       error instanceof ApiError ? error.message : "Buchung konnte nicht geladen werden";
@@ -208,6 +215,10 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
                 })}
               </ul>
             </section>
+          ) : null}
+
+          {ops ? (
+            <CustomerCheck booking={booking} ops={ops} eligibility={eligibility} email={email} />
           ) : null}
 
           {ops?.contract?.text_md ? (

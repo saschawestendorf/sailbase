@@ -93,6 +93,8 @@ class BoatOut(ORMModel):
     base: BaseOut
     boat_class: BoatClassOut
     charterer: ChartererPublic
+    rating_overall: float | None = None
+    rating_count: int = 0
 
 
 class BoatDetailOut(BoatOut):

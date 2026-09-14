@@ -44,6 +44,10 @@ class PricingParams:
     # Duration
     short_stay_days: int = 2  # stays <= this get a premium per day
     short_stay_premium: float = 0.10
+    # A stay shorter than a full week occupies days a week booking would have taken. When
+    # comparable boats are filling up, that displacement is charged for.
+    week_nights: int = 7
+    below_week_peak_premium: float = 0.12
     long_stay_tiers: dict[int, float] = field(
         default_factory=lambda: {7: 0.03, 14: 0.08, 21: 0.12}
     )  # >= days -> discount

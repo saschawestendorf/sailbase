@@ -6,7 +6,7 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request, UploadFile
 
-from app.api.deps import CurrentUser
+from app.api.deps import DB, CurrentUser, OptionalUser
 from app.core.config import get_settings
 from app.schemas.ops import UploadOut
 
@@ -22,8 +22,7 @@ def upload_dir() -> Path:
     return d
 
 
-@router.post("/uploads", response_model=UploadOut, status_code=201)
-async def upload(file: UploadFile, request: Request, user: CurrentUser):
+async def _store(file: UploadFile, request: Request) -> UploadOut:
     ext = ALLOWED.get(file.content_type or "")
     if ext is None:
         raise HTTPException(415, "Nur JPEG, PNG, WebP oder PDF")
@@ -37,5 +36,36 @@ async def upload(file: UploadFile, request: Request, user: CurrentUser):
     if not name.endswith(ext):
         name += ext
     (upload_dir() / name).write_bytes(data)
-    url = f"{str(request.base_url).rstrip('/')}/media/{name}"
-    return UploadOut(url=url, filename=name, size=len(data))
+    return UploadOut(
+        url=f"{str(request.base_url).rstrip('/')}/media/{name}",
+        filename=name,
+        size=len(data),
+    )
+
+
+@router.post("/uploads", response_model=UploadOut, status_code=201)
+async def upload(file: UploadFile, request: Request, user: CurrentUser):
+    return await _store(file, request)
+
+
+@router.post("/bookings/{reference}/uploads", response_model=UploadOut, status_code=201)
+async def guest_upload(
+    reference: str,
+    file: UploadFile,
+    request: Request,
+    db: DB,
+    user: OptionalUser,
+    email: str | None = None,
+):
+    """Guests have no account, so the booking itself is what proves they may upload."""
+    from app.models import Booking
+
+    booking = db.query(Booking).filter(Booking.reference == reference.upper()).one_or_none()
+    if booking is None:
+        raise HTTPException(404, "Buchung nicht gefunden")
+    allowed = (user is not None and (user.id == booking.customer_user_id or user.role == "admin")) or (
+        email is not None and email.lower() == booking.customer_email
+    )
+    if not allowed:
+        raise HTTPException(403, "Zugriff verweigert")
+    return await _store(file, request)

@@ -58,6 +58,7 @@ def _candidates(db: Session, q: SearchQuery) -> list[Boat]:
             selectinload(Boat.base).selectinload(Base_.region),
             selectinload(Boat.boat_class),
             selectinload(Boat.charterer),
+            selectinload(Boat.reviews),
         )
         .where(Boat.is_active.is_(True))
     )

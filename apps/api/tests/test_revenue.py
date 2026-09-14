@@ -149,3 +149,60 @@ def test_preview_is_owner_scoped(client, db):
         json={},
     )
     assert r.status_code == 404
+
+
+def test_demand_level_drives_occupancy_and_is_reported(db):
+    """How sought-after the boat is, is an input the owner sets, not a hidden constant."""
+    boat = _boat(db)
+    results = {
+        level: revenue.compare(
+            db, boat, boat.pricing, start=date(2027, 1, 1), demand_level=level
+        )
+        for level in ("low", "medium", "high", "very_high")
+    }
+    occupancies = [results[level].dynamic.occupancy for level in ("low", "medium", "high", "very_high")]
+    assert occupancies == sorted(occupancies), "mehr Nachfrage muss mehr Auslastung bedeuten"
+    assert all(o <= 1.0 for o in occupancies), "Auslastung kann 100 % nicht überschreiten"
+    assert results["medium"].assumptions["demand_level"] == "medium"
+    assert results["low"].assumptions["peak_arrival_rate"] < results["high"].assumptions["peak_arrival_rate"]
+
+
+def test_no_month_exceeds_full_occupancy(db):
+    """Nights count on the days they occupy, not on the month the booking started in."""
+    boat = _boat(db)
+    for level in ("medium", "very_high"):
+        comparison = revenue.compare(
+            db, boat, boat.pricing, start=date(2027, 1, 1), demand_level=level
+        )
+        for run in (comparison.dynamic, comparison.static):
+            for month in run.months:
+                assert month.occupancy <= 1.0, f"{run.label} {month.label}: {month.occupancy}"
+                assert month.booked_days <= month.available_days + 0.01
+
+
+def test_long_stay_discount_fades_when_comparable_boats_fill_up(db):
+    """A discount that buys occupancy is ruinous in a week that would have sold anyway."""
+    from app.models.enums import PricingMode
+    from app.services.pricing import PricingEngine, PricingInput
+
+    def duration_factor(occupancy: float) -> float:
+        result = PricingEngine().price(
+            PricingInput(
+                boat_id="b",
+                mode=PricingMode.CORRIDOR,
+                reference_price_cents=30000,
+                floor_price_cents=10000,
+                ceiling_price_cents=90000,
+                start_date=date(2027, 7, 5),
+                end_date=date(2027, 7, 19),
+                today=date(2027, 4, 1),
+                occupancy=occupancy,
+            )
+        )
+        return {f.key: f for f in result.stay_factors}["duration"].multiplier
+
+    quiet = duration_factor(0.3)
+    busy = duration_factor(0.98)
+    assert quiet < 1.0, "in einer ruhigen Zeit gibt es den Langtörn-Rabatt"
+    assert busy > quiet
+    assert busy >= 0.999, "bei voller Nachfrage bleibt kein Rabatt übrig"

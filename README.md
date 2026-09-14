@@ -17,7 +17,10 @@ Preise folgen Saison, Nachfrage und Vorlaufzeit, und der Kalender kennt mehr als
 | One-Way | `apps/api/app/services/routing.py` | Bootsposition über die Zeit, Überführungskosten, Rückführungsrisiko, Rabatt für die Crew, die zurücksegelt |
 | Buchung und Vertrag | `apps/api/app/services/bookings.py`, `contracts.py` | Angebot → Hold → Zahlung → Bestätigung, Vertrag aus Boots- und Buchungsdaten |
 | Operations | `apps/api/app/services/operations.py` | Bootsbereitschaft, Übergabe, Rücknahme mit Fotopflicht, Schadenfälle, Kautionseinbehalt, Auszahlung |
-| Portal | `apps/web/` | Suche, Bootsdetail mit Preisbegründung, Buchung, Kundenportal |
+| Bootskatalog | `apps/api/app/models/catalog.py`, `services/catalog.py` | Hersteller → Modell → Generation → Werksvarianten; das Inserat wählt aus, statt Technik abzutippen |
+| Revenue-Vorschau | `apps/api/app/services/revenue.py` | Erlös je verfügbarem Bootstag über das Jahr, gegen den klassischen Wochentarif gerechnet |
+| Bewertungen und Bildherkunft | `apps/api/app/services/reviews.py` | Eine Bewertung je abgeschlossener Charter, Galerie getrennt nach Anbieter-, Gast- und Modellfoto |
+| Portal | `apps/web/` | Suche, Bootsseite, Inserat, Preisoptimierung, Abwicklung |
 
 Rollen: Charterkunde, Bootseigner bzw. Charterunternehmen, Servicepartner, Admin.
 
@@ -42,9 +45,13 @@ Hafen, tatsächliche Ausstattung, Umbauten, Zustand, Wartung, Dokumente, Kalende
 Preisregeln. Abweichungen vom Katalog werden explizit dokumentiert. Katalogkorrekturen
 dürfen bestätigte Buchungs- und Vertragsdaten nicht nachträglich verändern.
 
-**Stand:** `Boat` enthält bislang Modellname und technische Daten direkt. `BoatClass`
-ist eine Vergleichsklasse, kein Bootsmodell. Katalogtabellen, Variantenvalidierung und
-das darauf aufbauende Anbieter-Onboarding sind noch umzusetzen.
+**Stand:** Umgesetzt. `Manufacturer`, `BoatModel`, `ModelVersion` und `VariantOption` bilden
+den Katalog; `Boat` verweist über `model_version_id` und `variant_ids` darauf. Beim Einstellen
+werden die aufgelösten Werksdaten auf das Boot kopiert, zusammen mit `spec_sources` (Katalog,
+Variante oder eigene Angabe je Feld), `spec_overrides` für dokumentierte Abweichungen und
+`unknown_specs` für das, was unbelegt bleibt. Unplausible Baujahre und zwei Varianten derselben
+Art werden abgewiesen. Weil die Werte kopiert werden, verändert eine spätere Katalogkorrektur
+keine bestehende Buchung. `BoatClass` bleibt die Vergleichsklasse fürs Pricing.
 
 ### Dynamic Pricing, Competitive Set und Customer Intent
 
@@ -124,7 +131,13 @@ belegt), Uploadzeit und Herkunft sind getrennte Angaben. Private Übergabe-/Scha
 werden nicht automatisch öffentlich. Moderation, Meldung, Bildrechte und Schutz
 personenbezogener Inhalte gehören zum Veröffentlichungsablauf. Aktualität kann später
 als transparentes Signal dienen; wenige Bewertungen bedeuten nicht schlechte Qualität.
-**Stand:** Bilder sind bislang URL-Listen; Bildherkunft und verifizierte Reviews fehlen.
+**Stand:** Umgesetzt. `BoatImage` trägt die Herkunft (`model`, `owner`, `guest`, `handover`),
+bei Gastfotos den Chartermonat, dazu Uploadzeit und Rechtehinweis getrennt. Übergabefotos sind
+nicht öffentlich. `Review` hängt an genau einer Buchung; die Berechtigung leitet der Server aus
+deren Status ab, ein Label vom Client genügt nicht. Modell, Zustand des konkreten Bootes und
+Service werden getrennt bewertet, dahinter Pflege, Sauberkeit, Beschreibungstreue, Funktion der
+Ausstattung, Organisation und Übergabe. Gäste ohne Konto laden Fotos über ihre Buchungsreferenz
+hoch. Moderation und Meldewege fehlen noch.
 
 ### Rollen und nächste Schritte
 
@@ -140,6 +153,33 @@ Objektbezogene Rechte müssen auf dem Server durchgesetzt werden.
 Auf die erste Competitive-Set-Stufe folgen Katalog/Varianten mit migrationsfähiger
 Boot-Verknüpfung, Bildherkunft und verifizierte Reviews. Anschließend werden die
 strukturierten Daten für feinere Similarity-Scores und Operations-Planung genutzt.
+
+## Die fünf Seiten des Kernprozesses
+
+| Seite | Wer | Was dort passiert |
+|---|---|---|
+| `/search` | Kunde | Feste Daten oder ein Zeitfenster mit Dauer von bis; Treffer nach Passung, je Boot mehrere Termine |
+| `/boats/[slug]` | Kunde | Technik mit Quellenangabe, Preiskalender, aufgeschlüsselter Preis, Galerie nach Herkunft, verifizierte Bewertungen |
+| `/charterer/boats/new` | Vercharterer | Inserat über den Katalog: Modell, Baureihe, Varianten, dann Regeln und Preisrahmen |
+| `/charterer/boats/[id]/pricing` | Vercharterer | Preiskorridor, Strategie und Lückenregel, daneben die Jahresrechnung je verfügbarem Bootstag |
+| `/charterer/bookings/[id]` | Vercharterer | Abwicklung: Vertrag, Papiere, Checklisten mit Fotopflicht, Schäden, Kaution, Auszahlung |
+
+Die Gegenseite der Abwicklung liegt unter `/booking/[reference]`: Zahlungen, Vertrag, Crewliste,
+Bestätigung von Übernahme und Rückgabe und danach die Bewertung mit eigenen Fotos.
+
+### Zur Revenue-Vorschau
+
+Die Vorschau ist eine Modellrechnung, keine Prognose. Sie läuft den Kalender Tag für Tag durch
+und trägt dabei die Wahrscheinlichkeit mit, dass das Boot noch frei ist, damit eine Buchung die
+Tage blockiert, die sie belegt. Verglichen wird gegen den Markt von heute: fester Saisonpreis,
+sieben Nächte, Samstag bis Samstag.
+
+Wie groß der Unterschied ausfällt, hängt an der angenommenen Nachfrage, und die kennt der
+Eigner besser als das Modell. Deshalb ist sie ein Eingabewert der Vorschau und kein verstecktes
+Konstrukt. Bei einem Boot mit freien Wochen holt Flexibilität Buchungen, die eine starre Woche
+nie erreicht; bei einem ohnehin ausgebuchten Boot liegen beide Modelle nah beieinander und es
+zählt fast nur noch der Preis. Die Strategie wirkt entsprechend erst, wenn der Kalender
+umkämpft ist: in einem leeren Kalender zerschneidet eine Kurzbuchung nichts.
 
 ## Lokal starten
 
