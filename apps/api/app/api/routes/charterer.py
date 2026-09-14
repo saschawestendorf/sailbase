@@ -337,8 +337,7 @@ def _apply_catalog(db, boat: Boat, payload: BoatFromCatalog) -> Boat:
     boat.model = version.model.name
     boat.year_built = payload.year_built
     for field, value in spec.values.items():
-        if value is not None:
-            setattr(boat, field, value)
+        setattr(boat, field, value)
     boat.boat_class_id = _class_for_length(db, float(spec.values.get("length_m") or 0)).id
 
     features = list(spec.features)
@@ -356,9 +355,18 @@ def _apply_catalog(db, boat: Boat, payload: BoatFromCatalog) -> Boat:
 def _sync_gallery(db, boat: Boat, payload: BoatFromCatalog, version_images: list[str]) -> None:
     review_service.add_owner_images(db, boat, payload.images, payload.image_captions)
     # Model photos stay marked as model photos; they never stand in for the actual boat.
-    existing_model = {i.url for i in boat.gallery if i.origin == "model"}
+    # Remove model images from previous versions that are no longer current.
+    current_model_urls = set(version_images)
+    existing_model_urls: set[str] = set()
+    for image in list(boat.gallery):
+        if image.origin != "model":
+            continue
+        if image.url not in current_model_urls:
+            db.delete(image)
+        else:
+            existing_model_urls.add(image.url)
     for offset, url in enumerate(version_images):
-        if url in existing_model:
+        if url in existing_model_urls:
             continue
         db.add(
             BoatImage(
@@ -370,7 +378,7 @@ def _sync_gallery(db, boat: Boat, payload: BoatFromCatalog, version_images: list
                 sort_order=1000 + offset,
             )
         )
-    boat.images = payload.images or list(version_images)
+    boat.images = payload.images
     db.flush()
 
 
