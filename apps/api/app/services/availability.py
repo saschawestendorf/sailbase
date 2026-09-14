@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.models import AvailabilityBlock, Base_, BlockType, Boat
 from app.models.entities import utcnow
+from app.services.matching.competitive import similarity
 
 _BLOCKING_TYPES = {
     BlockType.BOOKING.value,
@@ -85,18 +86,19 @@ def is_available(db: Session, boat: Boat, start: date, end: date) -> tuple[bool,
 def comparable_occupancy(
     db: Session, boat: Boat, start: date, end: date, now: datetime | None = None
 ) -> float:
-    """Share of boat-nights already blocked among comparable boats in the window.
+    """Similarity-weighted share of booked/held boat-nights in the window.
 
-    Comparable = same boat class, same region, active. Includes the boat itself.
+    Eligible = same boat class, same region, active. Includes the boat itself.
+    Overlapping blocks count once per boat; non-demand blocks do not count.
     Returns 0..1. Robust to empty sets (returns 0).
     """
     now = now or utcnow()
     nights = (end - start).days
     if nights <= 0:
         return 0.0
-    comparable_ids = (
+    comparable_boats = (
         db.execute(
-            select(Boat.id)
+            select(Boat)
             .join(Base_, Boat.base_id == Base_.id)
             .where(
                 Boat.is_active.is_(True),
@@ -107,13 +109,14 @@ def comparable_occupancy(
         .scalars()
         .all()
     )
-    if not comparable_ids:
+    weights = {b.id: 1.0 if b.id == boat.id else similarity(boat, b) for b in comparable_boats}
+    if not weights:
         return 0.0
 
     blocks = (
         db.execute(
             select(AvailabilityBlock).where(
-                AvailabilityBlock.boat_id.in_(comparable_ids),
+                AvailabilityBlock.boat_id.in_(weights),
                 AvailabilityBlock.start_date < end,
                 AvailabilityBlock.end_date > start,
                 AvailabilityBlock.block_type.in_([BlockType.BOOKING.value, BlockType.HOLD.value]),
@@ -124,10 +127,14 @@ def comparable_occupancy(
         .all()
     )
 
-    blocked_nights = 0
+    intervals: dict[str, list[tuple[date, date]]] = {}
     for b in blocks:
-        s = max(b.start_date, start)
-        e = min(b.end_date, end)
-        blocked_nights += max(0, (e - s).days)
-    capacity = len(comparable_ids) * nights
+        intervals.setdefault(b.boat_id, []).append((max(b.start_date, start), min(b.end_date, end)))
+    blocked_nights = 0.0
+    for boat_id, ranges in intervals.items():
+        last_end = start
+        for s, e in sorted(ranges):
+            blocked_nights += weights[boat_id] * max(0, (e - max(s, last_end)).days)
+            last_end = max(last_end, e)
+    capacity = sum(weights.values()) * nights
     return min(1.0, blocked_nights / capacity) if capacity else 0.0
