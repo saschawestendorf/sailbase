@@ -14,8 +14,7 @@ from app.schemas.catalog import (
     CalendarOut,
     RegionOut,
 )
-from app.services import availability
-from app.services.quotes import QuoteError, compute_price
+from app.services.offers import OfferContext
 
 router = APIRouter(tags=["catalog"])
 
@@ -67,22 +66,41 @@ def boat_calendar(
     start: date | None = None,
     days: int = Query(default=60, ge=1, le=180),
     nights: int | None = Query(default=None, ge=1, le=60),
+    pickup_base_id: str | None = None,
+    dropoff_base_id: str | None = None,
 ):
     """Per-day start price for a stay of `nights` starting on that day (a hotel-style calendar)."""
     boat = _load_boat(db, slug)
     start = start or date.today()
     nights = nights or max(1, boat.min_days)
     out: list[CalendarDay] = []
+    if boat.pricing is None:
+        for i in range(days):
+            d = start + timedelta(days=i)
+            out.append(CalendarDay(date=d, available=False, per_day_cents=None, reason="Kein Preis"))
+        return CalendarOut(boat_id=boat.id, nights=nights, days=out)
+    ctx = OfferContext(
+        db,
+        boat,
+        start,
+        start + timedelta(days=days + nights),
+        pickup_base_id=pickup_base_id,
+        dropoff_base_id=dropoff_base_id,
+    )
     for i in range(days):
         d = start + timedelta(days=i)
         e = d + timedelta(days=nights)
-        ok, reason = availability.is_available(db, boat, d, e)
-        price = None
-        if ok and boat.pricing is not None:
+        ok, reason = ctx.is_free(d, e)
+        price = total = None
+        if ok:
             try:
-                res, _ = compute_price(db, boat, d, e)
-                price = res.per_day_cents
-            except QuoteError:
+                res, _gap, offer, note = ctx.price(d, e)
+            except ValueError:
                 ok, reason = False, "Kein Preis"
-        out.append(CalendarDay(date=d, available=ok, per_day_cents=price, reason=reason))
+            else:
+                if offer:
+                    price, total = res.per_day_cents, res.total_cents
+                else:
+                    ok, reason = False, note
+        out.append(CalendarDay(date=d, available=ok, per_day_cents=price, total_cents=total, reason=reason))
     return CalendarOut(boat_id=boat.id, nights=nights, days=out)

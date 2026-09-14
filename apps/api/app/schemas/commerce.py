@@ -11,6 +11,8 @@ class QuoteRequest(BaseModel):
     start_date: date
     end_date: date
     persons: int = Field(default=2, ge=1, le=30)
+    pickup_base_id: str | None = None
+    dropoff_base_id: str | None = None
 
     @model_validator(mode="after")
     def _check_dates(self):
@@ -27,6 +29,8 @@ class QuoteOut(ORMModel):
     start_date: date
     end_date: date
     persons: int
+    pickup_base_id: str | None
+    dropoff_base_id: str | None
     currency: str
     total_cents: int
     breakdown: dict
@@ -49,9 +53,11 @@ class BookingCreate(BaseModel):
 class PaymentOut(ORMModel):
     id: str
     provider: str
+    purpose: str
     amount_cents: int
     currency: str
     status: str
+    due_at: date | None
     checkout_url: str
 
 
@@ -64,10 +70,14 @@ class BookingOut(ORMModel):
     persons: int
     start_date: date
     end_date: date
+    pickup_base_id: str | None
+    dropoff_base_id: str | None
     status: str
     currency: str
     total_cents: int
     deposit_cents: int
+    security_deposit_cents: int
+    balance_due_at: date | None
     price_breakdown: dict
     hold_expires_at: datetime | None
     created_at: datetime

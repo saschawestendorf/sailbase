@@ -1,21 +1,36 @@
+import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
-from app.api.routes import auth, catalog, charterer, commerce, search
+from app.api.routes import auth, catalog, charterer, commerce, operations, partner, search, uploads
 from app.core.config import get_settings
 from app.core.db import Base, engine
+
+logger = logging.getLogger("sailbase")
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
-    if not settings.is_production:
-        # Dev convenience; production uses Alembic migrations.
-        import app.models  # noqa: F401
+    import app.models  # noqa: F401
 
+    if not settings.is_production:
+        # Dev convenience; production runs Alembic migrations on container start.
         Base.metadata.create_all(bind=engine)
+    if settings.seed_on_start:
+        # Opt-in demo data. Seeding is idempotent, so a restart never duplicates rows.
+        try:
+            from app.core.db import SessionLocal
+            from app.seed.seed import seed
+
+            with SessionLocal() as db:
+                logger.info("Seeding demo catalogue: %s", seed(db))
+        except Exception:  # never let seeding take the API down
+            logger.exception("Seeding failed, continuing with an empty catalogue")
     yield
 
 
@@ -34,10 +49,22 @@ def create_app() -> FastAPI:
     app.include_router(search.router)
     app.include_router(commerce.router)
     app.include_router(charterer.router)
+    app.include_router(operations.router)
+    app.include_router(partner.router)
+    app.include_router(uploads.router)
+
+    media = Path(settings.upload_dir)
+    media.mkdir(parents=True, exist_ok=True)
+    app.mount("/media", StaticFiles(directory=str(media)), name="media")
 
     @app.get("/health", tags=["meta"])
     def health():
-        return {"status": "ok", "environment": settings.environment}
+        """Liveness/readiness probe used by the platform health check."""
+        return {"status": "ok", "environment": settings.environment, "version": app.version}
+
+    @app.get("/", include_in_schema=False)
+    def root():
+        return {"service": settings.app_name, "docs": "/docs", "health": "/health"}
 
     return app
 

@@ -43,6 +43,9 @@ class PricingPolicyOut(ORMModel):
     reference_price_cents: int
     floor_price_cents: int
     ceiling_price_cents: int
+    target_price_cents: int | None
+    strategy: str
+    max_dead_gap_days: int | None
     overrides: dict
 
 
@@ -74,10 +77,18 @@ class BoatOut(ORMModel):
     description: str
     images: list
     min_days: int
+    max_days: int
+    allowed_nights: list
+    min_lead_days: int
     turnaround_days: int
     changeover_weekdays: list
+    handover_options: list
+    one_way_enabled: bool
+    one_way_base_ids: list
+    one_way_fee_cents: int
     deposit_cents: int
     cleaning_fee_cents: int
+    region_restrictions: str
     base: BaseOut
     boat_class: BoatClassOut
     charterer: ChartererPublic
@@ -106,6 +117,7 @@ class CalendarDay(BaseModel):
     date: date
     available: bool
     per_day_cents: int | None
+    total_cents: int | None = None
     reason: str = ""
 
 
@@ -115,12 +127,26 @@ class CalendarOut(BaseModel):
     days: list[CalendarDay]
 
 
+class OfferOut(BaseModel):
+    start_date: date
+    end_date: date
+    nights: int
+    per_day_cents: int
+    total_cents: int
+    breakdown: dict = Field(default_factory=dict)
+    gap: dict = Field(default_factory=dict)
+    note: str = ""
+    pickup_base_id: str | None = None
+    dropoff_base_id: str | None = None
+
+
 class SearchHitOut(BaseModel):
     boat: BoatOut
     available: bool
     unavailable_reason: str = ""
     total_cents: int | None
     per_day_cents: int | None
+    offers: list[OfferOut] = Field(default_factory=list)
     fit_score: float
     fit_reasons: list[str]
     blockers: list[str]

@@ -2,7 +2,7 @@
 
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -28,9 +28,33 @@ class Settings(BaseSettings):
     quote_ttl_minutes: int = 30
     hold_ttl_minutes: int = 45
 
+    # One-way / repositioning economics
+    repositioning_cents_per_nm: int = 1500  # skipper, fuel, wear per nautical mile
+    repositioning_fixed_cents: int = 15000  # travel of the delivery skipper etc.
+    repositioning_nm_per_day: int = 60
+    coastal_route_factor: float = 1.35  # great-circle -> realistic coastal track
+    return_leg_probability: float = 0.5  # chance someone books the leg back
+
+    # Files
+    upload_dir: str = "./uploads"
+
+    # Ops
+    seed_on_start: bool = False  # idempotent demo catalogue, handy for a fresh staging deploy
+
+    @field_validator("database_url", mode="after")
+    @classmethod
+    def _normalise_database_url(cls, v: str) -> str:
+        """Managed providers hand out `postgres://` / `postgresql://`; we drive psycopg 3."""
+        for prefix in ("postgres://", "postgresql://"):
+            if v.startswith(prefix):
+                return "postgresql+psycopg://" + v[len(prefix) :]
+        return v
+
     @property
     def cors_origin_list(self) -> list[str]:
-        return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
+        """Comma-separated list; `*` allows any origin (useful before the web domain is known)."""
+        origins = [o.strip() for o in self.cors_origins.split(",") if o.strip()]
+        return origins or ["*"]
 
     @property
     def is_production(self) -> bool:

@@ -33,11 +33,31 @@ class BoatUpsert(BaseModel):
     description: str = ""
     images: list[str] = []
     min_days: int = Field(default=3, ge=1, le=30)
+    max_days: int = Field(default=28, ge=1, le=90)
+    allowed_nights: list[int] = []
+    min_lead_days: int = Field(default=1, ge=0, le=60)
     turnaround_days: int = Field(default=0, ge=0, le=7)
     changeover_weekdays: list[int] = []
+    handover_options: list[str] = ["owner", "partner"]
+    one_way_enabled: bool = False
+    one_way_base_ids: list[str] = []
+    one_way_fee_cents: int = Field(default=0, ge=0)
     deposit_cents: int = Field(default=0, ge=0)
     cleaning_fee_cents: int = Field(default=0, ge=0)
+    region_restrictions: str = ""
+    documents: list[dict] = []
+    insurance: dict = {}
     is_active: bool = True
+
+    @model_validator(mode="after")
+    def _rules(self):
+        if self.max_days < self.min_days:
+            raise ValueError("max_days muss >= min_days sein")
+        if any(n < self.min_days or n > self.max_days for n in self.allowed_nights):
+            raise ValueError("allowed_nights müssen zwischen min_days und max_days liegen")
+        if any(d < 0 or d > 6 for d in self.changeover_weekdays):
+            raise ValueError("changeover_weekdays: 0=Montag … 6=Sonntag")
+        return self
 
 
 class PricingPolicyUpsert(BaseModel):
@@ -46,6 +66,9 @@ class PricingPolicyUpsert(BaseModel):
     reference_price_cents: int = Field(gt=0)
     floor_price_cents: int = Field(gt=0)
     ceiling_price_cents: int = Field(gt=0)
+    target_price_cents: int | None = Field(default=None, gt=0)
+    strategy: str = Field(default="balanced", pattern="^(conservative|balanced|aggressive)$")
+    max_dead_gap_days: int | None = Field(default=None, ge=0, le=14)
     overrides: dict = {}
 
     @model_validator(mode="after")
@@ -91,9 +114,27 @@ class ChartererOut(ORMModel):
     rating: float | None
 
 
+class CalendarGap(BaseModel):
+    boat_id: str
+    boat_name: str
+    start_date: date
+    end_date: date
+    nights: int
+    sellable: bool
+
+
 class ChartererStats(BaseModel):
     boats: int
     bookings_confirmed: int
     bookings_pending: int
-    revenue_cents: int
+    bookings_settled: int
+    charter_nights: int
+    revenue_cents: int  # dynamic, actually achieved (confirmed + later)
+    static_revenue_cents: int  # what a fixed seasonal tariff would have earned on the same bookings
+    dynamic_uplift_cents: int
+    avg_price_per_night_cents: int
+    commission_cents: int
+    service_cost_cents: int
+    payouts_pending_cents: int
     occupancy_next_90d: float
+    gaps_next_90d: list[CalendarGap]
