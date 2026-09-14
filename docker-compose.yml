@@ -1,0 +1,42 @@
+# Local full stack: Postgres, API and portal. Mirrors the Railway topology.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sailbase
+      POSTGRES_PASSWORD: sailbase
+      POSTGRES_DB: sailbase
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sailbase"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: ./apps/api
+    environment:
+      DATABASE_URL: postgresql+psycopg://sailbase:sailbase@db:5432/sailbase
+      ENVIRONMENT: development
+      SECRET_KEY: local-dev-secret-please-change-0123456789
+      CORS_ORIGINS: http://localhost:3000
+      PUBLIC_WEB_URL: http://localhost:3000
+      SEED_ON_START: "true"
+      UPLOAD_DIR: /data/uploads
+    ports: ["8000:8000"]
+    volumes: ["uploads:/data/uploads"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./apps/web
+    environment:
+      API_URL: http://api:8000
+    ports: ["3000:3000"]
+    depends_on: [api]
+
+volumes:
+  pgdata:
+  uploads:

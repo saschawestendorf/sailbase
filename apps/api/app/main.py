@@ -1,3 +1,4 @@
+import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -9,15 +10,27 @@ from app.api.routes import auth, catalog, charterer, commerce, operations, partn
 from app.core.config import get_settings
 from app.core.db import Base, engine
 
+logger = logging.getLogger("sailbase")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
-    if not settings.is_production:
-        # Dev convenience; production uses Alembic migrations.
-        import app.models  # noqa: F401
+    import app.models  # noqa: F401
 
+    if not settings.is_production:
+        # Dev convenience; production runs Alembic migrations on container start.
         Base.metadata.create_all(bind=engine)
+    if settings.seed_on_start:
+        # Opt-in demo data. Seeding is idempotent, so a restart never duplicates rows.
+        try:
+            from app.core.db import SessionLocal
+            from app.seed.seed import seed
+
+            with SessionLocal() as db:
+                logger.info("Seeding demo catalogue: %s", seed(db))
+        except Exception:  # never let seeding take the API down
+            logger.exception("Seeding failed, continuing with an empty catalogue")
     yield
 
 
@@ -46,7 +59,12 @@ def create_app() -> FastAPI:
 
     @app.get("/health", tags=["meta"])
     def health():
-        return {"status": "ok", "environment": settings.environment}
+        """Liveness/readiness probe used by the platform health check."""
+        return {"status": "ok", "environment": settings.environment, "version": app.version}
+
+    @app.get("/", include_in_schema=False)
+    def root():
+        return {"service": settings.app_name, "docs": "/docs", "health": "/health"}
 
     return app
 
