@@ -1,6 +1,6 @@
 from datetime import date, datetime
 
-from pydantic import BaseModel, EmailStr, Field, model_validator
+from pydantic import BaseModel, EmailStr, Field, computed_field, model_validator
 
 from app.schemas.catalog import BoatOut, PriceBreakdown
 from app.schemas.common import ORMModel
@@ -35,6 +35,11 @@ class QuoteOut(ORMModel):
     total_cents: int
     breakdown: dict
     expires_at: datetime
+
+    @computed_field
+    @property
+    def deposit_cents(self) -> int:
+        return self.breakdown.get("deposit_cents", self.total_cents)
 
 
 class BookingCreate(BaseModel):

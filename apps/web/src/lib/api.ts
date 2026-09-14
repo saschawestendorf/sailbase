@@ -214,6 +214,7 @@ export type Quote = {
   dropoff_base_id: string | null;
   currency: string;
   total_cents: number;
+  deposit_cents: number;
   breakdown: Breakdown;
   expires_at: string;
 };

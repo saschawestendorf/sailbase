@@ -172,6 +172,10 @@ class OfferContext:
                 return False, "One-Way nicht möglich"
             if not self._dropoff_allowed(dropoff):
                 return False, "Abgabehafen nicht erlaubt"
+        # Return-leg feasibility: applies to any case where the boat ends up at a potentially
+        # non-home location — true one-way (dropoff != pickup) OR transfer-in round trip
+        # (pickup != location, dropoff == pickup, but boat is left at the foreign pickup port).
+        if dropoff != pickup or pickup != location:
             nxt = self._next_block(end)
             if nxt is not None:
                 expected = nxt.start_base_id or boat.base_id
@@ -193,6 +197,7 @@ class OfferContext:
             info["transfer_nm"] = repo.nm
         if dropoff != pickup:
             result.add_fee("one_way_fee", "One-Way-Gebühr", boat.one_way_fee_cents)
+        if dropoff != pickup or pickup != location:
             nxt = self._next_block(end)
             expected = (nxt.start_base_id or boat.base_id) if nxt is not None else None
             if expected is not None and expected != dropoff:

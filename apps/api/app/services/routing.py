@@ -8,11 +8,12 @@ import math
 from dataclasses import dataclass
 from datetime import date
 
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
 from app.models import AvailabilityBlock, Base_, BlockType, Boat
+from app.models.entities import utcnow
 
 _EARTH_NM = 3440.065
 
@@ -53,6 +54,7 @@ def repositioning(a: Base_ | None, b: Base_ | None) -> Repositioning:
 def location_at(db: Session, boat: Boat, on: date) -> str:
     """Base id where the boat is on the morning of `on`: end base of the last block that ended
     on or before that day (bookings carry it), otherwise the home base."""
+    now = utcnow()
     last = (
         db.execute(
             select(AvailabilityBlock)
@@ -60,6 +62,7 @@ def location_at(db: Session, boat: Boat, on: date) -> str:
                 AvailabilityBlock.boat_id == boat.id,
                 AvailabilityBlock.end_date <= on,
                 AvailabilityBlock.block_type.in_([BlockType.BOOKING.value, BlockType.HOLD.value]),
+                or_(AvailabilityBlock.expires_at.is_(None), AvailabilityBlock.expires_at > now),
             )
             .order_by(AvailabilityBlock.end_date.desc())
             .limit(1)
@@ -73,10 +76,15 @@ def location_at(db: Session, boat: Boat, on: date) -> str:
 
 
 def next_block_after(db: Session, boat: Boat, after: date) -> AvailabilityBlock | None:
+    now = utcnow()
     return (
         db.execute(
             select(AvailabilityBlock)
-            .where(AvailabilityBlock.boat_id == boat.id, AvailabilityBlock.start_date >= after)
+            .where(
+                AvailabilityBlock.boat_id == boat.id,
+                AvailabilityBlock.start_date >= after,
+                or_(AvailabilityBlock.expires_at.is_(None), AvailabilityBlock.expires_at > now),
+            )
             .order_by(AvailabilityBlock.start_date)
             .limit(1)
         )
