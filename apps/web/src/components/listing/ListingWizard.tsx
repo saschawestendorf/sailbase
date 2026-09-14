@@ -77,7 +77,9 @@ export default function ListingWizard({ bases, existing }: Props) {
   const [baseId, setBaseId] = useState(existing?.base.id ?? bases[0]?.id ?? "");
   const [description, setDescription] = useState(existing?.description ?? "");
   const [character, setCharacter] = useState<string[]>(existing?.character ?? []);
-  const [extraFeatures, setExtraFeatures] = useState<string[]>([]);
+  const [extraFeatures, setExtraFeatures] = useState<string[]>(
+    existing ? EXTRA_FEATURES.filter((f) => (existing.features ?? []).includes(f)) : [],
+  );
   const [images, setImages] = useState<string[]>(existing?.images ?? []);
   const [yearRefit, setYearRefit] = useState<number | null>(existing?.year_refit ?? null);
   const [requiredLicense, setRequiredLicense] = useState(existing?.required_license ?? 2);

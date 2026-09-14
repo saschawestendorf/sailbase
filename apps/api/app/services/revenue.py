@@ -10,6 +10,7 @@ named constants rather than hidden in the arithmetic. Two runs of the same input
 numbers, which is what makes a price decision defensible to the owner.
 """
 
+import math
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 
@@ -299,11 +300,14 @@ def simulate(
             if force_static:
                 # A whole week of arrivals funnels into the one Saturday that can serve them.
                 share *= 7
-            probability = min(0.95, arrival * share * _conversion_factor(per_day, market_per_day))
-            taken = free * probability
+            lam = arrival * share * _conversion_factor(per_day, market_per_day)
+            probability = 1.0 - math.exp(-lam)
+            # Marginal contribution: probability that no earlier duration booked AND this one does.
+            marginal = (1.0 - taken_total) * probability
+            taken = free * marginal
             if taken <= 0:
                 continue
-            taken_total += probability
+            taken_total = 1.0 - (1.0 - taken_total) * (1.0 - probability)
             counted = len(nights_in_window)
             gross = per_day * counted
             revenue += taken * gross
