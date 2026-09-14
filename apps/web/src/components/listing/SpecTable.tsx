@@ -2,8 +2,11 @@
 
 import type { ResolvedSpec } from "@/lib/api";
 
+// Der Katalog führt die Rumpflänge. Wo Quellen Rumpflänge und Länge über alles
+// vermischten, wurde die Rumpflänge eingetragen und der Konflikt am Modell vermerkt;
+// das Label darf deshalb nicht "über alles" versprechen.
 const LABELS: Record<string, [string, string]> = {
-  length_m: ["Länge über alles", "m"],
+  length_m: ["Rumpflänge", "m"],
   beam_m: ["Breite", "m"],
   draft_m: ["Tiefgang", "m"],
   displacement_kg: ["Verdrängung", "kg"],
