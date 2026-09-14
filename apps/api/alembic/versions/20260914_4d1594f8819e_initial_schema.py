@@ -1,14 +1,14 @@
 """initial schema
 
-Revision ID: 20e56e73c53b
+Revision ID: 4d1594f8819e
 Revises: 
-Create Date: 2026-09-14 14:45:02.171675
+Create Date: 2026-09-14 15:02:46.095861
 """
 from alembic import op
 import sqlalchemy as sa
 
 
-revision = '20e56e73c53b'
+revision = '4d1594f8819e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -79,6 +79,22 @@ def upgrade() -> None:
     sa.UniqueConstraint('owner_user_id'),
     sa.UniqueConstraint('slug')
     )
+    op.create_table('service_partners',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('user_id', sa.String(length=32), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
+    sa.Column('phone', sa.String(length=64), nullable=False),
+    sa.Column('base_ids', sa.JSON(), nullable=False),
+    sa.Column('services', sa.JSON(), nullable=False),
+    sa.Column('prices', sa.JSON(), nullable=False),
+    sa.Column('rating', sa.Float(), nullable=True),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id')
+    )
     op.create_table('boats',
     sa.Column('id', sa.String(length=32), nullable=False),
     sa.Column('charterer_id', sa.String(length=32), nullable=False),
@@ -111,10 +127,20 @@ def upgrade() -> None:
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('images', sa.JSON(), nullable=False),
     sa.Column('min_days', sa.Integer(), nullable=False),
+    sa.Column('max_days', sa.Integer(), nullable=False),
+    sa.Column('allowed_nights', sa.JSON(), nullable=False),
+    sa.Column('min_lead_days', sa.Integer(), nullable=False),
     sa.Column('turnaround_days', sa.Integer(), nullable=False),
     sa.Column('changeover_weekdays', sa.JSON(), nullable=False),
+    sa.Column('handover_options', sa.JSON(), nullable=False),
+    sa.Column('one_way_enabled', sa.Boolean(), nullable=False),
+    sa.Column('one_way_base_ids', sa.JSON(), nullable=False),
+    sa.Column('one_way_fee_cents', sa.Integer(), nullable=False),
     sa.Column('deposit_cents', sa.Integer(), nullable=False),
     sa.Column('cleaning_fee_cents', sa.Integer(), nullable=False),
+    sa.Column('region_restrictions', sa.Text(), nullable=False),
+    sa.Column('documents', sa.JSON(), nullable=False),
+    sa.Column('insurance', sa.JSON(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['base_id'], ['bases.id'], ),
@@ -131,6 +157,9 @@ def upgrade() -> None:
     sa.Column('reference_price_cents', sa.Integer(), nullable=False),
     sa.Column('floor_price_cents', sa.Integer(), nullable=False),
     sa.Column('ceiling_price_cents', sa.Integer(), nullable=False),
+    sa.Column('target_price_cents', sa.Integer(), nullable=True),
+    sa.Column('strategy', sa.String(length=20), nullable=False),
+    sa.Column('max_dead_gap_days', sa.Integer(), nullable=True),
     sa.Column('overrides', sa.JSON(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
@@ -145,12 +174,16 @@ def upgrade() -> None:
     sa.Column('start_date', sa.Date(), nullable=False),
     sa.Column('end_date', sa.Date(), nullable=False),
     sa.Column('persons', sa.Integer(), nullable=False),
+    sa.Column('pickup_base_id', sa.String(length=32), nullable=True),
+    sa.Column('dropoff_base_id', sa.String(length=32), nullable=True),
     sa.Column('currency', sa.String(length=3), nullable=False),
     sa.Column('total_cents', sa.Integer(), nullable=False),
     sa.Column('breakdown', sa.JSON(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('expires_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['boat_id'], ['boats.id'], ),
+    sa.ForeignKeyConstraint(['dropoff_base_id'], ['bases.id'], ),
+    sa.ForeignKeyConstraint(['pickup_base_id'], ['bases.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -165,18 +198,32 @@ def upgrade() -> None:
     sa.Column('persons', sa.Integer(), nullable=False),
     sa.Column('start_date', sa.Date(), nullable=False),
     sa.Column('end_date', sa.Date(), nullable=False),
+    sa.Column('pickup_base_id', sa.String(length=32), nullable=True),
+    sa.Column('dropoff_base_id', sa.String(length=32), nullable=True),
     sa.Column('status', sa.String(length=20), nullable=False),
     sa.Column('currency', sa.String(length=3), nullable=False),
     sa.Column('total_cents', sa.Integer(), nullable=False),
     sa.Column('deposit_cents', sa.Integer(), nullable=False),
     sa.Column('commission_cents', sa.Integer(), nullable=False),
+    sa.Column('security_deposit_cents', sa.Integer(), nullable=False),
+    sa.Column('static_price_cents', sa.Integer(), nullable=False),
     sa.Column('price_breakdown', sa.JSON(), nullable=False),
     sa.Column('hold_expires_at', sa.DateTime(), nullable=True),
+    sa.Column('balance_due_at', sa.Date(), nullable=True),
     sa.Column('notes', sa.Text(), nullable=False),
+    sa.Column('contract', sa.JSON(), nullable=False),
+    sa.Column('contract_accepted_customer_at', sa.DateTime(), nullable=True),
+    sa.Column('contract_accepted_charterer_at', sa.DateTime(), nullable=True),
+    sa.Column('crew_list', sa.JSON(), nullable=False),
+    sa.Column('documents', sa.JSON(), nullable=False),
+    sa.Column('handover_confirmed_customer_at', sa.DateTime(), nullable=True),
+    sa.Column('return_confirmed_customer_at', sa.DateTime(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['boat_id'], ['boats.id'], ),
     sa.ForeignKeyConstraint(['customer_user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['dropoff_base_id'], ['bases.id'], ),
+    sa.ForeignKeyConstraint(['pickup_base_id'], ['bases.id'], ),
     sa.ForeignKeyConstraint(['quote_id'], ['quotes.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('quote_id', name='uq_booking_quote'),
@@ -191,8 +238,12 @@ def upgrade() -> None:
     sa.Column('booking_id', sa.String(length=32), nullable=True),
     sa.Column('expires_at', sa.DateTime(), nullable=True),
     sa.Column('note', sa.String(length=255), nullable=False),
+    sa.Column('start_base_id', sa.String(length=32), nullable=True),
+    sa.Column('end_base_id', sa.String(length=32), nullable=True),
     sa.ForeignKeyConstraint(['boat_id'], ['boats.id'], ),
     sa.ForeignKeyConstraint(['booking_id'], ['bookings.id'], ),
+    sa.ForeignKeyConstraint(['end_base_id'], ['bases.id'], ),
+    sa.ForeignKeyConstraint(['start_base_id'], ['bases.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('availability_blocks', schema=None) as batch_op:
@@ -203,9 +254,11 @@ def upgrade() -> None:
     sa.Column('booking_id', sa.String(length=32), nullable=False),
     sa.Column('provider', sa.String(length=20), nullable=False),
     sa.Column('provider_ref', sa.String(length=255), nullable=False),
+    sa.Column('purpose', sa.String(length=20), nullable=False),
     sa.Column('amount_cents', sa.Integer(), nullable=False),
     sa.Column('currency', sa.String(length=3), nullable=False),
     sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('due_at', sa.Date(), nullable=True),
     sa.Column('checkout_url', sa.Text(), nullable=False),
     sa.Column('raw', sa.JSON(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
@@ -216,11 +269,70 @@ def upgrade() -> None:
     with op.batch_alter_table('payments', schema=None) as batch_op:
         batch_op.create_index(batch_op.f('ix_payments_provider_ref'), ['provider_ref'], unique=False)
 
+    op.create_table('payouts',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('booking_id', sa.String(length=32), nullable=False),
+    sa.Column('charterer_id', sa.String(length=32), nullable=False),
+    sa.Column('gross_cents', sa.Integer(), nullable=False),
+    sa.Column('commission_cents', sa.Integer(), nullable=False),
+    sa.Column('service_cost_cents', sa.Integer(), nullable=False),
+    sa.Column('damage_withheld_cents', sa.Integer(), nullable=False),
+    sa.Column('net_cents', sa.Integer(), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('paid_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['booking_id'], ['bookings.id'], ),
+    sa.ForeignKeyConstraint(['charterer_id'], ['charterers.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('booking_id')
+    )
+    op.create_table('service_orders',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('booking_id', sa.String(length=32), nullable=False),
+    sa.Column('boat_id', sa.String(length=32), nullable=False),
+    sa.Column('partner_id', sa.String(length=32), nullable=True),
+    sa.Column('order_type', sa.String(length=20), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('scheduled_for', sa.DateTime(), nullable=True),
+    sa.Column('checklist', sa.JSON(), nullable=False),
+    sa.Column('photos', sa.JSON(), nullable=False),
+    sa.Column('notes', sa.Text(), nullable=False),
+    sa.Column('price_cents', sa.Integer(), nullable=False),
+    sa.Column('completed_at', sa.DateTime(), nullable=True),
+    sa.Column('completed_by_user_id', sa.String(length=32), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['boat_id'], ['boats.id'], ),
+    sa.ForeignKeyConstraint(['booking_id'], ['bookings.id'], ),
+    sa.ForeignKeyConstraint(['completed_by_user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['partner_id'], ['service_partners.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('damage_cases',
+    sa.Column('id', sa.String(length=32), nullable=False),
+    sa.Column('booking_id', sa.String(length=32), nullable=False),
+    sa.Column('source_order_id', sa.String(length=32), nullable=True),
+    sa.Column('title', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.Text(), nullable=False),
+    sa.Column('photos', sa.JSON(), nullable=False),
+    sa.Column('estimated_cents', sa.Integer(), nullable=False),
+    sa.Column('withheld_cents', sa.Integer(), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['booking_id'], ['bookings.id'], ),
+    sa.ForeignKeyConstraint(['source_order_id'], ['service_orders.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 
 def downgrade() -> None:
     # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_table('damage_cases')
+    op.drop_table('service_orders')
+    op.drop_table('payouts')
     with op.batch_alter_table('payments', schema=None) as batch_op:
         batch_op.drop_index(batch_op.f('ix_payments_provider_ref'))
 
@@ -233,6 +345,7 @@ def downgrade() -> None:
     op.drop_table('quotes')
     op.drop_table('pricing_policies')
     op.drop_table('boats')
+    op.drop_table('service_partners')
     op.drop_table('charterers')
     op.drop_table('bases')
     with op.batch_alter_table('users', schema=None) as batch_op:

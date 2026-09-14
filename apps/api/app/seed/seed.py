@@ -16,6 +16,7 @@ from app.models import (
     Charterer,
     PricingPolicy,
     Region,
+    ServicePartner,
     User,
     UserRole,
 )
@@ -146,6 +147,29 @@ def seed(db: Session, *, with_demo_bookings: bool = True) -> dict:
         policy.ceiling_price_cents = b["ceiling"] * 100
         db.add(policy)
         boats.append(obj)
+    db.flush()
+
+    # Service partners
+    for pdata in data.PARTNERS:
+        user = db.query(User).filter(User.email == pdata["email"]).one_or_none()
+        if user is None:
+            user = User(
+                email=pdata["email"],
+                password_hash=hash_password(pdata["password"]),
+                full_name=pdata["name"],
+                role=UserRole.PARTNER.value,
+            )
+            db.add(user)
+            db.flush()
+        partner = db.query(ServicePartner).filter(ServicePartner.user_id == user.id).one_or_none()
+        if partner is None:
+            partner = ServicePartner(user_id=user.id, name=pdata["name"])
+        partner.phone = pdata["phone"]
+        partner.base_ids = [bases[n].id for n in pdata["bases"] if n in bases]
+        partner.services = pdata["services"]
+        partner.prices = pdata["prices"]
+        partner.rating = 4.8
+        db.add(partner)
     db.flush()
 
     # Demo users

@@ -38,7 +38,15 @@ def _boat(db, boat_id: str) -> Boat:
 def create_quote(payload: QuoteRequest, db: DB, user: OptionalUser):
     boat = _boat(db, payload.boat_id)
     try:
-        draft = draft_quote(db, boat, payload.start_date, payload.end_date, payload.persons)
+        draft = draft_quote(
+            db,
+            boat,
+            payload.start_date,
+            payload.end_date,
+            payload.persons,
+            payload.pickup_base_id,
+            payload.dropoff_base_id,
+        )
     except QuoteError as e:
         raise HTTPException(status.HTTP_409_CONFLICT, str(e)) from e
     quote = persist_quote(db, draft, user.id if user else None)

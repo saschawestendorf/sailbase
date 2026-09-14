@@ -28,6 +28,16 @@ class Settings(BaseSettings):
     quote_ttl_minutes: int = 30
     hold_ttl_minutes: int = 45
 
+    # One-way / repositioning economics
+    repositioning_cents_per_nm: int = 1500  # skipper, fuel, wear per nautical mile
+    repositioning_fixed_cents: int = 15000  # travel of the delivery skipper etc.
+    repositioning_nm_per_day: int = 60
+    coastal_route_factor: float = 1.35  # great-circle -> realistic coastal track
+    return_leg_probability: float = 0.5  # chance someone books the leg back
+
+    # Files
+    upload_dir: str = "./uploads"
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]

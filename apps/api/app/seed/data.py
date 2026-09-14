@@ -469,3 +469,31 @@ DEMO_CUSTOMER = {
     "height_cm": 188,
 }
 DEMO_ADMIN = {"email": "admin@sailbase.example", "password": "admin12345", "full_name": "Sailbase Admin"}
+
+PARTNERS = [
+    {
+        "email": "service@hafenhelfer.example",
+        "password": "partner123",
+        "name": "Hafenhelfer Heiligenhafen",
+        "phone": "+49 4362 000000",
+        "bases": ["Marina Heiligenhafen", "Marina Kiel-Schilksee"],
+        "services": ["readiness", "handover", "return", "cleaning"],
+        "prices": {"readiness": 12000, "handover": 9000, "return": 9000, "cleaning": 15000},
+    },
+    {
+        "email": "crew@boddenservice.example",
+        "password": "partner123",
+        "name": "Bodden Yachtservice",
+        "phone": "+49 3831 000000",
+        "bases": ["Citymarina Stralsund", "Marina Breege"],
+        "services": ["readiness", "handover", "return", "cleaning", "technical", "laundry"],
+        "prices": {
+            "readiness": 11000,
+            "handover": 8000,
+            "return": 8000,
+            "cleaning": 14000,
+            "technical": 7500,
+            "laundry": 4500,
+        },
+    },
+]

@@ -1,4 +1,4 @@
-"""Quote service: availability + demand + pricing -> persisted, time-limited price offer."""
+"""Quote service: availability + demand + pricing + gap logic -> persisted, time-limited offer."""
 
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from app.core.config import get_settings
 from app.models import Boat, PricingMode, Quote
 from app.models.entities import utcnow
-from app.services import availability
+from app.services.offers import OfferContext
 from app.services.pricing import PriceResult, PricingEngine, PricingInput
 
 
@@ -24,50 +24,54 @@ class QuoteDraft:
     persons: int
     result: PriceResult
     occupancy: float
+    gap: dict
+    pickup_base_id: str | None = None
+    dropoff_base_id: str | None = None
 
 
 def compute_price(
+    db: Session, boat: Boat, start: date, end: date, today: date | None = None
+) -> tuple[PriceResult, float]:
+    """Price for an (assumed available) window, gap logic included. No persistence."""
+    if boat.pricing is None:
+        raise QuoteError("Boot hat keine Preisregel")
+    ctx = OfferContext(db, boat, start, end, today=today)
+    try:
+        result, _gap, offer, note = ctx.price(start, end)
+    except ValueError as e:
+        raise QuoteError(str(e)) from e
+    if not offer:
+        raise QuoteError(note or "Zeitraum wird nicht angeboten")
+    return result, ctx.occupancy
+
+
+def draft_quote(
     db: Session,
     boat: Boat,
     start: date,
     end: date,
-    today: date | None = None,
-    engine: PricingEngine | None = None,
-) -> tuple[PriceResult, float]:
-    """Pure price computation for an (assumed available) window. No persistence."""
-    if boat.pricing is None:
-        raise QuoteError("Boot hat keine Preisregel")
-    today = today or utcnow().date()
-    occ = availability.comparable_occupancy(db, boat, start, end)
-    policy = boat.pricing
-    inp = PricingInput(
-        boat_id=boat.id,
-        mode=PricingMode(policy.mode),
-        reference_price_cents=policy.reference_price_cents,
-        floor_price_cents=policy.floor_price_cents,
-        ceiling_price_cents=policy.ceiling_price_cents,
-        start_date=start,
-        end_date=end,
-        today=today,
-        season_curve=boat.base.region.season_curve or None,
-        occupancy=occ,
-        cleaning_fee_cents=boat.cleaning_fee_cents,
-        currency=policy.currency,
-        overrides=policy.overrides or None,
-    )
-    return (engine or PricingEngine()).price(inp), occ
-
-
-def draft_quote(db: Session, boat: Boat, start: date, end: date, persons: int) -> QuoteDraft:
-    ok, reason = availability.is_available(db, boat, start, end)
-    if not ok:
-        raise QuoteError(reason)
+    persons: int,
+    pickup_base_id: str | None = None,
+    dropoff_base_id: str | None = None,
+) -> QuoteDraft:
     if persons < 1:
         raise QuoteError("Mindestens eine Person")
     if boat.max_persons and persons > boat.max_persons:
         raise QuoteError(f"Maximal {boat.max_persons} Personen")
-    result, occ = compute_price(db, boat, start, end)
-    return QuoteDraft(boat, start, end, persons, result, occ)
+    if boat.pricing is None:
+        raise QuoteError("Boot hat keine Preisregel")
+    ctx = OfferContext(db, boat, start, end, pickup_base_id=pickup_base_id, dropoff_base_id=dropoff_base_id)
+    ok, reason = ctx.is_free(start, end)
+    if not ok:
+        raise QuoteError(reason)
+    try:
+        result, gap, offer, note = ctx.price(start, end)
+    except ValueError as e:
+        raise QuoteError(str(e)) from e
+    if not offer:
+        raise QuoteError(note or "Zeitraum wird nicht angeboten")
+    _loc, pickup, dropoff = ctx.legs(start)
+    return QuoteDraft(boat, start, end, persons, result, ctx.occupancy, gap, pickup, dropoff)
 
 
 def persist_quote(db: Session, draft: QuoteDraft, user_id: str | None) -> Quote:
@@ -78,9 +82,11 @@ def persist_quote(db: Session, draft: QuoteDraft, user_id: str | None) -> Quote:
         start_date=draft.start_date,
         end_date=draft.end_date,
         persons=draft.persons,
+        pickup_base_id=draft.pickup_base_id,
+        dropoff_base_id=draft.dropoff_base_id,
         currency=draft.result.currency,
         total_cents=draft.result.total_cents,
-        breakdown={**draft.result.to_dict(), "occupancy": draft.occupancy},
+        breakdown={**draft.result.to_dict(), "occupancy": draft.occupancy, "gap": draft.gap},
         expires_at=utcnow() + timedelta(minutes=settings.quote_ttl_minutes),
     )
     db.add(q)
@@ -90,3 +96,24 @@ def persist_quote(db: Session, draft: QuoteDraft, user_id: str | None) -> Quote:
 
 def quote_is_valid(q: Quote, now: datetime | None = None) -> bool:
     return q.expires_at > (now or utcnow())
+
+
+def static_price_cents(boat: Boat, start: date, end: date) -> int:
+    """What a classic fixed seasonal tariff would have charged (for owner dashboards)."""
+    policy = boat.pricing
+    if policy is None:
+        return 0
+    inp = PricingInput(
+        boat_id=boat.id,
+        mode=PricingMode.FIXED,
+        reference_price_cents=policy.reference_price_cents,
+        floor_price_cents=policy.floor_price_cents,
+        ceiling_price_cents=policy.ceiling_price_cents,
+        start_date=start,
+        end_date=end,
+        today=start,
+        season_curve=(boat.base.region.season_curve or None) if boat.base else None,
+        cleaning_fee_cents=boat.cleaning_fee_cents,
+        currency=policy.currency,
+    )
+    return PricingEngine().price(inp).total_cents

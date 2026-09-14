@@ -3,6 +3,9 @@ import os
 os.environ["DATABASE_URL"] = "sqlite://"
 os.environ["ENVIRONMENT"] = "test"
 os.environ["PAYMENT_PROVIDER"] = "fake"
+os.environ["UPLOAD_DIR"] = (
+    "/tmp/claude-0/-home-user-sailbase/b6abb400-0d98-57e6-88b3-5ee30169d95c/scratchpad/uploads-test"
+)
 
 from datetime import date  # noqa: E402
 

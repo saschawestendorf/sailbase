@@ -68,6 +68,16 @@ class PriceResult:
     day_factors: list[FactorLine] = field(default_factory=list)
     stay_factors: list[FactorLine] = field(default_factory=list)
     per_day_prices: list[int] = field(default_factory=list)  # before clamp, per night
+    fee_lines: list[dict] = field(default_factory=list)  # {key,label,amount_cents,detail}
+
+    def add_fee(self, key: str, label: str, amount_cents: int, detail: str = "") -> None:
+        if amount_cents == 0:
+            return
+        self.fee_lines.append(
+            {"key": key, "label": label, "amount_cents": int(amount_cents), "detail": detail}
+        )
+        self.fees_cents += int(amount_cents)
+        self.total_cents = self.charter_cents + self.fees_cents
 
     def to_dict(self) -> dict:
         return {
@@ -82,6 +92,7 @@ class PriceResult:
             "clamped": self.clamped,
             "day_factors": [f.__dict__ for f in self.day_factors],
             "stay_factors": [f.__dict__ for f in self.stay_factors],
+            "fee_lines": list(self.fee_lines),
         }
 
 
@@ -238,22 +249,23 @@ class PricingEngine:
 
         per_day_int = int(round(per_day))
         charter = per_day_int * inp.nights
-        fees = max(0, inp.cleaning_fee_cents)
 
-        return PriceResult(
+        result = PriceResult(
             currency=inp.currency,
             nights=inp.nights,
             reference_per_day_cents=inp.reference_price_cents,
             raw_per_day_cents=int(round(raw_per_day)),
             per_day_cents=per_day_int,
             charter_cents=charter,
-            fees_cents=fees,
-            total_cents=charter + fees,
+            fees_cents=0,
+            total_cents=charter,
             clamped=clamped,
             day_factors=day_lines,
             stay_factors=stay_lines,
             per_day_prices=per_day_prices,
         )
+        result.add_fee("cleaning", "Endreinigung", max(0, inp.cleaning_fee_cents))
+        return result
 
 
 # ------------------------------------------------------------------------ helpers

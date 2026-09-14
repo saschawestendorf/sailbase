@@ -5,7 +5,8 @@ import enum
 
 class UserRole(enum.StrEnum):
     CUSTOMER = "customer"
-    CHARTERER = "charterer"
+    CHARTERER = "charterer"  # Bootseigner / Charterunternehmen
+    PARTNER = "partner"  # lokaler Servicepartner (Übergabe, Reinigung, Technik)
     ADMIN = "admin"
 
 
@@ -20,6 +21,14 @@ class PricingMode(enum.StrEnum):
     FIXED = "fixed"  # reference price only, no dynamic factors
     CORRIDOR = "corridor"  # dynamic within [floor, ceiling] set by charterer
     AUTO = "auto"  # dynamic, platform decides (floor still respected)
+
+
+class PricingStrategy(enum.StrEnum):
+    """How aggressively the algorithm sells calendar days (owner setting)."""
+
+    CONSERVATIVE = "conservative"  # protect the calendar, reject fragmenting bookings
+    BALANCED = "balanced"
+    AGGRESSIVE = "aggressive"  # sell every day that clears the floor
 
 
 class BoatCharacter(enum.StrEnum):
@@ -51,10 +60,52 @@ class BlockType(enum.StrEnum):
 
 class BookingStatus(enum.StrEnum):
     PENDING_PAYMENT = "pending_payment"
-    CONFIRMED = "confirmed"
+    CONFIRMED = "confirmed"  # deposit paid, contract generated
+    READY = "ready"  # readiness check complete -> "Ready for Charter"
+    HANDED_OVER = "handed_over"  # check-in done, crew on board
+    RETURNED = "returned"  # check-out done, damages assessed
+    SETTLED = "settled"  # deposit released/withheld, owner paid out
     CANCELLED = "cancelled"
     EXPIRED = "expired"
-    COMPLETED = "completed"
+
+    @classmethod
+    def active(cls) -> set[str]:
+        return {cls.CONFIRMED, cls.READY, cls.HANDED_OVER, cls.RETURNED, cls.SETTLED}
+
+
+class PaymentPurpose(enum.StrEnum):
+    DEPOSIT = "deposit"  # Anzahlung
+    BALANCE = "balance"  # Restzahlung
+    SECURITY_DEPOSIT = "security_deposit"  # Kaution
+    EXTRAS = "extras"
+
+
+class ServiceOrderType(enum.StrEnum):
+    READINESS = "readiness"  # Bootsbereitschaft vor Charter
+    HANDOVER = "handover"  # Übergabe / Check-in
+    RETURN = "return"  # Rücknahme / Check-out
+    CLEANING = "cleaning"
+    TECHNICAL = "technical"
+    LAUNDRY = "laundry"
+
+
+class ServiceOrderStatus(enum.StrEnum):
+    OPEN = "open"  # created, nobody assigned
+    ASSIGNED = "assigned"
+    IN_PROGRESS = "in_progress"
+    DONE = "done"
+    CANCELLED = "cancelled"
+
+
+class DamageStatus(enum.StrEnum):
+    OPEN = "open"
+    ASSESSED = "assessed"
+    SETTLED = "settled"
+
+
+class PayoutStatus(enum.StrEnum):
+    PENDING = "pending"
+    PAID = "paid"
 
 
 class PaymentStatus(enum.StrEnum):

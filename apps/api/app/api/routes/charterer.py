@@ -20,6 +20,7 @@ from app.schemas.charterer import (
     BlockCreate,
     BlockOut,
     BoatUpsert,
+    CalendarGap,
     ChartererOut,
     ChartererStats,
     PricingPolicyUpsert,
@@ -74,33 +75,86 @@ def charterer_me(charterer: CurrentCharterer):
 @router.get("/stats", response_model=ChartererStats)
 def charterer_stats(db: DB, charterer: CurrentCharterer):
     boat_ids = [b.id for b in charterer.boats]
-    confirmed = pending = revenue = 0
+    confirmed = pending = settled = nights = revenue = static = commission = 0
+    service_cost = payouts_pending = 0
     if boat_ids:
         rows = db.query(Booking).filter(Booking.boat_id.in_(boat_ids)).all()
         for b in rows:
-            if b.status == BookingStatus.CONFIRMED.value:
-                confirmed += 1
-                revenue += b.total_cents
-            elif b.status == BookingStatus.PENDING_PAYMENT.value:
+            if b.status == BookingStatus.PENDING_PAYMENT.value:
                 pending += 1
+            elif b.status in BookingStatus.active():
+                confirmed += 1
+                if b.status == BookingStatus.SETTLED.value:
+                    settled += 1
+                n = (b.end_date - b.start_date).days
+                nights += n
+                revenue += b.total_cents
+                static += b.static_price_cents or b.total_cents
+                commission += b.commission_cents
+                service_cost += sum(
+                    o.price_cents for o in b.service_orders if o.status == "done" and o.partner_id
+                )
+                if b.payout and b.payout.status == "pending":
+                    payouts_pending += b.payout.net_cents
     today = date.today()
     horizon = today + timedelta(days=90)
     occ_total = 0.0
+    gaps: list[CalendarGap] = []
     active = [b for b in charterer.boats if b.is_active]
     for boat in active:
-        blocks = availability.overlapping_blocks(db, boat.id, today, horizon)
-        nights = sum(
+        blocks = sorted(
+            availability.overlapping_blocks(db, boat.id, today, horizon), key=lambda x: x.start_date
+        )
+        booked_nights = sum(
             max(0, (min(bl.end_date, horizon) - max(bl.start_date, today)).days)
             for bl in blocks
             if bl.block_type == BlockType.BOOKING.value
         )
-        occ_total += nights / 90
+        occ_total += booked_nights / 90
+        # free gaps between blocks
+        cursor = today
+        for bl in blocks:
+            if bl.start_date > cursor:
+                g = (bl.start_date - cursor).days
+                gaps.append(
+                    CalendarGap(
+                        boat_id=boat.id,
+                        boat_name=boat.name,
+                        start_date=cursor,
+                        end_date=bl.start_date,
+                        nights=g,
+                        sellable=g >= boat.min_days,
+                    )
+                )
+            cursor = max(cursor, bl.end_date)
+        if cursor < horizon:
+            g = (horizon - cursor).days
+            gaps.append(
+                CalendarGap(
+                    boat_id=boat.id,
+                    boat_name=boat.name,
+                    start_date=cursor,
+                    end_date=horizon,
+                    nights=g,
+                    sellable=g >= boat.min_days,
+                )
+            )
+    gaps.sort(key=lambda g: (g.sellable, g.start_date))
     return ChartererStats(
         boats=len(charterer.boats),
         bookings_confirmed=confirmed,
         bookings_pending=pending,
+        bookings_settled=settled,
+        charter_nights=nights,
         revenue_cents=revenue,
+        static_revenue_cents=static,
+        dynamic_uplift_cents=revenue - static,
+        avg_price_per_night_cents=round(revenue / nights) if nights else 0,
+        commission_cents=commission,
+        service_cost_cents=service_cost,
+        payouts_pending_cents=payouts_pending,
         occupancy_next_90d=round(occ_total / len(active), 3) if active else 0.0,
+        gaps_next_90d=gaps[:50],
     )
 
 

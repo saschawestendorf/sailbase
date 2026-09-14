@@ -59,6 +59,7 @@ class User(TimestampMixin, Base):
     height_cm: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
     charterer: Mapped["Charterer | None"] = relationship(back_populates="owner", uselist=False)
+    partner_profile: Mapped["ServicePartner | None"] = relationship(back_populates="user", uselist=False)
 
 
 # ---------------------------------------------------------------------- charterers
@@ -178,10 +179,23 @@ class Boat(TimestampMixin, Base):
 
     # Charter rules
     min_days: Mapped[int] = mapped_column(Integer, default=3)
+    max_days: Mapped[int] = mapped_column(Integer, default=28)
+    allowed_nights: Mapped[list] = mapped_column(JSON, default=list)  # [] = any between min/max
+    min_lead_days: Mapped[int] = mapped_column(Integer, default=1)  # Mindestvorlauf
     turnaround_days: Mapped[int] = mapped_column(Integer, default=0)
     changeover_weekdays: Mapped[list] = mapped_column(JSON, default=list)  # [] = any day; 0=Mon
+    handover_options: Mapped[list] = mapped_column(JSON, default=lambda: ["owner", "partner"])
+    # One-way charter: drop the boat at another base; the next crew sails it back.
+    one_way_enabled: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    one_way_base_ids: Mapped[list] = mapped_column(JSON, default=list)  # [] = any base in the region
+    one_way_fee_cents: Mapped[int] = mapped_column(Integer, default=0)
     deposit_cents: Mapped[int] = mapped_column(Integer, default=0)  # Kaution
     cleaning_fee_cents: Mapped[int] = mapped_column(Integer, default=0)
+    region_restrictions: Mapped[str] = mapped_column(Text, default="")  # Revierbeschränkungen
+
+    # Compliance & documents: [{"type": "insurance"|"certificate"|"manual"|..., "name", "url", "valid_until"}]
+    documents: Mapped[list] = mapped_column(JSON, default=list)
+    insurance: Mapped[dict] = mapped_column(JSON, default=dict)  # {"insurer", "policy_no", "valid_until"}
 
     charterer: Mapped[Charterer] = relationship(back_populates="boats")
     base: Mapped[Base_] = relationship(back_populates="boats")
@@ -204,6 +218,11 @@ class PricingPolicy(TimestampMixin, Base):
     reference_price_cents: Mapped[int] = mapped_column(Integer, nullable=False)  # per day, peak
     floor_price_cents: Mapped[int] = mapped_column(Integer, nullable=False)  # per day, absolute
     ceiling_price_cents: Mapped[int] = mapped_column(Integer, nullable=False)  # per day, absolute
+    target_price_cents: Mapped[int | None] = mapped_column(Integer, nullable=True)  # Zielpreis Ø/Tag
+    strategy: Mapped[str] = mapped_column(String(20), default="balanced", nullable=False)
+    # Gaps shorter than this (in nights) left over by a booking count as economically dead.
+    # None = derive from boat.min_days.
+    max_dead_gap_days: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # Optional per-boat overrides of engine parameters, e.g. {"weekend_uplift": 0.1}
     overrides: Mapped[dict] = mapped_column(JSON, default=dict)
 
@@ -224,6 +243,9 @@ class AvailabilityBlock(Base):
     booking_id: Mapped[str | None] = mapped_column(ForeignKey("bookings.id"), nullable=True)
     expires_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)  # for holds
     note: Mapped[str] = mapped_column(String(255), default="")
+    # Where the boat is at the start / end of this block. None = home base.
+    start_base_id: Mapped[str | None] = mapped_column(ForeignKey("bases.id"), nullable=True)
+    end_base_id: Mapped[str | None] = mapped_column(ForeignKey("bases.id"), nullable=True)
 
     boat: Mapped[Boat] = relationship(back_populates="blocks")
 
@@ -242,6 +264,8 @@ class Quote(Base):
     start_date: Mapped[date] = mapped_column(Date, nullable=False)
     end_date: Mapped[date] = mapped_column(Date, nullable=False)
     persons: Mapped[int] = mapped_column(Integer, default=1)
+    pickup_base_id: Mapped[str | None] = mapped_column(ForeignKey("bases.id"), nullable=True)
+    dropoff_base_id: Mapped[str | None] = mapped_column(ForeignKey("bases.id"), nullable=True)
     currency: Mapped[str] = mapped_column(String(3), default="EUR")
     total_cents: Mapped[int] = mapped_column(Integer, nullable=False)
     breakdown: Mapped[dict] = mapped_column(JSON, default=dict)
@@ -263,16 +287,33 @@ class Booking(TimestampMixin, Base):
     persons: Mapped[int] = mapped_column(Integer, default=1)
     start_date: Mapped[date] = mapped_column(Date, nullable=False)
     end_date: Mapped[date] = mapped_column(Date, nullable=False)
+    pickup_base_id: Mapped[str | None] = mapped_column(ForeignKey("bases.id"), nullable=True)
+    dropoff_base_id: Mapped[str | None] = mapped_column(ForeignKey("bases.id"), nullable=True)
     status: Mapped[str] = mapped_column(String(20), default="pending_payment", nullable=False)
     currency: Mapped[str] = mapped_column(String(3), default="EUR")
     total_cents: Mapped[int] = mapped_column(Integer, nullable=False)
     deposit_cents: Mapped[int] = mapped_column(Integer, nullable=False)  # Anzahlung
     commission_cents: Mapped[int] = mapped_column(Integer, default=0)
+    security_deposit_cents: Mapped[int] = mapped_column(Integer, default=0)  # Kaution
+    static_price_cents: Mapped[int] = mapped_column(Integer, default=0)  # what a fixed tariff would earn
     price_breakdown: Mapped[dict] = mapped_column(JSON, default=dict)
     hold_expires_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    balance_due_at: Mapped[date | None] = mapped_column(Date, nullable=True)
     notes: Mapped[str] = mapped_column(Text, default="")
 
+    # Contract & customer documents
+    contract: Mapped[dict] = mapped_column(JSON, default=dict)  # {"version", "text_md", "hash"}
+    contract_accepted_customer_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    contract_accepted_charterer_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    crew_list: Mapped[list] = mapped_column(JSON, default=list)  # [{"name", "birthdate", "role"}]
+    documents: Mapped[list] = mapped_column(JSON, default=list)  # [{"type", "name", "url"}]
+    handover_confirmed_customer_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    return_confirmed_customer_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
     payments: Mapped[list["Payment"]] = relationship(back_populates="booking")
+    service_orders: Mapped[list["ServiceOrder"]] = relationship(back_populates="booking")
+    damages: Mapped[list["DamageCase"]] = relationship(back_populates="booking")
+    payout: Mapped["Payout | None"] = relationship(back_populates="booking", uselist=False)
 
 
 class Payment(TimestampMixin, Base):
@@ -282,10 +323,93 @@ class Payment(TimestampMixin, Base):
     booking_id: Mapped[str] = mapped_column(ForeignKey("bookings.id"), nullable=False)
     provider: Mapped[str] = mapped_column(String(20), nullable=False)
     provider_ref: Mapped[str] = mapped_column(String(255), default="", index=True)
+    purpose: Mapped[str] = mapped_column(String(20), default="deposit", nullable=False)
     amount_cents: Mapped[int] = mapped_column(Integer, nullable=False)
     currency: Mapped[str] = mapped_column(String(3), default="EUR")
     status: Mapped[str] = mapped_column(String(20), default="pending", nullable=False)
+    due_at: Mapped[date | None] = mapped_column(Date, nullable=True)
     checkout_url: Mapped[str] = mapped_column(Text, default="")
     raw: Mapped[dict] = mapped_column(JSON, default=dict)
 
     booking: Mapped[Booking] = relationship(back_populates="payments")
+
+
+# ----------------------------------------------------------------------- operations
+
+
+class ServicePartner(TimestampMixin, Base):
+    """Local service provider: handover, cleaning, technical work, laundry."""
+
+    __tablename__ = "service_partners"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), unique=True, nullable=False)
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    phone: Mapped[str] = mapped_column(String(64), default="")
+    base_ids: Mapped[list] = mapped_column(JSON, default=list)  # bases served
+    services: Mapped[list] = mapped_column(JSON, default=list)  # ServiceOrderType values
+    prices: Mapped[dict] = mapped_column(JSON, default=dict)  # {"handover": 9000, "cleaning": 15000}
+    rating: Mapped[float | None] = mapped_column(Float, nullable=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+
+    user: Mapped[User] = relationship(back_populates="partner_profile")
+    orders: Mapped[list["ServiceOrder"]] = relationship(back_populates="partner")
+
+
+class ServiceOrder(TimestampMixin, Base):
+    """A unit of operational work tied to a booking (readiness, handover, return, ...)."""
+
+    __tablename__ = "service_orders"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
+    booking_id: Mapped[str] = mapped_column(ForeignKey("bookings.id"), nullable=False)
+    boat_id: Mapped[str] = mapped_column(ForeignKey("boats.id"), nullable=False)
+    partner_id: Mapped[str | None] = mapped_column(ForeignKey("service_partners.id"), nullable=True)
+    order_type: Mapped[str] = mapped_column(String(20), nullable=False)
+    status: Mapped[str] = mapped_column(String(20), default="open", nullable=False)
+    scheduled_for: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    # [{"key", "label", "required", "done", "issue", "note", "photos": [url]}]
+    checklist: Mapped[list] = mapped_column(JSON, default=list)
+    photos: Mapped[list] = mapped_column(JSON, default=list)  # general photos [url]
+    notes: Mapped[str] = mapped_column(Text, default="")
+    price_cents: Mapped[int] = mapped_column(Integer, default=0)  # cost charged to owner
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    completed_by_user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+
+    booking: Mapped[Booking] = relationship(back_populates="service_orders")
+    partner: Mapped[ServicePartner | None] = relationship(back_populates="orders")
+
+
+class DamageCase(TimestampMixin, Base):
+    __tablename__ = "damage_cases"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
+    booking_id: Mapped[str] = mapped_column(ForeignKey("bookings.id"), nullable=False)
+    source_order_id: Mapped[str | None] = mapped_column(ForeignKey("service_orders.id"), nullable=True)
+    title: Mapped[str] = mapped_column(String(255), nullable=False)
+    description: Mapped[str] = mapped_column(Text, default="")
+    photos: Mapped[list] = mapped_column(JSON, default=list)
+    estimated_cents: Mapped[int] = mapped_column(Integer, default=0)
+    withheld_cents: Mapped[int] = mapped_column(Integer, default=0)  # from security deposit
+    status: Mapped[str] = mapped_column(String(20), default="open", nullable=False)
+
+    booking: Mapped[Booking] = relationship(back_populates="damages")
+
+
+class Payout(TimestampMixin, Base):
+    """Owner settlement per booking: gross - commission - service costs."""
+
+    __tablename__ = "payouts"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
+    booking_id: Mapped[str] = mapped_column(ForeignKey("bookings.id"), unique=True, nullable=False)
+    charterer_id: Mapped[str] = mapped_column(ForeignKey("charterers.id"), nullable=False)
+    gross_cents: Mapped[int] = mapped_column(Integer, nullable=False)
+    commission_cents: Mapped[int] = mapped_column(Integer, default=0)
+    service_cost_cents: Mapped[int] = mapped_column(Integer, default=0)
+    damage_withheld_cents: Mapped[int] = mapped_column(Integer, default=0)  # informational
+    net_cents: Mapped[int] = mapped_column(Integer, nullable=False)
+    status: Mapped[str] = mapped_column(String(20), default="pending", nullable=False)
+    paid_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    booking: Mapped[Booking] = relationship(back_populates="payout")

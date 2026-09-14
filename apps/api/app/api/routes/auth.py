@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, status
 
 from app.api.deps import DB, CurrentUser
 from app.core.security import create_access_token, hash_password, verify_password
-from app.models import Charterer, User
+from app.models import Charterer, ServicePartner, User
 from app.schemas.auth import LoginRequest, ProfileUpdate, RegisterRequest, TokenResponse, UserOut
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -18,6 +18,7 @@ def _slugify(value: str) -> str:
 def _user_out(user: User) -> UserOut:
     out = UserOut.model_validate(user)
     out.charterer_id = user.charterer.id if user.charterer else None
+    out.partner_id = user.partner_profile.id if user.partner_profile else None
     return out
 
 
@@ -42,6 +43,9 @@ def register(payload: RegisterRequest, db: DB):
             n += 1
             slug = f"{_slugify(name)}-{n}"
         db.add(Charterer(owner_user_id=user.id, name=name, slug=slug, contact_email=email))
+    elif payload.role == "partner":
+        name = payload.partner_name or payload.full_name or email.split("@")[0]
+        db.add(ServicePartner(user_id=user.id, name=name))
     db.commit()
     return TokenResponse(access_token=create_access_token(user.id, {"role": user.role}))
 

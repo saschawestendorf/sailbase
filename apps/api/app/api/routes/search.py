@@ -18,8 +18,12 @@ def search_boats(
     start_date: date,
     end_date: date,
     persons: int = Query(default=2, ge=1, le=30),
+    min_nights: int | None = Query(default=None, ge=1, le=60, description="Flexible Suche: kürzeste Dauer"),
+    max_nights: int | None = Query(default=None, ge=1, le=60, description="Flexible Suche: längste Dauer"),
     region: str | None = None,
     base_id: str | None = None,
+    pickup_base_id: str | None = Query(default=None, description="Abholhafen (standortbewusst)"),
+    dropoff_base_id: str | None = Query(default=None, description="Abgabehafen für One-Way"),
     boat_class: str | None = None,
     min_length: float | None = Query(default=None, ge=0),
     max_length: float | None = Query(default=None, ge=0),
@@ -37,8 +41,21 @@ def search_boats(
 ):
     if end_date <= start_date:
         raise HTTPException(422, "end_date muss nach start_date liegen")
-    if (end_date - start_date).days > 60:
-        raise HTTPException(422, "Maximal 60 Nächte")
+    window_nights = (end_date - start_date).days
+    if window_nights > 90:
+        raise HTTPException(422, "Suchfenster maximal 90 Tage")
+    # Exact search = window is the stay. Flexible search = any stay of min..max nights inside the window.
+    if min_nights is None and max_nights is None:
+        min_nights = max_nights = window_nights
+    else:
+        min_nights = min_nights or 1
+        max_nights = max_nights or min_nights
+        if max_nights < min_nights:
+            raise HTTPException(422, "max_nights muss >= min_nights sein")
+        if max_nights > window_nights:
+            max_nights = window_nights
+        if min_nights > window_nights:
+            raise HTTPException(422, "min_nights passt nicht ins Suchfenster")
 
     # Profile defaults from logged-in user; explicit query params win.
     # Unknown qualification (no params, no profile) must not hide the whole catalogue:
@@ -58,15 +75,18 @@ def search_boats(
         skip_qualification_check=with_skipper or qualification_unknown,
     )
     q = SearchQuery(
-        start_date=start_date,
-        end_date=end_date,
+        window_start=start_date,
+        window_end=end_date,
+        min_nights=min_nights,
+        max_nights=max_nights,
         crew=crew,
         region_slug=region,
         base_id=base_id,
+        pickup_base_id=pickup_base_id,
+        dropoff_base_id=dropoff_base_id,
         boat_class_slug=boat_class,
         min_length_m=min_length,
         max_length_m=max_length,
-        max_price_cents=None,  # budget is scored softly; hard cap below
         sort=sort,
         include_unavailable=include_unavailable,
         limit=limit,
@@ -79,6 +99,7 @@ def search_boats(
             unavailable_reason=h.unavailable_reason,
             total_cents=h.total_cents,
             per_day_cents=h.per_day_cents,
+            offers=[o.to_dict() for o in h.offers],
             fit_score=h.fit_score,
             fit_reasons=h.fit_reasons,
             blockers=h.blockers,

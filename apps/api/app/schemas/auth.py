@@ -7,8 +7,9 @@ class RegisterRequest(BaseModel):
     email: EmailStr
     password: str = Field(min_length=8, max_length=128)
     full_name: str = Field(default="", max_length=255)
-    role: str = Field(default="customer", pattern="^(customer|charterer)$")
+    role: str = Field(default="customer", pattern="^(customer|charterer|partner)$")
     charterer_name: str | None = Field(default=None, max_length=255)
+    partner_name: str | None = Field(default=None, max_length=255)
 
 
 class LoginRequest(BaseModel):
@@ -37,3 +38,4 @@ class UserOut(ORMModel):
     experience_nm: int
     height_cm: int | None
     charterer_id: str | None = None
+    partner_id: str | None = None

@@ -1,9 +1,11 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
-from app.api.routes import auth, catalog, charterer, commerce, search
+from app.api.routes import auth, catalog, charterer, commerce, operations, partner, search, uploads
 from app.core.config import get_settings
 from app.core.db import Base, engine
 
@@ -34,6 +36,13 @@ def create_app() -> FastAPI:
     app.include_router(search.router)
     app.include_router(commerce.router)
     app.include_router(charterer.router)
+    app.include_router(operations.router)
+    app.include_router(partner.router)
+    app.include_router(uploads.router)
+
+    media = Path(settings.upload_dir)
+    media.mkdir(parents=True, exist_ok=True)
+    app.mount("/media", StaticFiles(directory=str(media)), name="media")
 
     @app.get("/health", tags=["meta"])
     def health():
