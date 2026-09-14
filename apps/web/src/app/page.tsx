@@ -60,9 +60,8 @@ export default async function HomePage() {
               <p className="card p-5 text-sm text-warn">
                 Der Buchungsdienst ist gerade nicht erreichbar. Bitte später erneut versuchen.
               </p>
-            ) : (
-              <SearchForm regions={regions} bases={bases} boatClasses={boatClasses} compact />
-            )}
+            ) : null}
+            <SearchForm regions={regions} bases={bases} boatClasses={boatClasses} compact />
           </div>
         </div>
       </section>
