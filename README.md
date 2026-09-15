@@ -263,6 +263,9 @@ Ablauf nicht ansehen, und die Kennzahlen im Eigner-Dashboard stehen alle auf
 null. Alles ist relativ zum heutigen Tag gesetzt und mit festem Zufallsstartwert
 erzeugt, also an jedem Tag gleich aufgebaut und trotzdem aktuell:
 
+- **24 Boote** an sechs Häfen bei drei Vercharterern. Die zehn Musterboote sind
+  von Hand gepflegt, die übrigen kommen über denselben Katalogweg zustande wie
+  ein Inserat im Portal – damit ist auch diese Strecke vorgeführt.
 - **Ein Vorgang je Phase** des Ablaufs, damit jeder Zustand der Abwicklungsseite
   erreichbar ist: bestätigt, bereit zur Übernahme, übergeben, zurückgenommen
   (mit offenem Schadenfall), abgerechnet und einer, der auf Zahlung wartet.
@@ -271,14 +274,30 @@ erzeugt, also an jedem Tag gleich aufgebaut und trotzdem aktuell:
   Suche in jeder Woche etwas findet und der Kalender nicht zufällig leer wirkt.
 - **Serviceaufträge** zu jeder bestätigten Buchung, wie sie das System beim
   Bestätigen selbst anlegt: Bootsbereitschaft, Übergabe, Rücknahme – mit
-  Checklisten, Fotopflicht und zugeordnetem Servicepartner.
-- **Zahlungen** je Buchung: Anzahlung bezahlt, Restzahlung offen oder bezahlt,
-  je nach Fälligkeit 30 Tage vor Törnbeginn.
+  Checklisten, Fotopflicht, Bemerkungen und zugeordnetem Servicepartner.
+- **Verträge, Crewlisten, Unterlagen, Zahlungen, Auszahlungen** und Schadenfälle
+  in mehreren Ständen; Übergabefotos, die ausdrücklich nicht öffentlich sind.
+- **Kalender** mit allen Sperrarten: Winterlager, Werfttermin, Eigennutzung,
+  Buchung und eine ablaufende Reservierung.
+- **One-Way** auf einem Teil der Flotte eingeschaltet, dazu eine Buchung, die in
+  einem anderen Hafen endet – ohne Beispiel bleibt das Merkmal Theorie.
 
 Die Preise stammen aus der echten Preisregel, gerechnet mit dem Vorlauf, den
 eine solche Buchung gehabt hätte – nicht mit dem Anreisetag. Sonst zeigte die
 Historie lauter Last-Minute-Preise. Für Zeiträume, die der Algorithmus heute gar
 nicht anbietet, steht ein Ersatzwert, der im Datensatz als solcher markiert ist.
+
+**Was bewusst leer bleibt:** Stehhöhe, Kojenlänge und maximale Personenzahl am
+Katalogmodell, wo die Recherche sie nicht belegt hat. Das sind Tatsachenangaben
+über ein Schiff, und an ihnen entscheidet sich, ob eine 1,96 m große Person an
+Bord passt – eine erfundene Zahl wäre dort keine Demo, sondern eine
+Falschauskunft. Charakter, Standardausstattung und Kurzbeschreibung am Modell
+sind dagegen gefüllt: sie sind erkennbar Einordnungen der Plattform und als
+solche im Text gekennzeichnet.
+
+`apps/api/tests/test_seed_demo.py` hält den Bestand vollständig: keine leere
+Tabelle, keine Spalte ohne Beispiel (bis auf die genannten Ausnahmen), jede
+Ablaufphase und jede Sperrart vertreten.
 
 Neu aufbauen lässt sich der Bestand jederzeit mit
 `rm apps/api/sailbase.db && .venv/bin/python -m app.seed.seed`.

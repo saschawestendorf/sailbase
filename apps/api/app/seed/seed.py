@@ -38,7 +38,7 @@ from app.models import (
     VariantOption,
 )
 from app.models.entities import utcnow
-from app.seed import catalog_data, data
+from app.seed import catalog_data, data, demo
 from app.services import catalog as catalog_service
 from app.services import operations as operations_service
 from app.services import quotes as quote_service
@@ -141,7 +141,12 @@ def seed_catalog(db: Session) -> dict[str, ModelVersion]:
     return versions
 
 
-def _link_boat_to_catalog(db: Session, boat: Boat, versions: dict[str, ModelVersion]) -> None:
+def _link_boat_to_catalog(
+    db: Session,
+    boat: Boat,
+    versions: dict[str, ModelVersion],
+    link: tuple[str, list[str]] | None = None,
+) -> None:
     """Point a demo boat at its catalog entry and take the technical data from there.
 
     This is the product's own promise applied to our demo fleet: the catalog supplies what it
@@ -149,7 +154,9 @@ def _link_boat_to_catalog(db: Session, boat: Boat, versions: dict[str, ModelVers
     (headroom and berth length are rarely published) stay as the provider's own statement and
     are recorded as such, so the boat page can tell the two apart.
     """
-    link = catalog_data.BOAT_CATALOG_LINK.get(boat.slug)
+    # Ohne ausdrückliche Angabe gilt die Zuordnung der zehn Musterboote; die
+    # erweiterte Flotte reicht ihren Katalogschlüssel direkt herein.
+    link = link or catalog_data.BOAT_CATALOG_LINK.get(boat.slug)
     if link is None:
         return
     model_key, preferred_codes = link
@@ -232,6 +239,16 @@ def _seed_gallery(db: Session, boat: Boat) -> None:
         )
 
 
+def _guest_email(author: str, index: int) -> str:
+    for name, email, _persons in data.DEMO_GUESTS:
+        if name == author:
+            return email
+    for entry in demo.EXTRA_CUSTOMERS:
+        if entry["full_name"] == author:
+            return entry["email"]
+    return f"demo{index}@example.com"
+
+
 def _seed_reviews(db: Session, boats_by_slug: dict[str, Boat]) -> None:
     """Reviews hang off a finished booking, so the demo creates that booking too."""
     if db.query(Review).first():
@@ -260,7 +277,9 @@ def _seed_reviews(db: Session, boats_by_slug: dict[str, Boat]) -> None:
             reference=f"SB-DEMO{index:02d}",
             boat_id=boat.id,
             quote_id=quote.id,
-            customer_email=f"demo{index}@example.com",
+            # An ein echtes Gastkonto gehängt, wo es eines gibt: eine verifizierte
+            # Bewertung ohne auffindbaren Verfasser ist im Zweifel wertlos.
+            customer_email=_guest_email(entry["author"], index),
             customer_name=entry["author"],
             persons=min(4, boat.max_persons or 4),
             start_date=start,
@@ -355,6 +374,12 @@ def _demo_booking(
     end = start + timedelta(days=nights)
     if not availability_free(db, boat.id, start, end):
         return None
+    # Die Regeln des Boots gelten auch für Demo-Daten: ein Bestand, der die
+    # eigenen Wechseltage verletzt, führt beim Ansehen in die Irre.
+    if boat.changeover_weekdays and start.weekday() not in boat.changeover_weekdays:
+        return None
+    if boat.allowed_nights and nights not in boat.allowed_nights:
+        return None
     name, email, persons = guest
     persons = min(persons, boat.max_persons or persons)
     total, breakdown = _demo_price(db, boat, start, nights, booked_days_before)
@@ -389,6 +414,10 @@ def _demo_booking(
         price_breakdown=breakdown,
         static_price_cents=quote_service.static_price_cents(boat, start, end),
     )
+    if status == BookingStatus.PENDING_PAYMENT.value:
+        # Die Frist gehört an die Buchung, bevor die Sperre sie übernimmt – sonst
+        # steht im Kalender eine Reservierung, die nie abläuft.
+        booking.hold_expires_at = utcnow() + timedelta(minutes=45)
     db.add(booking)
     db.flush()
 
@@ -779,13 +808,29 @@ def seed(db: Session, *, with_demo_bookings: bool = True) -> dict:
     # Betrieb statt leerer Datenbank: erst der Ablauf-Schaufenster mit je einem
     # Vorgang pro Phase, dann Historie und Vorausbuchungen fürs Mengengerüst.
     if with_demo_bookings:
+        # Erst die Flotte auf eine Größe bringen, in der sich Suche, Vergleich und
+        # One-Way überhaupt zeigen lassen – danach wird gebucht.
+        boats += demo.expand_fleet(
+            db,
+            charterers=charterers,
+            bases=bases,
+            boat_class_for=class_for,
+            link_to_catalog=lambda db_, boat, key: _link_boat_to_catalog(
+                db_, boat, versions, link=(key, [])
+            ),
+            seed_gallery=_seed_gallery,
+        )
         # Die Preisregeln wurden in dieser Sitzung gerade erst angelegt; ohne das
         # Verfallen der Beziehungen sieht boat.pricing noch None und die Demo
         # bekäme Ersatzpreise statt der Zahlen des Algorithmus.
         db.expire_all()
         boats = [db.get(Boat, b.id) for b in boats]
+        demo.fill_boat_details_before_booking(db, boats)
         _seed_demo_operations(db, {b.slug: b for b in boats})
         _seed_demo_season(db, boats)
+        db.expire_all()
+        boats = [db.get(Boat, b.id) for b in boats]
+        demo.fill_everything(db, boats)
     db.commit()
     return {
         "regions": len(regions),
@@ -793,6 +838,7 @@ def seed(db: Session, *, with_demo_bookings: bool = True) -> dict:
         "boats": len(boats),
         "models": len(versions),
         "reviews": db.query(Review).count(),
+        "bookings": db.query(Booking).count(),
     }
 
 
