@@ -4,7 +4,8 @@ from typing import Annotated
 from fastapi import APIRouter, HTTPException, Query
 
 from app.api.deps import DB, OptionalUser
-from app.schemas.catalog import SearchHitOut, SearchOut
+from app.schemas.catalog import PriceCellOut, PriceGridOut, SearchHitOut, SearchOut
+from app.services import pricegrid
 from app.services import reviews as review_service
 from app.services.matching import CrewProfile
 from app.services.search import SearchQuery, search
@@ -113,3 +114,86 @@ def search_boats(
         item.boat.rating_count = summary.count
         out.append(item)
     return SearchOut(count=len(out), hits=out)
+
+
+@router.get("/search/price-grid", response_model=PriceGridOut)
+def price_grid(
+    db: DB,
+    user: OptionalUser,
+    window_start: date,
+    window_end: date,
+    min_nights: int = Query(default=7, ge=1, le=60),
+    max_nights: int | None = Query(default=None, ge=1, le=60),
+    persons: int = Query(default=2, ge=1, le=30),
+    boat_slug: str | None = Query(default=None, description="Raster für ein einzelnes Boot"),
+    region: str | None = None,
+    base_id: str | None = None,
+    pickup_base_id: str | None = None,
+    dropoff_base_id: str | None = None,
+    boat_class: str | None = None,
+    min_length: float | None = Query(default=None, ge=0),
+    max_length: float | None = Query(default=None, ge=0),
+    max_price: int | None = Query(default=None, ge=0, description="Gesamtbudget in Cent"),
+    character: Annotated[list[str] | None, Query()] = None,
+    features: Annotated[list[str] | None, Query()] = None,
+    tallest_cm: int | None = Query(default=None, ge=100, le=250),
+    license_level: int | None = Query(default=None, ge=0, le=5),
+    experience_nm: int | None = Query(default=None, ge=0),
+    min_cabins: int | None = Query(default=None, ge=0),
+    with_skipper: bool = False,
+):
+    """Preis je Startdatum und Dauer — welcher Zeitraum ist der günstigste?
+
+    Dieselben Filter wie `/search`, aber statt einer Bootsliste kommt ein Raster
+    zurück: je Kombination aus Starttag und Dauer das günstigste passende Boot.
+    Damit lässt sich ablesen, ob ein Tag früher oder später etwas spart.
+    """
+    if window_end <= window_start:
+        raise HTTPException(422, "window_end muss nach window_start liegen")
+    window_end = pricegrid.clamp_window(window_start, window_end)
+    max_nights = max_nights or min_nights
+    if max_nights < min_nights:
+        raise HTTPException(422, "max_nights muss >= min_nights sein")
+    if min_nights >= (window_end - window_start).days:
+        raise HTTPException(422, "Die kürzeste Dauer passt nicht in das Fenster")
+
+    eff_license = license_level if license_level is not None else (user.license_level if user else None)
+    eff_exp = experience_nm if experience_nm is not None else (user.experience_nm if user else None)
+    crew = CrewProfile(
+        persons=persons,
+        license_level=eff_license or 0,
+        experience_nm=eff_exp or 0,
+        tallest_person_cm=tallest_cm if tallest_cm is not None else (user.height_cm if user else None),
+        preferred_character=character or [],
+        budget_total_cents=max_price,
+        wanted_features=features or [],
+        min_cabins=min_cabins,
+        # Wie in der Suche: unbekannte Qualifikation darf das Raster nicht leeren.
+        skip_qualification_check=with_skipper or (eff_license is None and eff_exp is None),
+    )
+    grid = pricegrid.build(
+        db,
+        pricegrid.GridQuery(
+            window_start=window_start,
+            window_end=window_end,
+            min_nights=min_nights,
+            max_nights=max_nights,
+            crew=crew,
+            boat_slug=boat_slug,
+            region_slug=region,
+            base_id=base_id,
+            pickup_base_id=pickup_base_id,
+            dropoff_base_id=dropoff_base_id,
+            boat_class_slug=boat_class,
+            min_length_m=min_length,
+            max_length_m=max_length,
+        ),
+    )
+    return PriceGridOut(
+        window_start=grid.window_start,
+        window_end=grid.window_end,
+        durations=grid.durations,
+        cells=[PriceCellOut(**c.to_dict()) for c in grid.cells],
+        boats_considered=grid.boats_considered,
+        truncated=grid.truncated,
+    )

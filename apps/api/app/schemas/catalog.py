@@ -167,3 +167,26 @@ class SearchHitOut(BaseModel):
 class SearchOut(BaseModel):
     count: int
     hits: list[SearchHitOut]
+
+
+class PriceCellOut(BaseModel):
+    """Die günstigste Möglichkeit, an diesem Tag für diese Dauer loszufahren."""
+
+    start_date: date
+    end_date: date
+    nights: int
+    total_cents: int
+    per_day_cents: int
+    boat_id: str
+    boat_slug: str
+    boat_name: str
+    boat_count: int = 1
+
+
+class PriceGridOut(BaseModel):
+    window_start: date
+    window_end: date
+    durations: list[int]
+    cells: list[PriceCellOut] = Field(default_factory=list)
+    boats_considered: int = 0
+    truncated: bool = False

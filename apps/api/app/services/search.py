@@ -49,7 +49,9 @@ class SearchHit:
     blockers: list[str] = field(default_factory=list)
 
 
-def _candidates(db: Session, q: SearchQuery) -> list[Boat]:
+def candidates(db: Session, q: SearchQuery) -> list[Boat]:
+    """Harte Filter auf Datenbankebene. Auch vom Preisraster genutzt, damit
+    Liste und Raster über dieselbe Grundmenge reden."""
     stmt = (
         select(Boat)
         .join(Base_, Boat.base_id == Base_.id)
@@ -79,7 +81,7 @@ def _candidates(db: Session, q: SearchQuery) -> list[Boat]:
 
 def search(db: Session, q: SearchQuery) -> list[SearchHit]:
     hits: list[SearchHit] = []
-    for boat in _candidates(db, q):
+    for boat in candidates(db, q):
         hit = SearchHit(boat=boat, available=True)
         if boat.pricing is None:
             hit.available, hit.unavailable_reason = False, "Kein Preis hinterlegt"

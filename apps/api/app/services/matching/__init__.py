@@ -1,1 +1,7 @@
-from app.services.matching.scoring import CrewProfile, FitResult, ScoreWeights, score  # noqa: F401
+from app.services.matching.scoring import (  # noqa: F401
+    CrewProfile,
+    FitResult,
+    ScoreWeights,
+    hard_filter,
+    score,
+)
