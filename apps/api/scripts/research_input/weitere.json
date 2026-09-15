@@ -1,0 +1,220 @@
+[
+  {
+    "manufacturer": "Salona Yachts (AD Boats)",
+    "model": "380",
+    "designer": "Cossutti Yacht Design",
+    "year_from": 2016,
+    "year_to": null,
+    "length_m": 11.60,
+    "beam_m": 3.72,
+    "draft_m": 2.10,
+    "displacement_kg": 6200,
+    "sail_area_m2": 84.0,
+    "engine_hp": 29,
+    "cabins": 3,
+    "berths": 8,
+    "heads": 1,
+    "max_persons": 8,
+    "water_tank_l": 180,
+    "fuel_tank_l": 100,
+    "keel_variants": [],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen (Eignerversion)", "cabins": 2, "berths": null, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen (Charter/Familie)", "cabins": 3, "berths": 8, "heads": 1}
+    ],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/ad-boats/salona-380-standard",
+      "https://sailboatdata.com/sailboat/salona-380/",
+      "https://www.listingsport.com/sailboats/salona/380",
+      "https://www.yanmar.com/marine/product/engines/3ym30ae/"
+    ],
+    "notes": "length_m 11.60 m ist die in den Quellen als LOA/38'1\" angegebene Laenge; eine davon getrennte Rumpflaenge wurde nicht gefunden. displacement_kg 6200 und sail_area_m2 84 sind Umrechnungen der angegebenen 13.669 lbs bzw. 904 sq ft. engine_hp 29: Quellen nennen Yanmar 3YM30AE-C mit 21,3 kW, Yanmar-Datenblatt bestaetigt 29 HP bei 21,3 kW. Kabinenzahl variiert laut Quellen 2-3, Kojen 4-9; 8 Kojen gelten fuer die 3-Kabinen-Version. Nur ein Tiefgang (2,10 m) belegt, keine Kielvarianten gefunden."
+  },
+  {
+    "manufacturer": "Salona Yachts (AD Boats)",
+    "model": "46",
+    "designer": "J&J Design",
+    "year_from": 2020,
+    "year_to": null,
+    "length_m": 13.50,
+    "beam_m": 4.20,
+    "draft_m": 2.61,
+    "displacement_kg": 9200,
+    "sail_area_m2": 109.0,
+    "engine_hp": 57,
+    "cabins": 4,
+    "berths": 10,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 500,
+    "fuel_tank_l": 210,
+    "keel_variants": [],
+    "layout_variants": [
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": null},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": 10, "heads": 2}
+    ],
+    "sources": [
+      "https://sailboatdata.com/sailboat/salona-46/",
+      "https://www.yachtingmonthly.com/reviews/yacht-reviews/salona-46-tough-sporty-and-fighting-fit",
+      "https://www.theglobesailor.com/salona-46-specifications-sm5958.html",
+      "https://www.yachtaris.com/en/sailing-yacht/ad-boats-salona-46-demetra/101378/"
+    ],
+    "notes": "length_m 13.50 m ist die ausdruecklich als Rumpflaenge genannte Zahl (LOA 14,14 m mit Bugspriet). sail_area_m2 109 ist die Summe der belegten Einzelwerte Grossegel 64 m2 + Genua 45 m2, keine als Gesamtflaeche publizierte Zahl. Widerspruch beim Motor: eine Charterquelle nennt 60 PS, die Bootstestquelle 57 PS Yanmar als Serienausstattung; hier 57 uebernommen. Nur der tiefe Kiel (2,61 m) ist belegt, eine Flachkielvariante wurde nicht mit Zahl gefunden. 3- und 4-Kabinen-Version sind belegt, Zahlen nur fuer die 4-Kabinen-Version."
+  },
+  {
+    "manufacturer": "Cantiere del Pardo",
+    "model": "Grand Soleil 44",
+    "designer": "Matteo Polli (Rumpf), Nauta Design (Deck und Interieur)",
+    "year_from": 2020,
+    "year_to": null,
+    "length_m": 13.40,
+    "beam_m": 4.30,
+    "draft_m": 2.60,
+    "displacement_kg": 9500,
+    "sail_area_m2": 112.0,
+    "engine_hp": 50,
+    "cabins": 3,
+    "berths": null,
+    "heads": 2,
+    "max_persons": 10,
+    "water_tank_l": 300,
+    "fuel_tank_l": 170,
+    "keel_variants": [],
+    "layout_variants": [],
+    "sources": [
+      "https://www.barchemagazine.com/en/grand-soleil-gs-44-shakespeare-on-board-2/",
+      "https://www.grandsoleil.net/model/gs-44/",
+      "https://itboat.com/models/10893-grand-soleil-44",
+      "https://www.giornaledellavela.com/2022/09/29/aboard-the-grand-soleil-44-the-villain-of-the-cantiere-del-pardo-photos-and-video/?lang=en"
+    ],
+    "notes": "Gemeint ist das aktuelle Modell von Matteo Polli, nicht der gleichnamige aeltere Grand Soleil 44 aus den 1990ern (sailboatdata fuehrt beide). length_m 13,40 m ist die neben LOA 14,35 m (Standard) bzw. 15,01 m (Race, mit Bugspriet) genannte Rumpflaenge; itboat nennt 13,41 m. sail_area_m2 112 ist die Summe Gross 59 m2 + Fock 108 Prozent 53 m2, keine publizierte Gesamtzahl; mit Selbstwendefock 47 m2 waeren es 106 m2. engine_hp 50 ist die Serienmotorisierung Volvo Penta Saildrive, 60 PS optional. max_persons 10 gilt laut Quelle fuer CE-Kategorie A (12 in B, 14 in C); eine andere Stelle spricht von acht Personen an der Dinette. Jahresangabe widerspruechlich: itboat nennt Produktion seit 2020, Boat of the Year 2022, erste Listings 2022/2023. Kojenzahl und Kielvarianten in den Suchergebnissen nicht belegt. Race- und Performance-Version sind belegt, aber ohne getrennte Kabinen-/Kojenzahlen."
+  },
+  {
+    "manufacturer": "Najad",
+    "model": "395 (N395 AC / N395 CC)",
+    "designer": "Farr Yacht Design (Rumpf), Ken Freivokh Design (Interieur)",
+    "year_from": 2017,
+    "year_to": null,
+    "length_m": 11.99,
+    "beam_m": 4.00,
+    "draft_m": 2.10,
+    "displacement_kg": 12400,
+    "sail_area_m2": 89.0,
+    "engine_hp": 57,
+    "cabins": 2,
+    "berths": null,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 370,
+    "fuel_tank_l": 370,
+    "keel_variants": [],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": 2}
+    ],
+    "sources": [
+      "https://www.yachtingmonthly.com/reviews/yacht-reviews/the-mini-superyacht-meet-the-najad-395-ac",
+      "https://najad.se/boat/n395-ac/",
+      "https://sailboatdata.com/sailboat/najad-395/",
+      "https://itboat.com/models/8124-najad-n395-ac"
+    ],
+    "notes": "11,99 m wird in einer Quelle als Rumpflaenge, in einer anderen als LOA gefuehrt; eine davon abweichende zweite Laengenangabe gab es nicht. Wasser- und Dieseltank werden in mehreren Quellen uebereinstimmend mit je 370 l (98 US-Gallonen) angegeben - identische Werte, aber mehrfach belegt. Es gibt eine Achtercockpit- (AC) und eine Mittelcockpit-Version (CC); die Zahlen hier stammen ueberwiegend aus AC-Quellen, eine getrennte Datenlage fuer CC wurde nicht gefunden. Kojenzahl und max_persons in den Suchergebnissen nicht genannt. Nur ein Tiefgang belegt."
+  },
+  {
+    "manufacturer": "Sunbeam Yachts",
+    "model": "32.1",
+    "designer": "J&J Design (Rumpf), KISKA (Design)",
+    "year_from": 2021,
+    "year_to": null,
+    "length_m": 9.85,
+    "beam_m": 2.98,
+    "draft_m": 1.80,
+    "displacement_kg": 4150,
+    "sail_area_m2": 56.0,
+    "engine_hp": 27,
+    "cabins": 1,
+    "berths": 4,
+    "heads": 1,
+    "max_persons": 4,
+    "water_tank_l": 80,
+    "fuel_tank_l": 60,
+    "keel_variants": [
+      {"code": "standard", "name": "Tiefkiel", "draft_m": 1.80},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.30}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://www.yachtingmonthly.com/reviews/yacht-reviews/first-look-sunbeam-32-1-a-real-head-turner",
+      "https://sailboatdata.com/sailboat/sunbeam-321/",
+      "https://itboat.com/models/15463-sunbeam-yachts-32-1",
+      "https://www.yachtingworld.com/yachts-and-gear/first-look-sunbeam-32-1-133958"
+    ],
+    "notes": "length_m 9,85 m ist die ausdruecklich als Rumpflaenge genannte Zahl; eine andere Quelle beschreibt das Boot als 9,98-Meter-Yacht (vermutlich LOA mit Bugspriet) - Widerspruch bewusst zugunsten der Rumpflaenge aufgeloest. Widerspruch bei der Personenzahl: eine Quelle nennt Gaestekapazitaet 4 (passend zu 4 Kojen), eine andere spricht von acht Personen an Bord (vermutlich CE-Maximum); hier 4 gesetzt. engine_hp 27 Volvo Penta. Bei diesem Modell war die Datenlage insgesamt duenn, Tankwerte stammen aus einer einzigen Quelle."
+  },
+  {
+    "manufacturer": "Delphia Yachts",
+    "model": "40.3",
+    "designer": "Andrzej Skrzat",
+    "year_from": 2009,
+    "year_to": 2019,
+    "length_m": 12.35,
+    "beam_m": 3.94,
+    "draft_m": 2.19,
+    "displacement_kg": 8600,
+    "sail_area_m2": 68.7,
+    "engine_hp": 55,
+    "cabins": 4,
+    "berths": 8,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 318,
+    "fuel_tank_l": 210,
+    "keel_variants": [
+      {"code": "tief", "name": "Tiefkiel", "draft_m": 2.19},
+      {"code": "flach", "name": "Flachkiel (shoal)", "draft_m": 1.80},
+      {"code": "schwenkkiel", "name": "Schwenkkiel (swing)", "draft_m": 1.02}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": null},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": null},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": 8, "heads": 2}
+    ],
+    "sources": [
+      "https://sailboatdata.com/sailboat/delphia-403/",
+      "https://www.boat-specs.com/sailing/sailboats/delphia-yachts/delphia-40-3-deep-draft",
+      "https://www.boat-specs.com/sailing/sailboats/delphia-yachts/delphia-40-3-shoal-draft",
+      "https://www.bwsailing.com/bw/delphia-40-3/",
+      "https://sailmagazine.com/boats/delphia-40-3/"
+    ],
+    "notes": "Widerspruch beim Tiefgang: metrische Quelle 2,19 m, imperiale Quelle 7'5\" (entspricht 2,26 m); hier der konkretere metrische Wert. Flachkiel 5'11\" = 1,80 m, Schwenkkiel 3'4\"/6'5\" = 1,02 m aufgeholt bis 1,96 m abgesenkt - in keel_variants ist der aufgeholte Wert eingetragen. displacement_kg 8600 ist die Umrechnung der angegebenen 18.960 lbs, so auch in der Quelle genannt. sail_area_m2 68,7 ist die Summe Gross 41,60 m2 + Genua 27,10 m2, keine publizierte Gesamtzahl. water_tank_l 318 aus 84 US-Gallonen; Dieseltank in einer Quelle 55 US-Gallonen (208 l), in einer anderen 210 l - praktisch deckungsgleich. 2-, 3- und 4-Kabinen-Layout sind belegt, Koje- und Nasszellenzahlen nur fuer die 4-Kabinen-Version."
+  },
+  {
+    "manufacturer": "Moody Yachts",
+    "model": "41 DS (Decksaloon 41)",
+    "designer": "Bill Dixon",
+    "year_from": 2019,
+    "year_to": null,
+    "length_m": 12.52,
+    "beam_m": 4.20,
+    "draft_m": 1.85,
+    "displacement_kg": 11200,
+    "sail_area_m2": 83.0,
+    "engine_hp": 57,
+    "cabins": 2,
+    "berths": 4,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 475,
+    "fuel_tank_l": 210,
+    "keel_variants": [],
+    "layout_variants": [],
+    "sources": [
+      "https://sailboatdata.com/sailboat/moody-41-ds/",
+      "https://itboat.com/models/10268-moody-decksaloon-41",
+      "https://moody-yachts.com/us/sailing-yachts/moody-decksaloon-41/",
+      "https://www.yachtingmonthly.com/reviews/yacht-reviews/moody-41-ds-a-deck-saloon-that-pushes-all-boundaries",
+      "https://www.yacht.de/en/cruising-yachts/moody-ds-41-the-smallest-moody-in-the-yacht-test/"
+    ],
+    "notes": "length_m 12,52 m ist die in den Quellen als Laenge/LOA (41,08 ft) genannte Zahl; eine davon getrennte Rumpflaenge wurde nicht gefunden. Groesster Widerspruch beim Wassertank: eine Quelle nennt 475 l, eine andere 220 l Standard mit Erweiterung auf bis zu 400 l gesamt; hier 475 uebernommen, der Wert ist vor Uebernahme in den Katalog zu pruefen. sail_area_m2 83 (Gross 45 + Fock 38) steht gegen eine Herstellerangabe von 85,8 m2 maximaler Segelflaeche. engine_hp 57 Serie, 80 PS optional. heads 2 laut Formulierung 'bis zu zwei Nasszellen', also ausstattungsabhaengig. Eine Flachkielvariante wird erwaehnt, die Zahlen dazu (1,83 m gegen 1,85 m Standard) sind widerspruechlich und praktisch identisch, daher keine keel_variants eingetragen."
+  }
+]

@@ -16,7 +16,7 @@ from app.models import (
     ModelVersion,
     PricingPolicy,
 )
-from app.schemas.catalog import BoatDetailOut, PricingPolicyOut
+from app.schemas.catalog import BoatDetailOut, BoatOut, PricingPolicyOut
 from app.schemas.catalog_master import BoatFromCatalog
 from app.schemas.charterer import (
     BlockCreate,
@@ -109,12 +109,21 @@ def charterer_stats(db: DB, charterer: CurrentCharterer):
         blocks = sorted(
             availability.overlapping_blocks(db, boat.id, today, horizon), key=lambda x: x.start_date
         )
+        def days_in_window(bl) -> int:
+            return max(0, (min(bl.end_date, horizon) - max(bl.start_date, today)).days)
+
         booked_nights = sum(
-            max(0, (min(bl.end_date, horizon) - max(bl.start_date, today)).days)
-            for bl in blocks
-            if bl.block_type == BlockType.BOOKING.value
+            days_in_window(bl) for bl in blocks if bl.block_type == BlockType.BOOKING.value
         )
-        occ_total += booked_nights / 90
+        # Gegen die verfügbaren Tage, nicht gegen den Kalender: ein Boot im
+        # Winterlager ist nicht schlecht ausgelastet, es steht gar nicht zur
+        # Verfügung. Sonst wäre die Zahl im Herbst strukturell niedrig und über
+        # das Jahr nicht vergleichbar.
+        closed_days = sum(
+            days_in_window(bl) for bl in blocks if bl.block_type == BlockType.CLOSED.value
+        )
+        available_days = max(1, 90 - closed_days)
+        occ_total += booked_nights / available_days
         # free gaps between blocks
         cursor = today
         for bl in blocks:
@@ -261,7 +270,7 @@ def list_bookings(db: DB, charterer: CurrentCharterer):
     out = []
     for b in rows:
         o = BookingOut.model_validate(b)
-        o.boat = db.get(Boat, b.boat_id)
+        o.boat = BoatOut.model_validate(db.get(Boat, b.boat_id))
         out.append(o)
     return out
 
@@ -277,7 +286,7 @@ def cancel(booking_id: str, db: DB, charterer: CurrentCharterer):
         raise HTTPException(status.HTTP_409_CONFLICT, str(e)) from e
     db.commit()
     o = BookingOut.model_validate(b)
-    o.boat = db.get(Boat, b.boat_id)
+    o.boat = BoatOut.model_validate(db.get(Boat, b.boat_id))
     return o
 
 
@@ -337,8 +346,7 @@ def _apply_catalog(db, boat: Boat, payload: BoatFromCatalog) -> Boat:
     boat.model = version.model.name
     boat.year_built = payload.year_built
     for field, value in spec.values.items():
-        if value is not None:
-            setattr(boat, field, value)
+        setattr(boat, field, value)
     boat.boat_class_id = _class_for_length(db, float(spec.values.get("length_m") or 0)).id
 
     features = list(spec.features)
@@ -356,9 +364,18 @@ def _apply_catalog(db, boat: Boat, payload: BoatFromCatalog) -> Boat:
 def _sync_gallery(db, boat: Boat, payload: BoatFromCatalog, version_images: list[str]) -> None:
     review_service.add_owner_images(db, boat, payload.images, payload.image_captions)
     # Model photos stay marked as model photos; they never stand in for the actual boat.
-    existing_model = {i.url for i in boat.gallery if i.origin == "model"}
+    # Remove model images from previous versions that are no longer current.
+    current_model_urls = set(version_images)
+    existing_model_urls: set[str] = set()
+    for image in list(boat.gallery):
+        if image.origin != "model":
+            continue
+        if image.url not in current_model_urls:
+            db.delete(image)
+        else:
+            existing_model_urls.add(image.url)
     for offset, url in enumerate(version_images):
-        if url in existing_model:
+        if url in existing_model_urls:
             continue
         db.add(
             BoatImage(
@@ -370,7 +387,7 @@ def _sync_gallery(db, boat: Boat, payload: BoatFromCatalog, version_images: list
                 sort_order=1000 + offset,
             )
         )
-    boat.images = payload.images or list(version_images)
+    boat.images = payload.images
     db.flush()
 
 

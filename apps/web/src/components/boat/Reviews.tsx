@@ -51,7 +51,7 @@ export default function Reviews({
   if (!summary || summary.count === 0) {
     return (
       <section className="card p-5">
-        <h2 className="text-lg font-semibold">Bewertungen</h2>
+        <h2 className="text-lg">Bewertungen</h2>
         <p className="mt-2 text-sm text-muted">
           Noch keine Bewertung. Bewerten darf nur, wer diese Yacht nachweislich gechartert hat.
           Wenige Bewertungen heißen also nicht, dass etwas nicht stimmt.
@@ -63,7 +63,7 @@ export default function Reviews({
   return (
     <section className="card p-5">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="text-lg font-semibold">Bewertungen</h2>
+        <h2 className="text-lg">Bewertungen</h2>
         <p className="text-sm text-muted">{summary.count} verifizierte Charter</p>
       </div>
 

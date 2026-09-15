@@ -1,0 +1,3900 @@
+{
+  "generated_on": "2026-09-15",
+  "note": "Recherchiert aus öffentlich zugänglichen Herstellerangaben und Fachdatenbanken. Nicht vom Hersteller bestätigt. Felder ohne Beleg stehen als null und werden im Portal als unbekannt ausgewiesen.",
+  "manufacturers": [
+    {
+      "slug": "bavaria",
+      "name": "Bavaria Yachts",
+      "country": "DE"
+    },
+    {
+      "slug": "beneteau",
+      "name": "Bénéteau",
+      "country": "FR"
+    },
+    {
+      "slug": "dehler",
+      "name": "Dehler",
+      "country": "DE"
+    },
+    {
+      "slug": "delphia",
+      "name": "Delphia Yachts",
+      "country": "PL"
+    },
+    {
+      "slug": "dufour",
+      "name": "Dufour Yachts",
+      "country": "FR"
+    },
+    {
+      "slug": "elan",
+      "name": "Elan Yachts",
+      "country": "SI"
+    },
+    {
+      "slug": "grand-soleil",
+      "name": "Grand Soleil (Cantiere del Pardo)",
+      "country": "IT"
+    },
+    {
+      "slug": "hallberg-rassy",
+      "name": "Hallberg-Rassy",
+      "country": "SE"
+    },
+    {
+      "slug": "hanse",
+      "name": "Hanse Yachts",
+      "country": "DE"
+    },
+    {
+      "slug": "jeanneau",
+      "name": "Jeanneau",
+      "country": "FR"
+    },
+    {
+      "slug": "moody",
+      "name": "Moody",
+      "country": "DE"
+    },
+    {
+      "slug": "najad",
+      "name": "Najad Yachts",
+      "country": "SE"
+    },
+    {
+      "slug": "salona",
+      "name": "Salona Yachts",
+      "country": "HR"
+    },
+    {
+      "slug": "sunbeam",
+      "name": "Sunbeam Yachts",
+      "country": "AT"
+    },
+    {
+      "slug": "x-yachts",
+      "name": "X-Yachts",
+      "country": "DK"
+    }
+  ],
+  "models": [
+    {
+      "manufacturer": "bavaria",
+      "slug": "c42",
+      "name": "C42",
+      "designer": "Cossutti Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2020,
+        "year_to": null,
+        "length_m": 11.98,
+        "beam_m": 4.29,
+        "draft_m": 2.1,
+        "displacement_kg": 9678,
+        "sail_area_m2": 100.6,
+        "engine_hp": 57,
+        "cabins": 3,
+        "berths": 8,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 210,
+        "fuel_tank_l": 210,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.1,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.7,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 8,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "57ps",
+          "name": "57 PS",
+          "is_default": true,
+          "engine_hp": 57
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://itboat.com/models/10155-bavaria-c42",
+      "all_sources": [
+        "https://itboat.com/models/10155-bavaria-c42",
+        "https://www.samboat.com/model/bavaria-c42",
+        "https://sailboatdata.com/sailboat/c42-bavaria/",
+        "https://www.bavariayachts.com/sailing-yachts/c42/data-and-options/",
+        "https://www.kiriacoulis.com/sales/BavariaC42_price.pdf",
+        "https://www.bavariayachts.com/sailing-yachts/c42/highlights/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 11,98 m, Länge über alles 12,38 m. Verdrängung widersprüchlich: 9.678 kg vs. 9.991 kg in einer anderen Quelle. Wassertank 210 l Standard, 460 l optional. Motor 57 PS (41,9 kW); Fabrikat in den Suchergebnissen nicht eindeutig genannt. Segelfläche 100,6 m² als Gesamtangabe; Einzelwerte Gross 53,8-54 m² und Genua 47 m²."
+    },
+    {
+      "manufacturer": "bavaria",
+      "slug": "c50",
+      "name": "C50",
+      "designer": "Cossutti Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 14.99,
+        "beam_m": 4.99,
+        "draft_m": 2.3,
+        "displacement_kg": 15490,
+        "sail_area_m2": 135.0,
+        "engine_hp": 80,
+        "cabins": 5,
+        "berths": 10,
+        "heads": 3,
+        "max_persons": null,
+        "water_tank_l": 650,
+        "fuel_tank_l": 250,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.3,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.85,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "5-kab",
+          "name": "5 Kabinen",
+          "is_default": false,
+          "cabins": 5,
+          "berths": 10,
+          "heads": 3,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "80ps",
+          "name": "80 PS",
+          "is_default": true,
+          "engine_hp": 80
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-c50-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-c50-standard",
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-c50-shoal-draft",
+        "https://itboat.com/models/8102-bavaria-c50",
+        "https://www.bavariayachts.com/sailing-yachts/c50/data-and-options/",
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/bavaria-c50",
+        "https://www.boot.com/en/Media_News/BAVARIA_C50_-_World_premiere_at_boot_2018"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 14,99 m. Länge über alles widersprüchlich: 15,39 m in einer Quelle, 15,55 m in einer anderen. Segelfläche wird als '135/147 m²' angegeben (vermutlich Standard- und Performance-Rigg); hier 135 m² eingetragen. Motor Yanmar 4JH80, 80 PS. Layouts 3 bis 5 Kabinen belegt, eine Quelle erwähnt sogar 6 Kabinen (nicht als Datensatz belegt, daher nicht aufgenommen). Flachkiel 1,85 m; eine frühere Suche nannte 1,95 m - der konkretere Wert 1,85 m wurde übernommen."
+    },
+    {
+      "manufacturer": "bavaria",
+      "slug": "cruiser-34",
+      "name": "Cruiser 34",
+      "designer": "Farr Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2013,
+        "year_to": null,
+        "length_m": 9.99,
+        "beam_m": 3.42,
+        "draft_m": 2.02,
+        "displacement_kg": 5300,
+        "sail_area_m2": 51.0,
+        "engine_hp": 18,
+        "cabins": 2,
+        "berths": 6,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 150,
+        "fuel_tank_l": 150,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.02,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.57,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "18ps",
+          "name": "18 PS",
+          "is_default": true,
+          "engine_hp": 18
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-34-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-34-standard",
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-34-shoal-draft",
+        "https://itboat.com/models/6902-bavaria-cruiser-34",
+        "https://sailmagazine.com/boats/boat-review-bavaria-cruiser-34/",
+        "https://sailboatdata.com/sailboat/bavaria-cruiser-34/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Baujahr widersprüchlich: eine Quelle nennt erste Rumpfschale/Bau seit 2013, eine andere 'seit 2016'. Segelfläche: Gesamtangabe 51 m², Einzelangaben Gross 27 m² + Genua 22 m² ergeben aber nur 49 m². Motor 18 PS Volvo Penta D1-20F Standard, 30 PS optional. Flachkiel-Tiefgang 1,57 m aus einer Review-Angabe '5 ft 2 in' umgerechnet (boat-specs führt eine Shoal-draft-Version, ohne dass in den Suchergebnissen ein Meterwert erschien) - vor Vertragsgebrauch prüfen. Berths in den Quellen als 4-6 bzw. 6 angegeben."
+    },
+    {
+      "manufacturer": "bavaria",
+      "slug": "cruiser-37",
+      "name": "Cruiser 37",
+      "designer": "Farr Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2014,
+        "year_to": null,
+        "length_m": 11.3,
+        "beam_m": 3.67,
+        "draft_m": 1.95,
+        "displacement_kg": 7000,
+        "sail_area_m2": 65.0,
+        "engine_hp": 19,
+        "cabins": 2,
+        "berths": null,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 350,
+        "fuel_tank_l": 150,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.95,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.63,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "19ps",
+          "name": "19 PS",
+          "is_default": true,
+          "engine_hp": 19
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-37-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-37-standard",
+        "https://itboat.com/models/943-bavaria-cruiser-37",
+        "https://www.velmundi.com/bavaria-cruiser-37.html",
+        "https://www.yachtdatabase.com/en/review.jsp?id=Bavaria+Cruiser+37",
+        "https://www.bavariayachts.com/sailing-yachts/cruiser-37/data-and-options/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Deutlicher Quellenkonflikt beim Tiefgang: eine Gruppe von Quellen nennt 1,69-2,02 m, eine andere 1,95 m Standard / 1,63 m Flachkiel. Uebernommen wurde das explizit als Standard/Flachkiel ausgewiesene Paar 1,95/1,63. Verdrängung ebenfalls widersprüchlich: 7.000 kg vs. 7,45 t. Motor Volvo Penta D1-20 (19 PS) Standard, D1-30 (28 PS) optional. Kojenzahl in den Suchergebnissen nur als 'max. Schlafplätze 4' bei 2-3 Kabinen - für die 3-Kabinen-Version kein belegter Wert, daher null."
+    },
+    {
+      "manufacturer": "bavaria",
+      "slug": "cruiser-41",
+      "name": "Cruiser 41",
+      "designer": "Farr Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2013,
+        "year_to": 2022,
+        "length_m": 12.35,
+        "beam_m": 3.96,
+        "draft_m": 2.05,
+        "displacement_kg": 8869,
+        "sail_area_m2": 82.0,
+        "engine_hp": 40,
+        "cabins": 3,
+        "berths": 8,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 360,
+        "fuel_tank_l": 210,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.05,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.65,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 8,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "40ps",
+          "name": "40 PS",
+          "is_default": true,
+          "engine_hp": 40
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-41-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-41-standard",
+        "https://itboat.com/models/4269-bavaria-cruiser-41",
+        "https://sailboatdata.com/sailboat/bavaria-cruiser-41/",
+        "https://www.sailboat-cruising.com/Bavaria-41-Sailboat.html",
+        "https://www.velmundi.com/bavaria-cruiser-41.html"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Verdrängung 8.869 kg ist das Leergewicht (Ballast 2.736 kg). Wassertank: Quellen nennen 210 l und 360 l - offenbar Standard- und Optionstank; 360 l übernommen, 210 l möglich. Kojen in den Quellen als Spanne 4-8 angegeben, hier der Maximalwert der üblichen 3-Kabinen-Version. Motor als 'Volvo Penta D2, 39,6 PS' angegeben."
+    },
+    {
+      "manufacturer": "bavaria",
+      "slug": "cruiser-46",
+      "name": "Cruiser 46",
+      "designer": "Farr Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2014,
+        "year_to": null,
+        "length_m": 14.27,
+        "beam_m": 4.35,
+        "draft_m": 2.1,
+        "displacement_kg": 11000,
+        "sail_area_m2": 108.0,
+        "engine_hp": 55,
+        "cabins": 4,
+        "berths": 8,
+        "heads": 3,
+        "max_persons": null,
+        "water_tank_l": 360,
+        "fuel_tank_l": 210,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.1,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.73,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": 8,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "55ps",
+          "name": "55 PS",
+          "is_default": true,
+          "engine_hp": 55
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-46-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-46-standard",
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-46-shoal-draft",
+        "https://itboat.com/models/954-bavaria-cruiser-46",
+        "https://sailboatdata.com/sailboat/bavaria-cruiser-46/",
+        "https://www.bavariayachts.com/sailing-yachts/cruiser-46/interior/",
+        "https://www.samboat.com/model/bavaria-cruiser-46"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Segelfläche 108 m² ist die Summe der belegten Einzelwerte Gross 56 m² + Genua 52 m²; eine Gesamtangabe stand in den Suchergebnissen nicht. Tiefgang Standard 2,10 m (nicht 2,15 m wie im Schema-Beispiel). Nasszellen widersprüchlich: itboat nennt 3 Bäder (4-Kabinen-Version), Herstellerseite beschreibt für die 3-Kabinen-Version je ein Bad an beiden Achterkabinen (= 2). 4-Kabinen-Version laut Quelle 8-10 Kojen."
+    },
+    {
+      "manufacturer": "bavaria",
+      "slug": "cruiser-51",
+      "name": "Cruiser 51",
+      "designer": "Farr Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2016,
+        "year_to": null,
+        "length_m": 14.99,
+        "beam_m": 4.67,
+        "draft_m": 2.25,
+        "displacement_kg": 12920,
+        "sail_area_m2": 130.0,
+        "engine_hp": 75,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 3,
+        "max_persons": null,
+        "water_tank_l": 560,
+        "fuel_tank_l": 280,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.25,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.85,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 6,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "5-kab",
+          "name": "5 Kabinen",
+          "is_default": false,
+          "cabins": 5,
+          "berths": 10,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "75ps",
+          "name": "75 PS",
+          "is_default": true,
+          "engine_hp": 75
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-51-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-51-standard",
+        "https://www.boat-specs.com/sailing/sailboats/bavaria-yachts/bavaria-cruiser-51-shoal-draft",
+        "https://itboat.com/models/298-bavaria-cruiser-51",
+        "https://sailboatdata.com/sailboat/bavaria-cruiser-51/",
+        "https://www.samboat.com/model/bavaria-cruiser-51"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Erste Suche lieferte nur 1,85 m Tiefgang - die zweite zeigte, dass das der Flachkiel ist und der Standardkiel 2,25 m hat. Segelfläche: Gesamtangabe 130 m², Einzelwerte Gross 51 m² + Rollgenua 71 m² ergeben 122 m² (Konflikt). Verdrängung 12,92 t bei halber Beladung. Kabinen 3/4/5 belegt, Kojenspanne 6-10, Nasszellen mit 3 angegeben (bezieht sich vermutlich auf die größeren Layouts). Baujahr: 'seit 2016'; die Variante Cruiser 51 Style wird mit 2015-2022 angegeben. Rumpflänge und Länge über alles werden beide mit 14,99 m angegeben."
+    },
+    {
+      "manufacturer": "beneteau",
+      "slug": "oceanis-30-1",
+      "name": "Oceanis 30.1",
+      "designer": "Finot-Conq (Pascal Conq), Interieur Nauta Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2019,
+        "year_to": null,
+        "length_m": 8.99,
+        "beam_m": 2.99,
+        "draft_m": 1.88,
+        "displacement_kg": 4120,
+        "sail_area_m2": 40.0,
+        "engine_hp": 21,
+        "cabins": 2,
+        "berths": 4,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 160,
+        "fuel_tank_l": 130,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel / Deep draft (Grauguss mit Bulb)",
+          "is_default": true,
+          "draft_m": 1.88,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel / Shoal draft",
+          "is_default": false,
+          "draft_m": 1.3,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "21ps",
+          "name": "21 PS",
+          "is_default": true,
+          "engine_hp": 21
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.pbo.co.uk/boats/big-new-small-yacht-beneteau-oceanis-30-1-tested-64447",
+      "all_sources": [
+        "https://www.pbo.co.uk/boats/big-new-small-yacht-beneteau-oceanis-30-1-tested-64447",
+        "https://canadianboating.ca/boat-reviews/beneteau-oceanis-30-1/",
+        "https://itboat.com/models/9614-beneteau-oceanis-30-1",
+        "https://www.boat-specs.com/sailing/sailboats/beneteau/oceanis-30-1-deep-draft",
+        "https://48north.com/boats-and-gear/boat-reviews/beneteau-oceanis-30-1/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 8,99 m laut PBO; LOA mit Bugspriet 9,53 m (itboat) - nicht verwechseln. Verdrängung widersprüchlich: 4.120 kg (itboat) vs. 8.805 lbs = rund 3.994 kg (Canadian Boating). Segelfläche 40,0 m² = Grosssegel 24 m² + Selbstwendefock 16 m² (am Wind); eine Quelle nennt 425 sq ft = 39,5 m², konsistent. Motor: EU-Basis 14 PS, USA/üblich Yanmar 3YM20 mit 21 PS. 4 feste Kojen in 2 Doppelkabinen, laut Beneteau zusätzlich 2 Salonkojen möglich. Kopfzahl Nasszellen und max. Personen nicht belegt. Es existiert laut boat-specs auch eine Kiel-Schwert-Version, aber ohne belegte Tiefgangswerte."
+    },
+    {
+      "manufacturer": "beneteau",
+      "slug": "oceanis-34-1",
+      "name": "Oceanis 34.1",
+      "designer": "Marc Lombard (Rumpf), Nauta Design (Interieur)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2021,
+        "year_to": null,
+        "length_m": 9.96,
+        "beam_m": 3.57,
+        "draft_m": 2.0,
+        "displacement_kg": 5470,
+        "sail_area_m2": 49.3,
+        "engine_hp": 21,
+        "cabins": 2,
+        "berths": null,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 231,
+        "fuel_tank_l": 130,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standard-/Tiefkiel (Grauguss)",
+          "is_default": true,
+          "draft_m": 2.0,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel (Grauguss)",
+          "is_default": false,
+          "draft_m": 1.5,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "21ps",
+          "name": "21 PS",
+          "is_default": true,
+          "engine_hp": 21
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.cruisingworld.com/sailboats/sailboat-review-beneteau-oceanis-34-1/",
+      "all_sources": [
+        "https://www.cruisingworld.com/sailboats/sailboat-review-beneteau-oceanis-34-1/",
+        "https://www.yachtingmonthly.com/yacht-reviews/first-look-beneteau-oceanis-34-1-82165",
+        "https://www.yachtworld.com/research/beneteau-oceanis-34-1-sailboat-review/",
+        "https://itboat.com/models/12382-beneteau-oceanis-34-1",
+        "https://www.beneteau.com/en-us/oceanis/oceanis-341",
+        "https://48north.com/boats-and-gear/48-north-boat-test-beneteau-oceanis-34-1/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Deutlicher Längen-Widerspruch: Rumpf laut Cruising World/SAIL 32 ft 8 in = 9,96 m, mehrere Händlerseiten nennen 10,77 m - das ist die Länge über alles mit Bugspriet des Downwind-Pakets. Hier wurde die Rumpflänge eingetragen. Segelfläche 49,3 m² = Am-Wind-Fläche 531 sq ft (Gross 334 sq ft + Selbstwendefock 197 sq ft); optional Rollgenua 26 m² oder Squaretop-Gross. Wassertank 231 l Standard, laut Beneteau bis 361 l optional. Motor Yanmar 3YM20 21 PS Standard, 30 PS optional. Kojenzahl und max. Personen nicht belegt. Eine Quelle nennt Tiefgang 1,49 m (= Flachkiel), passend zu 1,50 m. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Performance-/Hubkiel, hydraulisch (1,25-2,55 m)."
+    },
+    {
+      "manufacturer": "beneteau",
+      "slug": "oceanis-38-1",
+      "name": "Oceanis 38.1",
+      "designer": "Finot-Conq (Rumpf), Nauta Design (Interieur)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2017,
+        "year_to": 2023,
+        "length_m": 11.13,
+        "beam_m": 3.99,
+        "draft_m": 2.08,
+        "displacement_kg": 6850,
+        "sail_area_m2": 65.7,
+        "engine_hp": 30,
+        "cabins": 3,
+        "berths": null,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 130,
+        "fuel_tank_l": 130,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Tiefkiel mit T-Bulb",
+          "is_default": true,
+          "draft_m": 2.08,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.64,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "30ps",
+          "name": "30 PS",
+          "is_default": true,
+          "engine_hp": 30
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://uk.boats.com/reviews/beneteau-oceanis-38-1-review/",
+      "all_sources": [
+        "https://uk.boats.com/reviews/beneteau-oceanis-38-1-review/",
+        "https://itboat.com/models/7736-beneteau-oceanis-38-1",
+        "https://www.samboat.com/model/beneteau-oceanis-38-1",
+        "https://www.theglobesailor.com/oceanis-38-1-specifications-sm4788.html",
+        "https://nova-yachting.nl/sites/default/files/Beneteau%20Oceanis%2038.1%20-%20General%20specifications%202021.pdf"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Länge widersprüchlich: 11,13 m (Rumpflänge, Charterdatenblätter) vs. 11,50 m (itboat, vermutlich LOA). Hier Rumpflänge. Tiefgang: eine Quelle (itboat) nennt 2,90 m - das ist gegenüber allen anderen Quellen (2,08 m Tiefkiel / 1,64 m Flachkiel) unplausibel und wurde verworfen. Baujahre 2017-2023 stammen aus einer einzigen Quelle (itboat) und sind nicht gegengeprüft; die Beneteau-URL-Struktur legt eine früheren Serienstart nahe. Segelfläche 65,7 m² = Gross 32,7 m² + Genua 103% 33 m²; Rollgross alternativ 30 m². Wassertank 130 l Standard, 200 l optional. Kabinenzahl/Kojen: Quellen nennen 3 Kabinen mit 6 bzw. 8 Personen - widersprüchlich, daher berths und max_persons null. Insgesamt 6 Ausbauversionen belegt, aber ohne Einzelangaben. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Schwenkkiel / Lifting keel (1,26-2,40 m)."
+    },
+    {
+      "manufacturer": "beneteau",
+      "slug": "oceanis-40-1",
+      "name": "Oceanis 40.1",
+      "designer": "Marc Lombard (Rumpf), Nauta Design (Interieur)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2020,
+        "year_to": null,
+        "length_m": 11.99,
+        "beam_m": 4.18,
+        "draft_m": 2.17,
+        "displacement_kg": 8180,
+        "sail_area_m2": 77.3,
+        "engine_hp": 45,
+        "cabins": null,
+        "berths": null,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 235,
+        "fuel_tank_l": 195,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standard-/Tiefkiel",
+          "is_default": true,
+          "draft_m": 2.17,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.68,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "keel",
+          "code": "performance",
+          "name": "Performance-Kiel",
+          "is_default": false,
+          "draft_m": 2.27,
+          "adds_features": []
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "45ps",
+          "name": "45 PS",
+          "is_default": true,
+          "engine_hp": 45
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://itboat.com/models/10433-beneteau-oceanis-40-1",
+      "all_sources": [
+        "https://itboat.com/models/10433-beneteau-oceanis-40-1",
+        "https://www.beneteau-croatia.hr/beneteau-sailing-yachts/oceanis/oceanis-40-1/",
+        "https://canadianboating.ca/boat-reviews/beneteau-oceanis-40-1/",
+        "https://sailmagazine.com/boats/boat-review-beneteau-oceanis-40-1/",
+        "https://masteryachting.com/en/yacht/beneteau-oceanis-40-1/",
+        "https://www.beneteau.com/en-us/oceanis/oceanis-401"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Länge/Breite widersprüchlich: 11,99 m / 4,18 m (Rumpfmasse, itboat + SAIL) gegen 12,90 m / 4,25 m (42,32 ft / 13,94 ft, Händlerlisting - vermutlich LOA mit Bugspriet). Hier die Rumpfmasse. Segelfläche 77,3 m² = Gross 43 m² + Genua 34,3 m²; Rollgross alternativ 42,4 m². Wassertank 235 l Standard, 330 l optional. Motor Yanmar 4JH45 mit 45 PS Standard. Kabinenzahl: 2, 3 oder 4 Kabinen mit 1 oder 2 Nasszellen belegt, aber keine Quelle nennt Kojen- oder Nasszellenzahl je Version - daher cabins/berths/heads null und nur die Kabinenanzahl in layout_variants."
+    },
+    {
+      "manufacturer": "beneteau",
+      "slug": "oceanis-46-1",
+      "name": "Oceanis 46.1",
+      "designer": "Finot-Conq (Pascal Conq, Rumpf), Nauta Design (Interieur)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 13.65,
+        "beam_m": 4.5,
+        "draft_m": 2.35,
+        "displacement_kg": 10597,
+        "sail_area_m2": 85.0,
+        "engine_hp": 57,
+        "cabins": null,
+        "berths": null,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 370,
+        "fuel_tank_l": 200,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standard-/Tiefkiel (Grauguss)",
+          "is_default": true,
+          "draft_m": 2.35,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel (Grauguss)",
+          "is_default": false,
+          "draft_m": 1.75,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "keel",
+          "code": "performance",
+          "name": "Performance-Kiel (Grauguss/Blei)",
+          "is_default": false,
+          "draft_m": 2.65,
+          "adds_features": []
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab-2-wc",
+          "name": "3 Kabinen / 2 Nasszellen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab-3-wc",
+          "name": "3 Kabinen / 3 Nasszellen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": 3,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab-2-wc",
+          "name": "4 Kabinen / 2 Nasszellen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": null,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "5-kab",
+          "name": "5 Kabinen (bis 4 Nasszellen)",
+          "is_default": false,
+          "cabins": 5,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "57ps",
+          "name": "57 PS",
+          "is_default": true,
+          "engine_hp": 57
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/beneteau/oceanis-46-1-deep-draft",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/beneteau/oceanis-46-1-deep-draft",
+        "https://itboat.com/models/9644-beneteau-oceanis-46-1",
+        "https://sailmagazine.com/boats/boat-review-beneteau-oceanis-46-1/",
+        "https://www.beneteau.com/en-us/oceanis-2015-2022/oceanis-461",
+        "https://cdn.yachtbroker.org/media/2780152/V12705_OCEANIS_46-1_US_light%202025.pdf",
+        "https://nova-yachting.nl/sites/default/files/Beneteau%20Oceanis%2046.1%20-%20General%20specifications%202021.pdf"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Segelfläche 85,0 m² = Standard Gross 45 m² + Selbstwendefock 40 m²; optional Gross 54 m² + Genua 52 m², Classic-Gross 58 m². Ballast je Kielversion belegt: tief 2.735 kg, flach 3.061 kg, Performance 2.576 kg. Motor 57 PS Standard, 80 PS optional. Kabinen 3/4/5 mit 2/3/4 Nasszellen belegt, aber keine Quelle nennt Kojenzahlen je Version - berths daher durchgehend null. Eine Quelle nennt 'sleeping capacity 8', ohne Bezug zu einer konkreten Version, deshalb max_persons null. Baujahr ab 2018 (Serienstart November 2018), Europäische Yacht des Jahres 2019 Familienfahrtenyacht."
+    },
+    {
+      "manufacturer": "beneteau",
+      "slug": "oceanis-51-1",
+      "name": "Oceanis 51.1",
+      "designer": "Berret-Racoupeau Yacht Design (Rumpf), Nauta Design (Interieur)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2017,
+        "year_to": null,
+        "length_m": 14.98,
+        "beam_m": 4.8,
+        "draft_m": 2.3,
+        "displacement_kg": 13930,
+        "sail_area_m2": 91.0,
+        "engine_hp": 80,
+        "cabins": null,
+        "berths": null,
+        "heads": null,
+        "max_persons": 13,
+        "water_tank_l": 440,
+        "fuel_tank_l": 200,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standard-/Flachkiel",
+          "is_default": true,
+          "draft_m": 2.3,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "keel",
+          "code": "tief",
+          "name": "Tiefkiel (L-Kiel, Blei)",
+          "is_default": false,
+          "draft_m": 2.8,
+          "adds_features": []
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "5-kab",
+          "name": "5 Kabinen",
+          "is_default": false,
+          "cabins": 5,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "80ps",
+          "name": "80 PS",
+          "is_default": true,
+          "engine_hp": 80
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://itboat.com/models/7737-beneteau-oceanis-51-1",
+      "all_sources": [
+        "https://itboat.com/models/7737-beneteau-oceanis-51-1",
+        "https://sailmagazine.com/boats/boat-review-beneteau-oceanis-51-1/",
+        "https://www.beneteau.com/us/oceanis/oceanis-511",
+        "https://www.samboat.com/model/beneteau-oceanis-51-1",
+        "https://www.theglobesailor.com/oceanis-51-1-specifications-sm4223.html",
+        "https://www.boats.com/reviews/beneteau-oceanis-51-1-review/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Länge widersprüchlich: 15,94 m wird von mehreren Quellen als LOA geführt, 14,98 m (49 ft 1 in) als Rumpflänge - hier die Rumpflänge. Tankgrößen stark widersprüchlich: eine Quelle nennt 440 l Wasser / 200 l Diesel als Standard, eine andere 980 l / 400 l (vermutlich Maximalausbau mit Zusatztanks). Hier die Standardwerte. Segelfläche 91,0 m² = Gross 45 m² + Selbstwendefock 46 m² laut Quelle - eine größere Selbstwendefock als Gross ist ungewöhnlich, Wert vor Katalogfreigabe prüfen. Motor 80 PS Standard, 100-110 PS optional. 3 bis 5 Kabinen mit 2 bis 4 Nasszellen belegt, Kojenzahlen je Version nicht. max_persons 13 stammt aus zwei Quellen ('bis 13 Personen an Bord'), vermutlich CE-Maximum, nicht Kojenzahl."
+    },
+    {
+      "manufacturer": "dehler",
+      "slug": "30-one-design",
+      "name": "30 one design",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2019,
+        "year_to": null,
+        "length_m": 9.14,
+        "beam_m": 3.25,
+        "draft_m": 2.2,
+        "displacement_kg": 2800,
+        "sail_area_m2": null,
+        "engine_hp": 10,
+        "cabins": null,
+        "berths": null,
+        "heads": 1,
+        "max_persons": 6,
+        "water_tank_l": null,
+        "fuel_tank_l": null,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.2
+        },
+        {
+          "kind": "engine",
+          "code": "10ps",
+          "name": "10 PS",
+          "is_default": true,
+          "engine_hp": 10
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/dehler-30od/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/dehler-30od/",
+        "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-30-od",
+        "https://www.barchemagazine.com/en/dehler-30-one-design-eng/",
+        "https://dehler.com/us/historical-models/dehler-30-one-design/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 9.14 m, LOA 10.30 m mit 130 cm Bugspriet, Wasserlinie 8.97 m. Verdrängung 2800 kg bei halber Beladung, Bleibombe 900 kg. Segelfläche nur in Einzelwerten belegt (Gross 33.5 m² bzw. 34.5 m² je nach Quelle, Selbstwendefock 15 m², Code Zero 52 m², Gennaker 100/85 m²) - Gesamtsegelfläche am Wind nicht ausgewiesen, daher null. WASSERTANK: die genannten zwei 200-l-Tanks sind Wasserballasttanks, kein Frischwasser - Frischwasser- und Dieseltankgröße nicht belegt, daher null. KABINEN UNKLAR: boat-specs.com führt '3 Gästekabinen, 4 Gäste, 1 Nasszelle', was für einen ausgeräumten One-Design-Racer unplausibel wirkt und von keiner zweiten Quelle bestätigt wird - cabins/berths daher null, max_persons 6 (CE-Höchstzahl an Bord)."
+    },
+    {
+      "manufacturer": "dehler",
+      "slug": "34",
+      "name": "34",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2016,
+        "year_to": null,
+        "length_m": 10.3,
+        "beam_m": 3.6,
+        "draft_m": 1.95,
+        "displacement_kg": 6000,
+        "sail_area_m2": null,
+        "engine_hp": 18,
+        "cabins": null,
+        "berths": 8,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 231,
+        "fuel_tank_l": 159,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "L-Kiel Standard",
+          "is_default": true,
+          "draft_m": 1.95,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "competition",
+          "name": "Competition T-Kiel",
+          "is_default": false,
+          "draft_m": 2.1,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "L-Kiel flach (Shoal draft)",
+          "is_default": false,
+          "draft_m": 1.55,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "engine",
+          "code": "18ps",
+          "name": "18 PS",
+          "is_default": true,
+          "engine_hp": 18
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-34-j-v-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-34-j-v-standard",
+        "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-34-j-v-competition",
+        "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-34-j-v-shoal-draft",
+        "https://www.teamwindcraft.com/models/dehler-34/",
+        "https://sailboatdata.com/sailboat/dehler-34-3/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "ACHTUNG MODELLVERWECHSLUNG: es gibt drei verschiedene Dehler 34 - van-de-Stadt-Entwurf ab 1983 (10.1 m, 4000 kg), Dehler 34 Performance ab 2003 (Felci/Roseo) und die hier erfasste judel/vrolijk-Version ab 2016. Nur die Version ab 2016 ist charterrelevant. Längenkonflikt: Quellen nennen 33'10\" / 10.3 m als Rumpflänge und 10.70 m als LOA - hier 10.30 m als Rumpflänge. Verdrängung 6000 kg (eine Suchhypothese von 5250 kg wurde nicht bestätigt). Berths 8 nur aus der Formulierung 'accommodates 8 people' abgeleitet; Kabinenzahl und Nasszellen nicht belegt. Motor Volvo Penta 18 PS Saildrive."
+    },
+    {
+      "manufacturer": "dehler",
+      "slug": "38-sq",
+      "name": "38 SQ",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2021,
+        "year_to": null,
+        "length_m": 11.3,
+        "beam_m": 3.75,
+        "draft_m": 2.03,
+        "displacement_kg": 7000,
+        "sail_area_m2": null,
+        "engine_hp": 29,
+        "cabins": 3,
+        "berths": null,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 295,
+        "fuel_tank_l": 160,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.03,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "competition",
+          "name": "Competition-Kiel",
+          "is_default": false,
+          "draft_m": 2.24,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Kurzkiel (Shoal draft)",
+          "is_default": false,
+          "draft_m": 1.6,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen (mit Stauraum-Backskiste)",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen (Familienversion)",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "29ps",
+          "name": "29 PS",
+          "is_default": true,
+          "engine_hp": 29
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/dehler-38-sq/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/dehler-38-sq/",
+        "https://dehler.com/us/sailing-yachts/dehler-38-sq/",
+        "https://www.newwaveyachts.com/pdf_sheets/Dehler%2038%20SQ%20Specifications.pdf",
+        "https://itboat.com/models/11328-dehler-38-sq",
+        "https://www.yacht.de/en/cruising-yachts/dehler-38-sq-dehler-s-modified-performance-cruiser-on-test/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 11.30 m, LOA 11.64 m. Die Verdrängung 7000 kg ist in der Quelle der Competition-Variante (Tiefgang 2.24 m, Ballast 2050 kg) zugeordnet - Wert für die Standardversion nicht separat belegt. Segelfläche nur in Einzelwerten belegt (Gross 43 m², Gross optional 49 m², Selbstwendefock 35.6 m², Spinnaker 118 m², Gennaker 112 m²) - Gesamtsegelfläche nicht ausgewiesen, daher null. Kojenzahl nicht belegt. Modell 2021 überarbeitet; Baujahr-Beginn der SQ-Version daher mit 2021 angesetzt."
+    },
+    {
+      "manufacturer": "dehler",
+      "slug": "42",
+      "name": "42",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2016,
+        "year_to": null,
+        "length_m": 12.42,
+        "beam_m": 3.91,
+        "draft_m": 2.16,
+        "displacement_kg": 9100,
+        "sail_area_m2": 93.0,
+        "engine_hp": 40,
+        "cabins": 3,
+        "berths": 8,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 315,
+        "fuel_tank_l": 160,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.16,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "competition",
+          "name": "Competition-/Race-Kiel",
+          "is_default": false,
+          "draft_m": 2.39,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel (Shoal draft)",
+          "is_default": false,
+          "draft_m": 1.98,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 8,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "40ps",
+          "name": "40 PS",
+          "is_default": true,
+          "engine_hp": 40
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/dehler-42/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/dehler-42/",
+        "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-42-standard",
+        "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-42-competition",
+        "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-42-shoal-draft",
+        "https://www.dehler.co.uk/files/Dehler_42_Standard_Specification.pdf",
+        "https://sailingmagazine.net/article-permalink-1692.html"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 12.42 m, LOA 12.84 m laut offiziellem Datenblatt. Tiefgänge aus Fussangaben umgerechnet (7'1\" / 7'10\" / 6'6\"). Segelfläche 93.0 m² Standard (Gross 52.0 + Rollgenua 105% 41.0); Competition 105.5 m². Motor Volvo Penta D2-40 (40 PS) - eine Suchzusammenfassung nannte für die 42 auch 'ca. 29 hp', das ist vermutlich vom Dehler 38 SQ übernommen und wurde verworfen, da das Herstellerdatenblatt D2-40 nennt. Verdrängung 9100 kg Standard; Quelle nennt zusätzlich 18629 lbs Race und 20613 lbs Shoal."
+    },
+    {
+      "manufacturer": "delphia",
+      "slug": "40-3",
+      "name": "40.3",
+      "designer": "Andrzej Skrzat",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2009,
+        "year_to": 2019,
+        "length_m": 12.35,
+        "beam_m": 3.94,
+        "draft_m": 2.19,
+        "displacement_kg": 8600,
+        "sail_area_m2": 68.7,
+        "engine_hp": 55,
+        "cabins": 4,
+        "berths": 8,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 318,
+        "fuel_tank_l": 210,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "tief",
+          "name": "Tiefkiel",
+          "is_default": true,
+          "draft_m": 2.19,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel (shoal)",
+          "is_default": false,
+          "draft_m": 1.8,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "schwenkkiel",
+          "name": "Schwenkkiel (swing)",
+          "is_default": false,
+          "draft_m": 1.02,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": 8,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "55ps",
+          "name": "55 PS",
+          "is_default": true,
+          "engine_hp": 55
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/delphia-403/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/delphia-403/",
+        "https://www.boat-specs.com/sailing/sailboats/delphia-yachts/delphia-40-3-deep-draft",
+        "https://www.boat-specs.com/sailing/sailboats/delphia-yachts/delphia-40-3-shoal-draft",
+        "https://www.bwsailing.com/bw/delphia-40-3/",
+        "https://sailmagazine.com/boats/delphia-40-3/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Widerspruch beim Tiefgang: metrische Quelle 2,19 m, imperiale Quelle 7'5\" (entspricht 2,26 m); hier der konkretere metrische Wert. Flachkiel 5'11\" = 1,80 m, Schwenkkiel 3'4\"/6'5\" = 1,02 m aufgeholt bis 1,96 m abgesenkt - in keel_variants ist der aufgeholte Wert eingetragen. displacement_kg 8600 ist die Umrechnung der angegebenen 18.960 lbs, so auch in der Quelle genannt. sail_area_m2 68,7 ist die Summe Gross 41,60 m² + Genua 27,10 m², keine publizierte Gesamtzahl. water_tank_l 318 aus 84 US-Gallonen; Dieseltank in einer Quelle 55 US-Gallonen (208 l), in einer anderen 210 l - praktisch deckungsgleich. 2-, 3- und 4-Kabinen-Layout sind belegt, Koje- und Nasszellenzahlen nur für die 4-Kabinen-Version."
+    },
+    {
+      "manufacturer": "dufour",
+      "slug": "310-grand-large",
+      "name": "310 Grand Large",
+      "designer": "Umberto Felci / Felci Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2014,
+        "year_to": null,
+        "length_m": 9.35,
+        "beam_m": 3.31,
+        "draft_m": 1.9,
+        "displacement_kg": 4940,
+        "sail_area_m2": 50.4,
+        "engine_hp": 19,
+        "cabins": 2,
+        "berths": null,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 159,
+        "fuel_tank_l": 91,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.9
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "19ps",
+          "name": "19 PS",
+          "is_default": true,
+          "engine_hp": 19
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/dufour-310-grand-large/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/dufour-310-grand-large/",
+        "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-310-grand-large",
+        "https://no-frills-sailing.com/dufour-grandlarge-310-so-big-that-small/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: eine Quelle nennt 31.73 ft / 9.67 m als Rumpflänge, sailboatdata 30'8\" / 9.35 m. Hier 9.35 m als Rumpflänge übernommen, 9.67 m dürfte LOA sein - vor Katalogfreigabe prüfen. Berths nicht eindeutig belegt (eine Quelle nennt widersprüchlich '4-6 Kojen', eine andere garbled 'ten berths'), daher null. Segelfläche 50.4 m² (Gross 33.5 + Genua 16.8). Tiefgang 1.90 m Standard; eine Quelle erwähnt einen optionalen Hubkiel ohne Massangabe, daher keine keel_variants. Bauzeit-Ende nicht belegt."
+    },
+    {
+      "manufacturer": "dufour",
+      "slug": "350-grand-large",
+      "name": "350 Grand Large",
+      "designer": "Umberto Felci / Felci Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2014,
+        "year_to": 2017,
+        "length_m": 10.28,
+        "beam_m": 3.54,
+        "draft_m": 1.9,
+        "displacement_kg": 5674,
+        "sail_area_m2": 55.0,
+        "engine_hp": 19,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 220,
+        "fuel_tank_l": 160,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel (L-Kiel mit Bombe)",
+          "is_default": true,
+          "draft_m": 1.9,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.55,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "19ps",
+          "name": "19 PS",
+          "is_default": true,
+          "engine_hp": 19
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://uk.boats.com/reviews/dufour-350-grand-large-review-classy-cruiser/",
+      "all_sources": [
+        "https://uk.boats.com/reviews/dufour-350-grand-large-review-classy-cruiser/",
+        "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-350-grand-large",
+        "https://sailmagazine.com/boats/boat-review-dufour-grand-large-350/",
+        "https://www.samboat.com/model/dufour-350-grand-large"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Beide Layouts haben nur eine Nasszelle (2-Kabinen-Version mit separater Duschkabine). Kojenzahl der 2-Kabinen-Version nicht belegt. Motor 19 PS Volvo mit Saildrive. Längenangabe 10.28 m wird in den Quellen als 'Length' geführt, ob Rumpflänge oder LOA ist nicht explizit ausgewiesen."
+    },
+    {
+      "manufacturer": "dufour",
+      "slug": "390-grand-large",
+      "name": "390 Grand Large",
+      "designer": "Umberto Felci / Felci Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 11.19,
+        "beam_m": 3.99,
+        "draft_m": 1.95,
+        "displacement_kg": 7700,
+        "sail_area_m2": 66.5,
+        "engine_hp": 30,
+        "cabins": 3,
+        "berths": 8,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 380,
+        "fuel_tank_l": 200,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.95
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 8,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "30ps",
+          "name": "30 PS",
+          "is_default": true,
+          "engine_hp": 30
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/dufour-390-grand-large/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/dufour-390-grand-large/",
+        "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-390-grand-large-standard",
+        "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-390-grand-large-shoal-draft",
+        "https://boattomorrow.com/articles/dufour-390-review",
+        "https://www.samboat.com/model/dufour-390-grand-large"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "WIDERSPRUCH beim Flachkiel: eine Quelle nennt 1.75 m, eine andere 1.55 m für die Shoal-draft-Version. Da nicht auflösbar, keine keel_variants eingetragen - vor Katalogfreigabe klären. Standardtiefgang 1.95 m (eine weitere Quelle nennt lastabhängig 1.95-2.05 m). Nasszellen werden mit 2-3 angegeben, hier 2 für die belegte 3-Kabinen-Version. Motor 30 PS Standard, 40 PS optional. Segelfläche 66.5 m² (Gross 36.6 + Genua 29.9)."
+    },
+    {
+      "manufacturer": "dufour",
+      "slug": "430-grand-large",
+      "name": "430 Grand Large",
+      "designer": "Umberto Felci",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 12.5,
+        "beam_m": 4.3,
+        "draft_m": 2.1,
+        "displacement_kg": 9700,
+        "sail_area_m2": 92.0,
+        "engine_hp": 50,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 430,
+        "fuel_tank_l": 250,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.1,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel (Shoal draft)",
+          "is_default": false,
+          "draft_m": 1.75,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "50ps",
+          "name": "50 PS",
+          "is_default": true,
+          "engine_hp": 50
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/dufour-430-grand-large/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/dufour-430-grand-large/",
+        "https://canadianboating.ca/boat-reviews/sneak-peek-dufour-430-grand-large/",
+        "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-430-shoal-draft",
+        "https://www.samboat.com/model/dufour-430-grand-large"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "6 feste Kojen plus 2 Zusatzkojen laut Quelle. Belegt ist die 3-Kabinen/2-Nasszellen-Version; eine 4-Kabinen-Version liess sich in den Suchergebnissen nicht bestätigen, daher keine layout_variants. Motor 50 PS Yanmar Saildrive Standard, 60 PS optional. Vorstellung Cannes 2018."
+    },
+    {
+      "manufacturer": "dufour",
+      "slug": "470",
+      "name": "470",
+      "designer": "Umberto Felci",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2021,
+        "year_to": null,
+        "length_m": 13.99,
+        "beam_m": 4.74,
+        "draft_m": 2.25,
+        "displacement_kg": 13200,
+        "sail_area_m2": null,
+        "engine_hp": 60,
+        "cabins": 3,
+        "berths": 8,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 530,
+        "fuel_tank_l": 250,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.25
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen (Charter)",
+          "is_default": false,
+          "cabins": 4,
+          "berths": 8,
+          "heads": 4,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "5-kab",
+          "name": "5 Kabinen",
+          "is_default": false,
+          "cabins": 5,
+          "berths": 10,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "60ps",
+          "name": "60 PS",
+          "is_default": true,
+          "engine_hp": 60
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/dufour-470/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/dufour-470/",
+        "https://itboat.com/models/11755-dufour-470",
+        "https://boattest.com/boats/dufour-yachts/470-2021",
+        "https://www.nauticexpo.com/prod/dufour-yachts/product-20156-570412.html",
+        "https://www.samboat.com/model/dufour-470"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: LOA 14.85 m (mit Bugspriet), Rumpflänge laut einer Quelle 13.99 m / 45.9 ft, Wasserlinie 13.55 m. Hier 13.99 m als Rumpflänge. Segelfläche nur in Einzelwerten belegt (Gross 57.0 m², Genua 50 m²), Summe nicht als Gesamtsegelfläche ausgewiesen, daher null. Layouts 3 bis 5 Kabinen; das 5-Kabinen-Layout wird mit 10 Schlafplätzen beschrieben, Nasszellen dazu nicht belegt. Versionen Easy / Ocean / Performance unterscheiden sich im Deckslayout. Ballast 3550 kg."
+    },
+    {
+      "manufacturer": "elan",
+      "slug": "e5",
+      "name": "E5",
+      "designer": "Humphreys Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2015,
+        "year_to": null,
+        "length_m": 11.96,
+        "beam_m": 3.87,
+        "draft_m": 2.4,
+        "displacement_kg": 8190,
+        "sail_area_m2": null,
+        "engine_hp": 29,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 277,
+        "fuel_tank_l": 132,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.4
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "29ps",
+          "name": "29 PS",
+          "is_default": true,
+          "engine_hp": 29
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/elan-e5/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/elan-e5/",
+        "https://www.boat-specs.com/sailing/sailboats/elan-yachts/elan-e5-deep-draft",
+        "https://itboat.com/models/2552-elan-e5",
+        "https://www.yacht-rent.com/boat-models-in-charter/elan-e5"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "11.96 m ist als LOA belegt, eine separate Rumpflänge stand nicht in den Suchergebnissen. Segelfläche nur aufgeteilt belegt (Gross 52 bzw. 51.56 m², Fock 39 m², Gennaker 135 m²) - Summe nicht direkt belegt, daher null. Draft 2.40 m bezieht sich auf die Deep-draft-Version; eine Shoal-draft-Version ist erwähnt, ihr Tiefgang steht aber in keinem Suchergebnis, daher keine keel_variants. Motor 29 hp = Standard Yanmar 3YM30AE, Option Yanmar 4JH45 45 hp."
+    },
+    {
+      "manufacturer": "elan",
+      "slug": "impression-40-1",
+      "name": "Impression 40.1",
+      "designer": "Humphreys Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2019,
+        "year_to": null,
+        "length_m": 11.48,
+        "beam_m": 3.91,
+        "draft_m": 1.8,
+        "displacement_kg": 8368,
+        "sail_area_m2": 76.02,
+        "engine_hp": null,
+        "cabins": null,
+        "berths": null,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 520,
+        "fuel_tank_l": 146,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.8,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel (shallow keel)",
+          "is_default": false,
+          "draft_m": 1.5,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/impression-401-elan/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/impression-401-elan/",
+        "https://www.boat-specs.com/sailing/sailboats/elan-yachts/impression-40-1-standard",
+        "https://www.samboat.com/model/elan-impression-40-1",
+        "https://www.theglobesailor.com/elan-impression-40-1-specifications-sm5209.html"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: Boat-Specs nennt Rumpflänge 37'8\" (11.48 m), Sailboatdata LOA 11.99 m. Hier die Rumpflänge eingetragen. Motor nur als Bereich 29-39 hp belegt, daher null. Kabinen/Kojen/Nasszellen nur als Bereich belegt (2-3 Kabinen, 4-8 Kojen, 1-2 Nasszellen, vier Layout-Varianten, davon nur die 2-Kabinen-/1-Nasszellen-Version namentlich beschrieben) - keine konkreten Einzelvarianten in den Suchergebnissen, daher null bzw. leere Liste. Wassertank 520 l ist als Option ausgewiesen."
+    },
+    {
+      "manufacturer": "elan",
+      "slug": "impression-45-1",
+      "name": "Impression 45.1",
+      "designer": "Humphreys Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2019,
+        "year_to": 2021,
+        "length_m": 13.85,
+        "beam_m": 4.17,
+        "draft_m": 1.9,
+        "displacement_kg": 10433,
+        "sail_area_m2": null,
+        "engine_hp": null,
+        "cabins": 3,
+        "berths": 8,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 572,
+        "fuel_tank_l": 212,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.9,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel (shoal draft)",
+          "is_default": false,
+          "draft_m": 1.6,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 8,
+          "heads": 2,
+          "max_persons": null
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/impression-451-elan/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/impression-451-elan/",
+        "https://www.boat-specs.com/sailing/sailboats/elan-yachts/impression-45-1-standard",
+        "https://www.theglobesailor.com/elan-impression-45-1-specifications-sm5012.html",
+        "https://www.samboat.com/model/elan-impression-45-1",
+        "https://itboat.com/models/10312-elan-impression-45-1"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: mehrere Quellen 13.84-13.85 m (LOA), eine Quelle nennt 13.0 m als Rumpflänge - hier 13.85 m eingetragen, unsicher. Produktionszeitraum widersprüchlich: eine Quelle 'gebaut seit 2019', eine andere '2019 bis 2021'. Verdrängung nur in lbs belegt (23'000 lbs), hier umgerechnet auf 10'433 kg. Tank Diesel nur in US-Gallonen belegt (56 gal), umgerechnet auf 212 l. Wassertank 572 l als Option ausgewiesen. Segelfläche nur als unklar formatierte Einzelwerte (Gross/Genua) in ft2, daher null. Motor nur als Optionen belegt (Yanmar 57 hp oder Volvo 75 hp), keine Standardangabe, daher null."
+    },
+    {
+      "manufacturer": "grand-soleil",
+      "slug": "44",
+      "name": "44",
+      "designer": "Matteo Polli (Rumpf), Nauta Design (Deck und Interieur)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2020,
+        "year_to": null,
+        "length_m": 13.4,
+        "beam_m": 4.3,
+        "draft_m": 2.6,
+        "displacement_kg": 9500,
+        "sail_area_m2": 112.0,
+        "engine_hp": 50,
+        "cabins": 3,
+        "berths": null,
+        "heads": 2,
+        "max_persons": 10,
+        "water_tank_l": 300,
+        "fuel_tank_l": 170,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.6
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": 2,
+          "max_persons": 10
+        },
+        {
+          "kind": "engine",
+          "code": "50ps",
+          "name": "50 PS",
+          "is_default": true,
+          "engine_hp": 50
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.barchemagazine.com/en/grand-soleil-gs-44-shakespeare-on-board-2/",
+      "all_sources": [
+        "https://www.barchemagazine.com/en/grand-soleil-gs-44-shakespeare-on-board-2/",
+        "https://www.grandsoleil.net/model/gs-44/",
+        "https://itboat.com/models/10893-grand-soleil-44",
+        "https://www.giornaledellavela.com/2022/09/29/aboard-the-grand-soleil-44-the-villain-of-the-cantiere-del-pardo-photos-and-video/?lang=en"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Gemeint ist das aktuelle Modell von Matteo Polli, nicht der gleichnamige ältere Grand Soleil 44 aus den 1990ern (sailboatdata führt beide). length_m 13,40 m ist die neben LOA 14,35 m (Standard) bzw. 15,01 m (Race, mit Bugspriet) genannte Rumpflänge; itboat nennt 13,41 m. sail_area_m2 112 ist die Summe Gross 59 m² + Fock 108 Prozent 53 m², keine publizierte Gesamtzahl; mit Selbstwendefock 47 m² wären es 106 m². engine_hp 50 ist die Serienmotorisierung Volvo Penta Saildrive, 60 PS optional. max_persons 10 gilt laut Quelle für CE-Kategorie A (12 in B, 14 in C); eine andere Stelle spricht von acht Personen an der Dinette. Jahresangabe widersprüchlich: itboat nennt Produktion seit 2020, Boat of the Year 2022, erste Listings 2022/2023. Kojenzahl und Kielvarianten in den Suchergebnissen nicht belegt. Race- und Performance-Version sind belegt, aber ohne getrennte Kabinen-/Kojenzahlen."
+    },
+    {
+      "manufacturer": "hallberg-rassy",
+      "slug": "340",
+      "name": "340",
+      "designer": "Germán Frers",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2017,
+        "year_to": null,
+        "length_m": 10.36,
+        "beam_m": 3.47,
+        "draft_m": 1.9,
+        "displacement_kg": 5980,
+        "sail_area_m2": 63.7,
+        "engine_hp": 29,
+        "cabins": 2,
+        "berths": null,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 277,
+        "fuel_tank_l": 188,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.9
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "29ps",
+          "name": "29 PS",
+          "is_default": true,
+          "engine_hp": 29
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.hallberg-rassy.com/yachts/hallberg-rassy-340",
+      "all_sources": [
+        "https://www.hallberg-rassy.com/yachts/hallberg-rassy-340",
+        "https://www.hallberg-rassy.com/fileadmin/data/yachts/hallberg-rassy_340/downloads/HR340colour.pdf",
+        "https://www.boat-specs.com/sailing/sailboats/hallberg-rassy/hallberg-rassy-340",
+        "https://sailboatdata.com/sailboat/hallberg-rassy-340/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 10.36 m; maximale Länge inkl. Anbauteile 10.95 m. Verdrängung 5.98 t bezieht sich laut Werft auf das leere Standardboot. Kojenzahl nur als Bereich belegt (4-6), daher null; Nasszellenzahl stand in keinem Suchergebnis. Nur ein Tiefgang (1.90 m) belegt, keine Kielvarianten in den Suchergebnissen."
+    },
+    {
+      "manufacturer": "hallberg-rassy",
+      "slug": "40c",
+      "name": "40C",
+      "designer": "Germán Frers",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 12.3,
+        "beam_m": 4.18,
+        "draft_m": 1.92,
+        "displacement_kg": 11000,
+        "sail_area_m2": 90.1,
+        "engine_hp": 60,
+        "cabins": 2,
+        "berths": null,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 520,
+        "fuel_tank_l": 400,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.92
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "60ps",
+          "name": "60 PS",
+          "is_default": true,
+          "engine_hp": 60
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.hallberg-rassy.com/yachts/hallberg-rassy-40c",
+      "all_sources": [
+        "https://www.hallberg-rassy.com/yachts/hallberg-rassy-40c",
+        "https://sailboatdata.com/sailboat/hallberg-rassy-40c/",
+        "https://itboat.com/models/10114-hallberg-rassy-40c",
+        "https://nova-yachting.nl/sites/default/files/Hallberg-Rassy%2040C%20-%20Standard%20Specification%202019.pdf",
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/hallberg-rassy-40c-the-best-sailing-boat-h-r-have-ever-built"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Tiefgangskonflikt: 1.92 m in einer Quelle, eine andere Zusammenfassung nennt ca. 1.93-1.99 m bzw. 6'4\" - 1.92 m übernommen, unsicher. Segelfläche 90.1 m² mit Arbeitsfock; optimierte Version mit 1'040 ft2 erwähnt. Motor Volvo Penta D2-60 (60 hp). Kojen- und Nasszellenzahl nicht als Zahl belegt (Vorschiffskabine mit zwei Kojen, Achterkabine mit Doppel- und Einzelkoje, optional Mittelkoje achtern) - daher null. Keine Kielvarianten in den Suchergebnissen belegt."
+    },
+    {
+      "manufacturer": "hallberg-rassy",
+      "slug": "44",
+      "name": "44",
+      "designer": "Germán Frers",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2016,
+        "year_to": null,
+        "length_m": 13.68,
+        "beam_m": 4.2,
+        "draft_m": 2.1,
+        "displacement_kg": 13300,
+        "sail_area_m2": 109.6,
+        "engine_hp": 75,
+        "cabins": 3,
+        "berths": null,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 650,
+        "fuel_tank_l": 365,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.1
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "75ps",
+          "name": "75 PS",
+          "is_default": true,
+          "engine_hp": 75
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.hallberg-rassy.com/yachts/hallberg-rassy-44",
+      "all_sources": [
+        "https://www.hallberg-rassy.com/yachts/hallberg-rassy-44",
+        "https://www.boat-specs.com/sailing/sailboats/hallberg-rassy/hallberg-rassy-44",
+        "https://uk.boats.com/reviews/hallberg-rassy-44-review/",
+        "https://itboat.com/models/7106-hallberg-rassy-44",
+        "https://sailboatdata.com/sailboat/hallberg-rassy-44/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 13.68 m, LOA 14.45 m, Wasserlinie 12.88 m. Kojenkonflikt: eine Quelle nennt 6 Kojen in 3 Kabinen, eine andere 4-8 Kojen - daher null. Motor Volvo Penta D2-75 (75 hp). Eine Quelle erwähnt eine zweite Kieloption mit geringerem Tiefgang, nennt aber keinen Wert - daher keine keel_variants."
+    },
+    {
+      "manufacturer": "hanse",
+      "slug": "315",
+      "name": "315",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2015,
+        "year_to": null,
+        "length_m": 9.62,
+        "beam_m": 3.35,
+        "draft_m": 1.85,
+        "displacement_kg": 5100,
+        "sail_area_m2": 47.0,
+        "engine_hp": 14,
+        "cabins": 2,
+        "berths": 4,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 210,
+        "fuel_tank_l": 100,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.85,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.35,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "14ps",
+          "name": "14 PS",
+          "is_default": true,
+          "engine_hp": 14
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-315-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-315-standard",
+        "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-315-shoal-draft",
+        "https://hanseyachts.com/gb/sailing-yachts/hanse-315/",
+        "https://hanseyachts.hr/en/range/hanse-315",
+        "https://itboat.com/models/7247-hanse-315",
+        "https://sailboatdata.com/sailboat/hanse-315/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Achtung: Es existieren zwei verschiedene Boote mit der Bezeichnung Hanse 315 - ein älteres Modell (Prospekt 2006, LOA 9,45 m, Tiefgang 1,75/1,40 m, Tank 50 l Diesel / 120 l Wasser, 21 PS) und das hier erfasste Modell seit 2015 (Europas Yacht of the Year 2016, Familienkreuzer). Die Suchergebnisse mischen beide. Uebernommen sind die Werte des 2015er Modells. Verdrängung 5,1 t laut boat-specs, eine andere Quelle nennt 4,3 t - Konflikt ungeklärt. Motor als 13,60 PS Standard angegeben. Rumpflänge 9,62 m; eine Quelle nennt 9,1 m (vermutlich andere Bezugslänge)."
+    },
+    {
+      "manufacturer": "hanse",
+      "slug": "348",
+      "name": "348",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 9.99,
+        "beam_m": 3.5,
+        "draft_m": 1.95,
+        "displacement_kg": 6560,
+        "sail_area_m2": 55.9,
+        "engine_hp": 21,
+        "cabins": 2,
+        "berths": 4,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 230,
+        "fuel_tank_l": 160,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "L-Kiel mittel",
+          "is_default": true,
+          "draft_m": 1.95,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.55,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "21ps",
+          "name": "21 PS",
+          "is_default": true,
+          "engine_hp": 21
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://itboat.com/models/7949-hanse-348",
+      "all_sources": [
+        "https://itboat.com/models/7949-hanse-348",
+        "https://sailboatdata.com/sailboat/hanse-348/",
+        "https://hanseyachts.hr/en/range/hanse-348",
+        "https://www.newwaveyachts.com/pdf_sheets/Hanse%20348%20Specification%20and%20Pricelist.pdf",
+        "https://www.sailboat-cruising.com/Hanse-348.html"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Segelfläche 55,90 m² ist die Am-Wind-Fläche (Gross 34,00 + Selbstwendefock 21,90); Vorwind 121,70 m². Verdrängung 6,56 t bezieht sich auf die L-Kiel-Version. Motor 21 PS Standard, 29 PS optional. Kabinen-/Kojenzahl aus itboat (2 Gästekabinen, 4 Gäste, 1 Bad) - Angaben zu einer möglichen 3-Kabinen-Version standen nicht in den Suchergebnissen."
+    },
+    {
+      "manufacturer": "hanse",
+      "slug": "388",
+      "name": "388",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2017,
+        "year_to": null,
+        "length_m": 11.4,
+        "beam_m": 3.9,
+        "draft_m": 2.06,
+        "displacement_kg": 8270,
+        "sail_area_m2": 72.0,
+        "engine_hp": 30,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 295,
+        "fuel_tank_l": 160,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.06,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.62,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "30ps",
+          "name": "30 PS",
+          "is_default": true,
+          "engine_hp": 30
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://itboat.com/models/7950-hanse-388",
+      "all_sources": [
+        "https://itboat.com/models/7950-hanse-388",
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/hanse-388",
+        "https://sailboatdata.com/sailboat/hanse-388/",
+        "https://www.newwaveyachts.com/pdf_sheets/Hanse%20388%20Specification%20and%20Pricelist.pdf",
+        "https://www.boatbookings.com/yacht/hanse-388-bareboat-sailing-yacht-pid40012",
+        "https://hanseyachts.com/us/historical-models/hanse-388/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Werksseitig ist die 2-Kabinen-Version Standard, die 3-Kabinen-Version Option; hier wurde die im Chartereinsatz übliche 3-Kabinen-Konfiguration als Basisdatensatz genommen (6 Kojen, 1 Nasszelle laut Charterlisting). Quellen nennen zusätzlich 'schläft bis zu 7 Personen' inkl. Salon. Segelfläche 72 m² als Gesamtangabe."
+    },
+    {
+      "manufacturer": "hanse",
+      "slug": "418",
+      "name": "418",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2017,
+        "year_to": null,
+        "length_m": 11.99,
+        "beam_m": 4.17,
+        "draft_m": 2.07,
+        "displacement_kg": 10150,
+        "sail_area_m2": 86.8,
+        "engine_hp": 39,
+        "cabins": 3,
+        "berths": 8,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 475,
+        "fuel_tank_l": 160,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "L-Kiel mittel",
+          "is_default": true,
+          "draft_m": 2.07,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.74,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 8,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "39ps",
+          "name": "39 PS",
+          "is_default": true,
+          "engine_hp": 39
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.hanseyachts.co.uk/files/Hanse_418_Standard_Specification.pdf",
+      "all_sources": [
+        "https://www.hanseyachts.co.uk/files/Hanse_418_Standard_Specification.pdf",
+        "https://www.samboat.com/model/hanse-418",
+        "https://sailboatdata.com/sailboat/hanse-418/",
+        "https://hanseyachts.com/gb/historical-models/hanse-418/",
+        "https://www.newwaveyachts.com/pdf_sheets/Hanse%20418%20Specification%20and%20Pricelist.pdf",
+        "https://www.boatbookings.com/yacht/hanse-418-bareboat-sailing-yacht-pid43028"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 11,99 m, Länge über alles 12,40 m. Verdrängung 10.150 kg gilt für den L-Kiel (mittel), für den Flachkiel werden ca. 10.410 kg genannt. Segelfläche 86,80 m² am Wind (Gross 52,20 + Selbstwendefock 34,60), Vorwind 186,90 m². Motor 39 PS Standard, 57 PS optional. Nasszellen: eine Charterquelle nennt ausdrücklich 1 Bad / 1 WC bei 3 Kabinen und 6/8 Kojen - für den Charterkatalog bitte pro Schiff prüfen, 2-Bad-Versionen sind bei dieser Größe üblich, waren aber nicht belegt. Baujahrbeginn in den Quellen als 2017 ('launched in 2017') angegeben."
+    },
+    {
+      "manufacturer": "hanse",
+      "slug": "458",
+      "name": "458",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 13.55,
+        "beam_m": 4.38,
+        "draft_m": 2.23,
+        "displacement_kg": 11700,
+        "sail_area_m2": 103.0,
+        "engine_hp": 57,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 450,
+        "fuel_tank_l": 210,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.23
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "57ps",
+          "name": "57 PS",
+          "is_default": true,
+          "engine_hp": 57
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://itboat.com/models/11252-hanse-458",
+      "all_sources": [
+        "https://itboat.com/models/11252-hanse-458",
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/hanse-458",
+        "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-458-medium-draft",
+        "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-458-shoal-draft",
+        "https://sailboatdata.com/sailboat/hanse-458/",
+        "https://hanseyachts.hr/en/range/hanse-458",
+        "https://www.velmundi.com/hanse-458.html"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 13,55 m, Länge über alles 14,04 m. Tiefgang 2,23 m entspricht der Medium-/L-Kiel-Version. Eine Flachkiel-Version ist belegt (eigene boat-specs-Seite 'Shoal draft'), ein konkreter Meterwert stand in den Suchergebnissen nicht - deshalb keine keel_variants. Motor Yanmar 4JH57 mit 57 PS Standard, 80 PS optional. 4-Kabinen-Version nicht belegt."
+    },
+    {
+      "manufacturer": "hanse",
+      "slug": "508",
+      "name": "508",
+      "designer": "judel/vrolijk & co",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 14.93,
+        "beam_m": 4.75,
+        "draft_m": 2.4,
+        "displacement_kg": 14700,
+        "sail_area_m2": 118.0,
+        "engine_hp": 80,
+        "cabins": 4,
+        "berths": 8,
+        "heads": 2,
+        "max_persons": 12,
+        "water_tank_l": 630,
+        "fuel_tank_l": 280,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.4,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.98,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": 3,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": 8,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "5-kab",
+          "name": "5 Kabinen",
+          "is_default": false,
+          "cabins": 5,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "80ps",
+          "name": "80 PS",
+          "is_default": true,
+          "engine_hp": 80
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://itboat.com/models/10120-hanse-508",
+      "all_sources": [
+        "https://itboat.com/models/10120-hanse-508",
+        "https://www.samboat.com/model/hanse-508",
+        "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-508-medium-draft",
+        "https://www.boat-specs.com/sailing/sailboats/hanse/hanse-508-shoal-draft",
+        "https://sailboatdata.com/sailboat/hanse-508/",
+        "https://hanseyachts.com/us/historical-models/hanse-508/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 14,93 m, Länge über alles 15,55 m. Segelfläche 118 m² ist die Summe der belegten Einzelwerte Gross 66,5 m² + Selbstwendefock 51,5 m²; eine Gesamtangabe stand nicht in den Suchergebnissen (optionale Genua 87 m², Gennaker 200 m²). Verdrängung 14,7 t bei halber Beladung für den Standardkiel, 15.100 kg für den Flachkiel. Layout-Angaben widersprüchlich: eine Quelle nennt für die 4-Kabinen-Version 2 Bäder, eine andere 4 Bäder bei 8/10 Kojen, eine dritte 3 Kabinen mit 3 Bädern."
+    },
+    {
+      "manufacturer": "jeanneau",
+      "slug": "sun-odyssey-319",
+      "name": "Sun Odyssey 319",
+      "designer": "Jeanneau Design Office",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2017,
+        "year_to": null,
+        "length_m": 9.44,
+        "beam_m": 3.46,
+        "draft_m": 1.85,
+        "displacement_kg": 5100,
+        "sail_area_m2": 45.3,
+        "engine_hp": 21,
+        "cabins": 2,
+        "berths": 4,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 150,
+        "fuel_tank_l": 100,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Kielflosse mit T-Bulb",
+          "is_default": true,
+          "draft_m": 1.85,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "schwert",
+          "name": "Kiel-Schwert-Version (Schwert unten 1,70 m, oben 0,74 m)",
+          "is_default": false,
+          "draft_m": 1.7,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "21ps",
+          "name": "21 PS",
+          "is_default": true,
+          "engine_hp": 21
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://en.wikipedia.org/wiki/Sun_Odyssey_319",
+      "all_sources": [
+        "https://en.wikipedia.org/wiki/Sun_Odyssey_319",
+        "https://www.boat-specs.com/sailing/sailboats/jeanneau/sun-odyssey-319-fin-keel",
+        "https://www.boat-specs.com/sailing/sailboats/jeanneau/sun-odyssey-319-keel-and-centerboard",
+        "https://www.sunsail.com/yachts/monohulls/sun-odyssey-319",
+        "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/113-sun-odyssey-319",
+        "https://sailboatdata.com/sailboat/sun-odyssey-319-jeanneau/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Länge: 9,44 m wird als Rumpflänge genannt, 9,99 m als LOA (mit Bugspriet/Ankerbeschlag) - hier die Rumpflänge. Segelfläche 45,3 m² ist die Am-Wind-Fläche (488 sq ft), davon Gross 23,0 m². Kojen: Quellen nennen 4 bis 6 (4 feste in 2 Kabinen, bis 6 mit Salonkojen); hier 4 eingetragen. max_persons nicht belegt."
+    },
+    {
+      "manufacturer": "jeanneau",
+      "slug": "sun-odyssey-349",
+      "name": "Sun Odyssey 349",
+      "designer": "Marc Lombard Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2014,
+        "year_to": null,
+        "length_m": 10.34,
+        "beam_m": 3.44,
+        "draft_m": 1.98,
+        "displacement_kg": 5350,
+        "sail_area_m2": 50.77,
+        "engine_hp": 21,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 206,
+        "fuel_tank_l": 130,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel mit Bulb",
+          "is_default": true,
+          "draft_m": 1.98,
+          "adds_features": []
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen (mit Stauraum statt Achterkabine)",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "21ps",
+          "name": "21 PS",
+          "is_default": true,
+          "engine_hp": 21
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://en.wikipedia.org/wiki/Sun_Odyssey_349",
+      "all_sources": [
+        "https://en.wikipedia.org/wiki/Sun_Odyssey_349",
+        "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/37-sun-odyssey-349",
+        "https://www.samboat.com/model/jeanneau-sun-odyssey-349",
+        "https://sailmagazine.com/boats/boat-review-jeanneau-sun-odyssey-349/",
+        "https://horizon-yacht-sales.com/wp-content/uploads/2018/07/EN-BK-SO349-180717.pdf",
+        "https://www.theglobesailor.com/sun-odyssey-349-specifications-sm3039.html"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "10,34 m wird in den Quellen sowohl als Rumpflänge wie als LOA geführt; der Wert ist konsistent, die Zuordnung aber nicht sauber belegt. Eine Quelle nannte 'Kabinen 2, 3, 4 oder 5' - für einen 34-Füßer offensichtlich fehlerhaft, verworfen zugunsten der belegten 2- und 3-Kabinen-Version. Flachkiel-Tiefgang in einer Quelle als Bereich 1,26-1,36 m angegeben, was eher zu einem Schwenkkiel passt - Wert daher null gesetzt. Kojen 4-6 (+2 Option) laut Quelle; hier 6 für die 3-Kabinen-Version. Motor Yanmar 3YM20 21 PS. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Flachkiel (Quellenangabe 1,26-1,36 m, widerspruechlich)."
+    },
+    {
+      "manufacturer": "jeanneau",
+      "slug": "sun-odyssey-380",
+      "name": "Sun Odyssey 380",
+      "designer": "Marc Lombard (Rumpf), Jean-Marc Piaton (Interieur), Jeanneau Design Office",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2021,
+        "year_to": null,
+        "length_m": 10.77,
+        "beam_m": 3.76,
+        "draft_m": 2.0,
+        "displacement_kg": 6896,
+        "sail_area_m2": 63.0,
+        "engine_hp": 29,
+        "cabins": 2,
+        "berths": 4,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 330,
+        "fuel_tank_l": 130,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Kielflosse mit Bulb",
+          "is_default": true,
+          "draft_m": 2.0,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel (5 ft 3 in)",
+          "is_default": false,
+          "draft_m": 1.6,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "29ps",
+          "name": "29 PS",
+          "is_default": true,
+          "engine_hp": 29
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://en.wikipedia.org/wiki/Sun_Odyssey_380",
+      "all_sources": [
+        "https://en.wikipedia.org/wiki/Sun_Odyssey_380",
+        "https://itboat.com/models/12193-jeanneau-sun-odyssey-380",
+        "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/664-sun-odyssey-380",
+        "https://www.yachtingworld.com/yachts-and-gear/first-look-jeanneau-sun-odyssey-380-roomy-35-footer-134267",
+        "https://www.greatlakessailingco.com/sales/jeanneau/sun-odyssey-380/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Länge widersprüchlich: 11,75 m wird als Gesamtlänge geführt, 10,77 m als Rumpflänge - hier die Rumpflänge. Segelfläche 63,0 m² = Gross 35 m² + Genua 28 m². Tiefgang: eine Quelle nennt 2,00 m, eine andere 6 ft 6 in = 1,98 m für den Standardkiel - praktisch identisch. Optional wird auch ein Schwenkkiel genannt, ohne Tiefgangswerte. Motor Yanmar 3YM30AE 29 PS. Kojen nur für die 2-Kabinen-Version belegt (4)."
+    },
+    {
+      "manufacturer": "jeanneau",
+      "slug": "sun-odyssey-410",
+      "name": "Sun Odyssey 410",
+      "designer": "Marc Lombard Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 11.99,
+        "beam_m": 3.99,
+        "draft_m": 2.14,
+        "displacement_kg": 7900,
+        "sail_area_m2": 80.3,
+        "engine_hp": 40,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 330,
+        "fuel_tank_l": 200,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "L-Kielflosse (Tiefkiel)",
+          "is_default": true,
+          "draft_m": 2.14,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.6,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "40ps",
+          "name": "40 PS",
+          "is_default": true,
+          "engine_hp": 40
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://en.wikipedia.org/wiki/Sun_Odyssey_410",
+      "all_sources": [
+        "https://en.wikipedia.org/wiki/Sun_Odyssey_410",
+        "https://itboat.com/models/9550-jeanneau-sun-odyssey-410",
+        "https://canadianboating.ca/boat-reviews/jeanneau-sun-odyssey-410/",
+        "https://www.boats.com/reviews/jeanneau-sun-odyssey-410-review/",
+        "https://www.boat-specs.com/sailing/sailboats/jeanneau/sun-odyssey-410-deep-draft",
+        "https://www.euroyachts.com/wp-content/uploads/2018/07/sun-odyssey-410-na-1.pdf"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Verdrängung widersprüchlich: 7.900 kg (17.417 lbs) gegen 8.000 kg - Differenz gering, hier 7.900 kg. Wassertank: 330 l Standard, mit Zusatztank 200 l gesamt 530 l; eine Quelle gibt direkt 530 l an. Hier der Standardwert. Tiefgang Tiefkiel wird mit 2,13 bzw. 2,14 m angegeben. Ein Hubkiel wird als Option genannt, ohne Werte. Motor Yanmar 40 PS Standard, 45 PS optional. Segelfläche 80,3 m² (865 sq ft). max_persons nicht belegt (3-Kabinen-Version 6+2 Kojen)."
+    },
+    {
+      "manufacturer": "jeanneau",
+      "slug": "sun-odyssey-440",
+      "name": "Sun Odyssey 440",
+      "designer": "Philippe Briand (Rumpf), Piaton Bonet Yacht Design (Interieur), Jeanneau Design Office",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2017,
+        "year_to": null,
+        "length_m": 13.39,
+        "beam_m": 4.29,
+        "draft_m": 2.2,
+        "displacement_kg": 8561,
+        "sail_area_m2": 90.4,
+        "engine_hp": 45,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 330,
+        "fuel_tank_l": 200,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.2,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.57,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen / 2 Nasszellen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen / 2 Nasszellen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen / 2 Nasszellen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": 8,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "45ps",
+          "name": "45 PS",
+          "is_default": true,
+          "engine_hp": 45
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://en.wikipedia.org/wiki/Sun_Odyssey_440",
+      "all_sources": [
+        "https://en.wikipedia.org/wiki/Sun_Odyssey_440",
+        "https://itboat.com/models/8033-jeanneau-sun-odyssey-440",
+        "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/109-sun-odyssey-440",
+        "https://uk.boats.com/reviews/jeanneau-sun-odyssey-440-review/",
+        "https://www.theglobesailor.com/sun-odyssey-440-specifications-sm4265.html",
+        "https://www.kavas.com/odyssey-440.html"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Baujahr widersprüchlich: eine Quelle nennt 2017 (Vorstellung), eine andere 'gebaut seit 2018'. Hier 2017. Länge 13,39 m: eine Quelle bezeichnet den Wert als LOA inklusive Bugspriet, eine andere als Rumpflänge - die Zuordnung bleibt unsicher. Segelfläche 90,4 m² = Gross 45,2 m² + Fock/Genua 45,2 m². Motor 45 PS Standard, 57 PS optional. Eine Quelle nennt 'bis zu 10 Personen' bei 4 Kabinen, die Layout-Uebersicht dagegen 8 - max_persons daher null. Kojenzahlen je Layout aus den Chartervarianten abgeleitet (2/3/4 Kabinen mit 4/6/8 Personen)."
+    },
+    {
+      "manufacturer": "jeanneau",
+      "slug": "sun-odyssey-490",
+      "name": "Sun Odyssey 490",
+      "designer": "Philippe Briand (Rumpf), Jean-Marc Piaton (Interieur)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2018,
+        "year_to": null,
+        "length_m": 14.0,
+        "beam_m": 4.49,
+        "draft_m": 2.24,
+        "displacement_kg": 11290,
+        "sail_area_m2": 111.4,
+        "engine_hp": 57,
+        "cabins": null,
+        "berths": null,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 640,
+        "fuel_tank_l": 240,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.24,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.65,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 6,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": 8,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "5-kab",
+          "name": "5 Kabinen",
+          "is_default": false,
+          "cabins": 5,
+          "berths": 10,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "57ps",
+          "name": "57 PS",
+          "is_default": true,
+          "engine_hp": 57
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://en.wikipedia.org/wiki/Sun_Odyssey_490",
+      "all_sources": [
+        "https://en.wikipedia.org/wiki/Sun_Odyssey_490",
+        "https://itboat.com/models/8034-jeanneau-sun-odyssey-490",
+        "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/111-sun-odyssey-490",
+        "https://www.theglobesailor.com/sun-odyssey-490-specifications-sm4305.html",
+        "https://www.sunsail.com/yachts/monohulls/sun-odyssey-490-5-cabin",
+        "https://www.yachts.co/wp-content/uploads/2017/07/sun-odyssey-490-EN-BDEF.pdf"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Länge: 14,00 m Rumpflänge gegen 14,78 m LOA (48 ft 6 in) - hier die Rumpflänge. Breite widersprüchlich: 4,47 m gegen 4,49 m; Tiefgang 2,23 gegen 2,24 m - jeweils der größere, konkreter angegebene Wert eingetragen. Segelfläche 111,4 m² = Gross 57,8 m² + Fock/Genua 53,6 m². Motor Yanmar 57 PS Standard, 80 PS optional. Kabinen 2 bis 5, Nasszellen 2 bis 4, Kojen 4/6/8/10 (+2) laut Quelle - eine Standardkonfiguration ist nicht belegt, daher cabins/berths/heads null und die Varianten in layout_variants."
+    },
+    {
+      "manufacturer": "moody",
+      "slug": "41-ds",
+      "name": "41 DS",
+      "designer": "Bill Dixon",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2019,
+        "year_to": null,
+        "length_m": 12.52,
+        "beam_m": 4.2,
+        "draft_m": 1.85,
+        "displacement_kg": 11200,
+        "sail_area_m2": 83.0,
+        "engine_hp": 57,
+        "cabins": 2,
+        "berths": 4,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 475,
+        "fuel_tank_l": 210,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 1.85
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": 4,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "57ps",
+          "name": "57 PS",
+          "is_default": true,
+          "engine_hp": 57
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/moody-41-ds/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/moody-41-ds/",
+        "https://itboat.com/models/10268-moody-decksaloon-41",
+        "https://moody-yachts.com/us/sailing-yachts/moody-decksaloon-41/",
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/moody-41-ds-a-deck-saloon-that-pushes-all-boundaries",
+        "https://www.yacht.de/en/cruising-yachts/moody-ds-41-the-smallest-moody-in-the-yacht-test/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "length_m 12,52 m ist die in den Quellen als Länge/LOA (41,08 ft) genannte Zahl; eine davon getrennte Rumpflänge wurde nicht gefunden. Größter Widerspruch beim Wassertank: eine Quelle nennt 475 l, eine andere 220 l Standard mit Erweiterung auf bis zu 400 l gesamt; hier 475 übernommen, der Wert ist vor Uebernahme in den Katalog zu prüfen. sail_area_m2 83 (Gross 45 + Fock 38) steht gegen eine Herstellerangabe von 85,8 m² maximaler Segelfläche. engine_hp 57 Serie, 80 PS optional. heads 2 laut Formulierung 'bis zu zwei Nasszellen', also ausstattungsabhängig. Eine Flachkielvariante wird erwähnt, die Zahlen dazu (1,83 m gegen 1,85 m Standard) sind widersprüchlich und praktisch identisch, daher keine keel_variants eingetragen."
+    },
+    {
+      "manufacturer": "najad",
+      "slug": "395",
+      "name": "395",
+      "designer": "Farr Yacht Design (Rumpf), Ken Freivokh Design (Interieur)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2017,
+        "year_to": null,
+        "length_m": 11.99,
+        "beam_m": 4.0,
+        "draft_m": 2.1,
+        "displacement_kg": 12400,
+        "sail_area_m2": 89.0,
+        "engine_hp": 57,
+        "cabins": 2,
+        "berths": null,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 370,
+        "fuel_tank_l": 370,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.1
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": false,
+          "cabins": 3,
+          "berths": null,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "57ps",
+          "name": "57 PS",
+          "is_default": true,
+          "engine_hp": 57
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.yachtingmonthly.com/reviews/yacht-reviews/the-mini-superyacht-meet-the-najad-395-ac",
+      "all_sources": [
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/the-mini-superyacht-meet-the-najad-395-ac",
+        "https://najad.se/boat/n395-ac/",
+        "https://sailboatdata.com/sailboat/najad-395/",
+        "https://itboat.com/models/8124-najad-n395-ac"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "11,99 m wird in einer Quelle als Rumpflänge, in einer anderen als LOA geführt; eine davon abweichende zweite Längenangabe gab es nicht. Wasser- und Dieseltank werden in mehreren Quellen übereinstimmend mit je 370 l (98 US-Gallonen) angegeben - identische Werte, aber mehrfach belegt. Es gibt eine Achtercockpit- (AC) und eine Mittelcockpit-Version (CC); die Zahlen hier stammen überwiegend aus AC-Quellen, eine getrennte Datenlage für CC wurde nicht gefunden. Kojenzahl und max_persons in den Suchergebnissen nicht genannt. Nur ein Tiefgang belegt."
+    },
+    {
+      "manufacturer": "salona",
+      "slug": "380",
+      "name": "380",
+      "designer": "Cossutti Yacht Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2016,
+        "year_to": null,
+        "length_m": 11.6,
+        "beam_m": 3.72,
+        "draft_m": 2.1,
+        "displacement_kg": 6200,
+        "sail_area_m2": 84.0,
+        "engine_hp": 29,
+        "cabins": 3,
+        "berths": 8,
+        "heads": 1,
+        "max_persons": 8,
+        "water_tank_l": 180,
+        "fuel_tank_l": 100,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.1
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen (Eignerversion)",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen (Charter/Familie)",
+          "is_default": false,
+          "cabins": 3,
+          "berths": 8,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "29ps",
+          "name": "29 PS",
+          "is_default": true,
+          "engine_hp": 29
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/ad-boats/salona-380-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/ad-boats/salona-380-standard",
+        "https://sailboatdata.com/sailboat/salona-380/",
+        "https://www.listingsport.com/sailboats/salona/380",
+        "https://www.yanmar.com/marine/product/engines/3ym30ae/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "length_m 11.60 m ist die in den Quellen als LOA/38'1\" angegebene Länge; eine davon getrennte Rumpflänge wurde nicht gefunden. displacement_kg 6200 und sail_area_m2 84 sind Umrechnungen der angegebenen 13.669 lbs bzw. 904 sq ft. engine_hp 29: Quellen nennen Yanmar 3YM30AE-C mit 21,3 kW, Yanmar-Datenblatt bestätigt 29 HP bei 21,3 kW. Kabinenzahl variiert laut Quellen 2-3, Kojen 4-9; 8 Kojen gelten für die 3-Kabinen-Version. Nur ein Tiefgang (2,10 m) belegt, keine Kielvarianten gefunden."
+    },
+    {
+      "manufacturer": "salona",
+      "slug": "46",
+      "name": "46",
+      "designer": "J&J Design",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2020,
+        "year_to": null,
+        "length_m": 13.5,
+        "beam_m": 4.2,
+        "draft_m": 2.61,
+        "displacement_kg": 9200,
+        "sail_area_m2": 109.0,
+        "engine_hp": 57,
+        "cabins": 4,
+        "berths": 10,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 500,
+        "fuel_tank_l": 210,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.61
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": null,
+          "heads": null,
+          "max_persons": null
+        },
+        {
+          "kind": "layout",
+          "code": "4-kab",
+          "name": "4 Kabinen",
+          "is_default": false,
+          "cabins": 4,
+          "berths": 10,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "57ps",
+          "name": "57 PS",
+          "is_default": true,
+          "engine_hp": 57
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/salona-46/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/salona-46/",
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/salona-46-tough-sporty-and-fighting-fit",
+        "https://www.theglobesailor.com/salona-46-specifications-sm5958.html",
+        "https://www.yachtaris.com/en/sailing-yacht/ad-boats-salona-46-demetra/101378/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "length_m 13.50 m ist die ausdrücklich als Rumpflänge genannte Zahl (LOA 14,14 m mit Bugspriet). sail_area_m2 109 ist die Summe der belegten Einzelwerte Grossegel 64 m² + Genua 45 m², keine als Gesamtfläche publizierte Zahl. Widerspruch beim Motor: eine Charterquelle nennt 60 PS, die Bootstestquelle 57 PS Yanmar als Serienausstattung; hier 57 übernommen. Nur der tiefe Kiel (2,61 m) ist belegt, eine Flachkielvariante wurde nicht mit Zahl gefunden. 3- und 4-Kabinen-Version sind belegt, Zahlen nur für die 4-Kabinen-Version."
+    },
+    {
+      "manufacturer": "sunbeam",
+      "slug": "32-1",
+      "name": "32.1",
+      "designer": "J&J Design (Rumpf), KISKA (Design)",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2021,
+        "year_to": null,
+        "length_m": 9.85,
+        "beam_m": 2.98,
+        "draft_m": 1.8,
+        "displacement_kg": 4150,
+        "sail_area_m2": 56.0,
+        "engine_hp": 27,
+        "cabins": 1,
+        "berths": 4,
+        "heads": 1,
+        "max_persons": 4,
+        "water_tank_l": 80,
+        "fuel_tank_l": 60,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Tiefkiel",
+          "is_default": true,
+          "draft_m": 1.8,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flachkiel",
+          "is_default": false,
+          "draft_m": 1.3,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "1-kab",
+          "name": "1 Kabinen",
+          "is_default": true,
+          "cabins": 1,
+          "berths": 4,
+          "heads": 1,
+          "max_persons": 4
+        },
+        {
+          "kind": "engine",
+          "code": "27ps",
+          "name": "27 PS",
+          "is_default": true,
+          "engine_hp": 27
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.yachtingmonthly.com/reviews/yacht-reviews/first-look-sunbeam-32-1-a-real-head-turner",
+      "all_sources": [
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/first-look-sunbeam-32-1-a-real-head-turner",
+        "https://sailboatdata.com/sailboat/sunbeam-321/",
+        "https://itboat.com/models/15463-sunbeam-yachts-32-1",
+        "https://www.yachtingworld.com/yachts-and-gear/first-look-sunbeam-32-1-133958"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "length_m 9,85 m ist die ausdrücklich als Rumpflänge genannte Zahl; eine andere Quelle beschreibt das Boot als 9,98-Meter-Yacht (vermutlich LOA mit Bugspriet) - Widerspruch bewusst zugunsten der Rumpflänge aufgelöst. Widerspruch bei der Personenzahl: eine Quelle nennt Gästekapazität 4 (passend zu 4 Kojen), eine andere spricht von acht Personen an Bord (vermutlich CE-Maximum); hier 4 gesetzt. engine_hp 27 Volvo Penta. Bei diesem Modell war die Datenlage insgesamt dünn, Tankwerte stammen aus einer einzigen Quelle."
+    },
+    {
+      "manufacturer": "x-yachts",
+      "slug": "x4-0",
+      "name": "X4.0",
+      "designer": "X-Yachts Design Group",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2019,
+        "year_to": null,
+        "length_m": 12.09,
+        "beam_m": 3.78,
+        "draft_m": 2.11,
+        "displacement_kg": 8100,
+        "sail_area_m2": null,
+        "engine_hp": 40,
+        "cabins": 2,
+        "berths": null,
+        "heads": 1,
+        "max_persons": null,
+        "water_tank_l": 245,
+        "fuel_tank_l": 180,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.11,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "keel",
+          "code": "tief",
+          "name": "Deep draft Kiel",
+          "is_default": false,
+          "draft_m": 2.4,
+          "adds_features": []
+        },
+        {
+          "kind": "layout",
+          "code": "2-kab",
+          "name": "2 Kabinen",
+          "is_default": true,
+          "cabins": 2,
+          "berths": null,
+          "heads": 1,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "40ps",
+          "name": "40 PS",
+          "is_default": true,
+          "engine_hp": 40
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/x4/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/x4/",
+        "https://itboat.com/models/9619-x-yachts-x4",
+        "https://www.x-yachts.com/en/yachts/x/x4-0/",
+        "https://www.boat-specs.com/sailing/sailboats/x-yachts/x4-0-standard",
+        "https://sailmagazine.com/boats/boat-review-x-yachts-x4degree/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: eine Quelle nennt 39'8\" (12.09 m), eine andere 37'8\" (11.5 m) als Rumpflänge - 12.09 m eingetragen, unsicher (die 11.5 m tauchen in denselben Suchläufen auch für die Elan Impression 40.1 auf, möglicher Uebertragungsfehler). Verdrängung 8100 kg ist als ECC-Wert belegt. Segelfläche nur aufgeteilt (Gross 46 m², selbstwendende Fock 84%, optionale Genua 106% = 37 m²), Summe nicht belegt, daher null. Kojenzahl stand in keinem Suchergebnis."
+    },
+    {
+      "manufacturer": "x-yachts",
+      "slug": "x4-3",
+      "name": "X4.3",
+      "designer": "Niels Jeppesen / X-Yachts",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2016,
+        "year_to": null,
+        "length_m": 12.67,
+        "beam_m": 3.99,
+        "draft_m": 2.2,
+        "displacement_kg": 9400,
+        "sail_area_m2": null,
+        "engine_hp": null,
+        "cabins": null,
+        "berths": null,
+        "heads": null,
+        "max_persons": null,
+        "water_tank_l": 340,
+        "fuel_tank_l": 200,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Torpedo-Bulb Standardkiel",
+          "is_default": true,
+          "draft_m": 2.2,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "tief",
+          "name": "Torpedo-Bulb Tiefkiel",
+          "is_default": false,
+          "draft_m": 2.5,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Flacher L-Bulb Kiel",
+          "is_default": false,
+          "draft_m": 1.85,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://www.boat-specs.com/sailing/sailboats/x-yachts/x4-3-standard",
+      "all_sources": [
+        "https://www.boat-specs.com/sailing/sailboats/x-yachts/x4-3-standard",
+        "https://www.x-yachts.com/en/yachts/x/x4-3/",
+        "https://www.yachtingmonthly.com/reviews/yacht-reviews/first-look-x-yachts-x-4-3",
+        "https://www.yachtingworld.com/yachts-and-gear/first-look-x43-second-generation-133354",
+        "https://www.yacht.de/en/cruising-yachts/test-x-4-3-travelling-in-comfort-and-sailing-fast-both-are-possible/"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Tankkonflikt: ein Suchergebnis nennt 340 l als Diesel, ein anderes 340 l Frischwasser und 200 l Diesel (Alutank mittig unter der Steuerbordkoje). Die konkretere Angabe (Wasser 340 / Diesel 200) wurde übernommen. Achtung: es existieren zwei Generationen X43 (2003-2010 und ab 2016); die Daten hier beziehen sich auf die neuere ab 2016. Kabinen/Kojen/Nasszellen nur als Bereich belegt (2-3 Kabinen, 4-8 Kojen, 1-2 Nasszellen), daher null. Motor nur als Upgrade-Option belegt (Yanmar 4JH57, 57 hp), Standardmotor nicht belegt. Segelfläche nur aufgeteilt (Gross 54 m², Genua 106% 43 m², Spi 150 m²)."
+    },
+    {
+      "manufacturer": "x-yachts",
+      "slug": "xc-45",
+      "name": "Xc 45",
+      "designer": "Niels Jeppesen / X-Yachts",
+      "version": {
+        "name": "Serienstand",
+        "year_from": 2013,
+        "year_to": 2023,
+        "length_m": 13.86,
+        "beam_m": 4.32,
+        "draft_m": 2.2,
+        "displacement_kg": 13220,
+        "sail_area_m2": 112.0,
+        "engine_hp": 80,
+        "cabins": 3,
+        "berths": 6,
+        "heads": 2,
+        "max_persons": null,
+        "water_tank_l": 610,
+        "fuel_tank_l": 440,
+        "description": ""
+      },
+      "variants": [
+        {
+          "kind": "keel",
+          "code": "standard",
+          "name": "Standardkiel",
+          "is_default": true,
+          "draft_m": 2.2,
+          "adds_features": []
+        },
+        {
+          "kind": "keel",
+          "code": "flach",
+          "name": "Shoal draft Kiel",
+          "is_default": false,
+          "draft_m": 1.8,
+          "adds_features": [
+            "shallow_draft"
+          ]
+        },
+        {
+          "kind": "layout",
+          "code": "3-kab",
+          "name": "3 Kabinen",
+          "is_default": true,
+          "cabins": 3,
+          "berths": 6,
+          "heads": 2,
+          "max_persons": null
+        },
+        {
+          "kind": "engine",
+          "code": "80ps",
+          "name": "80 PS",
+          "is_default": true,
+          "engine_hp": 80
+        }
+      ],
+      "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
+      "source_url": "https://sailboatdata.com/sailboat/xc-45/",
+      "all_sources": [
+        "https://sailboatdata.com/sailboat/xc-45/",
+        "https://www.boat-specs.com/sailing/sailboats/x-yachts/xc-45-standard",
+        "https://www.boat-specs.com/sailing/sailboats/x-yachts/xc-45-shoal-draft",
+        "https://www.cruisingworld.com/xc-45-review/",
+        "https://itboat.com/models/906-xc-45"
+      ],
+      "verified_on": "2026-09-15",
+      "notes": "Bauzeitraum widersprüchlich: eine Quelle nennt 2013-2023, in den Trefferlisten taucht aber auch ein Datenblatt '2008 X-Yachts Xc 45 Standard' auf - Baubeginn möglicherweise früher als 2013. Segelfläche 112 m² ist als Wert bei 108% Vorsegel belegt. Motor 80 hp Yanmar."
+    }
+  ]
+}

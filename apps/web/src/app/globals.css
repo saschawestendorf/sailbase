@@ -1,159 +1,381 @@
 @import "tailwindcss";
 
-/* Sailbase design tokens: deep sea navy, horizon teal, warm sand accent. */
+/* Sailbase design language: Weiß, Tinte, Seegrün.
+   Die Fläche ist weiß und bleibt weiß – Struktur entsteht aus Weißraum,
+   Haarlinien und Typografie, nicht aus Farbflächen. Farbe tritt nur dort auf,
+   wo sie etwas bedeutet: Aktionen in Seegrün, Hinweise in Messing, Warnungen
+   in Rostrot. Das ist die teurere Wirkung, weil sie auf Ruhe beruht. */
 :root {
-  --background: #f6f8fa;
+  color-scheme: light;
+
+  --background: #ffffff;
+  --paper: #fbfbf9;
   --surface: #ffffff;
-  --surface-muted: #eef2f6;
-  --foreground: #0b1f33;
-  --muted: #5b7185;
-  --border: #dbe3ec;
-  --brand: #0d3b5c;
-  --brand-strong: #072639;
-  --accent: #0e8f8f;
-  --accent-soft: #e3f4f3;
-  --warn: #b45309;
-  --warn-soft: #fdf3e3;
-  --positive: #0f7a4d;
-  --positive-soft: #e4f4ec;
+  --surface-muted: #f6f6f3;
+  --surface-sunk: #f0efea;
+  --foreground: #12222a;
+  --muted: #5f7079;
+  --faint: #93a1a7;
+  --border: #e7e6e0;
+  --border-strong: #d3d1c8;
+  --brand: #10303f;
+  --brand-strong: #061c27;
+  --brand-soft: #eef3f5;
+  --accent: #0a6f6a;
+  --accent-strong: #05534f;
+  --accent-soft: #e7f2f0;
+  --brass: #94703a;
+  --brass-soft: #f7f0e3;
+  --warn: #9a5217;
+  --warn-soft: #fbf0e5;
+  --positive: #0c6541;
+  --positive-soft: #e6f1eb;
+
+  /* Erhebung sehr sparsam: eine Karte ist zuerst eine Linie, erst beim
+     Anfassen ein Objekt. Schatten mit einem Hauch Blau wirken wie Tageslicht. */
+  --shadow-hairline: 0 1px 2px rgba(18, 34, 42, 0.03);
+  --shadow-card: 0 1px 2px rgba(18, 34, 42, 0.03), 0 8px 24px -20px rgba(18, 34, 42, 0.2);
+  --shadow-lift: 0 2px 6px rgba(18, 34, 42, 0.05), 0 22px 44px -28px rgba(18, 34, 42, 0.3);
+  --shadow-float: 0 24px 60px -34px rgba(18, 34, 42, 0.35);
+
+  --radius-sm: 0.5rem;
+  --radius: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-paper: var(--paper);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
+  --color-surface-sunk: var(--surface-sunk);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
+  --color-brass: var(--brass);
+  --color-brass-soft: var(--brass-soft);
   --color-warn: var(--warn);
   --color-warn-soft: var(--warn-soft);
   --color-positive: var(--positive);
   --color-positive-soft: var(--positive-soft);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter), var(--font-geist-sans);
+  --font-display: var(--font-display);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #071722;
-    --surface: #0d2433;
-    --surface-muted: #123045;
-    --foreground: #e8f1f7;
-    --muted: #9ab2c4;
-    --border: #1d4054;
-    --brand: #7cc6e8;
-    --brand-strong: #b6e0f3;
-    --accent: #3fd0c9;
-    --accent-soft: #0f3b3d;
-    --warn: #f0b429;
-    --warn-soft: #3a2d10;
-    --positive: #48d08a;
-    --positive-soft: #0e3626;
-  }
+  --radius-card: var(--radius);
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+  --shadow-float: var(--shadow-float);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Utility shorthands used across the portal */
+/* Zahlen laufen in Tabellen und Preisen tabellarisch, damit Spalten stehen. */
+.tnum,
+table,
+.money {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.012em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
 @layer components {
+  /* ---- Flächen ---- */
+  /* Die Standardkarte trägt nur eine Linie. Wo etwas wirklich hervortreten
+     soll, kommt card-raised dazu – sonst schwebt am Ende die ganze Seite. */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 1rem;
+    border-radius: var(--radius-lg);
   }
+  .card-raised {
+    box-shadow: var(--shadow-card);
+  }
+  .card-link {
+    transition:
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+  .card-link:hover {
+    box-shadow: var(--shadow-lift);
+    border-color: var(--border-strong);
+  }
+  .card-flat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .panel-raised {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-float);
+  }
+
+  /* ---- Typografie-Bausteine ---- */
+  .display {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.018em;
+    line-height: 1.06;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .lede {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .rule {
+    height: 1px;
+    border: 0;
+    background: var(--border);
+  }
+  /* Linie, die an den Enden ausläuft – für Abschnitte im Weißraum. */
+  .rule-soft {
+    height: 1px;
+    border: 0;
+    background: linear-gradient(90deg, var(--border-strong), transparent);
+  }
+
+  /* ---- Formulare ---- */
   .field {
     width: 100%;
-    border-radius: 0.625rem;
-    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
     background: var(--surface);
     color: var(--foreground);
-    padding: 0.55rem 0.7rem;
+    padding: 0.6rem 0.75rem;
     font-size: 0.9rem;
+    transition:
+      border-color 140ms ease,
+      box-shadow 140ms ease;
   }
-  .field:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
+  .field::placeholder {
+    color: var(--faint);
+  }
+  .field:hover {
+    border-color: var(--muted);
+  }
+  .field:focus,
+  .field:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
   }
   .label {
     display: block;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.35rem;
   }
+
+  /* ---- Schaltflächen ---- */
+  /* Eine Volltonfläche, keine Verläufe: der Kontrast macht die Wirkung. */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 0.625rem;
+    border-radius: 999px;
     background: var(--brand);
     color: #ffffff;
-    padding: 0.6rem 1.1rem;
+    padding: 0.65rem 1.35rem;
     font-size: 0.9rem;
     font-weight: 600;
+    letter-spacing: 0.01em;
+    transition:
+      background 150ms ease,
+      box-shadow 150ms ease;
   }
   .btn-primary:hover {
     background: var(--brand-strong);
+    box-shadow: var(--shadow-card);
   }
   .btn-primary:disabled {
-    opacity: 0.55;
+    opacity: 0.4;
+    box-shadow: none;
   }
-  @media (prefers-color-scheme: dark) {
-    .btn-primary {
-      color: #071722;
-    }
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #ffffff;
+    padding: 0.65rem 1.35rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 150ms ease;
+  }
+  .btn-accent:hover {
+    background: var(--accent-strong);
+  }
+  .btn-accent:disabled {
+    opacity: 0.4;
   }
   .btn-ghost {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    border-radius: 0.625rem;
-    border: 1px solid var(--border);
-    padding: 0.55rem 0.9rem;
+    gap: 0.45rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    padding: 0.55rem 1.05rem;
     font-size: 0.875rem;
     font-weight: 500;
+    transition:
+      background 140ms ease,
+      border-color 140ms ease;
   }
   .btn-ghost:hover {
     background: var(--surface-muted);
+    border-color: var(--muted);
   }
+  .btn-quiet {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    transition:
+      background 140ms ease,
+      color 140ms ease;
+  }
+  .btn-quiet:hover {
+    background: var(--surface-muted);
+    color: var(--foreground);
+  }
+
+  /* ---- Marker ---- */
   .chip {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
     border-radius: 999px;
-    background: var(--surface-muted);
+    border: 1px solid var(--border);
+    background: var(--surface);
     color: var(--muted);
-    padding: 0.15rem 0.6rem;
+    padding: 0.2rem 0.65rem;
     font-size: 0.75rem;
     font-weight: 500;
   }
-}
-
-/* Chart tokens. Two categorical slots, validated against both chart surfaces
-   (adjacent-pair CVD ΔE 24.7 light / 26.8 dark, contrast ≥ 3:1 in both). */
-.viz {
-  --series-dynamic: #2a78d6;
-  --series-classic: #eb6834;
-  --viz-grid: #dbe3ec;
-  --viz-surface: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  .viz {
-    --series-dynamic: #3987e5;
-    --series-classic: #d95926;
-    --viz-grid: #1d4054;
-    --viz-surface: #0d2433;
+  .chip-accent {
+    border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+    background: var(--accent-soft);
+    color: var(--accent-strong);
   }
+  .chip-brass {
+    border-color: color-mix(in srgb, var(--brass) 28%, transparent);
+    background: var(--brass-soft);
+    color: var(--brass);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  .price {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.018em;
+  }
+
+  .stat-value {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: 1.85rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.018em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+}
+
+@layer utilities {
+  /* Himmel und Wasser in hellen Tönen – dieselbe Palette wie die gezeichneten
+     Bilder, damit Flächen und Illustrationen zusammengehören. */
+  .bg-horizon {
+    background:
+      radial-gradient(120% 90% at 20% 0%, rgba(10, 111, 106, 0.07) 0%, transparent 60%),
+      radial-gradient(90% 80% at 85% 5%, rgba(148, 112, 58, 0.07) 0%, transparent 55%),
+      linear-gradient(180deg, #ffffff 0%, var(--paper) 70%, #ffffff 100%);
+  }
+  .text-balance-tight {
+    text-wrap: balance;
+  }
+}
+
+/* Diagrammtokens. Zwei kategoriale Slots, gegen die Diagrammfläche geprüft
+   (Nachbarpaar-CVD ΔE 24,7, Kontrast ≥ 3:1). */
+.viz {
+  --series-dynamic: #1f6fb2;
+  --series-classic: #c9622c;
+  --viz-grid: #e7e6e0;
+  --viz-surface: #ffffff;
 }

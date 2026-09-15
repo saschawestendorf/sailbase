@@ -36,16 +36,36 @@ UPLOAD_DIR=/data/uploads
 `DATABASE_URL` von Railway beginnt mit `postgresql://`; die Anwendung schreibt das intern auf
 den psycopg-3-Treiber um, es ist keine manuelle Anpassung nötig.
 
-Beim Containerstart läuft `alembic upgrade head` (abschaltbar mit `RUN_MIGRATIONS=0`), danach
-startet uvicorn. Migrationen sind idempotent, ein Restart oder ein zweiter Replica ist also
-unkritisch.
+Beim Containerstart laufen nacheinander `alembic upgrade head` (abschaltbar mit
+`RUN_MIGRATIONS=0`) und – falls `SEED_ON_START` gesetzt ist – der Demo-Seed, dann startet
+uvicorn. Beide Schritte stehen als eigene Zeilen im Deploy-Log und brechen sichtbar ab, wenn
+etwas schiefgeht. Migrationen und Seed sind idempotent, ein Restart oder ein zweiter Replica
+ist also unkritisch.
 
 **Volume:** Fotos aus Übergabe und Rücknahme landen unter `UPLOAD_DIR`. Ohne Volume sind sie
 nach jedem Deploy weg. In den Service-Settings ein Volume mit Mount Path `/data` anlegen.
 
 **Demo-Daten:** Einmalig `SEED_ON_START=true` setzen, deployen, danach wieder auf `false`.
-Das Seeding ist idempotent und legt Reviere, Häfen, zehn Boote, Vercharterer und
-Servicepartner an.
+Der Seed legt den vollständigen Demo-Bestand an (siehe README) und braucht dafür auf einer
+frischen Postgres-Datenbank rund zehn Sekunden.
+
+### Wenn der Container mit „Can't locate revision" abbricht
+
+Dann trägt die Datenbank eine Migrationsnummer, die es im Code nicht mehr gibt – in aller
+Regel, weil eine bereits ausgerollte Migration ersetzt statt ergänzt wurde. Der Container
+startet dann bei jedem Versuch neu und das Deployment scheitert; von außen sieht es aus, als
+sei die Datenbank leer und als stimmten die Zugangsdaten nicht.
+
+- **Demo-Datenbank:** `DB_RESET=1` setzen und neu deployen. Das Schema wird verworfen, die
+  Migrationen laufen von vorn, der Seed baut den Bestand neu auf. **Danach `DB_RESET` wieder
+  auf `0` setzen** – sonst wird bei jedem Deploy alles gelöscht.
+- **Echte Daten:** nicht zurücksetzen. Stattdessen eine Migration von Hand schreiben, die von
+  der vorhandenen Nummer auf die aktuelle Kette führt, oder die gelöschte Migrationsdatei aus
+  der Git-Historie zurückholen.
+
+Damit dieser Fall nicht wieder entsteht, hält `apps/api/tests/test_migrations.py` die Nummer
+der ersten Migration fest. Schemaänderungen kommen als zusätzliche Migration obendrauf,
+niemals durch Neuerzeugen einer bestehenden.
 
 ## 3. Web-Service
 

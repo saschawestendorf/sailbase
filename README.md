@@ -53,6 +53,29 @@ Variante oder eigene Angabe je Feld), `spec_overrides` für dokumentierte Abweic
 Art werden abgewiesen. Weil die Werte kopiert werden, verändert eine spätere Katalogkorrektur
 keine bestehende Buchung. `BoatClass` bleibt die Vergleichsklasse fürs Pricing.
 
+Der Katalog ist mit 50 in der Ostsee gängigen Modellen von 15 Werften gefüllt
+(`apps/api/app/seed/data/boat_catalog.json`), dazu 223 Werksvarianten: 92 Kiel-, 84 Layout-
+und 47 Motorvarianten. Die Daten stammen aus öffentlich zugänglichen Hersteller- und
+Fachdatenbankangaben und sind **nicht vom Hersteller bestätigt**. Das ist die entscheidende
+Einschränkung, und sie steht deshalb auch im Datensatz selbst:
+
+- Jedes Modell führt Quelle, Quell-URL und Prüfdatum mit.
+- Was die Recherche nicht klären konnte, steht als `caveat` am Modell und ist auf der
+  Bootsseite sichtbar – bei allen 50 Modellen gibt es mindestens einen solchen Punkt,
+  meist Rumpflänge gegen Länge über alles oder eine uneinheitlich gemessene Segelfläche.
+- Unbelegte Felder bleiben `null` statt geschätzt zu werden. Vollständig belegt sind Länge,
+  Breite, Tiefgang und Verdrängung; Segelfläche (42), Kabinen (42), Nasszellen (40) und
+  Kojen (32) lückenhaft, die maximale Personenzahl mit 6 von 50 kaum.
+- "Flachkiel" ist eine abgeleitete Einordnung der Plattform, keine Herstelleraussage: nur
+  der flachste Kiel eines Modells und nur, wenn er deutlich unter dem tiefsten liegt.
+
+Für den Betrieb heißt das: der Katalog beschleunigt das Inserieren und macht Boote
+vergleichbar, ersetzt aber keine Werftfreigabe. Vor kommerzieller Nutzung sollten die
+Stammdaten je Modell gegen das Datenblatt der Werft geprüft und `verified_on` neu gesetzt
+werden. `apps/api/tests/test_catalog_data.py` hält die Mindestqualität fest: Belege je
+Modell, Werte innerhalb plausibler Grenzen, eindeutige Schlüssel, genau ein Standard je
+Variantenart.
+
 ### Dynamic Pricing, Competitive Set und Customer Intent
 
 Zielgröße ist der erwartete Erlös pro verfügbarem Bootstag unter Berücksichtigung von
@@ -139,6 +162,24 @@ Service werden getrennt bewertet, dahinter Pflege, Sauberkeit, Beschreibungstreu
 Ausstattung, Organisation und Übergabe. Gäste ohne Konto laden Fotos über ihre Buchungsreferenz
 hoch. Moderation und Meldewege fehlen noch.
 
+Fotos bringt die Plattform keine mit: Werftbilder haben ungeklärte Nutzungsrechte, und ein
+zufälliges Fremdfoto als Modellbild auszuweisen wäre eine Falschaussage über das Schiff.
+Wo kein Foto hinterlegt ist, zeichnet das Portal eine Szene (`apps/web/src/lib/illustration.ts`,
+ausgeliefert über `/illustration/<seed>.svg`). Sie ist aus dem Namen abgeleitet, damit zwei
+Boote nebeneinander verschieden aussehen, und wird in der Galerie ausdrücklich als
+Illustration ausgewiesen – nie als Aufnahme.
+
+### Gestaltung
+
+Weiße Fläche, Tinte als Schriftfarbe, Seegrün für Aktionen, Messing für Hinweise. Struktur
+entsteht aus Weißraum, Haarlinien und Typografie, nicht aus Farbflächen: eine Karte ist
+zuerst eine Linie und erst beim Anfassen ein Objekt. Überschriften und Preise stehen in einer
+Buchschrift (Fraunces), Oberfläche und Zahlen in Inter. Die Tokens liegen vollständig in
+`apps/web/src/app/globals.css`; Komponenten greifen über Klassen wie `card`, `field`,
+`btn-primary`, `chip`, `eyebrow` und `stat-value` darauf zu, statt Farben einzeln zu setzen.
+Das Portal ist auf das helle Schema festgelegt (`color-scheme: light`) – ein zweites Schema
+mitzupflegen, das niemand verlangt hat, kostet bei jeder Änderung doppelt.
+
 ### Rollen und nächste Schritte
 
 | Rolle | Verantwortungsbereich |
@@ -214,6 +255,52 @@ Nach dem Seeding stehen bereit:
 | Vercharterer | `charter@ostsee-yachting.example` | `charter123` |
 | Servicepartner | `service@hafenhelfer.example` | `partner123` |
 | Kunde | `segler@example.com` | `segeln123` |
+
+### Was der Seed anlegt
+
+Nicht nur Stammdaten, sondern ein durchgespielter Betrieb – sonst lässt sich der
+Ablauf nicht ansehen, und die Kennzahlen im Eigner-Dashboard stehen alle auf
+null. Alles ist relativ zum heutigen Tag gesetzt und mit festem Zufallsstartwert
+erzeugt, also an jedem Tag gleich aufgebaut und trotzdem aktuell:
+
+- **24 Boote** an sechs Häfen bei drei Vercharterern. Die zehn Musterboote sind
+  von Hand gepflegt, die übrigen kommen über denselben Katalogweg zustande wie
+  ein Inserat im Portal – damit ist auch diese Strecke vorgeführt.
+- **Ein Vorgang je Phase** des Ablaufs, damit jeder Zustand der Abwicklungsseite
+  erreichbar ist: bestätigt, bereit zur Übernahme, übergeben, zurückgenommen
+  (mit offenem Schadenfall), abgerechnet und einer, der auf Zahlung wartet.
+- **Historie und Ausblick**: abgerechnete Buchungen der vergangenen Saison und
+  bestätigte über die nächsten zwölf Monate, verteilt statt geballt, damit die
+  Suche in jeder Woche etwas findet und der Kalender nicht zufällig leer wirkt.
+- **Serviceaufträge** zu jeder bestätigten Buchung, wie sie das System beim
+  Bestätigen selbst anlegt: Bootsbereitschaft, Übergabe, Rücknahme – mit
+  Checklisten, Fotopflicht, Bemerkungen und zugeordnetem Servicepartner.
+- **Verträge, Crewlisten, Unterlagen, Zahlungen, Auszahlungen** und Schadenfälle
+  in mehreren Ständen; Übergabefotos, die ausdrücklich nicht öffentlich sind.
+- **Kalender** mit allen Sperrarten: Winterlager, Werfttermin, Eigennutzung,
+  Buchung und eine ablaufende Reservierung.
+- **One-Way** auf einem Teil der Flotte eingeschaltet, dazu eine Buchung, die in
+  einem anderen Hafen endet – ohne Beispiel bleibt das Merkmal Theorie.
+
+Die Preise stammen aus der echten Preisregel, gerechnet mit dem Vorlauf, den
+eine solche Buchung gehabt hätte – nicht mit dem Anreisetag. Sonst zeigte die
+Historie lauter Last-Minute-Preise. Für Zeiträume, die der Algorithmus heute gar
+nicht anbietet, steht ein Ersatzwert, der im Datensatz als solcher markiert ist.
+
+**Was bewusst leer bleibt:** Stehhöhe, Kojenlänge und maximale Personenzahl am
+Katalogmodell, wo die Recherche sie nicht belegt hat. Das sind Tatsachenangaben
+über ein Schiff, und an ihnen entscheidet sich, ob eine 1,96 m große Person an
+Bord passt – eine erfundene Zahl wäre dort keine Demo, sondern eine
+Falschauskunft. Charakter, Standardausstattung und Kurzbeschreibung am Modell
+sind dagegen gefüllt: sie sind erkennbar Einordnungen der Plattform und als
+solche im Text gekennzeichnet.
+
+`apps/api/tests/test_seed_demo.py` hält den Bestand vollständig: keine leere
+Tabelle, keine Spalte ohne Beispiel (bis auf die genannten Ausnahmen), jede
+Ablaufphase und jede Sperrart vertreten.
+
+Neu aufbauen lässt sich der Bestand jederzeit mit
+`rm apps/api/sailbase.db && .venv/bin/python -m app.seed.seed`.
 
 ## Deployment
 

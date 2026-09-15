@@ -81,8 +81,8 @@ export default function SearchForm({ regions, bases, boatClasses, compact = fals
   }
 
   return (
-    <form onSubmit={submit} className="card p-4 sm:p-5">
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <form onSubmit={submit}>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <label className="label" htmlFor="start">
             {flexible ? "Zeitfenster ab" : "Übernahme"}
@@ -151,13 +151,13 @@ export default function SearchForm({ regions, bases, boatClasses, compact = fals
         </div>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
-        <label className="flex items-center gap-2">
+      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
+        <label className="flex cursor-pointer items-center gap-2.5">
           <input
             type="checkbox"
             checked={flexible}
             onChange={(e) => setFlexible(e.target.checked)}
-            className="h-4 w-4 accent-[var(--accent)]"
+            className="h-4 w-4 rounded accent-[var(--accent)]"
           />
           Flexible Dauer im Zeitfenster
         </label>
@@ -188,7 +188,7 @@ export default function SearchForm({ regions, bases, boatClasses, compact = fals
       </div>
 
       {showMore ? (
-        <div className="mt-4 grid gap-3 border-t border-line pt-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-5 grid gap-4 border-t border-line pt-5 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <label className="label" htmlFor="pickup">
               Abholhafen
@@ -285,10 +285,10 @@ export default function SearchForm({ regions, bases, boatClasses, compact = fals
                     key={c.value}
                     onClick={() => toggleCharacter(c.value)}
                     aria-pressed={active}
-                    className={`rounded-full border px-3 py-1 text-sm ${
+                    className={`rounded-full border px-3.5 py-1.5 text-sm transition ${
                       active
-                        ? "border-transparent bg-accent-soft font-medium text-accent"
-                        : "border-line text-muted hover:bg-surface-muted"
+                        ? "border-accent bg-accent-soft font-medium text-accent shadow-sm"
+                        : "border-line text-muted hover:border-line-strong hover:text-foreground"
                     }`}
                   >
                     {c.label}
@@ -297,25 +297,29 @@ export default function SearchForm({ regions, bases, boatClasses, compact = fals
               })}
             </div>
           </div>
-          <label className="flex items-center gap-2 self-end text-sm">
+          <label className="flex cursor-pointer items-center gap-2.5 self-end text-sm">
             <input
               type="checkbox"
               checked={withSkipper}
               onChange={(e) => setWithSkipper(e.target.checked)}
-              className="h-4 w-4 accent-[var(--accent)]"
+              className="h-4 w-4 rounded accent-[var(--accent)]"
             />
             Mit Skipper (Qualifikation egal)
           </label>
         </div>
       ) : null}
 
-      <div className="mt-4 flex items-center justify-between gap-3">
+      <div className="mt-5 flex items-center justify-between gap-3">
         <button
           type="button"
           onClick={() => setShowMore((v) => !v)}
-          className="text-sm font-medium text-accent hover:underline"
+          aria-expanded={showMore}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-strong"
         >
           {showMore ? "Weniger Filter" : "Mehr Filter"}
+          <span aria-hidden className={showMore ? "rotate-180 transition-transform" : "transition-transform"}>
+            ⌄
+          </span>
         </button>
         <button type="submit" className="btn-primary">
           Passende Boote zeigen

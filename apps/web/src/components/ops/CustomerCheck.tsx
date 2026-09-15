@@ -171,7 +171,7 @@ export default function CustomerCheck({ booking, ops, eligibility, email }: Prop
       ) : null}
 
       <section className="card p-5">
-        <h2 className="text-lg font-semibold">Crew und Papiere</h2>
+        <h2 className="text-lg">Crew und Papiere</h2>
         <p className="mt-1 text-sm text-muted">
           Vor der Übernahme brauchen wir, wer an Bord ist und wer das Schiff führt.
         </p>
@@ -239,7 +239,7 @@ export default function CustomerCheck({ booking, ops, eligibility, email }: Prop
       </section>
 
       <section className="card p-5">
-        <h2 className="text-lg font-semibold">Übernahme und Rückgabe</h2>
+        <h2 className="text-lg">Übernahme und Rückgabe</h2>
         <p className="mt-1 text-sm text-muted">
           Der Vercharterer arbeitet die Checkliste ab und dokumentiert den Zustand mit Fotos. Du
           bestätigst anschließend digital.
@@ -278,7 +278,7 @@ export default function CustomerCheck({ booking, ops, eligibility, email }: Prop
       </section>
 
       <section className="card p-5">
-        <h2 className="text-lg font-semibold">Deine Bewertung</h2>
+        <h2 className="text-lg">Deine Bewertung</h2>
         {!eligibility?.may_review ? (
           <p className="mt-2 rounded-lg bg-surface-muted px-3 py-2 text-sm text-muted">
             {eligibility?.reason ||

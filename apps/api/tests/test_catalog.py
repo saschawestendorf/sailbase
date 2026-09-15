@@ -72,6 +72,10 @@ def test_list_boat_from_catalog(client, db):
         .first()
     )
     three_cabins = next(v for v in version.variants if v.code == "3-kab")
+    # Der Katalog wird ohne Werftfotos ausgeliefert (ungeklaerte Bildrechte).
+    # Dieser Test prueft die Herkunftstrennung, also hinterlegt er selbst eines.
+    version.model_images = ["https://example.test/werksfoto.jpg"]
+    db.commit()
 
     payload = {
         "version_id": version.id,

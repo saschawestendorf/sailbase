@@ -1,0 +1,293 @@
+[
+  {
+    "manufacturer": "Dufour Yachts",
+    "model": "310 Grand Large",
+    "designer": "Umberto Felci / Felci Yacht Design",
+    "year_from": 2014,
+    "year_to": null,
+    "length_m": 9.35,
+    "beam_m": 3.31,
+    "draft_m": 1.90,
+    "displacement_kg": 4940,
+    "sail_area_m2": 50.4,
+    "engine_hp": 19,
+    "cabins": 2,
+    "berths": null,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 159,
+    "fuel_tank_l": 91,
+    "keel_variants": [],
+    "layout_variants": [],
+    "sources": [
+      "https://sailboatdata.com/sailboat/dufour-310-grand-large/",
+      "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-310-grand-large",
+      "https://no-frills-sailing.com/dufour-grandlarge-310-so-big-that-small/"
+    ],
+    "notes": "Laengenkonflikt: eine Quelle nennt 31.73 ft / 9.67 m als Rumpflaenge, sailboatdata 30'8\" / 9.35 m. Hier 9.35 m als Rumpflaenge uebernommen, 9.67 m duerfte LOA sein - vor Katalogfreigabe pruefen. Berths nicht eindeutig belegt (eine Quelle nennt widerspruechlich '4-6 Kojen', eine andere garbled 'ten berths'), daher null. Segelflaeche 50.4 m2 (Gross 33.5 + Genua 16.8). Tiefgang 1.90 m Standard; eine Quelle erwaehnt einen optionalen Hubkiel ohne Massangabe, daher keine keel_variants. Bauzeit-Ende nicht belegt."
+  },
+  {
+    "manufacturer": "Dufour Yachts",
+    "model": "350 Grand Large",
+    "designer": "Umberto Felci / Felci Yacht Design",
+    "year_from": 2014,
+    "year_to": 2017,
+    "length_m": 10.28,
+    "beam_m": 3.54,
+    "draft_m": 1.90,
+    "displacement_kg": 5674,
+    "sail_area_m2": 55.0,
+    "engine_hp": 19,
+    "cabins": 3,
+    "berths": 6,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 220,
+    "fuel_tank_l": 160,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel (L-Kiel mit Bombe)", "draft_m": 1.90},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.55}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 6, "heads": 1}
+    ],
+    "sources": [
+      "https://uk.boats.com/reviews/dufour-350-grand-large-review-classy-cruiser/",
+      "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-350-grand-large",
+      "https://sailmagazine.com/boats/boat-review-dufour-grand-large-350/",
+      "https://www.samboat.com/model/dufour-350-grand-large"
+    ],
+    "notes": "Beide Layouts haben nur eine Nasszelle (2-Kabinen-Version mit separater Duschkabine). Kojenzahl der 2-Kabinen-Version nicht belegt. Motor 19 PS Volvo mit Saildrive. Laengenangabe 10.28 m wird in den Quellen als 'Length' gefuehrt, ob Rumpflaenge oder LOA ist nicht explizit ausgewiesen."
+  },
+  {
+    "manufacturer": "Dufour Yachts",
+    "model": "390 Grand Large",
+    "designer": "Umberto Felci / Felci Yacht Design",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 11.19,
+    "beam_m": 3.99,
+    "draft_m": 1.95,
+    "displacement_kg": 7700,
+    "sail_area_m2": 66.5,
+    "engine_hp": 30,
+    "cabins": 3,
+    "berths": 8,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 380,
+    "fuel_tank_l": 200,
+    "keel_variants": [],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": 2},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 8, "heads": 2}
+    ],
+    "sources": [
+      "https://sailboatdata.com/sailboat/dufour-390-grand-large/",
+      "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-390-grand-large-standard",
+      "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-390-grand-large-shoal-draft",
+      "https://boattomorrow.com/articles/dufour-390-review",
+      "https://www.samboat.com/model/dufour-390-grand-large"
+    ],
+    "notes": "WIDERSPRUCH beim Flachkiel: eine Quelle nennt 1.75 m, eine andere 1.55 m fuer die Shoal-draft-Version. Da nicht aufloesbar, keine keel_variants eingetragen - vor Katalogfreigabe klaeren. Standardtiefgang 1.95 m (eine weitere Quelle nennt lastabhaengig 1.95-2.05 m). Nasszellen werden mit 2-3 angegeben, hier 2 fuer die belegte 3-Kabinen-Version. Motor 30 PS Standard, 40 PS optional. Segelflaeche 66.5 m2 (Gross 36.6 + Genua 29.9)."
+  },
+  {
+    "manufacturer": "Dufour Yachts",
+    "model": "430 Grand Large",
+    "designer": "Umberto Felci",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 12.50,
+    "beam_m": 4.30,
+    "draft_m": 2.10,
+    "displacement_kg": 9700,
+    "sail_area_m2": 92.0,
+    "engine_hp": 50,
+    "cabins": 3,
+    "berths": 6,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 430,
+    "fuel_tank_l": 250,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.10},
+      {"code": "flach", "name": "Flachkiel (Shoal draft)", "draft_m": 1.75}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://sailboatdata.com/sailboat/dufour-430-grand-large/",
+      "https://canadianboating.ca/boat-reviews/sneak-peek-dufour-430-grand-large/",
+      "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-430-shoal-draft",
+      "https://www.samboat.com/model/dufour-430-grand-large"
+    ],
+    "notes": "6 feste Kojen plus 2 Zusatzkojen laut Quelle. Belegt ist die 3-Kabinen/2-Nasszellen-Version; eine 4-Kabinen-Version liess sich in den Suchergebnissen nicht bestaetigen, daher keine layout_variants. Motor 50 PS Yanmar Saildrive Standard, 60 PS optional. Vorstellung Cannes 2018."
+  },
+  {
+    "manufacturer": "Dufour Yachts",
+    "model": "470",
+    "designer": "Umberto Felci",
+    "year_from": 2021,
+    "year_to": null,
+    "length_m": 13.99,
+    "beam_m": 4.74,
+    "draft_m": 2.25,
+    "displacement_kg": 13200,
+    "sail_area_m2": null,
+    "engine_hp": 60,
+    "cabins": 3,
+    "berths": 8,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 530,
+    "fuel_tank_l": 250,
+    "keel_variants": [],
+    "layout_variants": [
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": 2},
+      {"code": "4-kab", "name": "4 Kabinen (Charter)", "cabins": 4, "berths": 8, "heads": 4},
+      {"code": "5-kab", "name": "5 Kabinen", "cabins": 5, "berths": 10, "heads": null}
+    ],
+    "sources": [
+      "https://sailboatdata.com/sailboat/dufour-470/",
+      "https://itboat.com/models/11755-dufour-470",
+      "https://boattest.com/boats/dufour-yachts/470-2021",
+      "https://www.nauticexpo.com/prod/dufour-yachts/product-20156-570412.html",
+      "https://www.samboat.com/model/dufour-470"
+    ],
+    "notes": "Laengenkonflikt: LOA 14.85 m (mit Bugspriet), Rumpflaenge laut einer Quelle 13.99 m / 45.9 ft, Wasserlinie 13.55 m. Hier 13.99 m als Rumpflaenge. Segelflaeche nur in Einzelwerten belegt (Gross 57.0 m2, Genua 50 m2), Summe nicht als Gesamtsegelflaeche ausgewiesen, daher null. Layouts 3 bis 5 Kabinen; das 5-Kabinen-Layout wird mit 10 Schlafplaetzen beschrieben, Nasszellen dazu nicht belegt. Versionen Easy / Ocean / Performance unterscheiden sich im Deckslayout. Ballast 3550 kg."
+  },
+  {
+    "manufacturer": "Dehler",
+    "model": "30 one design",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2019,
+    "year_to": null,
+    "length_m": 9.14,
+    "beam_m": 3.25,
+    "draft_m": 2.20,
+    "displacement_kg": 2800,
+    "sail_area_m2": null,
+    "engine_hp": 9.9,
+    "cabins": null,
+    "berths": null,
+    "heads": 1,
+    "max_persons": 6,
+    "water_tank_l": null,
+    "fuel_tank_l": null,
+    "keel_variants": [],
+    "layout_variants": [],
+    "sources": [
+      "https://sailboatdata.com/sailboat/dehler-30od/",
+      "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-30-od",
+      "https://www.barchemagazine.com/en/dehler-30-one-design-eng/",
+      "https://dehler.com/us/historical-models/dehler-30-one-design/"
+    ],
+    "notes": "Rumpflaenge 9.14 m, LOA 10.30 m mit 130 cm Bugspriet, Wasserlinie 8.97 m. Verdraengung 2800 kg bei halber Beladung, Bleibombe 900 kg. Segelflaeche nur in Einzelwerten belegt (Gross 33.5 m2 bzw. 34.5 m2 je nach Quelle, Selbstwendefock 15 m2, Code Zero 52 m2, Gennaker 100/85 m2) - Gesamtsegelflaeche am Wind nicht ausgewiesen, daher null. WASSERTANK: die genannten zwei 200-l-Tanks sind Wasserballasttanks, kein Frischwasser - Frischwasser- und Dieseltankgroesse nicht belegt, daher null. KABINEN UNKLAR: boat-specs.com fuehrt '3 Gaestekabinen, 4 Gaeste, 1 Nasszelle', was fuer einen ausgeraeumten One-Design-Racer unplausibel wirkt und von keiner zweiten Quelle bestaetigt wird - cabins/berths daher null, max_persons 6 (CE-Hoechstzahl an Bord)."
+  },
+  {
+    "manufacturer": "Dehler",
+    "model": "34",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2016,
+    "year_to": null,
+    "length_m": 10.30,
+    "beam_m": 3.60,
+    "draft_m": 1.95,
+    "displacement_kg": 6000,
+    "sail_area_m2": null,
+    "engine_hp": 18,
+    "cabins": null,
+    "berths": 8,
+    "heads": null,
+    "max_persons": null,
+    "water_tank_l": 231,
+    "fuel_tank_l": 159,
+    "keel_variants": [
+      {"code": "standard", "name": "L-Kiel Standard", "draft_m": 1.95},
+      {"code": "competition", "name": "Competition T-Kiel", "draft_m": 2.10},
+      {"code": "flach", "name": "L-Kiel flach (Shoal draft)", "draft_m": 1.55}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-34-j-v-standard",
+      "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-34-j-v-competition",
+      "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-34-j-v-shoal-draft",
+      "https://www.teamwindcraft.com/models/dehler-34/",
+      "https://sailboatdata.com/sailboat/dehler-34-3/"
+    ],
+    "notes": "ACHTUNG MODELLVERWECHSLUNG: es gibt drei verschiedene Dehler 34 - van-de-Stadt-Entwurf ab 1983 (10.1 m, 4000 kg), Dehler 34 Performance ab 2003 (Felci/Roseo) und die hier erfasste judel/vrolijk-Version ab 2016. Nur die Version ab 2016 ist charterrelevant. Laengenkonflikt: Quellen nennen 33'10\" / 10.3 m als Rumpflaenge und 10.70 m als LOA - hier 10.30 m als Rumpflaenge. Verdraengung 6000 kg (eine Suchhypothese von 5250 kg wurde nicht bestaetigt). Berths 8 nur aus der Formulierung 'accommodates 8 people' abgeleitet; Kabinenzahl und Nasszellen nicht belegt. Motor Volvo Penta 18 PS Saildrive."
+  },
+  {
+    "manufacturer": "Dehler",
+    "model": "38 SQ",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2021,
+    "year_to": null,
+    "length_m": 11.30,
+    "beam_m": 3.75,
+    "draft_m": 2.03,
+    "displacement_kg": 7000,
+    "sail_area_m2": null,
+    "engine_hp": 29,
+    "cabins": 3,
+    "berths": null,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 295,
+    "fuel_tank_l": 160,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.03},
+      {"code": "competition", "name": "Competition-Kiel", "draft_m": 2.24},
+      {"code": "flach", "name": "Kurzkiel (Shoal draft)", "draft_m": 1.60}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen (mit Stauraum-Backskiste)", "cabins": 2, "berths": null, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen (Familienversion)", "cabins": 3, "berths": null, "heads": 1}
+    ],
+    "sources": [
+      "https://sailboatdata.com/sailboat/dehler-38-sq/",
+      "https://dehler.com/us/sailing-yachts/dehler-38-sq/",
+      "https://www.newwaveyachts.com/pdf_sheets/Dehler%2038%20SQ%20Specifications.pdf",
+      "https://itboat.com/models/11328-dehler-38-sq",
+      "https://www.yacht.de/en/cruising-yachts/dehler-38-sq-dehler-s-modified-performance-cruiser-on-test/"
+    ],
+    "notes": "Rumpflaenge 11.30 m, LOA 11.64 m. Die Verdraengung 7000 kg ist in der Quelle der Competition-Variante (Tiefgang 2.24 m, Ballast 2050 kg) zugeordnet - Wert fuer die Standardversion nicht separat belegt. Segelflaeche nur in Einzelwerten belegt (Gross 43 m2, Gross optional 49 m2, Selbstwendefock 35.6 m2, Spinnaker 118 m2, Gennaker 112 m2) - Gesamtsegelflaeche nicht ausgewiesen, daher null. Kojenzahl nicht belegt. Modell 2021 ueberarbeitet; Baujahr-Beginn der SQ-Version daher mit 2021 angesetzt."
+  },
+  {
+    "manufacturer": "Dehler",
+    "model": "42",
+    "designer": "judel/vrolijk & co",
+    "year_from": 2016,
+    "year_to": null,
+    "length_m": 12.42,
+    "beam_m": 3.91,
+    "draft_m": 2.16,
+    "displacement_kg": 9100,
+    "sail_area_m2": 93.0,
+    "engine_hp": 40,
+    "cabins": 3,
+    "berths": 8,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 315,
+    "fuel_tank_l": 160,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.16},
+      {"code": "competition", "name": "Competition-/Race-Kiel", "draft_m": 2.39},
+      {"code": "flach", "name": "Flachkiel (Shoal draft)", "draft_m": 1.98}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": 4, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 8, "heads": 2}
+    ],
+    "sources": [
+      "https://sailboatdata.com/sailboat/dehler-42/",
+      "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-42-standard",
+      "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-42-competition",
+      "https://www.boat-specs.com/sailing/sailboats/dehler/dehler-42-shoal-draft",
+      "https://www.dehler.co.uk/files/Dehler_42_Standard_Specification.pdf",
+      "https://sailingmagazine.net/article-permalink-1692.html"
+    ],
+    "notes": "Rumpflaenge 12.42 m, LOA 12.84 m laut offiziellem Datenblatt. Tiefgaenge aus Fussangaben umgerechnet (7'1\" / 7'10\" / 6'6\"). Segelflaeche 93.0 m2 Standard (Gross 52.0 + Rollgenua 105% 41.0); Competition 105.5 m2. Motor Volvo Penta D2-40 (40 PS) - eine Suchzusammenfassung nannte fuer die 42 auch 'ca. 29 hp', das ist vermutlich vom Dehler 38 SQ uebernommen und wurde verworfen, da das Herstellerdatenblatt D2-40 nennt. Verdraengung 9100 kg Standard; Quelle nennt zusaetzlich 18629 lbs Race und 20613 lbs Shoal."
+  }
+]

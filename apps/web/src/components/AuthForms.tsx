@@ -16,7 +16,7 @@ function Submit({ label, pending }: { label: string; pending: boolean }) {
 function ErrorNote({ state }: { state: AuthState }) {
   if (!state.error) return null;
   return (
-    <p role="alert" className="rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">
+    <p role="alert" className="rounded-xl bg-warn-soft px-4 py-3 text-sm text-warn">
       {state.error}
     </p>
   );
@@ -25,7 +25,7 @@ function ErrorNote({ state }: { state: AuthState }) {
 export function LoginForm({ next }: { next?: string }) {
   const [state, action, pending] = useActionState<AuthState, FormData>(login, {});
   return (
-    <form action={action} className="card space-y-3 p-5">
+    <form action={action} className="card space-y-4 p-6">
       {next ? <input type="hidden" name="next" value={next} /> : null}
       <div>
         <label className="label" htmlFor="email">
@@ -62,7 +62,7 @@ export function RegisterForm() {
   const [state, action, pending] = useActionState<AuthState, FormData>(register, {});
   const [role, setRole] = useState("customer");
   return (
-    <form action={action} className="card space-y-3 p-5">
+    <form action={action} className="card space-y-4 p-6">
       <fieldset>
         <legend className="label">Ich möchte</legend>
         <div className="grid gap-2 sm:grid-cols-2">

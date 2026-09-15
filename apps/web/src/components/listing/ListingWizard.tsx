@@ -77,7 +77,9 @@ export default function ListingWizard({ bases, existing }: Props) {
   const [baseId, setBaseId] = useState(existing?.base.id ?? bases[0]?.id ?? "");
   const [description, setDescription] = useState(existing?.description ?? "");
   const [character, setCharacter] = useState<string[]>(existing?.character ?? []);
-  const [extraFeatures, setExtraFeatures] = useState<string[]>([]);
+  const [extraFeatures, setExtraFeatures] = useState<string[]>(
+    existing ? EXTRA_FEATURES.filter((f) => (existing.features ?? []).includes(f)) : [],
+  );
   const [images, setImages] = useState<string[]>(existing?.images ?? []);
   const [yearRefit, setYearRefit] = useState<number | null>(existing?.year_refit ?? null);
   const [requiredLicense, setRequiredLicense] = useState(existing?.required_license ?? 2);
@@ -115,7 +117,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
   function chooseVersion(v: ModelVersion) {
     setVersionId(v.id);
-    setYearBuilt(yearBuilt ?? v.year_to ?? v.year_from);
+    setYearBuilt(yearBuilt ?? v.year_to ?? v.year_from ?? null);
     setVariantIds(v.variants.filter((x) => x.is_default).map((x) => x.id));
     if (!name) setName("");
   }
@@ -214,7 +216,7 @@ export default function ListingWizard({ bases, existing }: Props) {
               disabled={index > step}
               className={`rounded-full px-3 py-1 ${
                 index === step
-                  ? "bg-brand font-medium text-white dark:text-[#071722]"
+                  ? "bg-brand font-medium text-white"
                   : index < step
                     ? "bg-accent-soft text-accent"
                     : "bg-surface-muted text-muted"
@@ -228,7 +230,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
       {step === 0 ? (
         <section className="card p-5">
-          <h2 className="text-lg font-semibold">Welches Modell ist es?</h2>
+          <h2 className="text-lg">Welches Modell ist es?</h2>
           <p className="mt-1 text-sm text-muted">
             Wähle das Modell aus dem Katalog. Maße, Tankgrößen und Werksvarianten kommen von dort,
             du musst sie nicht abtippen.
@@ -273,7 +275,7 @@ export default function ListingWizard({ bases, existing }: Props) {
       {step === 1 && detail ? (
         <section className="card space-y-4 p-5">
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg">
               {detail.manufacturer.name} {detail.name}
             </h2>
             <p className="mt-1 text-sm text-muted">
@@ -299,7 +301,10 @@ export default function ListingWizard({ bases, existing }: Props) {
                   >
                     <span className="block font-medium">{v.name}</span>
                     <span className="block text-xs">
-                      Bauzeit {v.year_from}–{v.year_to ?? "heute"} · {v.length_m.toFixed(2)} m
+                      {v.year_from
+                        ? `Bauzeit ${v.year_from}–${v.year_to ?? "heute"}`
+                        : "Bauzeit nicht belegt"}{" "}
+                      · {v.length_m.toFixed(2)} m
                     </span>
                   </button>
                 ))}
@@ -366,7 +371,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
           {spec ? (
             <div>
-              <h3 className="text-sm font-semibold">Das ergibt diese Konfiguration</h3>
+              <h3 className="text-sm">Das ergibt diese Konfiguration</h3>
               <div className="mt-2">
                 <SpecTable
                   spec={spec}
@@ -383,7 +388,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
       {step === 2 ? (
         <section className="card space-y-4 p-5">
-          <h2 className="text-lg font-semibold">Was nur für dieses Boot gilt</h2>
+          <h2 className="text-lg">Was nur für dieses Boot gilt</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <label className="label" htmlFor="boat-name">
@@ -542,7 +547,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
       {step === 3 ? (
         <section className="card space-y-4 p-5">
-          <h2 className="text-lg font-semibold">Wann und wie darf gechartert werden?</h2>
+          <h2 className="text-lg">Wann und wie darf gechartert werden?</h2>
           <p className="text-sm text-muted">
             Diese Regeln begrenzen, was der Algorithmus anbieten darf. Je enger sie sind, desto
             weniger Lücken kann er füllen.
@@ -711,7 +716,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
       {step === 4 ? (
         <section className="card space-y-4 p-5">
-          <h2 className="text-lg font-semibold">Dein Preisrahmen</h2>
+          <h2 className="text-lg">Dein Preisrahmen</h2>
           <p className="text-sm text-muted">
             Du gibst die Grenzen vor, der Algorithmus arbeitet strikt darin. Unter die
             Untergrenze geht er nie, auch nicht bei leerem Kalender.

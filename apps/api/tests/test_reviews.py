@@ -137,6 +137,16 @@ def test_gallery_order_and_handover_photos_stay_private(client, db, dates):
             sort_order=1,
         )
     )
+    # Die Demo fuehrt keine Werftfotos mehr; die Reihenfolge Eigner vor Modell
+    # bleibt aber Vertrag, also legt der Test ein Modellfoto selbst an.
+    db.add(
+        BoatImage(
+            boat_id=boat.id,
+            url="https://example.test/werksfoto.jpg",
+            origin="model",
+            sort_order=1000,
+        )
+    )
     db.commit()
     gallery = client.get("/boats/nordwind").json()["gallery"]
     assert all(i["origin"] != "handover" for i in gallery), "Übergabefotos sind nicht öffentlich"

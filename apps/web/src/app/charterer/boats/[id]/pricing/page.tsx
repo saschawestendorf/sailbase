@@ -25,7 +25,7 @@ export default async function PricingPage(props: PageProps<"/charterer/boats/[id
 
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Preisoptimierung · {boat.name}</h1>
+          <h1 className="text-3xl">Preisoptimierung · {boat.name}</h1>
           <p className="mt-1 text-muted">
             {boat.manufacturer} {boat.model} · {boat.base.name} · Mindestdauer {boat.min_days}{" "}
             Nächte

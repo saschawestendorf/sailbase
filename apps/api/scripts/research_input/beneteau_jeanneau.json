@@ -1,0 +1,433 @@
+[
+  {
+    "manufacturer": "Beneteau",
+    "model": "Oceanis 30.1",
+    "designer": "Finot-Conq (Pascal Conq), Interieur Nauta Design",
+    "year_from": 2019,
+    "year_to": null,
+    "length_m": 8.99,
+    "beam_m": 2.99,
+    "draft_m": 1.88,
+    "displacement_kg": 4120,
+    "sail_area_m2": 40.0,
+    "engine_hp": 21,
+    "cabins": 2,
+    "berths": 4,
+    "heads": null,
+    "max_persons": null,
+    "water_tank_l": 160,
+    "fuel_tank_l": 130,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel / Deep draft (Grauguss mit Bulb)", "draft_m": 1.88},
+      {"code": "flach", "name": "Flachkiel / Shoal draft", "draft_m": 1.30}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://www.pbo.co.uk/boats/big-new-small-yacht-beneteau-oceanis-30-1-tested-64447",
+      "https://canadianboating.ca/boat-reviews/beneteau-oceanis-30-1/",
+      "https://itboat.com/models/9614-beneteau-oceanis-30-1",
+      "https://www.boat-specs.com/sailing/sailboats/beneteau/oceanis-30-1-deep-draft",
+      "https://48north.com/boats-and-gear/boat-reviews/beneteau-oceanis-30-1/"
+    ],
+    "notes": "Rumpflaenge 8,99 m laut PBO; LOA mit Bugspriet 9,53 m (itboat) - nicht verwechseln. Verdraengung widerspruechlich: 4.120 kg (itboat) vs. 8.805 lbs = rund 3.994 kg (Canadian Boating). Segelflaeche 40,0 m2 = Grosssegel 24 m2 + Selbstwendefock 16 m2 (am Wind); eine Quelle nennt 425 sq ft = 39,5 m2, konsistent. Motor: EU-Basis 14 PS, USA/ueblich Yanmar 3YM20 mit 21 PS. 4 feste Kojen in 2 Doppelkabinen, laut Beneteau zusaetzlich 2 Salonkojen moeglich. Kopfzahl Nasszellen und max. Personen nicht belegt. Es existiert laut boat-specs auch eine Kiel-Schwert-Version, aber ohne belegte Tiefgangswerte."
+  },
+  {
+    "manufacturer": "Beneteau",
+    "model": "Oceanis 34.1",
+    "designer": "Marc Lombard (Rumpf), Nauta Design (Interieur)",
+    "year_from": 2021,
+    "year_to": null,
+    "length_m": 9.96,
+    "beam_m": 3.57,
+    "draft_m": 2.00,
+    "displacement_kg": 5470,
+    "sail_area_m2": 49.3,
+    "engine_hp": 21,
+    "cabins": 2,
+    "berths": null,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 231,
+    "fuel_tank_l": 130,
+    "keel_variants": [
+      {"code": "standard", "name": "Standard-/Tiefkiel (Grauguss)", "draft_m": 2.00},
+      {"code": "flach", "name": "Flachkiel (Grauguss)", "draft_m": 1.50},
+      {"code": "hub", "name": "Performance-/Hubkiel, hydraulisch (1,25-2,55 m)", "draft_m": null}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": 1}
+    ],
+    "sources": [
+      "https://www.cruisingworld.com/sailboats/sailboat-review-beneteau-oceanis-34-1/",
+      "https://www.yachtingmonthly.com/yacht-reviews/first-look-beneteau-oceanis-34-1-82165",
+      "https://www.yachtworld.com/research/beneteau-oceanis-34-1-sailboat-review/",
+      "https://itboat.com/models/12382-beneteau-oceanis-34-1",
+      "https://www.beneteau.com/en-us/oceanis/oceanis-341",
+      "https://48north.com/boats-and-gear/48-north-boat-test-beneteau-oceanis-34-1/"
+    ],
+    "notes": "Deutlicher Laengen-Widerspruch: Rumpf laut Cruising World/SAIL 32 ft 8 in = 9,96 m, mehrere Haendlerseiten nennen 10,77 m - das ist die Laenge ueber alles mit Bugspriet des Downwind-Pakets. Hier wurde die Rumpflaenge eingetragen. Segelflaeche 49,3 m2 = Am-Wind-Flaeche 531 sq ft (Gross 334 sq ft + Selbstwendefock 197 sq ft); optional Rollgenua 26 m2 oder Squaretop-Gross. Wassertank 231 l Standard, laut Beneteau bis 361 l optional. Motor Yanmar 3YM20 21 PS Standard, 30 PS optional. Kojenzahl und max. Personen nicht belegt. Eine Quelle nennt Tiefgang 1,49 m (= Flachkiel), passend zu 1,50 m."
+  },
+  {
+    "manufacturer": "Beneteau",
+    "model": "Oceanis 38.1",
+    "designer": "Finot-Conq (Rumpf), Nauta Design (Interieur)",
+    "year_from": 2017,
+    "year_to": 2023,
+    "length_m": 11.13,
+    "beam_m": 3.99,
+    "draft_m": 2.08,
+    "displacement_kg": 6850,
+    "sail_area_m2": 65.7,
+    "engine_hp": 30,
+    "cabins": 3,
+    "berths": null,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 130,
+    "fuel_tank_l": 130,
+    "keel_variants": [
+      {"code": "standard", "name": "Tiefkiel mit T-Bulb", "draft_m": 2.08},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.64},
+      {"code": "hub", "name": "Schwenkkiel / Lifting keel (1,26-2,40 m)", "draft_m": null}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://uk.boats.com/reviews/beneteau-oceanis-38-1-review/",
+      "https://itboat.com/models/7736-beneteau-oceanis-38-1",
+      "https://www.samboat.com/model/beneteau-oceanis-38-1",
+      "https://www.theglobesailor.com/oceanis-38-1-specifications-sm4788.html",
+      "https://nova-yachting.nl/sites/default/files/Beneteau%20Oceanis%2038.1%20-%20General%20specifications%202021.pdf"
+    ],
+    "notes": "Laenge widerspruechlich: 11,13 m (Rumpflaenge, Charterdatenblaetter) vs. 11,50 m (itboat, vermutlich LOA). Hier Rumpflaenge. Tiefgang: eine Quelle (itboat) nennt 2,90 m - das ist gegenueber allen anderen Quellen (2,08 m Tiefkiel / 1,64 m Flachkiel) unplausibel und wurde verworfen. Baujahre 2017-2023 stammen aus einer einzigen Quelle (itboat) und sind nicht gegengeprueft; die Beneteau-URL-Struktur legt eine frueheren Serienstart nahe. Segelflaeche 65,7 m2 = Gross 32,7 m2 + Genua 103% 33 m2; Rollgross alternativ 30 m2. Wassertank 130 l Standard, 200 l optional. Kabinenzahl/Kojen: Quellen nennen 3 Kabinen mit 6 bzw. 8 Personen - widerspruechlich, daher berths und max_persons null. Insgesamt 6 Ausbauversionen belegt, aber ohne Einzelangaben."
+  },
+  {
+    "manufacturer": "Beneteau",
+    "model": "Oceanis 40.1",
+    "designer": "Marc Lombard (Rumpf), Nauta Design (Interieur)",
+    "year_from": 2020,
+    "year_to": null,
+    "length_m": 11.99,
+    "beam_m": 4.18,
+    "draft_m": 2.17,
+    "displacement_kg": 8180,
+    "sail_area_m2": 77.3,
+    "engine_hp": 45,
+    "cabins": null,
+    "berths": null,
+    "heads": null,
+    "max_persons": null,
+    "water_tank_l": 235,
+    "fuel_tank_l": 195,
+    "keel_variants": [
+      {"code": "standard", "name": "Standard-/Tiefkiel", "draft_m": 2.17},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.68},
+      {"code": "performance", "name": "Performance-Kiel", "draft_m": 2.27}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": null, "heads": null},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": null},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": null, "heads": null}
+    ],
+    "sources": [
+      "https://itboat.com/models/10433-beneteau-oceanis-40-1",
+      "https://www.beneteau-croatia.hr/beneteau-sailing-yachts/oceanis/oceanis-40-1/",
+      "https://canadianboating.ca/boat-reviews/beneteau-oceanis-40-1/",
+      "https://sailmagazine.com/boats/boat-review-beneteau-oceanis-40-1/",
+      "https://masteryachting.com/en/yacht/beneteau-oceanis-40-1/",
+      "https://www.beneteau.com/en-us/oceanis/oceanis-401"
+    ],
+    "notes": "Laenge/Breite widerspruechlich: 11,99 m / 4,18 m (Rumpfmasse, itboat + SAIL) gegen 12,90 m / 4,25 m (42,32 ft / 13,94 ft, Haendlerlisting - vermutlich LOA mit Bugspriet). Hier die Rumpfmasse. Segelflaeche 77,3 m2 = Gross 43 m2 + Genua 34,3 m2; Rollgross alternativ 42,4 m2. Wassertank 235 l Standard, 330 l optional. Motor Yanmar 4JH45 mit 45 PS Standard. Kabinenzahl: 2, 3 oder 4 Kabinen mit 1 oder 2 Nasszellen belegt, aber keine Quelle nennt Kojen- oder Nasszellenzahl je Version - daher cabins/berths/heads null und nur die Kabinenanzahl in layout_variants."
+  },
+  {
+    "manufacturer": "Beneteau",
+    "model": "Oceanis 46.1",
+    "designer": "Finot-Conq (Pascal Conq, Rumpf), Nauta Design (Interieur)",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 13.65,
+    "beam_m": 4.50,
+    "displacement_kg": 10597,
+    "draft_m": 2.35,
+    "sail_area_m2": 85.0,
+    "engine_hp": 57,
+    "cabins": null,
+    "berths": null,
+    "heads": null,
+    "max_persons": null,
+    "water_tank_l": 370,
+    "fuel_tank_l": 200,
+    "keel_variants": [
+      {"code": "standard", "name": "Standard-/Tiefkiel (Grauguss)", "draft_m": 2.35},
+      {"code": "flach", "name": "Flachkiel (Grauguss)", "draft_m": 1.75},
+      {"code": "performance", "name": "Performance-Kiel (Grauguss/Blei)", "draft_m": 2.65}
+    ],
+    "layout_variants": [
+      {"code": "3-kab-2-wc", "name": "3 Kabinen / 2 Nasszellen", "cabins": 3, "berths": null, "heads": 2},
+      {"code": "3-kab-3-wc", "name": "3 Kabinen / 3 Nasszellen", "cabins": 3, "berths": null, "heads": 3},
+      {"code": "4-kab-2-wc", "name": "4 Kabinen / 2 Nasszellen", "cabins": 4, "berths": null, "heads": 2},
+      {"code": "5-kab", "name": "5 Kabinen (bis 4 Nasszellen)", "cabins": 5, "berths": null, "heads": null}
+    ],
+    "sources": [
+      "https://www.boat-specs.com/sailing/sailboats/beneteau/oceanis-46-1-deep-draft",
+      "https://itboat.com/models/9644-beneteau-oceanis-46-1",
+      "https://sailmagazine.com/boats/boat-review-beneteau-oceanis-46-1/",
+      "https://www.beneteau.com/en-us/oceanis-2015-2022/oceanis-461",
+      "https://cdn.yachtbroker.org/media/2780152/V12705_OCEANIS_46-1_US_light%202025.pdf",
+      "https://nova-yachting.nl/sites/default/files/Beneteau%20Oceanis%2046.1%20-%20General%20specifications%202021.pdf"
+    ],
+    "notes": "Segelflaeche 85,0 m2 = Standard Gross 45 m2 + Selbstwendefock 40 m2; optional Gross 54 m2 + Genua 52 m2, Classic-Gross 58 m2. Ballast je Kielversion belegt: tief 2.735 kg, flach 3.061 kg, Performance 2.576 kg. Motor 57 PS Standard, 80 PS optional. Kabinen 3/4/5 mit 2/3/4 Nasszellen belegt, aber keine Quelle nennt Kojenzahlen je Version - berths daher durchgehend null. Eine Quelle nennt 'sleeping capacity 8', ohne Bezug zu einer konkreten Version, deshalb max_persons null. Baujahr ab 2018 (Serienstart November 2018), Europaeische Yacht des Jahres 2019 Familienfahrtenyacht."
+  },
+  {
+    "manufacturer": "Beneteau",
+    "model": "Oceanis 51.1",
+    "designer": "Berret-Racoupeau Yacht Design (Rumpf), Nauta Design (Interieur)",
+    "year_from": 2017,
+    "year_to": null,
+    "length_m": 14.98,
+    "beam_m": 4.80,
+    "draft_m": 2.30,
+    "displacement_kg": 13930,
+    "sail_area_m2": 91.0,
+    "engine_hp": 80,
+    "cabins": null,
+    "berths": null,
+    "heads": null,
+    "max_persons": 13,
+    "water_tank_l": 440,
+    "fuel_tank_l": 200,
+    "keel_variants": [
+      {"code": "standard", "name": "Standard-/Flachkiel", "draft_m": 2.30},
+      {"code": "tief", "name": "Tiefkiel (L-Kiel, Blei)", "draft_m": 2.80}
+    ],
+    "layout_variants": [
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": null},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": null, "heads": null},
+      {"code": "5-kab", "name": "5 Kabinen", "cabins": 5, "berths": null, "heads": null}
+    ],
+    "sources": [
+      "https://itboat.com/models/7737-beneteau-oceanis-51-1",
+      "https://sailmagazine.com/boats/boat-review-beneteau-oceanis-51-1/",
+      "https://www.beneteau.com/us/oceanis/oceanis-511",
+      "https://www.samboat.com/model/beneteau-oceanis-51-1",
+      "https://www.theglobesailor.com/oceanis-51-1-specifications-sm4223.html",
+      "https://www.boats.com/reviews/beneteau-oceanis-51-1-review/"
+    ],
+    "notes": "Laenge widerspruechlich: 15,94 m wird von mehreren Quellen als LOA gefuehrt, 14,98 m (49 ft 1 in) als Rumpflaenge - hier die Rumpflaenge. Tankgroessen stark widerspruechlich: eine Quelle nennt 440 l Wasser / 200 l Diesel als Standard, eine andere 980 l / 400 l (vermutlich Maximalausbau mit Zusatztanks). Hier die Standardwerte. Segelflaeche 91,0 m2 = Gross 45 m2 + Selbstwendefock 46 m2 laut Quelle - eine groessere Selbstwendefock als Gross ist ungewoehnlich, Wert vor Katalogfreigabe pruefen. Motor 80 PS Standard, 100-110 PS optional. 3 bis 5 Kabinen mit 2 bis 4 Nasszellen belegt, Kojenzahlen je Version nicht. max_persons 13 stammt aus zwei Quellen ('bis 13 Personen an Bord'), vermutlich CE-Maximum, nicht Kojenzahl."
+  },
+  {
+    "manufacturer": "Jeanneau",
+    "model": "Sun Odyssey 319",
+    "designer": "Jeanneau Design Office",
+    "year_from": 2017,
+    "year_to": null,
+    "length_m": 9.44,
+    "beam_m": 3.46,
+    "draft_m": 1.85,
+    "displacement_kg": 5100,
+    "sail_area_m2": 45.3,
+    "engine_hp": 21,
+    "cabins": 2,
+    "berths": 4,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 150,
+    "fuel_tank_l": 100,
+    "keel_variants": [
+      {"code": "standard", "name": "Kielflosse mit T-Bulb", "draft_m": 1.85},
+      {"code": "schwert", "name": "Kiel-Schwert-Version (Schwert unten 1,70 m, oben 0,74 m)", "draft_m": 1.70}
+    ],
+    "layout_variants": [],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Sun_Odyssey_319",
+      "https://www.boat-specs.com/sailing/sailboats/jeanneau/sun-odyssey-319-fin-keel",
+      "https://www.boat-specs.com/sailing/sailboats/jeanneau/sun-odyssey-319-keel-and-centerboard",
+      "https://www.sunsail.com/yachts/monohulls/sun-odyssey-319",
+      "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/113-sun-odyssey-319",
+      "https://sailboatdata.com/sailboat/sun-odyssey-319-jeanneau/"
+    ],
+    "notes": "Laenge: 9,44 m wird als Rumpflaenge genannt, 9,99 m als LOA (mit Bugspriet/Ankerbeschlag) - hier die Rumpflaenge. Segelflaeche 45,3 m2 ist die Am-Wind-Flaeche (488 sq ft), davon Gross 23,0 m2. Kojen: Quellen nennen 4 bis 6 (4 feste in 2 Kabinen, bis 6 mit Salonkojen); hier 4 eingetragen. max_persons nicht belegt."
+  },
+  {
+    "manufacturer": "Jeanneau",
+    "model": "Sun Odyssey 349",
+    "designer": "Marc Lombard Yacht Design",
+    "year_from": 2014,
+    "year_to": null,
+    "length_m": 10.34,
+    "beam_m": 3.44,
+    "draft_m": 1.98,
+    "displacement_kg": 5350,
+    "sail_area_m2": 50.77,
+    "engine_hp": 21,
+    "cabins": 3,
+    "berths": 6,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 206,
+    "fuel_tank_l": 130,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel mit Bulb", "draft_m": 1.98},
+      {"code": "flach", "name": "Flachkiel (Quellenangabe 1,26-1,36 m, widerspruechlich)", "draft_m": null}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen (mit Stauraum statt Achterkabine)", "cabins": 2, "berths": 4, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 6, "heads": 1}
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Sun_Odyssey_349",
+      "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/37-sun-odyssey-349",
+      "https://www.samboat.com/model/jeanneau-sun-odyssey-349",
+      "https://sailmagazine.com/boats/boat-review-jeanneau-sun-odyssey-349/",
+      "https://horizon-yacht-sales.com/wp-content/uploads/2018/07/EN-BK-SO349-180717.pdf",
+      "https://www.theglobesailor.com/sun-odyssey-349-specifications-sm3039.html"
+    ],
+    "notes": "10,34 m wird in den Quellen sowohl als Rumpflaenge wie als LOA gefuehrt; der Wert ist konsistent, die Zuordnung aber nicht sauber belegt. Eine Quelle nannte 'Kabinen 2, 3, 4 oder 5' - fuer einen 34-Fuesser offensichtlich fehlerhaft, verworfen zugunsten der belegten 2- und 3-Kabinen-Version. Flachkiel-Tiefgang in einer Quelle als Bereich 1,26-1,36 m angegeben, was eher zu einem Schwenkkiel passt - Wert daher null gesetzt. Kojen 4-6 (+2 Option) laut Quelle; hier 6 fuer die 3-Kabinen-Version. Motor Yanmar 3YM20 21 PS."
+  },
+  {
+    "manufacturer": "Jeanneau",
+    "model": "Sun Odyssey 380",
+    "designer": "Marc Lombard (Rumpf), Jean-Marc Piaton (Interieur), Jeanneau Design Office",
+    "year_from": 2021,
+    "year_to": null,
+    "length_m": 10.77,
+    "beam_m": 3.76,
+    "draft_m": 2.00,
+    "displacement_kg": 6896,
+    "sail_area_m2": 63.0,
+    "engine_hp": 29,
+    "cabins": 2,
+    "berths": 4,
+    "heads": 1,
+    "max_persons": null,
+    "water_tank_l": 330,
+    "fuel_tank_l": 130,
+    "keel_variants": [
+      {"code": "standard", "name": "Kielflosse mit Bulb", "draft_m": 2.00},
+      {"code": "flach", "name": "Flachkiel (5 ft 3 in)", "draft_m": 1.60}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": 4, "heads": 1},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": null, "heads": 1}
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Sun_Odyssey_380",
+      "https://itboat.com/models/12193-jeanneau-sun-odyssey-380",
+      "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/664-sun-odyssey-380",
+      "https://www.yachtingworld.com/yachts-and-gear/first-look-jeanneau-sun-odyssey-380-roomy-35-footer-134267",
+      "https://www.greatlakessailingco.com/sales/jeanneau/sun-odyssey-380/"
+    ],
+    "notes": "Laenge widerspruechlich: 11,75 m wird als Gesamtlaenge gefuehrt, 10,77 m als Rumpflaenge - hier die Rumpflaenge. Segelflaeche 63,0 m2 = Gross 35 m2 + Genua 28 m2. Tiefgang: eine Quelle nennt 2,00 m, eine andere 6 ft 6 in = 1,98 m fuer den Standardkiel - praktisch identisch. Optional wird auch ein Schwenkkiel genannt, ohne Tiefgangswerte. Motor Yanmar 3YM30AE 29 PS. Kojen nur fuer die 2-Kabinen-Version belegt (4)."
+  },
+  {
+    "manufacturer": "Jeanneau",
+    "model": "Sun Odyssey 410",
+    "designer": "Marc Lombard Yacht Design",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 11.99,
+    "beam_m": 3.99,
+    "draft_m": 2.14,
+    "displacement_kg": 7900,
+    "sail_area_m2": 80.3,
+    "engine_hp": 40,
+    "cabins": 3,
+    "berths": 6,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 330,
+    "fuel_tank_l": 200,
+    "keel_variants": [
+      {"code": "standard", "name": "L-Kielflosse (Tiefkiel)", "draft_m": 2.14},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.60}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": 4, "heads": 2},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 6, "heads": 2}
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Sun_Odyssey_410",
+      "https://itboat.com/models/9550-jeanneau-sun-odyssey-410",
+      "https://canadianboating.ca/boat-reviews/jeanneau-sun-odyssey-410/",
+      "https://www.boats.com/reviews/jeanneau-sun-odyssey-410-review/",
+      "https://www.boat-specs.com/sailing/sailboats/jeanneau/sun-odyssey-410-deep-draft",
+      "https://www.euroyachts.com/wp-content/uploads/2018/07/sun-odyssey-410-na-1.pdf"
+    ],
+    "notes": "Verdraengung widerspruechlich: 7.900 kg (17.417 lbs) gegen 8.000 kg - Differenz gering, hier 7.900 kg. Wassertank: 330 l Standard, mit Zusatztank 200 l gesamt 530 l; eine Quelle gibt direkt 530 l an. Hier der Standardwert. Tiefgang Tiefkiel wird mit 2,13 bzw. 2,14 m angegeben. Ein Hubkiel wird als Option genannt, ohne Werte. Motor Yanmar 40 PS Standard, 45 PS optional. Segelflaeche 80,3 m2 (865 sq ft). max_persons nicht belegt (3-Kabinen-Version 6+2 Kojen)."
+  },
+  {
+    "manufacturer": "Jeanneau",
+    "model": "Sun Odyssey 440",
+    "designer": "Philippe Briand (Rumpf), Piaton Bonet Yacht Design (Interieur), Jeanneau Design Office",
+    "year_from": 2017,
+    "year_to": null,
+    "length_m": 13.39,
+    "beam_m": 4.29,
+    "draft_m": 2.20,
+    "displacement_kg": 8561,
+    "sail_area_m2": 90.4,
+    "engine_hp": 45,
+    "cabins": 3,
+    "berths": 6,
+    "heads": 2,
+    "max_persons": null,
+    "water_tank_l": 330,
+    "fuel_tank_l": 200,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.20},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.57}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen / 2 Nasszellen", "cabins": 2, "berths": 4, "heads": 2},
+      {"code": "3-kab", "name": "3 Kabinen / 2 Nasszellen", "cabins": 3, "berths": 6, "heads": 2},
+      {"code": "4-kab", "name": "4 Kabinen / 2 Nasszellen", "cabins": 4, "berths": 8, "heads": 2}
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Sun_Odyssey_440",
+      "https://itboat.com/models/8033-jeanneau-sun-odyssey-440",
+      "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/109-sun-odyssey-440",
+      "https://uk.boats.com/reviews/jeanneau-sun-odyssey-440-review/",
+      "https://www.theglobesailor.com/sun-odyssey-440-specifications-sm4265.html",
+      "https://www.kavas.com/odyssey-440.html"
+    ],
+    "notes": "Baujahr widerspruechlich: eine Quelle nennt 2017 (Vorstellung), eine andere 'gebaut seit 2018'. Hier 2017. Laenge 13,39 m: eine Quelle bezeichnet den Wert als LOA inklusive Bugspriet, eine andere als Rumpflaenge - die Zuordnung bleibt unsicher. Segelflaeche 90,4 m2 = Gross 45,2 m2 + Fock/Genua 45,2 m2. Motor 45 PS Standard, 57 PS optional. Eine Quelle nennt 'bis zu 10 Personen' bei 4 Kabinen, die Layout-Uebersicht dagegen 8 - max_persons daher null. Kojenzahlen je Layout aus den Chartervarianten abgeleitet (2/3/4 Kabinen mit 4/6/8 Personen)."
+  },
+  {
+    "manufacturer": "Jeanneau",
+    "model": "Sun Odyssey 490",
+    "designer": "Philippe Briand (Rumpf), Jean-Marc Piaton (Interieur)",
+    "year_from": 2018,
+    "year_to": null,
+    "length_m": 14.00,
+    "beam_m": 4.49,
+    "draft_m": 2.24,
+    "displacement_kg": 11290,
+    "sail_area_m2": 111.4,
+    "engine_hp": 57,
+    "cabins": null,
+    "berths": null,
+    "heads": null,
+    "max_persons": null,
+    "water_tank_l": 640,
+    "fuel_tank_l": 240,
+    "keel_variants": [
+      {"code": "standard", "name": "Standardkiel", "draft_m": 2.24},
+      {"code": "flach", "name": "Flachkiel", "draft_m": 1.65}
+    ],
+    "layout_variants": [
+      {"code": "2-kab", "name": "2 Kabinen", "cabins": 2, "berths": 4, "heads": null},
+      {"code": "3-kab", "name": "3 Kabinen", "cabins": 3, "berths": 6, "heads": null},
+      {"code": "4-kab", "name": "4 Kabinen", "cabins": 4, "berths": 8, "heads": null},
+      {"code": "5-kab", "name": "5 Kabinen", "cabins": 5, "berths": 10, "heads": null}
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Sun_Odyssey_490",
+      "https://itboat.com/models/8034-jeanneau-sun-odyssey-490",
+      "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/111-sun-odyssey-490",
+      "https://www.theglobesailor.com/sun-odyssey-490-specifications-sm4305.html",
+      "https://www.sunsail.com/yachts/monohulls/sun-odyssey-490-5-cabin",
+      "https://www.yachts.co/wp-content/uploads/2017/07/sun-odyssey-490-EN-BDEF.pdf"
+    ],
+    "notes": "Laenge: 14,00 m Rumpflaenge gegen 14,78 m LOA (48 ft 6 in) - hier die Rumpflaenge. Breite widerspruechlich: 4,47 m gegen 4,49 m; Tiefgang 2,23 gegen 2,24 m - jeweils der groessere, konkreter angegebene Wert eingetragen. Segelflaeche 111,4 m2 = Gross 57,8 m2 + Fock/Genua 53,6 m2. Motor Yanmar 57 PS Standard, 80 PS optional. Kabinen 2 bis 5, Nasszellen 2 bis 4, Kojen 4/6/8/10 (+2) laut Quelle - eine Standardkonfiguration ist nicht belegt, daher cabins/berths/heads null und die Varianten in layout_variants."
+  }
+]

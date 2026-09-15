@@ -104,7 +104,7 @@ export default function ChecklistPanel({
     <section className="card overflow-hidden">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line p-4">
         <div>
-          <h3 className="font-semibold">{ORDER_LABELS[order.order_type] ?? order.order_type}</h3>
+          <h3 className="">{ORDER_LABELS[order.order_type] ?? order.order_type}</h3>
           <p className="text-sm text-muted">
             {order.scheduled_for
               ? dateLabel(order.scheduled_for, {

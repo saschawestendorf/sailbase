@@ -96,33 +96,45 @@ export default async function SearchPage(props: PageProps<"/search">) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8">
-      <SearchForm regions={regions} bases={bases} boatClasses={boatClasses} />
-      {catalogError ? <p role="alert" className="card mt-4 p-5 text-sm text-warn">{catalogError}</p> : null}
+    <div className="mx-auto w-full max-w-6xl px-4 py-10">
+      <div className="card card-raised p-5 sm:p-6">
+        <SearchForm regions={regions} bases={bases} boatClasses={boatClasses} />
+      </div>
+      {catalogError ? (
+        <p role="alert" className="card mt-4 p-5 text-sm text-warn">
+          {catalogError}
+        </p>
+      ) : null}
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-10 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold">
+          <p className="eyebrow">Ergebnisse</p>
+          <h1 className="mt-2.5 text-2xl sm:text-3xl">
             {result ? `${result.count} Boote gefunden` : "Suche"}
             {query.min_nights ? (
-              <span className="ml-2 text-sm font-normal text-muted">
+              <span className="ml-2.5 font-sans text-sm font-normal tracking-normal text-muted">
                 flexibel, {query.min_nights}–{query.max_nights} Nächte
               </span>
             ) : null}
           </h1>
-          <p className="text-sm text-muted">
+          <p className="mt-1.5 max-w-xl text-sm text-muted">
             {query.min_nights
               ? "Jedes Boot zeigt die Termine, die sich in deinem Fenster wirtschaftlich anbieten lassen."
               : "Feste Daten. Für mehr Auswahl das Zeitfenster öffnen und eine Dauer von bis angeben."}
           </p>
         </div>
-        <div className="flex flex-wrap gap-1 text-sm">
+        {/* Segmentierte Steuerung statt loser Links: die aktive Sortierung ist
+            damit auch ohne Farbe als Zustand erkennbar. */}
+        <div className="flex flex-wrap gap-0.5 rounded-full border border-line bg-surface-muted p-1 text-sm">
           {sortLinks.map((s) => (
             <Link
               key={s.key}
               href={sortHref(s.key)}
-              className={`rounded-lg px-2.5 py-1 ${
-                sort === s.key ? "bg-accent-soft font-medium text-accent" : "text-muted hover:bg-surface-muted"
+              aria-current={sort === s.key ? "true" : undefined}
+              className={`rounded-full px-3 py-1.5 transition-colors ${
+                sort === s.key
+                  ? "bg-surface font-medium text-foreground shadow-sm"
+                  : "text-muted hover:text-foreground"
               }`}
             >
               {s.label}
@@ -132,11 +144,11 @@ export default async function SearchPage(props: PageProps<"/search">) {
       </div>
 
       {error ? (
-        <p className="card mt-4 p-5 text-sm text-warn">{error}</p>
+        <p className="card mt-6 p-5 text-sm text-warn">{error}</p>
       ) : result && result.hits.length === 0 ? (
-        <div className="card mt-4 p-6 text-sm text-muted">
-          <p className="font-medium text-foreground">Kein Boot passt zu diesen Angaben.</p>
-          <ul className="mt-2 list-inside list-disc space-y-1">
+        <div className="card mt-6 p-7 text-sm text-muted">
+          <p className="display text-lg text-foreground">Kein Boot passt zu diesen Angaben.</p>
+          <ul className="mt-3 list-inside list-disc space-y-1.5">
             <li>Zeitfenster öffnen und eine Dauer von bis angeben, statt feste Daten zu setzen.</li>
             <li>Anderen Abholhafen oder ein Nachbarrevier zulassen.</li>
             <li>
@@ -145,7 +157,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
           </ul>
         </div>
       ) : (
-        <div className="mt-4 grid gap-4">
+        <div className="mt-6 grid gap-5">
           {result?.hits.map((hit) => (
             <BoatCard key={hit.boat.id} hit={hit} query={boatQuery.toString()} basesById={basesById} />
           ))}

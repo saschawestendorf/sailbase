@@ -65,7 +65,8 @@ def validate_selection(
     version: ModelVersion, year_built: int | None, variant_ids: list[str]
 ) -> list[VariantOption]:
     """Reject implausible build years and impossible option combinations."""
-    if year_built is not None and not version.covers_year(year_built):
+    # Without a documented build span there is nothing to check the year against, so it passes.
+    if year_built is not None and version.year_from and not version.covers_year(year_built):
         lo = version.year_from - YEAR_TOLERANCE
         hi = (version.year_to or version.year_from + 60) + YEAR_TOLERANCE
         if not (lo <= year_built <= hi):
