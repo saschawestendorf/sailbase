@@ -32,16 +32,15 @@ async def lifespan(app: FastAPI):
     if not settings.is_production:
         # Dev convenience; production runs Alembic migrations on container start.
         Base.metadata.create_all(bind=engine)
-    if settings.seed_on_start:
-        # Opt-in demo data. Seeding is idempotent, so a restart never duplicates rows.
-        try:
-            from app.core.db import SessionLocal
-            from app.seed.seed import seed
+    if settings.seed_on_start and not settings.is_production:
+        # Nur für lokale Läufe ohne Start-Skript. Im Container übernimmt
+        # entrypoint.sh Migration und Seed als eigene, sichtbare Schritte – ein
+        # hier verschluckter Fehler sah von außen aus wie eine leere Datenbank.
+        from app.core.db import SessionLocal
+        from app.seed.seed import seed
 
-            with SessionLocal() as db:
-                logger.info("Seeding demo catalogue: %s", seed(db))
-        except Exception:  # never let seeding take the API down
-            logger.exception("Seeding failed, continuing with an empty catalogue")
+        with SessionLocal() as db:
+            logger.info("Seeding demo catalogue: %s", seed(db))
     yield
 
 
