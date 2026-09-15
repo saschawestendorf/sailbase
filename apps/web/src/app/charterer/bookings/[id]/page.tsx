@@ -38,7 +38,7 @@ export default async function CheckPage(props: PageProps<"/charterer/bookings/[i
       <div className="mt-3 flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="font-mono text-sm text-muted">{booking.reference}</p>
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-3xl">
             {booking.boat?.name ?? "Charter"} · {booking.customer_name}
           </h1>
           <p className="mt-1 text-muted">

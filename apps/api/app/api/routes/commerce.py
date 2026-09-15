@@ -6,6 +6,7 @@ from sqlalchemy.orm import selectinload
 from app.api.deps import DB, CurrentUser, OptionalUser
 from app.core.config import get_settings
 from app.models import Base_, Boat, Booking, Quote
+from app.schemas.catalog import BoatOut
 from app.schemas.commerce import BookingCreate, BookingCreated, BookingOut, QuoteOut, QuoteRequest
 from app.services import bookings as booking_service
 from app.services.payments import get_payment_provider
@@ -123,7 +124,7 @@ def my_bookings(db: DB, user: CurrentUser):
     out = []
     for b in rows:
         o = BookingOut.model_validate(b)
-        o.boat = db.get(Boat, b.boat_id)
+        o.boat = BoatOut.model_validate(db.get(Boat, b.boat_id))
         out.append(o)
     return out
 

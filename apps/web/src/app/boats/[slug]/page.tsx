@@ -37,9 +37,9 @@ function first(value: string | string[] | undefined): string | undefined {
 function Spec({ term, value }: { term: string; value: string | number | null | undefined }) {
   if (value === null || value === undefined || value === "") return null;
   return (
-    <div className="flex items-baseline justify-between gap-3 border-b border-line py-1.5 last:border-0">
+    <div className="flex items-baseline justify-between gap-3 border-b border-line py-2 last:border-0">
       <dt className="text-muted">{term}</dt>
-      <dd className="text-right font-medium">{value}</dd>
+      <dd className="tnum text-right font-medium">{value}</dd>
     </div>
   );
 }
@@ -114,45 +114,54 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8">
-      <Link href="/search" className="text-sm text-accent hover:underline">
-        ← Zurück zur Suche
+      <Link
+        href="/search"
+        className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
+      >
+        <span aria-hidden>←</span> Zurück zur Suche
       </Link>
 
-      <header className="mt-3 flex flex-wrap items-start justify-between gap-4">
+      <header className="mt-5 flex flex-wrap items-end justify-between gap-5">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{boat.name}</h1>
-          <p className="mt-1 text-muted">
+          <p className="eyebrow">
+            {boat.base.name}, {boat.base.city}
+          </p>
+          <h1 className="display mt-3 text-3xl sm:text-[2.75rem]">{boat.name}</h1>
+          <p className="mt-2 text-muted">
             {boat.manufacturer} {boat.model}
-            {boat.year_built ? ` · Baujahr ${boat.year_built}` : ""} · {boat.base.name},{" "}
-            {boat.base.city} · {boat.charterer.name}
+            {boat.year_built ? ` · Baujahr ${boat.year_built}` : ""} · {boat.charterer.name}
           </p>
           {boat.ratings?.count ? (
-            <p className="mt-1 text-sm">
-              <span className="text-accent">★</span> {boat.ratings.overall?.toFixed(1)} aus{" "}
-              {boat.ratings.count} verifizierten Charter
-              {boat.ratings.count === 1 ? "" : "n"}
+            <p className="mt-2 text-sm">
+              <span className="text-brass">★</span>{" "}
+              <span className="font-medium">{boat.ratings.overall?.toFixed(1)}</span>
+              <span className="ml-1 text-muted">
+                aus {boat.ratings.count} verifizierten Charter
+                {boat.ratings.count === 1 ? "" : "n"}
+              </span>
             </p>
           ) : null}
         </div>
         <div className="flex flex-wrap gap-1.5">
           {(boat.character ?? []).map((c) => (
-            <span key={c} className="chip">
+            <span key={c} className="chip chip-accent">
               {label(CHARACTER_LABELS, c)}
             </span>
           ))}
         </div>
       </header>
 
-      <div className="mt-5">
+      <div className="mt-7">
         <Gallery images={boat.gallery ?? []} name={boat.name} />
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_22rem]">
+      <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_22rem]">
         <div className="space-y-6">
-          <section className="card p-5">
-            <h2 className="text-lg font-semibold">Über dieses Schiff</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{boat.description}</p>
-            <dl className="mt-4 grid gap-x-8 text-sm sm:grid-cols-2">
+          <section className="card p-6 sm:p-7">
+            <h2 className="text-xl">Über dieses Schiff</h2>
+            <p className="mt-3 text-[0.95rem] leading-relaxed text-muted">{boat.description}</p>
+            <hr className="rule my-6" />
+            <dl className="grid gap-x-10 text-sm sm:grid-cols-2">
               <Spec term="Länge" value={`${boat.length_m.toFixed(2)} m`} />
               <Spec term="Breite" value={boat.beam_m ? `${boat.beam_m.toFixed(2)} m` : null} />
               <Spec term="Tiefgang" value={boat.draft_m ? `${boat.draft_m.toFixed(2)} m` : null} />
@@ -176,7 +185,7 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
             </dl>
 
             {boat.features?.length ? (
-              <div className="mt-4 flex flex-wrap gap-1.5">
+              <div className="mt-6 flex flex-wrap gap-1.5">
                 {boat.features.map((f) => (
                   <span key={f} className="chip">
                     {label(FEATURE_LABELS, f)}
@@ -186,20 +195,33 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
             ) : null}
 
             {boat.region_restrictions ? (
-              <p className="mt-4 rounded-lg bg-surface-muted px-3 py-2 text-sm text-muted">
+              <p className="mt-5 rounded-xl border border-line bg-surface-muted px-4 py-3 text-sm text-muted">
                 Revierbeschränkung: {boat.region_restrictions}
               </p>
             ) : null}
 
             {boat.model_info?.version_name ? (
-              <div className="mt-4 border-t border-line pt-3 text-xs text-muted">
+              /* Die Quellenlage gehört auf die Seite, aber nicht in den Vordergrund:
+                 wer sie sucht, klappt sie auf; wer das Boot ansieht, wird nicht von
+                 einer Textwand ausgebremst. */
+              <details className="group mt-6 rounded-xl border border-line bg-surface-muted/60 px-4 py-3 text-xs leading-relaxed text-muted">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-medium text-foreground marker:content-none">
+                  Woher diese Werksdaten stammen
+                  <span
+                    aria-hidden
+                    className="text-muted transition-transform group-open:rotate-180"
+                  >
+                    ⌄
+                  </span>
+                </summary>
+                <div className="mt-3 space-y-1.5">
                 <p>
                   Werksdaten aus dem Katalog: {boat.model_info.manufacturer}{" "}
                   {boat.model_info.model_name}, {boat.model_info.version_name}, Bauzeit{" "}
                   {boat.model_info.build_years}
                   {boat.model_info.designer ? ` · Riss ${boat.model_info.designer}` : ""}
                 </p>
-                <p className="mt-1">
+                <p>
                   Quelle: {boat.model_info.source || "nicht angegeben"} · Stand{" "}
                   {boat.model_info.revision}
                   {boat.model_info.water_tank_l
@@ -208,42 +230,43 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
                   {boat.model_info.fuel_tank_l ? ` · Diesel ${boat.model_info.fuel_tank_l} l` : ""}
                 </p>
                 {boat.model_info.caveat ? (
-                  <p className="mt-1 text-warn">Offen laut Quellenlage: {boat.model_info.caveat}</p>
+                  <p className="text-warn">Offen laut Quellenlage: {boat.model_info.caveat}</p>
                 ) : null}
                 {Object.keys(boat.spec_overrides ?? {}).length ? (
-                  <p className="mt-1 text-warn">
+                  <p className="text-warn">
                     Vom Katalog abweichend und vom Vercharterer angegeben:{" "}
                     {Object.keys(boat.spec_overrides).join(", ")}
                   </p>
                 ) : null}
                 {boat.unknown_specs?.length ? (
-                  <p className="mt-1">Nicht belegt: {boat.unknown_specs.join(", ")}</p>
+                  <p>Nicht belegt: {boat.unknown_specs.join(", ")}</p>
                 ) : null}
-              </div>
+                </div>
+              </details>
             ) : null}
           </section>
 
           <Reviews summary={reviewData.summary} reviews={reviewData.reviews} />
 
-          <section className="card p-5">
+          <section className="card p-6 sm:p-7">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h2 className="text-lg font-semibold">Preise der nächsten Wochen</h2>
+              <h2 className="text-xl">Preise der nächsten Wochen</h2>
               <p className="text-sm text-muted">
                 Törnlänge {calendar?.nights ?? boat.min_days} Nächte
                 {cheapest ? ` · ab ${money(cheapest)}/Nacht` : ""}
               </p>
             </div>
             {calendar ? (
-              <div className="mt-4 grid grid-cols-3 gap-1.5 sm:grid-cols-5 lg:grid-cols-7">
+              <div className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-7">
                 {calendar.days.map((day) => {
                   const active = day.date === startDate;
                   const href = `/boats/${boat.slug}?start_date=${day.date}&end_date=${addDays(day.date, calendar!.nights)}&persons=${persons}`;
                   const content = (
                     <>
-                      <span className="block text-[0.7rem] text-muted">
+                      <span className="block text-[0.7rem] uppercase tracking-wider text-faint">
                         {dateLabel(day.date, { day: "2-digit", month: "2-digit" })}
                       </span>
-                      <span className="block text-sm font-semibold">
+                      <span className="tnum mt-0.5 block text-sm font-semibold">
                         {day.available && day.per_day_cents ? money(day.per_day_cents) : "–"}
                       </span>
                     </>
@@ -253,7 +276,7 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
                       <div
                         key={day.date}
                         title={day.reason}
-                        className="rounded-lg border border-line bg-surface-muted px-2 py-2 text-center opacity-60"
+                        className="rounded-xl border border-dashed border-line bg-surface-muted px-2 py-2.5 text-center opacity-70"
                       >
                         {content}
                       </div>
@@ -263,10 +286,10 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
                     <Link
                       key={day.date}
                       href={href}
-                      className={`rounded-lg border px-2 py-2 text-center transition ${
+                      className={`rounded-xl border px-2 py-2.5 text-center transition ${
                         active
-                          ? "border-transparent bg-accent-soft text-accent"
-                          : "border-line hover:bg-surface-muted"
+                          ? "border-accent bg-accent-soft text-accent shadow-sm"
+                          : "border-line hover:-translate-y-0.5 hover:border-line-strong hover:shadow-sm"
                       }`}
                     >
                       {content}
@@ -280,33 +303,33 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
           </section>
         </div>
 
-        <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
-          <section className="card p-5">
-            <h2 className="text-lg font-semibold">Dein Törn</h2>
-            <dl className="mt-3 space-y-1 text-sm">
+        <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+          <section className="card p-6">
+            <h2 className="text-lg">Dein Törn</h2>
+            <dl className="mt-4 text-sm">
               <Spec term="Übernahme" value={`${dateLabel(startDate)} · ${pickupName}`} />
               <Spec term="Rückgabe" value={`${dateLabel(endDate)} · ${dropoffName}`} />
               <Spec term="Dauer" value={`${nights} Nächte`} />
               <Spec term="Personen" value={persons} />
             </dl>
 
-            <div className="mt-4 border-t border-line pt-4">
+            <div className="mt-5 border-t border-line pt-5">
               {quote ? (
                 <PriceExplainer breakdown={quote.breakdown} />
               ) : (
-                <p className="rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">
+                <p className="rounded-xl bg-warn-soft px-4 py-3 text-sm text-warn">
                   {quoteError ?? "Kein Angebot für diesen Zeitraum."}
                 </p>
               )}
             </div>
           </section>
 
-          <section className="card p-5">
-            <h2 className="text-lg font-semibold">Jetzt buchen</h2>
-            <p className="mt-1 text-sm text-muted">
+          <section className="card p-6">
+            <h2 className="text-lg">Jetzt buchen</h2>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted">
               Preis gilt für diesen Zeitraum und wird beim Buchen erneut bestätigt.
             </p>
-            <div className="mt-4">
+            <div className="mt-5">
               <BookingForm
                 boatId={boat.id}
                 startDate={startDate}

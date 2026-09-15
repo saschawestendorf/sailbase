@@ -16,7 +16,7 @@ from app.models import (
     ModelVersion,
     PricingPolicy,
 )
-from app.schemas.catalog import BoatDetailOut, PricingPolicyOut
+from app.schemas.catalog import BoatDetailOut, BoatOut, PricingPolicyOut
 from app.schemas.catalog_master import BoatFromCatalog
 from app.schemas.charterer import (
     BlockCreate,
@@ -261,7 +261,7 @@ def list_bookings(db: DB, charterer: CurrentCharterer):
     out = []
     for b in rows:
         o = BookingOut.model_validate(b)
-        o.boat = db.get(Boat, b.boat_id)
+        o.boat = BoatOut.model_validate(db.get(Boat, b.boat_id))
         out.append(o)
     return out
 
@@ -277,7 +277,7 @@ def cancel(booking_id: str, db: DB, charterer: CurrentCharterer):
         raise HTTPException(status.HTTP_409_CONFLICT, str(e)) from e
     db.commit()
     o = BookingOut.model_validate(b)
-    o.boat = db.get(Boat, b.boat_id)
+    o.boat = BoatOut.model_validate(db.get(Boat, b.boat_id))
     return o
 
 

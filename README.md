@@ -162,6 +162,23 @@ Service werden getrennt bewertet, dahinter Pflege, Sauberkeit, Beschreibungstreu
 Ausstattung, Organisation und Übergabe. Gäste ohne Konto laden Fotos über ihre Buchungsreferenz
 hoch. Moderation und Meldewege fehlen noch.
 
+Fotos bringt die Plattform keine mit: Werftbilder haben ungeklärte Nutzungsrechte, und ein
+zufälliges Fremdfoto als Modellbild auszuweisen wäre eine Falschaussage über das Schiff.
+Wo kein Foto hinterlegt ist, zeichnet das Portal eine Szene (`apps/web/src/lib/illustration.ts`,
+ausgeliefert über `/illustration/<seed>.svg`). Sie ist aus dem Namen abgeleitet, damit zwei
+Boote nebeneinander verschieden aussehen, und wird in der Galerie ausdrücklich als
+Illustration ausgewiesen – nie als Aufnahme.
+
+### Gestaltung
+
+Warmes Papier als Fläche, tiefes Marineblau für Struktur, Seegrün für Aktionen, Messing als
+Akzent – bewusst warme statt kühler Graustufen, damit das Portal nicht wie ein
+Verwaltungswerkzeug wirkt. Überschriften und Preise stehen in einer Buchschrift (Fraunces),
+Oberfläche und Zahlen in Inter. Die Tokens liegen vollständig in
+`apps/web/src/app/globals.css`; Komponenten greifen über Klassen wie `card`, `field`,
+`btn-primary`, `chip`, `eyebrow` und `stat-value` darauf zu, statt Farben einzeln zu setzen.
+Helles und dunkles Farbschema sind beide definiert und folgen der Systemeinstellung.
+
 ### Rollen und nächste Schritte
 
 | Rolle | Verantwortungsbereich |

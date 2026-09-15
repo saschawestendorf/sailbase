@@ -1,5 +1,5 @@
 {
-  "generated_on": "2026-09-14",
+  "generated_on": "2026-09-15",
   "note": "Recherchiert aus öffentlich zugänglichen Herstellerangaben und Fachdatenbanken. Nicht vom Hersteller bestätigt. Felder ohne Beleg stehen als null und werden im Portal als unbekannt ausgewiesen.",
   "manufacturers": [
     {
@@ -159,8 +159,8 @@
         "https://www.kiriacoulis.com/sales/BavariaC42_price.pdf",
         "https://www.bavariayachts.com/sailing-yachts/c42/highlights/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 11,98 m, Laenge ueber alles 12,38 m. Verdraengung widerspruechlich: 9.678 kg vs. 9.991 kg in einer anderen Quelle. Wassertank 210 l Standard, 460 l optional. Motor 57 PS (41,9 kW); Fabrikat in den Suchergebnissen nicht eindeutig genannt. Segelflaeche 100,6 m2 als Gesamtangabe; Einzelwerte Gross 53,8-54 m2 und Genua 47 m2."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 11,98 m, Länge über alles 12,38 m. Verdrängung widersprüchlich: 9.678 kg vs. 9.991 kg in einer anderen Quelle. Wassertank 210 l Standard, 460 l optional. Motor 57 PS (41,9 kW); Fabrikat in den Suchergebnissen nicht eindeutig genannt. Segelfläche 100,6 m² als Gesamtangabe; Einzelwerte Gross 53,8-54 m² und Genua 47 m²."
     },
     {
       "manufacturer": "bavaria",
@@ -252,8 +252,8 @@
         "https://www.yachtingmonthly.com/reviews/yacht-reviews/bavaria-c50",
         "https://www.boot.com/en/Media_News/BAVARIA_C50_-_World_premiere_at_boot_2018"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 14,99 m. Laenge ueber alles widerspruechlich: 15,39 m in einer Quelle, 15,55 m in einer anderen. Segelflaeche wird als '135/147 m2' angegeben (vermutlich Standard- und Performance-Rigg); hier 135 m2 eingetragen. Motor Yanmar 4JH80, 80 PS. Layouts 3 bis 5 Kabinen belegt, eine Quelle erwaehnt sogar 6 Kabinen (nicht als Datensatz belegt, daher nicht aufgenommen). Flachkiel 1,85 m; eine fruehere Suche nannte 1,95 m - der konkretere Wert 1,85 m wurde uebernommen."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 14,99 m. Länge über alles widersprüchlich: 15,39 m in einer Quelle, 15,55 m in einer anderen. Segelfläche wird als '135/147 m²' angegeben (vermutlich Standard- und Performance-Rigg); hier 135 m² eingetragen. Motor Yanmar 4JH80, 80 PS. Layouts 3 bis 5 Kabinen belegt, eine Quelle erwähnt sogar 6 Kabinen (nicht als Datensatz belegt, daher nicht aufgenommen). Flachkiel 1,85 m; eine frühere Suche nannte 1,95 m - der konkretere Wert 1,85 m wurde übernommen."
     },
     {
       "manufacturer": "bavaria",
@@ -334,8 +334,8 @@
         "https://sailmagazine.com/boats/boat-review-bavaria-cruiser-34/",
         "https://sailboatdata.com/sailboat/bavaria-cruiser-34/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Baujahr widerspruechlich: eine Quelle nennt erste Rumpfschale/Bau seit 2013, eine andere 'seit 2016'. Segelflaeche: Gesamtangabe 51 m2, Einzelangaben Gross 27 m2 + Genua 22 m2 ergeben aber nur 49 m2. Motor 18 PS Volvo Penta D1-20F Standard, 30 PS optional. Flachkiel-Tiefgang 1,57 m aus einer Review-Angabe '5 ft 2 in' umgerechnet (boat-specs fuehrt eine Shoal-draft-Version, ohne dass in den Suchergebnissen ein Meterwert erschien) - vor Vertragsgebrauch pruefen. Berths in den Quellen als 4-6 bzw. 6 angegeben."
+      "verified_on": "2026-09-15",
+      "notes": "Baujahr widersprüchlich: eine Quelle nennt erste Rumpfschale/Bau seit 2013, eine andere 'seit 2016'. Segelfläche: Gesamtangabe 51 m², Einzelangaben Gross 27 m² + Genua 22 m² ergeben aber nur 49 m². Motor 18 PS Volvo Penta D1-20F Standard, 30 PS optional. Flachkiel-Tiefgang 1,57 m aus einer Review-Angabe '5 ft 2 in' umgerechnet (boat-specs führt eine Shoal-draft-Version, ohne dass in den Suchergebnissen ein Meterwert erschien) - vor Vertragsgebrauch prüfen. Berths in den Quellen als 4-6 bzw. 6 angegeben."
     },
     {
       "manufacturer": "bavaria",
@@ -416,8 +416,8 @@
         "https://www.yachtdatabase.com/en/review.jsp?id=Bavaria+Cruiser+37",
         "https://www.bavariayachts.com/sailing-yachts/cruiser-37/data-and-options/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Deutlicher Quellenkonflikt beim Tiefgang: eine Gruppe von Quellen nennt 1,69-2,02 m, eine andere 1,95 m Standard / 1,63 m Flachkiel. Uebernommen wurde das explizit als Standard/Flachkiel ausgewiesene Paar 1,95/1,63. Verdraengung ebenfalls widerspruechlich: 7.000 kg vs. 7,45 t. Motor Volvo Penta D1-20 (19 PS) Standard, D1-30 (28 PS) optional. Kojenzahl in den Suchergebnissen nur als 'max. Schlafplaetze 4' bei 2-3 Kabinen - fuer die 3-Kabinen-Version kein belegter Wert, daher null."
+      "verified_on": "2026-09-15",
+      "notes": "Deutlicher Quellenkonflikt beim Tiefgang: eine Gruppe von Quellen nennt 1,69-2,02 m, eine andere 1,95 m Standard / 1,63 m Flachkiel. Uebernommen wurde das explizit als Standard/Flachkiel ausgewiesene Paar 1,95/1,63. Verdrängung ebenfalls widersprüchlich: 7.000 kg vs. 7,45 t. Motor Volvo Penta D1-20 (19 PS) Standard, D1-30 (28 PS) optional. Kojenzahl in den Suchergebnissen nur als 'max. Schlafplätze 4' bei 2-3 Kabinen - für die 3-Kabinen-Version kein belegter Wert, daher null."
     },
     {
       "manufacturer": "bavaria",
@@ -488,8 +488,8 @@
         "https://www.sailboat-cruising.com/Bavaria-41-Sailboat.html",
         "https://www.velmundi.com/bavaria-cruiser-41.html"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Verdraengung 8.869 kg ist das Leergewicht (Ballast 2.736 kg). Wassertank: Quellen nennen 210 l und 360 l - offenbar Standard- und Optionstank; 360 l uebernommen, 210 l moeglich. Kojen in den Quellen als Spanne 4-8 angegeben, hier der Maximalwert der ueblichen 3-Kabinen-Version. Motor als 'Volvo Penta D2, 39,6 PS' angegeben."
+      "verified_on": "2026-09-15",
+      "notes": "Verdrängung 8.869 kg ist das Leergewicht (Ballast 2.736 kg). Wassertank: Quellen nennen 210 l und 360 l - offenbar Standard- und Optionstank; 360 l übernommen, 210 l möglich. Kojen in den Quellen als Spanne 4-8 angegeben, hier der Maximalwert der üblichen 3-Kabinen-Version. Motor als 'Volvo Penta D2, 39,6 PS' angegeben."
     },
     {
       "manufacturer": "bavaria",
@@ -571,8 +571,8 @@
         "https://www.bavariayachts.com/sailing-yachts/cruiser-46/interior/",
         "https://www.samboat.com/model/bavaria-cruiser-46"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Segelflaeche 108 m2 ist die Summe der belegten Einzelwerte Gross 56 m2 + Genua 52 m2; eine Gesamtangabe stand in den Suchergebnissen nicht. Tiefgang Standard 2,10 m (nicht 2,15 m wie im Schema-Beispiel). Nasszellen widerspruechlich: itboat nennt 3 Baeder (4-Kabinen-Version), Herstellerseite beschreibt fuer die 3-Kabinen-Version je ein Bad an beiden Achterkabinen (= 2). 4-Kabinen-Version laut Quelle 8-10 Kojen."
+      "verified_on": "2026-09-15",
+      "notes": "Segelfläche 108 m² ist die Summe der belegten Einzelwerte Gross 56 m² + Genua 52 m²; eine Gesamtangabe stand in den Suchergebnissen nicht. Tiefgang Standard 2,10 m (nicht 2,15 m wie im Schema-Beispiel). Nasszellen widersprüchlich: itboat nennt 3 Bäder (4-Kabinen-Version), Herstellerseite beschreibt für die 3-Kabinen-Version je ein Bad an beiden Achterkabinen (= 2). 4-Kabinen-Version laut Quelle 8-10 Kojen."
     },
     {
       "manufacturer": "bavaria",
@@ -663,8 +663,8 @@
         "https://sailboatdata.com/sailboat/bavaria-cruiser-51/",
         "https://www.samboat.com/model/bavaria-cruiser-51"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Erste Suche lieferte nur 1,85 m Tiefgang - die zweite zeigte, dass das der Flachkiel ist und der Standardkiel 2,25 m hat. Segelflaeche: Gesamtangabe 130 m2, Einzelwerte Gross 51 m2 + Rollgenua 71 m2 ergeben 122 m2 (Konflikt). Verdraengung 12,92 t bei halber Beladung. Kabinen 3/4/5 belegt, Kojenspanne 6-10, Nasszellen mit 3 angegeben (bezieht sich vermutlich auf die groesseren Layouts). Baujahr: 'seit 2016'; die Variante Cruiser 51 Style wird mit 2015-2022 angegeben. Rumpflaenge und Laenge ueber alles werden beide mit 14,99 m angegeben."
+      "verified_on": "2026-09-15",
+      "notes": "Erste Suche lieferte nur 1,85 m Tiefgang - die zweite zeigte, dass das der Flachkiel ist und der Standardkiel 2,25 m hat. Segelfläche: Gesamtangabe 130 m², Einzelwerte Gross 51 m² + Rollgenua 71 m² ergeben 122 m² (Konflikt). Verdrängung 12,92 t bei halber Beladung. Kabinen 3/4/5 belegt, Kojenspanne 6-10, Nasszellen mit 3 angegeben (bezieht sich vermutlich auf die größeren Layouts). Baujahr: 'seit 2016'; die Variante Cruiser 51 Style wird mit 2015-2022 angegeben. Rumpflänge und Länge über alles werden beide mit 14,99 m angegeben."
     },
     {
       "manufacturer": "beneteau",
@@ -735,8 +735,8 @@
         "https://www.boat-specs.com/sailing/sailboats/beneteau/oceanis-30-1-deep-draft",
         "https://48north.com/boats-and-gear/boat-reviews/beneteau-oceanis-30-1/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 8,99 m laut PBO; LOA mit Bugspriet 9,53 m (itboat) - nicht verwechseln. Verdraengung widerspruechlich: 4.120 kg (itboat) vs. 8.805 lbs = rund 3.994 kg (Canadian Boating). Segelflaeche 40,0 m2 = Grosssegel 24 m2 + Selbstwendefock 16 m2 (am Wind); eine Quelle nennt 425 sq ft = 39,5 m2, konsistent. Motor: EU-Basis 14 PS, USA/ueblich Yanmar 3YM20 mit 21 PS. 4 feste Kojen in 2 Doppelkabinen, laut Beneteau zusaetzlich 2 Salonkojen moeglich. Kopfzahl Nasszellen und max. Personen nicht belegt. Es existiert laut boat-specs auch eine Kiel-Schwert-Version, aber ohne belegte Tiefgangswerte."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 8,99 m laut PBO; LOA mit Bugspriet 9,53 m (itboat) - nicht verwechseln. Verdrängung widersprüchlich: 4.120 kg (itboat) vs. 8.805 lbs = rund 3.994 kg (Canadian Boating). Segelfläche 40,0 m² = Grosssegel 24 m² + Selbstwendefock 16 m² (am Wind); eine Quelle nennt 425 sq ft = 39,5 m², konsistent. Motor: EU-Basis 14 PS, USA/üblich Yanmar 3YM20 mit 21 PS. 4 feste Kojen in 2 Doppelkabinen, laut Beneteau zusätzlich 2 Salonkojen möglich. Kopfzahl Nasszellen und max. Personen nicht belegt. Es existiert laut boat-specs auch eine Kiel-Schwert-Version, aber ohne belegte Tiefgangswerte."
     },
     {
       "manufacturer": "beneteau",
@@ -818,8 +818,8 @@
         "https://www.beneteau.com/en-us/oceanis/oceanis-341",
         "https://48north.com/boats-and-gear/48-north-boat-test-beneteau-oceanis-34-1/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Deutlicher Laengen-Widerspruch: Rumpf laut Cruising World/SAIL 32 ft 8 in = 9,96 m, mehrere Haendlerseiten nennen 10,77 m - das ist die Laenge ueber alles mit Bugspriet des Downwind-Pakets. Hier wurde die Rumpflaenge eingetragen. Segelflaeche 49,3 m2 = Am-Wind-Flaeche 531 sq ft (Gross 334 sq ft + Selbstwendefock 197 sq ft); optional Rollgenua 26 m2 oder Squaretop-Gross. Wassertank 231 l Standard, laut Beneteau bis 361 l optional. Motor Yanmar 3YM20 21 PS Standard, 30 PS optional. Kojenzahl und max. Personen nicht belegt. Eine Quelle nennt Tiefgang 1,49 m (= Flachkiel), passend zu 1,50 m. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Performance-/Hubkiel, hydraulisch (1,25-2,55 m)."
+      "verified_on": "2026-09-15",
+      "notes": "Deutlicher Längen-Widerspruch: Rumpf laut Cruising World/SAIL 32 ft 8 in = 9,96 m, mehrere Händlerseiten nennen 10,77 m - das ist die Länge über alles mit Bugspriet des Downwind-Pakets. Hier wurde die Rumpflänge eingetragen. Segelfläche 49,3 m² = Am-Wind-Fläche 531 sq ft (Gross 334 sq ft + Selbstwendefock 197 sq ft); optional Rollgenua 26 m² oder Squaretop-Gross. Wassertank 231 l Standard, laut Beneteau bis 361 l optional. Motor Yanmar 3YM20 21 PS Standard, 30 PS optional. Kojenzahl und max. Personen nicht belegt. Eine Quelle nennt Tiefgang 1,49 m (= Flachkiel), passend zu 1,50 m. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Performance-/Hubkiel, hydraulisch (1,25-2,55 m)."
     },
     {
       "manufacturer": "beneteau",
@@ -890,8 +890,8 @@
         "https://www.theglobesailor.com/oceanis-38-1-specifications-sm4788.html",
         "https://nova-yachting.nl/sites/default/files/Beneteau%20Oceanis%2038.1%20-%20General%20specifications%202021.pdf"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laenge widerspruechlich: 11,13 m (Rumpflaenge, Charterdatenblaetter) vs. 11,50 m (itboat, vermutlich LOA). Hier Rumpflaenge. Tiefgang: eine Quelle (itboat) nennt 2,90 m - das ist gegenueber allen anderen Quellen (2,08 m Tiefkiel / 1,64 m Flachkiel) unplausibel und wurde verworfen. Baujahre 2017-2023 stammen aus einer einzigen Quelle (itboat) und sind nicht gegengeprueft; die Beneteau-URL-Struktur legt eine frueheren Serienstart nahe. Segelflaeche 65,7 m2 = Gross 32,7 m2 + Genua 103% 33 m2; Rollgross alternativ 30 m2. Wassertank 130 l Standard, 200 l optional. Kabinenzahl/Kojen: Quellen nennen 3 Kabinen mit 6 bzw. 8 Personen - widerspruechlich, daher berths und max_persons null. Insgesamt 6 Ausbauversionen belegt, aber ohne Einzelangaben. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Schwenkkiel / Lifting keel (1,26-2,40 m)."
+      "verified_on": "2026-09-15",
+      "notes": "Länge widersprüchlich: 11,13 m (Rumpflänge, Charterdatenblätter) vs. 11,50 m (itboat, vermutlich LOA). Hier Rumpflänge. Tiefgang: eine Quelle (itboat) nennt 2,90 m - das ist gegenüber allen anderen Quellen (2,08 m Tiefkiel / 1,64 m Flachkiel) unplausibel und wurde verworfen. Baujahre 2017-2023 stammen aus einer einzigen Quelle (itboat) und sind nicht gegengeprüft; die Beneteau-URL-Struktur legt eine früheren Serienstart nahe. Segelfläche 65,7 m² = Gross 32,7 m² + Genua 103% 33 m²; Rollgross alternativ 30 m². Wassertank 130 l Standard, 200 l optional. Kabinenzahl/Kojen: Quellen nennen 3 Kabinen mit 6 bzw. 8 Personen - widersprüchlich, daher berths und max_persons null. Insgesamt 6 Ausbauversionen belegt, aber ohne Einzelangaben. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Schwenkkiel / Lifting keel (1,26-2,40 m)."
     },
     {
       "manufacturer": "beneteau",
@@ -991,8 +991,8 @@
         "https://masteryachting.com/en/yacht/beneteau-oceanis-40-1/",
         "https://www.beneteau.com/en-us/oceanis/oceanis-401"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laenge/Breite widerspruechlich: 11,99 m / 4,18 m (Rumpfmasse, itboat + SAIL) gegen 12,90 m / 4,25 m (42,32 ft / 13,94 ft, Haendlerlisting - vermutlich LOA mit Bugspriet). Hier die Rumpfmasse. Segelflaeche 77,3 m2 = Gross 43 m2 + Genua 34,3 m2; Rollgross alternativ 42,4 m2. Wassertank 235 l Standard, 330 l optional. Motor Yanmar 4JH45 mit 45 PS Standard. Kabinenzahl: 2, 3 oder 4 Kabinen mit 1 oder 2 Nasszellen belegt, aber keine Quelle nennt Kojen- oder Nasszellenzahl je Version - daher cabins/berths/heads null und nur die Kabinenanzahl in layout_variants."
+      "verified_on": "2026-09-15",
+      "notes": "Länge/Breite widersprüchlich: 11,99 m / 4,18 m (Rumpfmasse, itboat + SAIL) gegen 12,90 m / 4,25 m (42,32 ft / 13,94 ft, Händlerlisting - vermutlich LOA mit Bugspriet). Hier die Rumpfmasse. Segelfläche 77,3 m² = Gross 43 m² + Genua 34,3 m²; Rollgross alternativ 42,4 m². Wassertank 235 l Standard, 330 l optional. Motor Yanmar 4JH45 mit 45 PS Standard. Kabinenzahl: 2, 3 oder 4 Kabinen mit 1 oder 2 Nasszellen belegt, aber keine Quelle nennt Kojen- oder Nasszellenzahl je Version - daher cabins/berths/heads null und nur die Kabinenanzahl in layout_variants."
     },
     {
       "manufacturer": "beneteau",
@@ -1102,8 +1102,8 @@
         "https://cdn.yachtbroker.org/media/2780152/V12705_OCEANIS_46-1_US_light%202025.pdf",
         "https://nova-yachting.nl/sites/default/files/Beneteau%20Oceanis%2046.1%20-%20General%20specifications%202021.pdf"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Segelflaeche 85,0 m2 = Standard Gross 45 m2 + Selbstwendefock 40 m2; optional Gross 54 m2 + Genua 52 m2, Classic-Gross 58 m2. Ballast je Kielversion belegt: tief 2.735 kg, flach 3.061 kg, Performance 2.576 kg. Motor 57 PS Standard, 80 PS optional. Kabinen 3/4/5 mit 2/3/4 Nasszellen belegt, aber keine Quelle nennt Kojenzahlen je Version - berths daher durchgehend null. Eine Quelle nennt 'sleeping capacity 8', ohne Bezug zu einer konkreten Version, deshalb max_persons null. Baujahr ab 2018 (Serienstart November 2018), Europaeische Yacht des Jahres 2019 Familienfahrtenyacht."
+      "verified_on": "2026-09-15",
+      "notes": "Segelfläche 85,0 m² = Standard Gross 45 m² + Selbstwendefock 40 m²; optional Gross 54 m² + Genua 52 m², Classic-Gross 58 m². Ballast je Kielversion belegt: tief 2.735 kg, flach 3.061 kg, Performance 2.576 kg. Motor 57 PS Standard, 80 PS optional. Kabinen 3/4/5 mit 2/3/4 Nasszellen belegt, aber keine Quelle nennt Kojenzahlen je Version - berths daher durchgehend null. Eine Quelle nennt 'sleeping capacity 8', ohne Bezug zu einer konkreten Version, deshalb max_persons null. Baujahr ab 2018 (Serienstart November 2018), Europäische Yacht des Jahres 2019 Familienfahrtenyacht."
     },
     {
       "manufacturer": "beneteau",
@@ -1195,8 +1195,8 @@
         "https://www.theglobesailor.com/oceanis-51-1-specifications-sm4223.html",
         "https://www.boats.com/reviews/beneteau-oceanis-51-1-review/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laenge widerspruechlich: 15,94 m wird von mehreren Quellen als LOA gefuehrt, 14,98 m (49 ft 1 in) als Rumpflaenge - hier die Rumpflaenge. Tankgroessen stark widerspruechlich: eine Quelle nennt 440 l Wasser / 200 l Diesel als Standard, eine andere 980 l / 400 l (vermutlich Maximalausbau mit Zusatztanks). Hier die Standardwerte. Segelflaeche 91,0 m2 = Gross 45 m2 + Selbstwendefock 46 m2 laut Quelle - eine groessere Selbstwendefock als Gross ist ungewoehnlich, Wert vor Katalogfreigabe pruefen. Motor 80 PS Standard, 100-110 PS optional. 3 bis 5 Kabinen mit 2 bis 4 Nasszellen belegt, Kojenzahlen je Version nicht. max_persons 13 stammt aus zwei Quellen ('bis 13 Personen an Bord'), vermutlich CE-Maximum, nicht Kojenzahl."
+      "verified_on": "2026-09-15",
+      "notes": "Länge widersprüchlich: 15,94 m wird von mehreren Quellen als LOA geführt, 14,98 m (49 ft 1 in) als Rumpflänge - hier die Rumpflänge. Tankgrößen stark widersprüchlich: eine Quelle nennt 440 l Wasser / 200 l Diesel als Standard, eine andere 980 l / 400 l (vermutlich Maximalausbau mit Zusatztanks). Hier die Standardwerte. Segelfläche 91,0 m² = Gross 45 m² + Selbstwendefock 46 m² laut Quelle - eine größere Selbstwendefock als Gross ist ungewöhnlich, Wert vor Katalogfreigabe prüfen. Motor 80 PS Standard, 100-110 PS optional. 3 bis 5 Kabinen mit 2 bis 4 Nasszellen belegt, Kojenzahlen je Version nicht. max_persons 13 stammt aus zwei Quellen ('bis 13 Personen an Bord'), vermutlich CE-Maximum, nicht Kojenzahl."
     },
     {
       "manufacturer": "dehler",
@@ -1245,8 +1245,8 @@
         "https://www.barchemagazine.com/en/dehler-30-one-design-eng/",
         "https://dehler.com/us/historical-models/dehler-30-one-design/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 9.14 m, LOA 10.30 m mit 130 cm Bugspriet, Wasserlinie 8.97 m. Verdraengung 2800 kg bei halber Beladung, Bleibombe 900 kg. Segelflaeche nur in Einzelwerten belegt (Gross 33.5 m2 bzw. 34.5 m2 je nach Quelle, Selbstwendefock 15 m2, Code Zero 52 m2, Gennaker 100/85 m2) - Gesamtsegelflaeche am Wind nicht ausgewiesen, daher null. WASSERTANK: die genannten zwei 200-l-Tanks sind Wasserballasttanks, kein Frischwasser - Frischwasser- und Dieseltankgroesse nicht belegt, daher null. KABINEN UNKLAR: boat-specs.com fuehrt '3 Gaestekabinen, 4 Gaeste, 1 Nasszelle', was fuer einen ausgeraeumten One-Design-Racer unplausibel wirkt und von keiner zweiten Quelle bestaetigt wird - cabins/berths daher null, max_persons 6 (CE-Hoechstzahl an Bord)."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 9.14 m, LOA 10.30 m mit 130 cm Bugspriet, Wasserlinie 8.97 m. Verdrängung 2800 kg bei halber Beladung, Bleibombe 900 kg. Segelfläche nur in Einzelwerten belegt (Gross 33.5 m² bzw. 34.5 m² je nach Quelle, Selbstwendefock 15 m², Code Zero 52 m², Gennaker 100/85 m²) - Gesamtsegelfläche am Wind nicht ausgewiesen, daher null. WASSERTANK: die genannten zwei 200-l-Tanks sind Wasserballasttanks, kein Frischwasser - Frischwasser- und Dieseltankgröße nicht belegt, daher null. KABINEN UNKLAR: boat-specs.com führt '3 Gästekabinen, 4 Gäste, 1 Nasszelle', was für einen ausgeräumten One-Design-Racer unplausibel wirkt und von keiner zweiten Quelle bestätigt wird - cabins/berths daher null, max_persons 6 (CE-Höchstzahl an Bord)."
     },
     {
       "manufacturer": "dehler",
@@ -1315,8 +1315,8 @@
         "https://www.teamwindcraft.com/models/dehler-34/",
         "https://sailboatdata.com/sailboat/dehler-34-3/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "ACHTUNG MODELLVERWECHSLUNG: es gibt drei verschiedene Dehler 34 - van-de-Stadt-Entwurf ab 1983 (10.1 m, 4000 kg), Dehler 34 Performance ab 2003 (Felci/Roseo) und die hier erfasste judel/vrolijk-Version ab 2016. Nur die Version ab 2016 ist charterrelevant. Laengenkonflikt: Quellen nennen 33'10\" / 10.3 m als Rumpflaenge und 10.70 m als LOA - hier 10.30 m als Rumpflaenge. Verdraengung 6000 kg (eine Suchhypothese von 5250 kg wurde nicht bestaetigt). Berths 8 nur aus der Formulierung 'accommodates 8 people' abgeleitet; Kabinenzahl und Nasszellen nicht belegt. Motor Volvo Penta 18 PS Saildrive."
+      "verified_on": "2026-09-15",
+      "notes": "ACHTUNG MODELLVERWECHSLUNG: es gibt drei verschiedene Dehler 34 - van-de-Stadt-Entwurf ab 1983 (10.1 m, 4000 kg), Dehler 34 Performance ab 2003 (Felci/Roseo) und die hier erfasste judel/vrolijk-Version ab 2016. Nur die Version ab 2016 ist charterrelevant. Längenkonflikt: Quellen nennen 33'10\" / 10.3 m als Rumpflänge und 10.70 m als LOA - hier 10.30 m als Rumpflänge. Verdrängung 6000 kg (eine Suchhypothese von 5250 kg wurde nicht bestätigt). Berths 8 nur aus der Formulierung 'accommodates 8 people' abgeleitet; Kabinenzahl und Nasszellen nicht belegt. Motor Volvo Penta 18 PS Saildrive."
     },
     {
       "manufacturer": "dehler",
@@ -1405,8 +1405,8 @@
         "https://itboat.com/models/11328-dehler-38-sq",
         "https://www.yacht.de/en/cruising-yachts/dehler-38-sq-dehler-s-modified-performance-cruiser-on-test/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 11.30 m, LOA 11.64 m. Die Verdraengung 7000 kg ist in der Quelle der Competition-Variante (Tiefgang 2.24 m, Ballast 2050 kg) zugeordnet - Wert fuer die Standardversion nicht separat belegt. Segelflaeche nur in Einzelwerten belegt (Gross 43 m2, Gross optional 49 m2, Selbstwendefock 35.6 m2, Spinnaker 118 m2, Gennaker 112 m2) - Gesamtsegelflaeche nicht ausgewiesen, daher null. Kojenzahl nicht belegt. Modell 2021 ueberarbeitet; Baujahr-Beginn der SQ-Version daher mit 2021 angesetzt."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 11.30 m, LOA 11.64 m. Die Verdrängung 7000 kg ist in der Quelle der Competition-Variante (Tiefgang 2.24 m, Ballast 2050 kg) zugeordnet - Wert für die Standardversion nicht separat belegt. Segelfläche nur in Einzelwerten belegt (Gross 43 m², Gross optional 49 m², Selbstwendefock 35.6 m², Spinnaker 118 m², Gennaker 112 m²) - Gesamtsegelfläche nicht ausgewiesen, daher null. Kojenzahl nicht belegt. Modell 2021 überarbeitet; Baujahr-Beginn der SQ-Version daher mit 2021 angesetzt."
     },
     {
       "manufacturer": "dehler",
@@ -1496,8 +1496,8 @@
         "https://www.dehler.co.uk/files/Dehler_42_Standard_Specification.pdf",
         "https://sailingmagazine.net/article-permalink-1692.html"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 12.42 m, LOA 12.84 m laut offiziellem Datenblatt. Tiefgaenge aus Fussangaben umgerechnet (7'1\" / 7'10\" / 6'6\"). Segelflaeche 93.0 m2 Standard (Gross 52.0 + Rollgenua 105% 41.0); Competition 105.5 m2. Motor Volvo Penta D2-40 (40 PS) - eine Suchzusammenfassung nannte fuer die 42 auch 'ca. 29 hp', das ist vermutlich vom Dehler 38 SQ uebernommen und wurde verworfen, da das Herstellerdatenblatt D2-40 nennt. Verdraengung 9100 kg Standard; Quelle nennt zusaetzlich 18629 lbs Race und 20613 lbs Shoal."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 12.42 m, LOA 12.84 m laut offiziellem Datenblatt. Tiefgänge aus Fussangaben umgerechnet (7'1\" / 7'10\" / 6'6\"). Segelfläche 93.0 m² Standard (Gross 52.0 + Rollgenua 105% 41.0); Competition 105.5 m². Motor Volvo Penta D2-40 (40 PS) - eine Suchzusammenfassung nannte für die 42 auch 'ca. 29 hp', das ist vermutlich vom Dehler 38 SQ übernommen und wurde verworfen, da das Herstellerdatenblatt D2-40 nennt. Verdrängung 9100 kg Standard; Quelle nennt zusätzlich 18629 lbs Race und 20613 lbs Shoal."
     },
     {
       "manufacturer": "delphia",
@@ -1596,8 +1596,8 @@
         "https://www.bwsailing.com/bw/delphia-40-3/",
         "https://sailmagazine.com/boats/delphia-40-3/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Widerspruch beim Tiefgang: metrische Quelle 2,19 m, imperiale Quelle 7'5\" (entspricht 2,26 m); hier der konkretere metrische Wert. Flachkiel 5'11\" = 1,80 m, Schwenkkiel 3'4\"/6'5\" = 1,02 m aufgeholt bis 1,96 m abgesenkt - in keel_variants ist der aufgeholte Wert eingetragen. displacement_kg 8600 ist die Umrechnung der angegebenen 18.960 lbs, so auch in der Quelle genannt. sail_area_m2 68,7 ist die Summe Gross 41,60 m2 + Genua 27,10 m2, keine publizierte Gesamtzahl. water_tank_l 318 aus 84 US-Gallonen; Dieseltank in einer Quelle 55 US-Gallonen (208 l), in einer anderen 210 l - praktisch deckungsgleich. 2-, 3- und 4-Kabinen-Layout sind belegt, Koje- und Nasszellenzahlen nur fuer die 4-Kabinen-Version."
+      "verified_on": "2026-09-15",
+      "notes": "Widerspruch beim Tiefgang: metrische Quelle 2,19 m, imperiale Quelle 7'5\" (entspricht 2,26 m); hier der konkretere metrische Wert. Flachkiel 5'11\" = 1,80 m, Schwenkkiel 3'4\"/6'5\" = 1,02 m aufgeholt bis 1,96 m abgesenkt - in keel_variants ist der aufgeholte Wert eingetragen. displacement_kg 8600 ist die Umrechnung der angegebenen 18.960 lbs, so auch in der Quelle genannt. sail_area_m2 68,7 ist die Summe Gross 41,60 m² + Genua 27,10 m², keine publizierte Gesamtzahl. water_tank_l 318 aus 84 US-Gallonen; Dieseltank in einer Quelle 55 US-Gallonen (208 l), in einer anderen 210 l - praktisch deckungsgleich. 2-, 3- und 4-Kabinen-Layout sind belegt, Koje- und Nasszellenzahlen nur für die 4-Kabinen-Version."
     },
     {
       "manufacturer": "dufour",
@@ -1655,8 +1655,8 @@
         "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-310-grand-large",
         "https://no-frills-sailing.com/dufour-grandlarge-310-so-big-that-small/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laengenkonflikt: eine Quelle nennt 31.73 ft / 9.67 m als Rumpflaenge, sailboatdata 30'8\" / 9.35 m. Hier 9.35 m als Rumpflaenge uebernommen, 9.67 m duerfte LOA sein - vor Katalogfreigabe pruefen. Berths nicht eindeutig belegt (eine Quelle nennt widerspruechlich '4-6 Kojen', eine andere garbled 'ten berths'), daher null. Segelflaeche 50.4 m2 (Gross 33.5 + Genua 16.8). Tiefgang 1.90 m Standard; eine Quelle erwaehnt einen optionalen Hubkiel ohne Massangabe, daher keine keel_variants. Bauzeit-Ende nicht belegt."
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: eine Quelle nennt 31.73 ft / 9.67 m als Rumpflänge, sailboatdata 30'8\" / 9.35 m. Hier 9.35 m als Rumpflänge übernommen, 9.67 m dürfte LOA sein - vor Katalogfreigabe prüfen. Berths nicht eindeutig belegt (eine Quelle nennt widersprüchlich '4-6 Kojen', eine andere garbled 'ten berths'), daher null. Segelfläche 50.4 m² (Gross 33.5 + Genua 16.8). Tiefgang 1.90 m Standard; eine Quelle erwähnt einen optionalen Hubkiel ohne Massangabe, daher keine keel_variants. Bauzeit-Ende nicht belegt."
     },
     {
       "manufacturer": "dufour",
@@ -1736,8 +1736,8 @@
         "https://sailmagazine.com/boats/boat-review-dufour-grand-large-350/",
         "https://www.samboat.com/model/dufour-350-grand-large"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Beide Layouts haben nur eine Nasszelle (2-Kabinen-Version mit separater Duschkabine). Kojenzahl der 2-Kabinen-Version nicht belegt. Motor 19 PS Volvo mit Saildrive. Laengenangabe 10.28 m wird in den Quellen als 'Length' gefuehrt, ob Rumpflaenge oder LOA ist nicht explizit ausgewiesen."
+      "verified_on": "2026-09-15",
+      "notes": "Beide Layouts haben nur eine Nasszelle (2-Kabinen-Version mit separater Duschkabine). Kojenzahl der 2-Kabinen-Version nicht belegt. Motor 19 PS Volvo mit Saildrive. Längenangabe 10.28 m wird in den Quellen als 'Length' geführt, ob Rumpflänge oder LOA ist nicht explizit ausgewiesen."
     },
     {
       "manufacturer": "dufour",
@@ -1807,8 +1807,8 @@
         "https://boattomorrow.com/articles/dufour-390-review",
         "https://www.samboat.com/model/dufour-390-grand-large"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "WIDERSPRUCH beim Flachkiel: eine Quelle nennt 1.75 m, eine andere 1.55 m fuer die Shoal-draft-Version. Da nicht aufloesbar, keine keel_variants eingetragen - vor Katalogfreigabe klaeren. Standardtiefgang 1.95 m (eine weitere Quelle nennt lastabhaengig 1.95-2.05 m). Nasszellen werden mit 2-3 angegeben, hier 2 fuer die belegte 3-Kabinen-Version. Motor 30 PS Standard, 40 PS optional. Segelflaeche 66.5 m2 (Gross 36.6 + Genua 29.9)."
+      "verified_on": "2026-09-15",
+      "notes": "WIDERSPRUCH beim Flachkiel: eine Quelle nennt 1.75 m, eine andere 1.55 m für die Shoal-draft-Version. Da nicht auflösbar, keine keel_variants eingetragen - vor Katalogfreigabe klären. Standardtiefgang 1.95 m (eine weitere Quelle nennt lastabhängig 1.95-2.05 m). Nasszellen werden mit 2-3 angegeben, hier 2 für die belegte 3-Kabinen-Version. Motor 30 PS Standard, 40 PS optional. Segelfläche 66.5 m² (Gross 36.6 + Genua 29.9)."
     },
     {
       "manufacturer": "dufour",
@@ -1878,8 +1878,8 @@
         "https://www.boat-specs.com/sailing/sailboats/dufour/dufour-430-shoal-draft",
         "https://www.samboat.com/model/dufour-430-grand-large"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "6 feste Kojen plus 2 Zusatzkojen laut Quelle. Belegt ist die 3-Kabinen/2-Nasszellen-Version; eine 4-Kabinen-Version liess sich in den Suchergebnissen nicht bestaetigen, daher keine layout_variants. Motor 50 PS Yanmar Saildrive Standard, 60 PS optional. Vorstellung Cannes 2018."
+      "verified_on": "2026-09-15",
+      "notes": "6 feste Kojen plus 2 Zusatzkojen laut Quelle. Belegt ist die 3-Kabinen/2-Nasszellen-Version; eine 4-Kabinen-Version liess sich in den Suchergebnissen nicht bestätigen, daher keine layout_variants. Motor 50 PS Yanmar Saildrive Standard, 60 PS optional. Vorstellung Cannes 2018."
     },
     {
       "manufacturer": "dufour",
@@ -1959,8 +1959,8 @@
         "https://www.nauticexpo.com/prod/dufour-yachts/product-20156-570412.html",
         "https://www.samboat.com/model/dufour-470"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laengenkonflikt: LOA 14.85 m (mit Bugspriet), Rumpflaenge laut einer Quelle 13.99 m / 45.9 ft, Wasserlinie 13.55 m. Hier 13.99 m als Rumpflaenge. Segelflaeche nur in Einzelwerten belegt (Gross 57.0 m2, Genua 50 m2), Summe nicht als Gesamtsegelflaeche ausgewiesen, daher null. Layouts 3 bis 5 Kabinen; das 5-Kabinen-Layout wird mit 10 Schlafplaetzen beschrieben, Nasszellen dazu nicht belegt. Versionen Easy / Ocean / Performance unterscheiden sich im Deckslayout. Ballast 3550 kg."
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: LOA 14.85 m (mit Bugspriet), Rumpflänge laut einer Quelle 13.99 m / 45.9 ft, Wasserlinie 13.55 m. Hier 13.99 m als Rumpflänge. Segelfläche nur in Einzelwerten belegt (Gross 57.0 m², Genua 50 m²), Summe nicht als Gesamtsegelfläche ausgewiesen, daher null. Layouts 3 bis 5 Kabinen; das 5-Kabinen-Layout wird mit 10 Schlafplätzen beschrieben, Nasszellen dazu nicht belegt. Versionen Easy / Ocean / Performance unterscheiden sich im Deckslayout. Ballast 3550 kg."
     },
     {
       "manufacturer": "elan",
@@ -2019,8 +2019,8 @@
         "https://itboat.com/models/2552-elan-e5",
         "https://www.yacht-rent.com/boat-models-in-charter/elan-e5"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "11.96 m ist als LOA belegt, eine separate Rumpflaenge stand nicht in den Suchergebnissen. Segelflaeche nur aufgeteilt belegt (Gross 52 bzw. 51.56 m2, Fock 39 m2, Gennaker 135 m2) - Summe nicht direkt belegt, daher null. Draft 2.40 m bezieht sich auf die Deep-draft-Version; eine Shoal-draft-Version ist erwaehnt, ihr Tiefgang steht aber in keinem Suchergebnis, daher keine keel_variants. Motor 29 hp = Standard Yanmar 3YM30AE, Option Yanmar 4JH45 45 hp."
+      "verified_on": "2026-09-15",
+      "notes": "11.96 m ist als LOA belegt, eine separate Rumpflänge stand nicht in den Suchergebnissen. Segelfläche nur aufgeteilt belegt (Gross 52 bzw. 51.56 m², Fock 39 m², Gennaker 135 m²) - Summe nicht direkt belegt, daher null. Draft 2.40 m bezieht sich auf die Deep-draft-Version; eine Shoal-draft-Version ist erwähnt, ihr Tiefgang steht aber in keinem Suchergebnis, daher keine keel_variants. Motor 29 hp = Standard Yanmar 3YM30AE, Option Yanmar 4JH45 45 hp."
     },
     {
       "manufacturer": "elan",
@@ -2073,8 +2073,8 @@
         "https://www.samboat.com/model/elan-impression-40-1",
         "https://www.theglobesailor.com/elan-impression-40-1-specifications-sm5209.html"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laengenkonflikt: Boat-Specs nennt Rumpflaenge 37'8\" (11.48 m), Sailboatdata LOA 11.99 m. Hier die Rumpflaenge eingetragen. Motor nur als Bereich 29-39 hp belegt, daher null. Kabinen/Kojen/Nasszellen nur als Bereich belegt (2-3 Kabinen, 4-8 Kojen, 1-2 Nasszellen, vier Layout-Varianten, davon nur die 2-Kabinen-/1-Nasszellen-Version namentlich beschrieben) - keine konkreten Einzelvarianten in den Suchergebnissen, daher null bzw. leere Liste. Wassertank 520 l ist als Option ausgewiesen."
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: Boat-Specs nennt Rumpflänge 37'8\" (11.48 m), Sailboatdata LOA 11.99 m. Hier die Rumpflänge eingetragen. Motor nur als Bereich 29-39 hp belegt, daher null. Kabinen/Kojen/Nasszellen nur als Bereich belegt (2-3 Kabinen, 4-8 Kojen, 1-2 Nasszellen, vier Layout-Varianten, davon nur die 2-Kabinen-/1-Nasszellen-Version namentlich beschrieben) - keine konkreten Einzelvarianten in den Suchergebnissen, daher null bzw. leere Liste. Wassertank 520 l ist als Option ausgewiesen."
     },
     {
       "manufacturer": "elan",
@@ -2138,8 +2138,8 @@
         "https://www.samboat.com/model/elan-impression-45-1",
         "https://itboat.com/models/10312-elan-impression-45-1"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laengenkonflikt: mehrere Quellen 13.84-13.85 m (LOA), eine Quelle nennt 13.0 m als Rumpflaenge - hier 13.85 m eingetragen, unsicher. Produktionszeitraum widerspruechlich: eine Quelle 'gebaut seit 2019', eine andere '2019 bis 2021'. Verdraengung nur in lbs belegt (23'000 lbs), hier umgerechnet auf 10'433 kg. Tank Diesel nur in US-Gallonen belegt (56 gal), umgerechnet auf 212 l. Wassertank 572 l als Option ausgewiesen. Segelflaeche nur als unklar formatierte Einzelwerte (Gross/Genua) in ft2, daher null. Motor nur als Optionen belegt (Yanmar 57 hp oder Volvo 75 hp), keine Standardangabe, daher null."
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: mehrere Quellen 13.84-13.85 m (LOA), eine Quelle nennt 13.0 m als Rumpflänge - hier 13.85 m eingetragen, unsicher. Produktionszeitraum widersprüchlich: eine Quelle 'gebaut seit 2019', eine andere '2019 bis 2021'. Verdrängung nur in lbs belegt (23'000 lbs), hier umgerechnet auf 10'433 kg. Tank Diesel nur in US-Gallonen belegt (56 gal), umgerechnet auf 212 l. Wassertank 572 l als Option ausgewiesen. Segelfläche nur als unklar formatierte Einzelwerte (Gross/Genua) in ft2, daher null. Motor nur als Optionen belegt (Yanmar 57 hp oder Volvo 75 hp), keine Standardangabe, daher null."
     },
     {
       "manufacturer": "grand-soleil",
@@ -2198,8 +2198,8 @@
         "https://itboat.com/models/10893-grand-soleil-44",
         "https://www.giornaledellavela.com/2022/09/29/aboard-the-grand-soleil-44-the-villain-of-the-cantiere-del-pardo-photos-and-video/?lang=en"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Gemeint ist das aktuelle Modell von Matteo Polli, nicht der gleichnamige aeltere Grand Soleil 44 aus den 1990ern (sailboatdata fuehrt beide). length_m 13,40 m ist die neben LOA 14,35 m (Standard) bzw. 15,01 m (Race, mit Bugspriet) genannte Rumpflaenge; itboat nennt 13,41 m. sail_area_m2 112 ist die Summe Gross 59 m2 + Fock 108 Prozent 53 m2, keine publizierte Gesamtzahl; mit Selbstwendefock 47 m2 waeren es 106 m2. engine_hp 50 ist die Serienmotorisierung Volvo Penta Saildrive, 60 PS optional. max_persons 10 gilt laut Quelle fuer CE-Kategorie A (12 in B, 14 in C); eine andere Stelle spricht von acht Personen an der Dinette. Jahresangabe widerspruechlich: itboat nennt Produktion seit 2020, Boat of the Year 2022, erste Listings 2022/2023. Kojenzahl und Kielvarianten in den Suchergebnissen nicht belegt. Race- und Performance-Version sind belegt, aber ohne getrennte Kabinen-/Kojenzahlen."
+      "verified_on": "2026-09-15",
+      "notes": "Gemeint ist das aktuelle Modell von Matteo Polli, nicht der gleichnamige ältere Grand Soleil 44 aus den 1990ern (sailboatdata führt beide). length_m 13,40 m ist die neben LOA 14,35 m (Standard) bzw. 15,01 m (Race, mit Bugspriet) genannte Rumpflänge; itboat nennt 13,41 m. sail_area_m2 112 ist die Summe Gross 59 m² + Fock 108 Prozent 53 m², keine publizierte Gesamtzahl; mit Selbstwendefock 47 m² wären es 106 m². engine_hp 50 ist die Serienmotorisierung Volvo Penta Saildrive, 60 PS optional. max_persons 10 gilt laut Quelle für CE-Kategorie A (12 in B, 14 in C); eine andere Stelle spricht von acht Personen an der Dinette. Jahresangabe widersprüchlich: itboat nennt Produktion seit 2020, Boat of the Year 2022, erste Listings 2022/2023. Kojenzahl und Kielvarianten in den Suchergebnissen nicht belegt. Race- und Performance-Version sind belegt, aber ohne getrennte Kabinen-/Kojenzahlen."
     },
     {
       "manufacturer": "hallberg-rassy",
@@ -2258,8 +2258,8 @@
         "https://www.boat-specs.com/sailing/sailboats/hallberg-rassy/hallberg-rassy-340",
         "https://sailboatdata.com/sailboat/hallberg-rassy-340/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 10.36 m; maximale Laenge inkl. Anbauteile 10.95 m. Verdraengung 5.98 t bezieht sich laut Werft auf das leere Standardboot. Kojenzahl nur als Bereich belegt (4-6), daher null; Nasszellenzahl stand in keinem Suchergebnis. Nur ein Tiefgang (1.90 m) belegt, keine Kielvarianten in den Suchergebnissen."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 10.36 m; maximale Länge inkl. Anbauteile 10.95 m. Verdrängung 5.98 t bezieht sich laut Werft auf das leere Standardboot. Kojenzahl nur als Bereich belegt (4-6), daher null; Nasszellenzahl stand in keinem Suchergebnis. Nur ein Tiefgang (1.90 m) belegt, keine Kielvarianten in den Suchergebnissen."
     },
     {
       "manufacturer": "hallberg-rassy",
@@ -2319,8 +2319,8 @@
         "https://nova-yachting.nl/sites/default/files/Hallberg-Rassy%2040C%20-%20Standard%20Specification%202019.pdf",
         "https://www.yachtingmonthly.com/reviews/yacht-reviews/hallberg-rassy-40c-the-best-sailing-boat-h-r-have-ever-built"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Tiefgangskonflikt: 1.92 m in einer Quelle, eine andere Zusammenfassung nennt ca. 1.93-1.99 m bzw. 6'4\" - 1.92 m uebernommen, unsicher. Segelflaeche 90.1 m2 mit Arbeitsfock; optimierte Version mit 1'040 ft2 erwaehnt. Motor Volvo Penta D2-60 (60 hp). Kojen- und Nasszellenzahl nicht als Zahl belegt (Vorschiffskabine mit zwei Kojen, Achterkabine mit Doppel- und Einzelkoje, optional Mittelkoje achtern) - daher null. Keine Kielvarianten in den Suchergebnissen belegt."
+      "verified_on": "2026-09-15",
+      "notes": "Tiefgangskonflikt: 1.92 m in einer Quelle, eine andere Zusammenfassung nennt ca. 1.93-1.99 m bzw. 6'4\" - 1.92 m übernommen, unsicher. Segelfläche 90.1 m² mit Arbeitsfock; optimierte Version mit 1'040 ft2 erwähnt. Motor Volvo Penta D2-60 (60 hp). Kojen- und Nasszellenzahl nicht als Zahl belegt (Vorschiffskabine mit zwei Kojen, Achterkabine mit Doppel- und Einzelkoje, optional Mittelkoje achtern) - daher null. Keine Kielvarianten in den Suchergebnissen belegt."
     },
     {
       "manufacturer": "hallberg-rassy",
@@ -2380,8 +2380,8 @@
         "https://itboat.com/models/7106-hallberg-rassy-44",
         "https://sailboatdata.com/sailboat/hallberg-rassy-44/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 13.68 m, LOA 14.45 m, Wasserlinie 12.88 m. Kojenkonflikt: eine Quelle nennt 6 Kojen in 3 Kabinen, eine andere 4-8 Kojen - daher null. Motor Volvo Penta D2-75 (75 hp). Eine Quelle erwaehnt eine zweite Kieloption mit geringerem Tiefgang, nennt aber keinen Wert - daher keine keel_variants."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 13.68 m, LOA 14.45 m, Wasserlinie 12.88 m. Kojenkonflikt: eine Quelle nennt 6 Kojen in 3 Kabinen, eine andere 4-8 Kojen - daher null. Motor Volvo Penta D2-75 (75 hp). Eine Quelle erwähnt eine zweite Kieloption mit geringerem Tiefgang, nennt aber keinen Wert - daher keine keel_variants."
     },
     {
       "manufacturer": "hanse",
@@ -2453,8 +2453,8 @@
         "https://itboat.com/models/7247-hanse-315",
         "https://sailboatdata.com/sailboat/hanse-315/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Achtung: Es existieren zwei verschiedene Boote mit der Bezeichnung Hanse 315 - ein aelteres Modell (Prospekt 2006, LOA 9,45 m, Tiefgang 1,75/1,40 m, Tank 50 l Diesel / 120 l Wasser, 21 PS) und das hier erfasste Modell seit 2015 (Europas Yacht of the Year 2016, Familienkreuzer). Die Suchergebnisse mischen beide. Uebernommen sind die Werte des 2015er Modells. Verdraengung 5,1 t laut boat-specs, eine andere Quelle nennt 4,3 t - Konflikt ungeklaert. Motor als 13,60 PS Standard angegeben. Rumpflaenge 9,62 m; eine Quelle nennt 9,1 m (vermutlich andere Bezugslaenge)."
+      "verified_on": "2026-09-15",
+      "notes": "Achtung: Es existieren zwei verschiedene Boote mit der Bezeichnung Hanse 315 - ein älteres Modell (Prospekt 2006, LOA 9,45 m, Tiefgang 1,75/1,40 m, Tank 50 l Diesel / 120 l Wasser, 21 PS) und das hier erfasste Modell seit 2015 (Europas Yacht of the Year 2016, Familienkreuzer). Die Suchergebnisse mischen beide. Uebernommen sind die Werte des 2015er Modells. Verdrängung 5,1 t laut boat-specs, eine andere Quelle nennt 4,3 t - Konflikt ungeklärt. Motor als 13,60 PS Standard angegeben. Rumpflänge 9,62 m; eine Quelle nennt 9,1 m (vermutlich andere Bezugslänge)."
     },
     {
       "manufacturer": "hanse",
@@ -2525,8 +2525,8 @@
         "https://www.newwaveyachts.com/pdf_sheets/Hanse%20348%20Specification%20and%20Pricelist.pdf",
         "https://www.sailboat-cruising.com/Hanse-348.html"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Segelflaeche 55,90 m2 ist die Am-Wind-Flaeche (Gross 34,00 + Selbstwendefock 21,90); Vorwind 121,70 m2. Verdraengung 6,56 t bezieht sich auf die L-Kiel-Version. Motor 21 PS Standard, 29 PS optional. Kabinen-/Kojenzahl aus itboat (2 Gaestekabinen, 4 Gaeste, 1 Bad) - Angaben zu einer moeglichen 3-Kabinen-Version standen nicht in den Suchergebnissen."
+      "verified_on": "2026-09-15",
+      "notes": "Segelfläche 55,90 m² ist die Am-Wind-Fläche (Gross 34,00 + Selbstwendefock 21,90); Vorwind 121,70 m². Verdrängung 6,56 t bezieht sich auf die L-Kiel-Version. Motor 21 PS Standard, 29 PS optional. Kabinen-/Kojenzahl aus itboat (2 Gästekabinen, 4 Gäste, 1 Bad) - Angaben zu einer möglichen 3-Kabinen-Version standen nicht in den Suchergebnissen."
     },
     {
       "manufacturer": "hanse",
@@ -2608,8 +2608,8 @@
         "https://www.boatbookings.com/yacht/hanse-388-bareboat-sailing-yacht-pid40012",
         "https://hanseyachts.com/us/historical-models/hanse-388/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Werksseitig ist die 2-Kabinen-Version Standard, die 3-Kabinen-Version Option; hier wurde die im Chartereinsatz uebliche 3-Kabinen-Konfiguration als Basisdatensatz genommen (6 Kojen, 1 Nasszelle laut Charterlisting). Quellen nennen zusaetzlich 'schlaeft bis zu 7 Personen' inkl. Salon. Segelflaeche 72 m2 als Gesamtangabe."
+      "verified_on": "2026-09-15",
+      "notes": "Werksseitig ist die 2-Kabinen-Version Standard, die 3-Kabinen-Version Option; hier wurde die im Chartereinsatz übliche 3-Kabinen-Konfiguration als Basisdatensatz genommen (6 Kojen, 1 Nasszelle laut Charterlisting). Quellen nennen zusätzlich 'schläft bis zu 7 Personen' inkl. Salon. Segelfläche 72 m² als Gesamtangabe."
     },
     {
       "manufacturer": "hanse",
@@ -2681,8 +2681,8 @@
         "https://www.newwaveyachts.com/pdf_sheets/Hanse%20418%20Specification%20and%20Pricelist.pdf",
         "https://www.boatbookings.com/yacht/hanse-418-bareboat-sailing-yacht-pid43028"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 11,99 m, Laenge ueber alles 12,40 m. Verdraengung 10.150 kg gilt fuer den L-Kiel (mittel), fuer den Flachkiel werden ca. 10.410 kg genannt. Segelflaeche 86,80 m2 am Wind (Gross 52,20 + Selbstwendefock 34,60), Vorwind 186,90 m2. Motor 39 PS Standard, 57 PS optional. Nasszellen: eine Charterquelle nennt ausdruecklich 1 Bad / 1 WC bei 3 Kabinen und 6/8 Kojen - fuer den Charterkatalog bitte pro Schiff pruefen, 2-Bad-Versionen sind bei dieser Groesse ueblich, waren aber nicht belegt. Baujahrbeginn in den Quellen als 2017 ('launched in 2017') angegeben."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 11,99 m, Länge über alles 12,40 m. Verdrängung 10.150 kg gilt für den L-Kiel (mittel), für den Flachkiel werden ca. 10.410 kg genannt. Segelfläche 86,80 m² am Wind (Gross 52,20 + Selbstwendefock 34,60), Vorwind 186,90 m². Motor 39 PS Standard, 57 PS optional. Nasszellen: eine Charterquelle nennt ausdrücklich 1 Bad / 1 WC bei 3 Kabinen und 6/8 Kojen - für den Charterkatalog bitte pro Schiff prüfen, 2-Bad-Versionen sind bei dieser Größe üblich, waren aber nicht belegt. Baujahrbeginn in den Quellen als 2017 ('launched in 2017') angegeben."
     },
     {
       "manufacturer": "hanse",
@@ -2744,8 +2744,8 @@
         "https://hanseyachts.hr/en/range/hanse-458",
         "https://www.velmundi.com/hanse-458.html"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 13,55 m, Laenge ueber alles 14,04 m. Tiefgang 2,23 m entspricht der Medium-/L-Kiel-Version. Eine Flachkiel-Version ist belegt (eigene boat-specs-Seite 'Shoal draft'), ein konkreter Meterwert stand in den Suchergebnissen nicht - deshalb keine keel_variants. Motor Yanmar 4JH57 mit 57 PS Standard, 80 PS optional. 4-Kabinen-Version nicht belegt."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 13,55 m, Länge über alles 14,04 m. Tiefgang 2,23 m entspricht der Medium-/L-Kiel-Version. Eine Flachkiel-Version ist belegt (eigene boat-specs-Seite 'Shoal draft'), ein konkreter Meterwert stand in den Suchergebnissen nicht - deshalb keine keel_variants. Motor Yanmar 4JH57 mit 57 PS Standard, 80 PS optional. 4-Kabinen-Version nicht belegt."
     },
     {
       "manufacturer": "hanse",
@@ -2837,8 +2837,8 @@
         "https://sailboatdata.com/sailboat/hanse-508/",
         "https://hanseyachts.com/us/historical-models/hanse-508/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Rumpflaenge 14,93 m, Laenge ueber alles 15,55 m. Segelflaeche 118 m2 ist die Summe der belegten Einzelwerte Gross 66,5 m2 + Selbstwendefock 51,5 m2; eine Gesamtangabe stand nicht in den Suchergebnissen (optionale Genua 87 m2, Gennaker 200 m2). Verdraengung 14,7 t bei halber Beladung fuer den Standardkiel, 15.100 kg fuer den Flachkiel. Layout-Angaben widerspruechlich: eine Quelle nennt fuer die 4-Kabinen-Version 2 Baeder, eine andere 4 Baeder bei 8/10 Kojen, eine dritte 3 Kabinen mit 3 Baedern."
+      "verified_on": "2026-09-15",
+      "notes": "Rumpflänge 14,93 m, Länge über alles 15,55 m. Segelfläche 118 m² ist die Summe der belegten Einzelwerte Gross 66,5 m² + Selbstwendefock 51,5 m²; eine Gesamtangabe stand nicht in den Suchergebnissen (optionale Genua 87 m², Gennaker 200 m²). Verdrängung 14,7 t bei halber Beladung für den Standardkiel, 15.100 kg für den Flachkiel. Layout-Angaben widersprüchlich: eine Quelle nennt für die 4-Kabinen-Version 2 Bäder, eine andere 4 Bäder bei 8/10 Kojen, eine dritte 3 Kabinen mit 3 Bädern."
     },
     {
       "manufacturer": "jeanneau",
@@ -2910,8 +2910,8 @@
         "https://www.jeanneau.com/boats/sailboat/2-sun-odyssey/113-sun-odyssey-319",
         "https://sailboatdata.com/sailboat/sun-odyssey-319-jeanneau/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laenge: 9,44 m wird als Rumpflaenge genannt, 9,99 m als LOA (mit Bugspriet/Ankerbeschlag) - hier die Rumpflaenge. Segelflaeche 45,3 m2 ist die Am-Wind-Flaeche (488 sq ft), davon Gross 23,0 m2. Kojen: Quellen nennen 4 bis 6 (4 feste in 2 Kabinen, bis 6 mit Salonkojen); hier 4 eingetragen. max_persons nicht belegt."
+      "verified_on": "2026-09-15",
+      "notes": "Länge: 9,44 m wird als Rumpflänge genannt, 9,99 m als LOA (mit Bugspriet/Ankerbeschlag) - hier die Rumpflänge. Segelfläche 45,3 m² ist die Am-Wind-Fläche (488 sq ft), davon Gross 23,0 m². Kojen: Quellen nennen 4 bis 6 (4 feste in 2 Kabinen, bis 6 mit Salonkojen); hier 4 eingetragen. max_persons nicht belegt."
     },
     {
       "manufacturer": "jeanneau",
@@ -2983,8 +2983,8 @@
         "https://horizon-yacht-sales.com/wp-content/uploads/2018/07/EN-BK-SO349-180717.pdf",
         "https://www.theglobesailor.com/sun-odyssey-349-specifications-sm3039.html"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "10,34 m wird in den Quellen sowohl als Rumpflaenge wie als LOA gefuehrt; der Wert ist konsistent, die Zuordnung aber nicht sauber belegt. Eine Quelle nannte 'Kabinen 2, 3, 4 oder 5' - fuer einen 34-Fuesser offensichtlich fehlerhaft, verworfen zugunsten der belegten 2- und 3-Kabinen-Version. Flachkiel-Tiefgang in einer Quelle als Bereich 1,26-1,36 m angegeben, was eher zu einem Schwenkkiel passt - Wert daher null gesetzt. Kojen 4-6 (+2 Option) laut Quelle; hier 6 fuer die 3-Kabinen-Version. Motor Yanmar 3YM20 21 PS. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Flachkiel (Quellenangabe 1,26-1,36 m, widerspruechlich)."
+      "verified_on": "2026-09-15",
+      "notes": "10,34 m wird in den Quellen sowohl als Rumpflänge wie als LOA geführt; der Wert ist konsistent, die Zuordnung aber nicht sauber belegt. Eine Quelle nannte 'Kabinen 2, 3, 4 oder 5' - für einen 34-Füßer offensichtlich fehlerhaft, verworfen zugunsten der belegten 2- und 3-Kabinen-Version. Flachkiel-Tiefgang in einer Quelle als Bereich 1,26-1,36 m angegeben, was eher zu einem Schwenkkiel passt - Wert daher null gesetzt. Kojen 4-6 (+2 Option) laut Quelle; hier 6 für die 3-Kabinen-Version. Motor Yanmar 3YM20 21 PS. Ohne Tiefgangsangabe und daher nicht als Variante geführt: Flachkiel (Quellenangabe 1,26-1,36 m, widerspruechlich)."
     },
     {
       "manufacturer": "jeanneau",
@@ -3065,8 +3065,8 @@
         "https://www.yachtingworld.com/yachts-and-gear/first-look-jeanneau-sun-odyssey-380-roomy-35-footer-134267",
         "https://www.greatlakessailingco.com/sales/jeanneau/sun-odyssey-380/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laenge widerspruechlich: 11,75 m wird als Gesamtlaenge gefuehrt, 10,77 m als Rumpflaenge - hier die Rumpflaenge. Segelflaeche 63,0 m2 = Gross 35 m2 + Genua 28 m2. Tiefgang: eine Quelle nennt 2,00 m, eine andere 6 ft 6 in = 1,98 m fuer den Standardkiel - praktisch identisch. Optional wird auch ein Schwenkkiel genannt, ohne Tiefgangswerte. Motor Yanmar 3YM30AE 29 PS. Kojen nur fuer die 2-Kabinen-Version belegt (4)."
+      "verified_on": "2026-09-15",
+      "notes": "Länge widersprüchlich: 11,75 m wird als Gesamtlänge geführt, 10,77 m als Rumpflänge - hier die Rumpflänge. Segelfläche 63,0 m² = Gross 35 m² + Genua 28 m². Tiefgang: eine Quelle nennt 2,00 m, eine andere 6 ft 6 in = 1,98 m für den Standardkiel - praktisch identisch. Optional wird auch ein Schwenkkiel genannt, ohne Tiefgangswerte. Motor Yanmar 3YM30AE 29 PS. Kojen nur für die 2-Kabinen-Version belegt (4)."
     },
     {
       "manufacturer": "jeanneau",
@@ -3148,8 +3148,8 @@
         "https://www.boat-specs.com/sailing/sailboats/jeanneau/sun-odyssey-410-deep-draft",
         "https://www.euroyachts.com/wp-content/uploads/2018/07/sun-odyssey-410-na-1.pdf"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Verdraengung widerspruechlich: 7.900 kg (17.417 lbs) gegen 8.000 kg - Differenz gering, hier 7.900 kg. Wassertank: 330 l Standard, mit Zusatztank 200 l gesamt 530 l; eine Quelle gibt direkt 530 l an. Hier der Standardwert. Tiefgang Tiefkiel wird mit 2,13 bzw. 2,14 m angegeben. Ein Hubkiel wird als Option genannt, ohne Werte. Motor Yanmar 40 PS Standard, 45 PS optional. Segelflaeche 80,3 m2 (865 sq ft). max_persons nicht belegt (3-Kabinen-Version 6+2 Kojen)."
+      "verified_on": "2026-09-15",
+      "notes": "Verdrängung widersprüchlich: 7.900 kg (17.417 lbs) gegen 8.000 kg - Differenz gering, hier 7.900 kg. Wassertank: 330 l Standard, mit Zusatztank 200 l gesamt 530 l; eine Quelle gibt direkt 530 l an. Hier der Standardwert. Tiefgang Tiefkiel wird mit 2,13 bzw. 2,14 m angegeben. Ein Hubkiel wird als Option genannt, ohne Werte. Motor Yanmar 40 PS Standard, 45 PS optional. Segelfläche 80,3 m² (865 sq ft). max_persons nicht belegt (3-Kabinen-Version 6+2 Kojen)."
     },
     {
       "manufacturer": "jeanneau",
@@ -3241,8 +3241,8 @@
         "https://www.theglobesailor.com/sun-odyssey-440-specifications-sm4265.html",
         "https://www.kavas.com/odyssey-440.html"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Baujahr widerspruechlich: eine Quelle nennt 2017 (Vorstellung), eine andere 'gebaut seit 2018'. Hier 2017. Laenge 13,39 m: eine Quelle bezeichnet den Wert als LOA inklusive Bugspriet, eine andere als Rumpflaenge - die Zuordnung bleibt unsicher. Segelflaeche 90,4 m2 = Gross 45,2 m2 + Fock/Genua 45,2 m2. Motor 45 PS Standard, 57 PS optional. Eine Quelle nennt 'bis zu 10 Personen' bei 4 Kabinen, die Layout-Uebersicht dagegen 8 - max_persons daher null. Kojenzahlen je Layout aus den Chartervarianten abgeleitet (2/3/4 Kabinen mit 4/6/8 Personen)."
+      "verified_on": "2026-09-15",
+      "notes": "Baujahr widersprüchlich: eine Quelle nennt 2017 (Vorstellung), eine andere 'gebaut seit 2018'. Hier 2017. Länge 13,39 m: eine Quelle bezeichnet den Wert als LOA inklusive Bugspriet, eine andere als Rumpflänge - die Zuordnung bleibt unsicher. Segelfläche 90,4 m² = Gross 45,2 m² + Fock/Genua 45,2 m². Motor 45 PS Standard, 57 PS optional. Eine Quelle nennt 'bis zu 10 Personen' bei 4 Kabinen, die Layout-Uebersicht dagegen 8 - max_persons daher null. Kojenzahlen je Layout aus den Chartervarianten abgeleitet (2/3/4 Kabinen mit 4/6/8 Personen)."
     },
     {
       "manufacturer": "jeanneau",
@@ -3344,8 +3344,8 @@
         "https://www.sunsail.com/yachts/monohulls/sun-odyssey-490-5-cabin",
         "https://www.yachts.co/wp-content/uploads/2017/07/sun-odyssey-490-EN-BDEF.pdf"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laenge: 14,00 m Rumpflaenge gegen 14,78 m LOA (48 ft 6 in) - hier die Rumpflaenge. Breite widerspruechlich: 4,47 m gegen 4,49 m; Tiefgang 2,23 gegen 2,24 m - jeweils der groessere, konkreter angegebene Wert eingetragen. Segelflaeche 111,4 m2 = Gross 57,8 m2 + Fock/Genua 53,6 m2. Motor Yanmar 57 PS Standard, 80 PS optional. Kabinen 2 bis 5, Nasszellen 2 bis 4, Kojen 4/6/8/10 (+2) laut Quelle - eine Standardkonfiguration ist nicht belegt, daher cabins/berths/heads null und die Varianten in layout_variants."
+      "verified_on": "2026-09-15",
+      "notes": "Länge: 14,00 m Rumpflänge gegen 14,78 m LOA (48 ft 6 in) - hier die Rumpflänge. Breite widersprüchlich: 4,47 m gegen 4,49 m; Tiefgang 2,23 gegen 2,24 m - jeweils der größere, konkreter angegebene Wert eingetragen. Segelfläche 111,4 m² = Gross 57,8 m² + Fock/Genua 53,6 m². Motor Yanmar 57 PS Standard, 80 PS optional. Kabinen 2 bis 5, Nasszellen 2 bis 4, Kojen 4/6/8/10 (+2) laut Quelle - eine Standardkonfiguration ist nicht belegt, daher cabins/berths/heads null und die Varianten in layout_variants."
     },
     {
       "manufacturer": "moody",
@@ -3405,8 +3405,8 @@
         "https://www.yachtingmonthly.com/reviews/yacht-reviews/moody-41-ds-a-deck-saloon-that-pushes-all-boundaries",
         "https://www.yacht.de/en/cruising-yachts/moody-ds-41-the-smallest-moody-in-the-yacht-test/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "length_m 12,52 m ist die in den Quellen als Laenge/LOA (41,08 ft) genannte Zahl; eine davon getrennte Rumpflaenge wurde nicht gefunden. Groesster Widerspruch beim Wassertank: eine Quelle nennt 475 l, eine andere 220 l Standard mit Erweiterung auf bis zu 400 l gesamt; hier 475 uebernommen, der Wert ist vor Uebernahme in den Katalog zu pruefen. sail_area_m2 83 (Gross 45 + Fock 38) steht gegen eine Herstellerangabe von 85,8 m2 maximaler Segelflaeche. engine_hp 57 Serie, 80 PS optional. heads 2 laut Formulierung 'bis zu zwei Nasszellen', also ausstattungsabhaengig. Eine Flachkielvariante wird erwaehnt, die Zahlen dazu (1,83 m gegen 1,85 m Standard) sind widerspruechlich und praktisch identisch, daher keine keel_variants eingetragen."
+      "verified_on": "2026-09-15",
+      "notes": "length_m 12,52 m ist die in den Quellen als Länge/LOA (41,08 ft) genannte Zahl; eine davon getrennte Rumpflänge wurde nicht gefunden. Größter Widerspruch beim Wassertank: eine Quelle nennt 475 l, eine andere 220 l Standard mit Erweiterung auf bis zu 400 l gesamt; hier 475 übernommen, der Wert ist vor Uebernahme in den Katalog zu prüfen. sail_area_m2 83 (Gross 45 + Fock 38) steht gegen eine Herstellerangabe von 85,8 m² maximaler Segelfläche. engine_hp 57 Serie, 80 PS optional. heads 2 laut Formulierung 'bis zu zwei Nasszellen', also ausstattungsabhängig. Eine Flachkielvariante wird erwähnt, die Zahlen dazu (1,83 m gegen 1,85 m Standard) sind widersprüchlich und praktisch identisch, daher keine keel_variants eingetragen."
     },
     {
       "manufacturer": "najad",
@@ -3475,8 +3475,8 @@
         "https://sailboatdata.com/sailboat/najad-395/",
         "https://itboat.com/models/8124-najad-n395-ac"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "11,99 m wird in einer Quelle als Rumpflaenge, in einer anderen als LOA gefuehrt; eine davon abweichende zweite Laengenangabe gab es nicht. Wasser- und Dieseltank werden in mehreren Quellen uebereinstimmend mit je 370 l (98 US-Gallonen) angegeben - identische Werte, aber mehrfach belegt. Es gibt eine Achtercockpit- (AC) und eine Mittelcockpit-Version (CC); die Zahlen hier stammen ueberwiegend aus AC-Quellen, eine getrennte Datenlage fuer CC wurde nicht gefunden. Kojenzahl und max_persons in den Suchergebnissen nicht genannt. Nur ein Tiefgang belegt."
+      "verified_on": "2026-09-15",
+      "notes": "11,99 m wird in einer Quelle als Rumpflänge, in einer anderen als LOA geführt; eine davon abweichende zweite Längenangabe gab es nicht. Wasser- und Dieseltank werden in mehreren Quellen übereinstimmend mit je 370 l (98 US-Gallonen) angegeben - identische Werte, aber mehrfach belegt. Es gibt eine Achtercockpit- (AC) und eine Mittelcockpit-Version (CC); die Zahlen hier stammen überwiegend aus AC-Quellen, eine getrennte Datenlage für CC wurde nicht gefunden. Kojenzahl und max_persons in den Suchergebnissen nicht genannt. Nur ein Tiefgang belegt."
     },
     {
       "manufacturer": "salona",
@@ -3545,8 +3545,8 @@
         "https://www.listingsport.com/sailboats/salona/380",
         "https://www.yanmar.com/marine/product/engines/3ym30ae/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "length_m 11.60 m ist die in den Quellen als LOA/38'1\" angegebene Laenge; eine davon getrennte Rumpflaenge wurde nicht gefunden. displacement_kg 6200 und sail_area_m2 84 sind Umrechnungen der angegebenen 13.669 lbs bzw. 904 sq ft. engine_hp 29: Quellen nennen Yanmar 3YM30AE-C mit 21,3 kW, Yanmar-Datenblatt bestaetigt 29 HP bei 21,3 kW. Kabinenzahl variiert laut Quellen 2-3, Kojen 4-9; 8 Kojen gelten fuer die 3-Kabinen-Version. Nur ein Tiefgang (2,10 m) belegt, keine Kielvarianten gefunden."
+      "verified_on": "2026-09-15",
+      "notes": "length_m 11.60 m ist die in den Quellen als LOA/38'1\" angegebene Länge; eine davon getrennte Rumpflänge wurde nicht gefunden. displacement_kg 6200 und sail_area_m2 84 sind Umrechnungen der angegebenen 13.669 lbs bzw. 904 sq ft. engine_hp 29: Quellen nennen Yanmar 3YM30AE-C mit 21,3 kW, Yanmar-Datenblatt bestätigt 29 HP bei 21,3 kW. Kabinenzahl variiert laut Quellen 2-3, Kojen 4-9; 8 Kojen gelten für die 3-Kabinen-Version. Nur ein Tiefgang (2,10 m) belegt, keine Kielvarianten gefunden."
     },
     {
       "manufacturer": "salona",
@@ -3615,8 +3615,8 @@
         "https://www.theglobesailor.com/salona-46-specifications-sm5958.html",
         "https://www.yachtaris.com/en/sailing-yacht/ad-boats-salona-46-demetra/101378/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "length_m 13.50 m ist die ausdruecklich als Rumpflaenge genannte Zahl (LOA 14,14 m mit Bugspriet). sail_area_m2 109 ist die Summe der belegten Einzelwerte Grossegel 64 m2 + Genua 45 m2, keine als Gesamtflaeche publizierte Zahl. Widerspruch beim Motor: eine Charterquelle nennt 60 PS, die Bootstestquelle 57 PS Yanmar als Serienausstattung; hier 57 uebernommen. Nur der tiefe Kiel (2,61 m) ist belegt, eine Flachkielvariante wurde nicht mit Zahl gefunden. 3- und 4-Kabinen-Version sind belegt, Zahlen nur fuer die 4-Kabinen-Version."
+      "verified_on": "2026-09-15",
+      "notes": "length_m 13.50 m ist die ausdrücklich als Rumpflänge genannte Zahl (LOA 14,14 m mit Bugspriet). sail_area_m2 109 ist die Summe der belegten Einzelwerte Grossegel 64 m² + Genua 45 m², keine als Gesamtfläche publizierte Zahl. Widerspruch beim Motor: eine Charterquelle nennt 60 PS, die Bootstestquelle 57 PS Yanmar als Serienausstattung; hier 57 übernommen. Nur der tiefe Kiel (2,61 m) ist belegt, eine Flachkielvariante wurde nicht mit Zahl gefunden. 3- und 4-Kabinen-Version sind belegt, Zahlen nur für die 4-Kabinen-Version."
     },
     {
       "manufacturer": "sunbeam",
@@ -3686,8 +3686,8 @@
         "https://itboat.com/models/15463-sunbeam-yachts-32-1",
         "https://www.yachtingworld.com/yachts-and-gear/first-look-sunbeam-32-1-133958"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "length_m 9,85 m ist die ausdruecklich als Rumpflaenge genannte Zahl; eine andere Quelle beschreibt das Boot als 9,98-Meter-Yacht (vermutlich LOA mit Bugspriet) - Widerspruch bewusst zugunsten der Rumpflaenge aufgeloest. Widerspruch bei der Personenzahl: eine Quelle nennt Gaestekapazitaet 4 (passend zu 4 Kojen), eine andere spricht von acht Personen an Bord (vermutlich CE-Maximum); hier 4 gesetzt. engine_hp 27 Volvo Penta. Bei diesem Modell war die Datenlage insgesamt duenn, Tankwerte stammen aus einer einzigen Quelle."
+      "verified_on": "2026-09-15",
+      "notes": "length_m 9,85 m ist die ausdrücklich als Rumpflänge genannte Zahl; eine andere Quelle beschreibt das Boot als 9,98-Meter-Yacht (vermutlich LOA mit Bugspriet) - Widerspruch bewusst zugunsten der Rumpflänge aufgelöst. Widerspruch bei der Personenzahl: eine Quelle nennt Gästekapazität 4 (passend zu 4 Kojen), eine andere spricht von acht Personen an Bord (vermutlich CE-Maximum); hier 4 gesetzt. engine_hp 27 Volvo Penta. Bei diesem Modell war die Datenlage insgesamt dünn, Tankwerte stammen aus einer einzigen Quelle."
     },
     {
       "manufacturer": "x-yachts",
@@ -3758,8 +3758,8 @@
         "https://www.boat-specs.com/sailing/sailboats/x-yachts/x4-0-standard",
         "https://sailmagazine.com/boats/boat-review-x-yachts-x4degree/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Laengenkonflikt: eine Quelle nennt 39'8\" (12.09 m), eine andere 37'8\" (11.5 m) als Rumpflaenge - 12.09 m eingetragen, unsicher (die 11.5 m tauchen in denselben Suchlaeufen auch fuer die Elan Impression 40.1 auf, moeglicher Uebertragungsfehler). Verdraengung 8100 kg ist als ECC-Wert belegt. Segelflaeche nur aufgeteilt (Gross 46 m2, selbstwendende Fock 84%, optionale Genua 106% = 37 m2), Summe nicht belegt, daher null. Kojenzahl stand in keinem Suchergebnis."
+      "verified_on": "2026-09-15",
+      "notes": "Längenkonflikt: eine Quelle nennt 39'8\" (12.09 m), eine andere 37'8\" (11.5 m) als Rumpflänge - 12.09 m eingetragen, unsicher (die 11.5 m tauchen in denselben Suchläufen auch für die Elan Impression 40.1 auf, möglicher Uebertragungsfehler). Verdrängung 8100 kg ist als ECC-Wert belegt. Segelfläche nur aufgeteilt (Gross 46 m², selbstwendende Fock 84%, optionale Genua 106% = 37 m²), Summe nicht belegt, daher null. Kojenzahl stand in keinem Suchergebnis."
     },
     {
       "manufacturer": "x-yachts",
@@ -3821,8 +3821,8 @@
         "https://www.yachtingworld.com/yachts-and-gear/first-look-x43-second-generation-133354",
         "https://www.yacht.de/en/cruising-yachts/test-x-4-3-travelling-in-comfort-and-sailing-fast-both-are-possible/"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Tankkonflikt: ein Suchergebnis nennt 340 l als Diesel, ein anderes 340 l Frischwasser und 200 l Diesel (Alutank mittig unter der Steuerbordkoje). Die konkretere Angabe (Wasser 340 / Diesel 200) wurde uebernommen. Achtung: es existieren zwei Generationen X43 (2003-2010 und ab 2016); die Daten hier beziehen sich auf die neuere ab 2016. Kabinen/Kojen/Nasszellen nur als Bereich belegt (2-3 Kabinen, 4-8 Kojen, 1-2 Nasszellen), daher null. Motor nur als Upgrade-Option belegt (Yanmar 4JH57, 57 hp), Standardmotor nicht belegt. Segelflaeche nur aufgeteilt (Gross 54 m2, Genua 106% 43 m2, Spi 150 m2)."
+      "verified_on": "2026-09-15",
+      "notes": "Tankkonflikt: ein Suchergebnis nennt 340 l als Diesel, ein anderes 340 l Frischwasser und 200 l Diesel (Alutank mittig unter der Steuerbordkoje). Die konkretere Angabe (Wasser 340 / Diesel 200) wurde übernommen. Achtung: es existieren zwei Generationen X43 (2003-2010 und ab 2016); die Daten hier beziehen sich auf die neuere ab 2016. Kabinen/Kojen/Nasszellen nur als Bereich belegt (2-3 Kabinen, 4-8 Kojen, 1-2 Nasszellen), daher null. Motor nur als Upgrade-Option belegt (Yanmar 4JH57, 57 hp), Standardmotor nicht belegt. Segelfläche nur aufgeteilt (Gross 54 m², Genua 106% 43 m², Spi 150 m²)."
     },
     {
       "manufacturer": "x-yachts",
@@ -3893,8 +3893,8 @@
         "https://www.cruisingworld.com/xc-45-review/",
         "https://itboat.com/models/906-xc-45"
       ],
-      "verified_on": "2026-09-14",
-      "notes": "Bauzeitraum widerspruechlich: eine Quelle nennt 2013-2023, in den Trefferlisten taucht aber auch ein Datenblatt '2008 X-Yachts Xc 45 Standard' auf - Baubeginn moeglicherweise frueher als 2013. Segelflaeche 112 m2 ist als Wert bei 108% Vorsegel belegt. Motor 80 hp Yanmar."
+      "verified_on": "2026-09-15",
+      "notes": "Bauzeitraum widersprüchlich: eine Quelle nennt 2013-2023, in den Trefferlisten taucht aber auch ein Datenblatt '2008 X-Yachts Xc 45 Standard' auf - Baubeginn möglicherweise früher als 2013. Segelfläche 112 m² ist als Wert bei 108% Vorsegel belegt. Motor 80 hp Yanmar."
     }
   ]
 }

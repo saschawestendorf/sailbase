@@ -59,7 +59,7 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
   if (!email) {
     return (
       <div className="mx-auto w-full max-w-md px-4 py-12">
-        <h1 className="text-2xl font-semibold tracking-tight">Buchung {reference}</h1>
+        <h1 className="text-3xl">Buchung {reference}</h1>
         <p className="mt-2 text-sm text-muted">
           Zur Sicherheit brauchen wir die E-Mail-Adresse, mit der gebucht wurde.
         </p>
@@ -84,7 +84,7 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
       error instanceof ApiError ? error.message : "Buchung konnte nicht geladen werden";
     return (
       <div className="mx-auto w-full max-w-md px-4 py-12">
-        <h1 className="text-2xl font-semibold tracking-tight">Buchung {reference}</h1>
+        <h1 className="text-3xl">Buchung {reference}</h1>
         <p className="mt-3 rounded-lg bg-warn-soft px-3 py-2 text-sm text-warn">{message}</p>
         <div className="mt-6">
           <BookingLookup defaultReference={reference} />
@@ -104,7 +104,7 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="font-mono text-sm text-muted">{booking.reference}</p>
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-3xl">
             {booking.boat?.name ?? "Charterbuchung"}
           </h1>
           <p className="mt-1 text-muted">
@@ -133,7 +133,7 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
       <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_20rem]">
         <div className="space-y-5">
           <section className="card p-5">
-            <h2 className="text-lg font-semibold">Zahlungen</h2>
+            <h2 className="text-lg">Zahlungen</h2>
             <table className="mt-3 w-full text-sm">
               <thead className="text-left text-xs uppercase tracking-wide text-muted">
                 <tr>
@@ -178,7 +178,7 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
 
           {ops?.orders?.length ? (
             <section className="card p-5">
-              <h2 className="text-lg font-semibold">Ablauf</h2>
+              <h2 className="text-lg">Ablauf</h2>
               <ul className="mt-3 space-y-3">
                 {ops.orders.map((order) => {
                   const total = order.checklist?.length ?? 0;
@@ -223,7 +223,7 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
 
           {ops?.contract?.text_md ? (
             <section className="card p-5">
-              <h2 className="text-lg font-semibold">Chartervertrag</h2>
+              <h2 className="text-lg">Chartervertrag</h2>
               <p className="mt-1 text-sm text-muted">
                 Version {ops.contract.version} ·{" "}
                 {ops.contract_accepted_customer_at
@@ -240,7 +240,7 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
         <aside className="space-y-5">
           {booking.boat ? (
             <section className="card p-5">
-              <h2 className="text-base font-semibold">Schiff und Hafen</h2>
+              <h2 className="text-base">Schiff und Hafen</h2>
               <p className="mt-2 text-sm text-muted">
                 {booking.boat.manufacturer} {booking.boat.model} · {booking.boat.length_m.toFixed(2)} m
               </p>
@@ -259,7 +259,7 @@ export default async function BookingPage(props: PageProps<"/booking/[reference]
 
           {booking.price_breakdown?.total_cents ? (
             <section className="card p-5">
-              <h2 className="text-base font-semibold">Preisdetails</h2>
+              <h2 className="text-base">Preisdetails</h2>
               <div className="mt-3">
                 <PriceExplainer breakdown={booking.price_breakdown} />
               </div>

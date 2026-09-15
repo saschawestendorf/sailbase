@@ -102,9 +102,12 @@ def seed_catalog(db: Session) -> dict[str, ModelVersion]:
         version.source_url = entry.get("source_url", "")
         version.verified_on = date.fromisoformat(entry["verified_on"]) if entry.get("verified_on") else None
         version.caveat = entry.get("notes", "")
-        version.model_images = [
-            f"https://picsum.photos/seed/model-{entry['manufacturer']}-{entry['slug']}/1200/800"
-        ]
+        # Keine Fotos aus Fremdquellen: ein zufälliges Bild, das als Modellfoto
+        # ausgewiesen wird, ist eine Falschaussage über das Schiff und hat
+        # obendrein keine geklärten Bildrechte. Bis echte Werftbilder mit
+        # geklärter Nutzung vorliegen, bleibt der Katalog bildlos; das Portal
+        # zeichnet dann eine klar erkennbare Illustration.
+        version.model_images = []
         db.add(version)
         db.flush()
 
@@ -198,10 +201,12 @@ def _seed_gallery(db: Session, boat: Boat) -> None:
     db.add(
         BoatImage(
             boat_id=boat.id,
-            url=f"https://picsum.photos/seed/{boat.slug}/1200/800",
+            url=f"/illustration/boot-{boat.slug}.svg",
             origin=ImageOrigin.OWNER.value,
-            caption="Aufnahme des Vercharterers",
-            credit=boat.charterer.name if boat.charterer else "",
+            # Keine erfundene Bildunterschrift: die Demo zeigt eine Zeichnung,
+            # und genau das steht auch darunter.
+            caption="Illustration – für dieses Boot liegt noch kein Foto vor",
+            credit="",
             sort_order=0,
         )
     )
@@ -279,7 +284,7 @@ def _seed_reviews(db: Session, boats_by_slug: dict[str, Boat]) -> None:
         db.add(
             BoatImage(
                 boat_id=boat.id,
-                url=f"https://picsum.photos/seed/guest-{boat.slug}-{index}/1200/800",
+                url=f"/illustration/gast-{boat.slug}-{index}.svg",
                 origin=ImageOrigin.GUEST.value,
                 caption=entry["title"],
                 credit=entry["author"],
@@ -388,7 +393,9 @@ def seed(db: Session, *, with_demo_bookings: bool = True) -> dict:
                 setattr(obj, key, b[key])
         obj.cleaning_fee_cents = b["cleaning_fee"] * 100
         obj.deposit_cents = b["deposit"] * 100
-        obj.images = [f"https://picsum.photos/seed/{slug}/1200/800"]
+        # Das Titelbild kommt aus der Galerie; die Demo hinterlegt dort eine
+        # gezeichnete Szene statt eines fremden Fotos.
+        obj.images = [f"/illustration/boot-{slug}.svg"]
         db.add(obj)
         db.flush()
         policy = obj.pricing or PricingPolicy(

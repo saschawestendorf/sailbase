@@ -230,7 +230,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
       {step === 0 ? (
         <section className="card p-5">
-          <h2 className="text-lg font-semibold">Welches Modell ist es?</h2>
+          <h2 className="text-lg">Welches Modell ist es?</h2>
           <p className="mt-1 text-sm text-muted">
             Wähle das Modell aus dem Katalog. Maße, Tankgrößen und Werksvarianten kommen von dort,
             du musst sie nicht abtippen.
@@ -275,7 +275,7 @@ export default function ListingWizard({ bases, existing }: Props) {
       {step === 1 && detail ? (
         <section className="card space-y-4 p-5">
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg">
               {detail.manufacturer.name} {detail.name}
             </h2>
             <p className="mt-1 text-sm text-muted">
@@ -371,7 +371,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
           {spec ? (
             <div>
-              <h3 className="text-sm font-semibold">Das ergibt diese Konfiguration</h3>
+              <h3 className="text-sm">Das ergibt diese Konfiguration</h3>
               <div className="mt-2">
                 <SpecTable
                   spec={spec}
@@ -388,7 +388,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
       {step === 2 ? (
         <section className="card space-y-4 p-5">
-          <h2 className="text-lg font-semibold">Was nur für dieses Boot gilt</h2>
+          <h2 className="text-lg">Was nur für dieses Boot gilt</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <label className="label" htmlFor="boat-name">
@@ -547,7 +547,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
       {step === 3 ? (
         <section className="card space-y-4 p-5">
-          <h2 className="text-lg font-semibold">Wann und wie darf gechartert werden?</h2>
+          <h2 className="text-lg">Wann und wie darf gechartert werden?</h2>
           <p className="text-sm text-muted">
             Diese Regeln begrenzen, was der Algorithmus anbieten darf. Je enger sie sind, desto
             weniger Lücken kann er füllen.
@@ -716,7 +716,7 @@ export default function ListingWizard({ bases, existing }: Props) {
 
       {step === 4 ? (
         <section className="card space-y-4 p-5">
-          <h2 className="text-lg font-semibold">Dein Preisrahmen</h2>
+          <h2 className="text-lg">Dein Preisrahmen</h2>
           <p className="text-sm text-muted">
             Du gibst die Grenzen vor, der Algorithmus arbeitet strikt darin. Unter die
             Untergrenze geht er nie, auch nicht bei leerem Kalender.

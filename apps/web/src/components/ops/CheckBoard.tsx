@@ -156,7 +156,7 @@ export default function CheckBoard({
         ))}
 
         <section className="card p-5">
-          <h2 className="text-lg font-semibold">Schäden</h2>
+          <h2 className="text-lg">Schäden</h2>
           <p className="mt-1 text-sm text-muted">
             Bei der Rücknahme als Auffälligkeit markierte Punkte landen hier. Vorher-/Nachher-Fotos
             liegen an den jeweiligen Checklistenpunkten.
@@ -180,7 +180,7 @@ export default function CheckBoard({
         {ops.contract?.text_md ? (
           <section className="card p-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h2 className="text-lg font-semibold">Chartervertrag</h2>
+              <h2 className="text-lg">Chartervertrag</h2>
               {ops.contract_accepted_charterer_at ? (
                 <span className="text-sm text-positive">
                   von dir bestätigt am {dateLabel(ops.contract_accepted_charterer_at)}
@@ -216,7 +216,7 @@ export default function CheckBoard({
 
       <aside className="space-y-4">
         <section className="card p-5">
-          <h2 className="text-base font-semibold">Crew und Unterlagen</h2>
+          <h2 className="text-base">Crew und Unterlagen</h2>
           {ops.crew_list?.length ? (
             <ul className="mt-2 space-y-1 text-sm">
               {ops.crew_list.map((member, index) => (
@@ -247,7 +247,7 @@ export default function CheckBoard({
         </section>
 
         <section className="card p-5">
-          <h2 className="text-base font-semibold">Zahlungen</h2>
+          <h2 className="text-base">Zahlungen</h2>
           <ul className="mt-2 space-y-1 text-sm">
             {payments.map((payment) => (
               <li key={payment.id} className="flex items-baseline justify-between gap-2">
@@ -266,7 +266,7 @@ export default function CheckBoard({
         </section>
 
         <section className="card p-5">
-          <h2 className="text-base font-semibold">Abrechnung</h2>
+          <h2 className="text-base">Abrechnung</h2>
           {ops.payout ? (
             <dl className="mt-2 space-y-1 text-sm">
               <div className="flex justify-between">

@@ -11,7 +11,7 @@ export default async function NewBoatPage() {
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8">
-      <h1 className="text-2xl font-semibold tracking-tight">Boot einstellen</h1>
+      <h1 className="text-3xl">Boot einstellen</h1>
       <p className="mt-2 max-w-2xl text-muted">
         Modell aus dem Katalog wählen, Varianten bestätigen, Regeln und Preisrahmen setzen. Den
         Rest übernimmt die Preisoptimierung.

@@ -46,10 +46,10 @@ function Stat({
   const toneClass =
     tone === "positive" ? "text-positive" : tone === "warn" ? "text-warn" : "text-foreground";
   return (
-    <div className="card p-4">
-      <p className="text-xs uppercase tracking-wide text-muted">{label}</p>
-      <p className={`mt-1 text-2xl font-semibold ${toneClass}`}>{value}</p>
-      {hint ? <p className="mt-1 text-xs text-muted">{hint}</p> : null}
+    <div className="card p-5">
+      <p className="stat-label">{label}</p>
+      <p className={`stat-value mt-2 ${toneClass}`}>{value}</p>
+      {hint ? <p className="mt-1.5 text-xs leading-relaxed text-muted">{hint}</p> : null}
     </div>
   );
 }
@@ -136,7 +136,7 @@ export default function PricingStudio({ boat }: { boat: BoatDetail }) {
       <div className="space-y-4">
         <section className="card space-y-4 p-5">
           <div>
-            <h2 className="text-lg font-semibold">Dein Preisrahmen</h2>
+            <h2 className="text-lg">Dein Preisrahmen</h2>
             <p className="mt-1 text-sm text-muted">
               Der Algorithmus arbeitet strikt zwischen diesen Werten. Unter die Untergrenze geht er
               nie, auch nicht bei leerem Kalender.
@@ -197,7 +197,7 @@ export default function PricingStudio({ boat }: { boat: BoatDetail }) {
         </section>
 
         <section className="card space-y-3 p-5">
-          <h2 className="text-lg font-semibold">Wie offensiv verkaufen?</h2>
+          <h2 className="text-lg">Wie offensiv verkaufen?</h2>
           <div className="space-y-2">
             {STRATEGIES.map((option) => (
               <button
@@ -322,7 +322,7 @@ export default function PricingStudio({ boat }: { boat: BoatDetail }) {
         </section>
 
         <section className="card p-5 text-sm">
-          <h2 className="text-base font-semibold">Was die Zahl bedeutet</h2>
+          <h2 className="text-base">Was die Zahl bedeutet</h2>
           <p className="mt-2 text-muted">
             Der Erlös je verfügbarem Bootstag rechnet den Jahresumsatz auf die Tage um, an denen
             das Boot überhaupt verfügbar war. Winterlager und Sperrzeiten zählen nicht mit. Damit

@@ -35,6 +35,50 @@ YARDS = {
     "moody": ("moody", "Moody", "DE"),
 }
 
+# Rechercheausgaben kommen oft in ASCII-Umschrift zurueck ("Segelflaeche").
+# Im Portal liest sich das wie ein unfertiger Datensatz, deshalb wird der
+# Fliesstext beim Bauen normalisiert. Bewusst eine ausgeschriebene Liste und
+# keine Regel auf "ae|oe|ue": echte Woerter wie "Quelle", "neuere" oder
+# "Steuerbordkoje" duerfen dabei nicht zerstoert werden.
+UMLAUTS = {
+    "Baeder": "Bäder", "Baedern": "Bädern", "Bezugslaenge": "Bezugslänge",
+    "Charterdatenblaetter": "Charterdatenblätter", "Dieseltankgroesse": "Dieseltankgröße",
+    "Europaeische": "Europäische", "Flaeche": "Fläche", "Fuesser": "Füßer",
+    "Gaeste": "Gäste", "Gaestekabinen": "Gästekabinen", "Gaestekapazitaet": "Gästekapazität",
+    "Gesamtflaeche": "Gesamtfläche", "Gesamtlaenge": "Gesamtlänge",
+    "Gesamtsegelflaeche": "Gesamtsegelfläche", "Groesse": "Größe", "Groesster": "Größter",
+    "Haendlerlisting": "Händlerlisting", "Haendlerseiten": "Händlerseiten",
+    "Hoechstzahl": "Höchstzahl", "Laenge": "Länge", "Laengen": "Längen",
+    "Laengenangabe": "Längenangabe", "Laengenkonflikt": "Längenkonflikt",
+    "Rumpflaenge": "Rumpflänge", "Schlafplaetze": "Schlafplätze",
+    "Schlafplaetzen": "Schlafplätzen", "Segelflaeche": "Segelfläche",
+    "Suchlaeufen": "Suchläufen", "Tankgroessen": "Tankgrößen", "Tiefgaenge": "Tiefgänge",
+    "Verdraengung": "Verdrängung", "aeltere": "ältere", "aelteres": "älteres",
+    "aufgeloest": "aufgelöst", "aufloesbar": "auflösbar", "ausdruecklich": "ausdrücklich",
+    "ausgeraeumten": "ausgeräumten", "ausstattungsabhaengig": "ausstattungsabhängig",
+    "bestaetigen": "bestätigen", "bestaetigt": "bestätigt", "duenn": "dünn",
+    "duerfte": "dürfte", "erwaehnt": "erwähnt", "frueher": "früher",
+    "fruehere": "frühere", "frueheren": "früheren", "fuehrt": "führt", "fuer": "für",
+    "gefuehrt": "geführt", "gegengeprueft": "gegengeprüft", "gegenueber": "gegenüber",
+    "groessere": "größere", "groesseren": "größeren", "klaeren": "klären",
+    "lastabhaengig": "lastabhängig", "moeglich": "möglich", "moeglichen": "möglichen",
+    "moeglicher": "möglicher", "moeglicherweise": "möglicherweise", "pruefen": "prüfen",
+    "schlaeft": "schläft", "ueber": "über", "ueberarbeitet": "überarbeitet",
+    "uebereinstimmend": "übereinstimmend", "uebernommen": "übernommen",
+    "ueberwiegend": "überwiegend", "ueblich": "üblich", "uebliche": "übliche",
+    "ueblichen": "üblichen", "ungeklaert": "ungeklärt", "ungewoehnlich": "ungewöhnlich",
+    "waeren": "wären", "widerspruechlich": "widersprüchlich", "zusaetzlich": "zusätzlich",
+}
+UMLAUT_RE = re.compile(r"\b(" + "|".join(sorted(UMLAUTS, key=len, reverse=True)) + r")\b")
+
+
+def de(text: str) -> str:
+    """Setzt Umlaute und Einheitenzeichen eines Fliesstexts zurecht."""
+    text = UMLAUT_RE.sub(lambda m: UMLAUTS[m.group(0)], text or "")
+    # "51 m2" liest sich wie ein Tippfehler; das Portal zeigt sonst ueberall m².
+    return re.sub(r"(?<=\d)(\s?)m2\b", r"\1m²", text)
+
+
 NUMERIC = (
     "length_m", "beam_m", "draft_m", "displacement_kg", "sail_area_m2", "engine_hp",
     "cabins", "berths", "heads", "max_persons", "water_tank_l", "fuel_tank_l",
@@ -193,13 +237,13 @@ def main():
                 "manufacturer": yard_slug,
                 "slug": slug,
                 "name": model_name,
-                "designer": entry.get("designer") or "",
+                "designer": de(entry.get("designer") or ""),
                 "version": {
                     "name": "Serienstand",
                     "year_from": entry.get("year_from"),
                     "year_to": entry.get("year_to"),
                     **values,
-                    "description": entry.get("description") or "",
+                    "description": de(entry.get("description") or ""),
                 },
                 "variants": variants,
                 "source": "Öffentliche Herstellerangaben und Fachdatenbanken, recherchiert",
@@ -208,7 +252,7 @@ def main():
                 "verified_on": today,
                 "notes": " ".join(
                     part for part in (
-                        entry.get("notes") or "",
+                        de(entry.get("notes") or ""),
                         (
                             "Ohne Tiefgangsangabe und daher nicht als Variante geführt: "
                             + ", ".join(undocumented_keels)
