@@ -49,20 +49,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="de"
       className={`${inter.variable} ${fraunces.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-paper-grain">
+      <body className="flex min-h-full flex-col">
         <SiteHeader />
 
         <main className="flex-1">{children}</main>
 
-        <footer className="mt-20 bg-sea text-[#e9f1f4]">
-          <div className="mx-auto w-full max-w-6xl px-4 py-14">
-            <div className="grid gap-10 sm:grid-cols-[1.4fr_1fr_1fr]">
+        <footer className="mt-24 border-t border-line">
+          <div className="mx-auto w-full max-w-6xl px-4 py-16">
+            <div className="grid gap-12 sm:grid-cols-[1.4fr_1fr_1fr]">
               <div>
-                <div className="flex items-center gap-2.5">
-                  <Burgee className="h-7 w-7 text-[#45cfc4]" />
-                  <span className="display text-xl tracking-tight">Sailbase</span>
+                <div className="flex items-center gap-2.5 text-brand">
+                  <Burgee className="h-6 w-6 text-accent" />
+                  <span className="display text-xl">Sailbase</span>
                 </div>
-                <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#9db3bd]">
+                <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
                   Sailbase macht aus einem Boot einen dynamisch buchbaren Vermögenswert:
                   Preisoptimierung, Zahlung und operative Abwicklung in einem Portal.
                 </p>
@@ -70,13 +70,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
               {FOOTER_LINKS.map((group) => (
                 <div key={group.title}>
-                  <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[#74909c]">
+                  <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-faint">
                     {group.title}
                   </p>
-                  <ul className="mt-3 space-y-2 text-sm">
+                  <ul className="mt-4 space-y-2.5 text-sm">
                     {group.items.map((item) => (
                       <li key={item.href}>
-                        <Link href={item.href} className="text-[#cfe0e6] hover:text-white">
+                        <Link href={item.href} className="text-muted hover:text-accent">
                           {item.label}
                         </Link>
                       </li>
@@ -86,7 +86,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               ))}
             </div>
 
-            <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-[#74909c]">
+            <div className="mt-14 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 text-xs text-faint">
               <p>Ostsee · Flensburg bis Rügen</p>
               <p>Demo-Umgebung. Preise und Verfügbarkeiten stammen aus Testdaten.</p>
             </div>

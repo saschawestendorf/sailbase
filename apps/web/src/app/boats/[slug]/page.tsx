@@ -304,7 +304,7 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-          <section className="card p-6">
+          <section className="card card-raised p-6">
             <h2 className="text-lg">Dein Törn</h2>
             <dl className="mt-4 text-sm">
               <Spec term="Übernahme" value={`${dateLabel(startDate)} · ${pickupName}`} />
@@ -324,7 +324,7 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
             </div>
           </section>
 
-          <section className="card p-6">
+          <section className="card card-raised p-6">
             <h2 className="text-lg">Jetzt buchen</h2>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">
               Preis gilt für diesen Zeitraum und wird beim Buchen erneut bestätigt.

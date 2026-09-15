@@ -216,7 +216,7 @@ export default function ListingWizard({ bases, existing }: Props) {
               disabled={index > step}
               className={`rounded-full px-3 py-1 ${
                 index === step
-                  ? "bg-brand font-medium text-white dark:text-[#071722]"
+                  ? "bg-brand font-medium text-white"
                   : index < step
                     ? "bg-accent-soft text-accent"
                     : "bg-surface-muted text-muted"

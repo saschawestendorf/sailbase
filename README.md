@@ -171,13 +171,14 @@ Illustration ausgewiesen – nie als Aufnahme.
 
 ### Gestaltung
 
-Warmes Papier als Fläche, tiefes Marineblau für Struktur, Seegrün für Aktionen, Messing als
-Akzent – bewusst warme statt kühler Graustufen, damit das Portal nicht wie ein
-Verwaltungswerkzeug wirkt. Überschriften und Preise stehen in einer Buchschrift (Fraunces),
-Oberfläche und Zahlen in Inter. Die Tokens liegen vollständig in
+Weiße Fläche, Tinte als Schriftfarbe, Seegrün für Aktionen, Messing für Hinweise. Struktur
+entsteht aus Weißraum, Haarlinien und Typografie, nicht aus Farbflächen: eine Karte ist
+zuerst eine Linie und erst beim Anfassen ein Objekt. Überschriften und Preise stehen in einer
+Buchschrift (Fraunces), Oberfläche und Zahlen in Inter. Die Tokens liegen vollständig in
 `apps/web/src/app/globals.css`; Komponenten greifen über Klassen wie `card`, `field`,
 `btn-primary`, `chip`, `eyebrow` und `stat-value` darauf zu, statt Farben einzeln zu setzen.
-Helles und dunkles Farbschema sind beide definiert und folgen der Systemeinstellung.
+Das Portal ist auf das helle Schema festgelegt (`color-scheme: light`) – ein zweites Schema
+mitzupflegen, das niemand verlangt hat, kostet bei jeder Änderung doppelt.
 
 ### Rollen und nächste Schritte
 
@@ -254,6 +255,33 @@ Nach dem Seeding stehen bereit:
 | Vercharterer | `charter@ostsee-yachting.example` | `charter123` |
 | Servicepartner | `service@hafenhelfer.example` | `partner123` |
 | Kunde | `segler@example.com` | `segeln123` |
+
+### Was der Seed anlegt
+
+Nicht nur Stammdaten, sondern ein durchgespielter Betrieb – sonst lässt sich der
+Ablauf nicht ansehen, und die Kennzahlen im Eigner-Dashboard stehen alle auf
+null. Alles ist relativ zum heutigen Tag gesetzt und mit festem Zufallsstartwert
+erzeugt, also an jedem Tag gleich aufgebaut und trotzdem aktuell:
+
+- **Ein Vorgang je Phase** des Ablaufs, damit jeder Zustand der Abwicklungsseite
+  erreichbar ist: bestätigt, bereit zur Übernahme, übergeben, zurückgenommen
+  (mit offenem Schadenfall), abgerechnet und einer, der auf Zahlung wartet.
+- **Historie und Ausblick**: abgerechnete Buchungen der vergangenen Saison und
+  bestätigte über die nächsten zwölf Monate, verteilt statt geballt, damit die
+  Suche in jeder Woche etwas findet und der Kalender nicht zufällig leer wirkt.
+- **Serviceaufträge** zu jeder bestätigten Buchung, wie sie das System beim
+  Bestätigen selbst anlegt: Bootsbereitschaft, Übergabe, Rücknahme – mit
+  Checklisten, Fotopflicht und zugeordnetem Servicepartner.
+- **Zahlungen** je Buchung: Anzahlung bezahlt, Restzahlung offen oder bezahlt,
+  je nach Fälligkeit 30 Tage vor Törnbeginn.
+
+Die Preise stammen aus der echten Preisregel, gerechnet mit dem Vorlauf, den
+eine solche Buchung gehabt hätte – nicht mit dem Anreisetag. Sonst zeigte die
+Historie lauter Last-Minute-Preise. Für Zeiträume, die der Algorithmus heute gar
+nicht anbietet, steht ein Ersatzwert, der im Datensatz als solcher markiert ist.
+
+Neu aufbauen lässt sich der Bestand jederzeit mit
+`rm apps/api/sailbase.db && .venv/bin/python -m app.seed.seed`.
 
 ## Deployment
 

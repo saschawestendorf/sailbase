@@ -73,7 +73,16 @@ export default function Gallery({ images, name }: { images: BoatImage[]; name: s
           ) : null}
         </div>
         {current.caption || current.credit ? (
-          <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-5 pb-4 pt-12 text-xs text-white/90">
+          /* Ein dunkler Verlauf trägt weiße Schrift nur über einem Foto. Über der
+             hellen Zeichnung wäre er weder schön noch lesbar, deshalb dort eine
+             helle Leiste mit Tintenschrift. */
+          <p
+            className={
+              isIllustration(current.url)
+                ? "absolute inset-x-0 bottom-0 border-t border-line bg-surface/90 px-5 py-2.5 text-xs text-muted backdrop-blur"
+                : "absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-5 pb-4 pt-12 text-xs text-white/90"
+            }
+          >
             {current.caption}
             {current.credit ? ` · ${current.credit}` : ""}
           </p>

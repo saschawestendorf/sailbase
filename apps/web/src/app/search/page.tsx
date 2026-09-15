@@ -97,7 +97,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-10">
-      <div className="card p-5 sm:p-6">
+      <div className="card card-raised p-5 sm:p-6">
         <SearchForm regions={regions} bases={bases} boatClasses={boatClasses} />
       </div>
       {catalogError ? (

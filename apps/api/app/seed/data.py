@@ -497,3 +497,41 @@ PARTNERS = [
         },
     },
 ]
+
+
+# --------------------------------------------------------------------------- demo
+# Ein durchgespielter Betrieb statt einer leeren Datenbank. Die Fälle sind relativ
+# zum heutigen Tag gesetzt, damit die Demo an jedem Tag zeigt, was sie zeigen soll:
+# je ein Vorgang in jeder Phase des Ablaufs, dazu Historie für die Kennzahlen.
+DEMO_GUESTS = [
+    ("Familie Brandt", "brandt@example.com", 4),
+    ("Jan Petersen", "petersen@example.com", 2),
+    ("Crew Seeschwalbe", "seeschwalbe@example.com", 6),
+    ("Miriam Koll", "koll@example.com", 3),
+    ("Törnschule Nord", "toernschule@example.com", 5),
+    ("Ole Hansen", "hansen@example.com", 4),
+    ("Team Backbord", "backbord@example.com", 6),
+    ("Sanne Vos", "vos@example.com", 2),
+]
+
+# (Boot, Status, Start relativ zu heute in Tagen, Nächte, Gast-Index, Notiz)
+# Jede Phase des Ablaufs genau einmal, damit die Abwicklungsseite in jedem
+# Zustand angesehen werden kann.
+DEMO_LIFECYCLE = [
+    ("nordwind", "handed_over", -2, 6, 0, "Crew ist an Bord, Rückgabe steht aus"),
+    ("foerdeperle", "ready", 3, 7, 2, "Boot ist freigegeben, Übergabe geplant"),
+    ("sturmvogel", "confirmed", 12, 5, 3, "Anzahlung bezahlt, Vorbereitung offen"),
+    ("kleine-freiheit", "returned", -9, 7, 1, "Zurück, ein Schaden aufgenommen"),
+    ("windsbraut", "pending_payment", 45, 4, 4, "Wartet auf Zahlung"),
+    ("baltic-star", "settled", -38, 7, 6, "Abgerechnet, Kaution freigegeben"),
+]
+
+DEMO_DAMAGE = {
+    "title": "Fock am Achterliek eingerissen",
+    "description": (
+        "Riss von etwa 15 cm am Achterliek der Fock, bei der Rückgabe gemeinsam "
+        "festgestellt. Segelmacher ist beauftragt, Kostenvoranschlag liegt vor."
+    ),
+    "estimated_cents": 34000,
+    "withheld_cents": 34000,
+}

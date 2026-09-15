@@ -109,12 +109,21 @@ def charterer_stats(db: DB, charterer: CurrentCharterer):
         blocks = sorted(
             availability.overlapping_blocks(db, boat.id, today, horizon), key=lambda x: x.start_date
         )
+        def days_in_window(bl) -> int:
+            return max(0, (min(bl.end_date, horizon) - max(bl.start_date, today)).days)
+
         booked_nights = sum(
-            max(0, (min(bl.end_date, horizon) - max(bl.start_date, today)).days)
-            for bl in blocks
-            if bl.block_type == BlockType.BOOKING.value
+            days_in_window(bl) for bl in blocks if bl.block_type == BlockType.BOOKING.value
         )
-        occ_total += booked_nights / 90
+        # Gegen die verfügbaren Tage, nicht gegen den Kalender: ein Boot im
+        # Winterlager ist nicht schlecht ausgelastet, es steht gar nicht zur
+        # Verfügung. Sonst wäre die Zahl im Herbst strukturell niedrig und über
+        # das Jahr nicht vergleichbar.
+        closed_days = sum(
+            days_in_window(bl) for bl in blocks if bl.block_type == BlockType.CLOSED.value
+        )
+        available_days = max(1, 90 - closed_days)
+        occ_total += booked_nights / available_days
         # free gaps between blocks
         cursor = today
         for bl in blocks:

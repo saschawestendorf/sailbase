@@ -1,52 +1,52 @@
 @import "tailwindcss";
 
-/* Sailbase design language: Leinen und Ostsee.
-   Warme, papierartige Neutraltöne tragen die Fläche, ein tiefes Marineblau die
-   Struktur, Seegrün die Aktionen und ein Messington die Akzente. Bewusst warme
-   statt kühler Graustufen: das unterscheidet den Auftritt von einem
-   Verwaltungswerkzeug, ohne die Lesbarkeit der Zahlen anzutasten. */
+/* Sailbase design language: Weiß, Tinte, Seegrün.
+   Die Fläche ist weiß und bleibt weiß – Struktur entsteht aus Weißraum,
+   Haarlinien und Typografie, nicht aus Farbflächen. Farbe tritt nur dort auf,
+   wo sie etwas bedeutet: Aktionen in Seegrün, Hinweise in Messing, Warnungen
+   in Rostrot. Das ist die teurere Wirkung, weil sie auf Ruhe beruht. */
 :root {
-  --paper: #fbf9f5;
-  --paper-deep: #f4f0e8;
-  --background: var(--paper);
-  --surface: #ffffff;
-  --surface-muted: #f3efe7;
-  --surface-sunk: #ede7dc;
-  --foreground: #0d2029;
-  --muted: #5d6f78;
-  --faint: #8c9aa1;
-  --border: #e2dcd0;
-  --border-strong: #cfc6b6;
-  --brand: #0d3346;
-  --brand-strong: #061f2d;
-  --brand-soft: #e6edf1;
-  --accent: #0a7570;
-  --accent-strong: #065e5a;
-  --accent-soft: #e2f0ee;
-  --brass: #9a763b;
-  --brass-soft: #f5ecdb;
-  --warn: #9c5514;
-  --warn-soft: #fbeedd;
-  --positive: #0d6b46;
-  --positive-soft: #e2f0e8;
+  color-scheme: light;
 
-  /* Erhebung in drei Stufen. Sehr weiche, weit gestreute Schatten mit einem
-     Hauch Blau wirken wie Tageslicht, nicht wie ein Materialschatten. */
-  --shadow-hairline: 0 1px 2px rgba(13, 32, 41, 0.04);
-  --shadow-card: 0 1px 2px rgba(13, 32, 41, 0.04), 0 10px 30px -18px rgba(13, 32, 41, 0.18);
-  --shadow-lift: 0 2px 4px rgba(13, 32, 41, 0.05), 0 22px 45px -22px rgba(13, 32, 41, 0.28);
-  --shadow-float: 0 30px 60px -28px rgba(6, 31, 45, 0.45);
+  --background: #ffffff;
+  --paper: #fbfbf9;
+  --surface: #ffffff;
+  --surface-muted: #f6f6f3;
+  --surface-sunk: #f0efea;
+  --foreground: #12222a;
+  --muted: #5f7079;
+  --faint: #93a1a7;
+  --border: #e7e6e0;
+  --border-strong: #d3d1c8;
+  --brand: #10303f;
+  --brand-strong: #061c27;
+  --brand-soft: #eef3f5;
+  --accent: #0a6f6a;
+  --accent-strong: #05534f;
+  --accent-soft: #e7f2f0;
+  --brass: #94703a;
+  --brass-soft: #f7f0e3;
+  --warn: #9a5217;
+  --warn-soft: #fbf0e5;
+  --positive: #0c6541;
+  --positive-soft: #e6f1eb;
+
+  /* Erhebung sehr sparsam: eine Karte ist zuerst eine Linie, erst beim
+     Anfassen ein Objekt. Schatten mit einem Hauch Blau wirken wie Tageslicht. */
+  --shadow-hairline: 0 1px 2px rgba(18, 34, 42, 0.03);
+  --shadow-card: 0 1px 2px rgba(18, 34, 42, 0.03), 0 8px 24px -20px rgba(18, 34, 42, 0.2);
+  --shadow-lift: 0 2px 6px rgba(18, 34, 42, 0.05), 0 22px 44px -28px rgba(18, 34, 42, 0.3);
+  --shadow-float: 0 24px 60px -34px rgba(18, 34, 42, 0.35);
 
   --radius-sm: 0.5rem;
-  --radius: 0.875rem;
-  --radius-lg: 1.25rem;
-  --radius-xl: 1.75rem;
+  --radius: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-paper: var(--paper);
-  --color-paper-deep: var(--paper-deep);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
   --color-surface-sunk: var(--surface-sunk);
@@ -76,44 +76,10 @@
   --shadow-float: var(--shadow-float);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #061821;
-    --paper-deep: #04121a;
-    --background: var(--paper);
-    --surface: #0b2531;
-    --surface-muted: #10303e;
-    --surface-sunk: #071e28;
-    --foreground: #e9f1f4;
-    --muted: #9db3bd;
-    --faint: #74909c;
-    --border: #1a3f4f;
-    --border-strong: #2a5567;
-    --brand: #8ec9e2;
-    --brand-strong: #c3e4f1;
-    --brand-soft: #0f2f3e;
-    --accent: #45cfc4;
-    --accent-strong: #7ae0d7;
-    --accent-soft: #0b3a39;
-    --brass: #d9b169;
-    --brass-soft: #33280f;
-    --warn: #eca94e;
-    --warn-soft: #36280f;
-    --positive: #4fcb92;
-    --positive-soft: #0c3325;
-
-    --shadow-hairline: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 14px 32px -20px rgba(0, 0, 0, 0.8);
-    --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.35), 0 26px 50px -24px rgba(0, 0, 0, 0.9);
-    --shadow-float: 0 34px 64px -30px rgba(0, 0, 0, 0.95);
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
-  font-feature-settings: "cv05" 1, "ss01" 1;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -134,10 +100,9 @@ table,
   h2,
   h3 {
     font-family: var(--font-display), Georgia, serif;
-    font-weight: 500;
-    letter-spacing: -0.015em;
+    font-weight: 400;
+    letter-spacing: -0.012em;
   }
-  /* Ein sichtbarer, aber nicht lauter Fokusring – überall gleich. */
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
@@ -147,22 +112,22 @@ table,
 
 @layer components {
   /* ---- Flächen ---- */
+  /* Die Standardkarte trägt nur eine Linie. Wo etwas wirklich hervortreten
+     soll, kommt card-raised dazu – sonst schwebt am Ende die ganze Seite. */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
+  }
+  .card-raised {
     box-shadow: var(--shadow-card);
   }
-  /* Nur für Karten, die wirklich anklickbar sind: das Anheben ist ein
-     Affordance-Signal, kein Dekor. */
   .card-link {
     transition:
-      transform 180ms ease,
       box-shadow 180ms ease,
       border-color 180ms ease;
   }
   .card-link:hover {
-    transform: translateY(-3px);
     box-shadow: var(--shadow-lift);
     border-color: var(--border-strong);
   }
@@ -171,20 +136,19 @@ table,
     border: 1px solid var(--border);
     border-radius: var(--radius);
   }
-  .panel-glass {
-    background: color-mix(in srgb, var(--surface) 88%, transparent);
-    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  .panel-raised {
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-float);
-    backdrop-filter: blur(14px) saturate(1.3);
   }
 
   /* ---- Typografie-Bausteine ---- */
   .display {
     font-family: var(--font-display), Georgia, serif;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.04;
+    font-weight: 400;
+    letter-spacing: -0.018em;
+    line-height: 1.06;
   }
   .eyebrow {
     display: inline-flex;
@@ -192,7 +156,7 @@ table,
     gap: 0.5rem;
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--accent);
   }
@@ -201,30 +165,34 @@ table,
     width: 1.75rem;
     height: 1px;
     background: currentColor;
-    opacity: 0.55;
+    opacity: 0.5;
   }
   .lede {
     font-size: 1.0625rem;
-    line-height: 1.65;
+    line-height: 1.7;
     color: var(--muted);
   }
-  /* Feine Trennlinie, die an den Enden ausläuft statt hart abzubrechen. */
   .rule {
     height: 1px;
     border: 0;
-    background: linear-gradient(90deg, transparent, var(--border-strong) 15%, var(--border-strong) 85%, transparent);
+    background: var(--border);
+  }
+  /* Linie, die an den Enden ausläuft – für Abschnitte im Weißraum. */
+  .rule-soft {
+    height: 1px;
+    border: 0;
+    background: linear-gradient(90deg, var(--border-strong), transparent);
   }
 
   /* ---- Formulare ---- */
   .field {
     width: 100%;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-strong);
     background: var(--surface);
     color: var(--foreground);
     padding: 0.6rem 0.75rem;
     font-size: 0.9rem;
-    box-shadow: inset 0 1px 1px rgba(13, 32, 41, 0.03);
     transition:
       border-color 140ms ease,
       box-shadow 140ms ease;
@@ -233,13 +201,13 @@ table,
     color: var(--faint);
   }
   .field:hover {
-    border-color: var(--border-strong);
+    border-color: var(--muted);
   }
   .field:focus,
   .field:focus-visible {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
   }
   .label {
     display: block;
@@ -252,35 +220,29 @@ table,
   }
 
   /* ---- Schaltflächen ---- */
+  /* Eine Volltonfläche, keine Verläufe: der Kontrast macht die Wirkung. */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     border-radius: 999px;
-    background: linear-gradient(180deg, var(--brand) 0%, var(--brand-strong) 100%);
-    color: #fdfcfa;
+    background: var(--brand);
+    color: #ffffff;
     padding: 0.65rem 1.35rem;
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.01em;
-    box-shadow: var(--shadow-card);
     transition:
-      transform 150ms ease,
-      box-shadow 150ms ease,
-      filter 150ms ease;
+      background 150ms ease,
+      box-shadow 150ms ease;
   }
   .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-lift);
-    filter: saturate(1.1);
-  }
-  .btn-primary:active {
-    transform: translateY(0);
+    background: var(--brand-strong);
+    box-shadow: var(--shadow-card);
   }
   .btn-primary:disabled {
-    opacity: 0.5;
-    transform: none;
+    opacity: 0.4;
     box-shadow: none;
   }
   .btn-accent {
@@ -289,29 +251,18 @@ table,
     justify-content: center;
     gap: 0.5rem;
     border-radius: 999px;
-    background: linear-gradient(180deg, var(--accent) 0%, var(--accent-strong) 100%);
-    color: #fdfcfa;
+    background: var(--accent);
+    color: #ffffff;
     padding: 0.65rem 1.35rem;
     font-size: 0.9rem;
     font-weight: 600;
-    box-shadow: var(--shadow-card);
-    transition:
-      transform 150ms ease,
-      box-shadow 150ms ease;
+    transition: background 150ms ease;
   }
   .btn-accent:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-lift);
+    background: var(--accent-strong);
   }
   .btn-accent:disabled {
-    opacity: 0.5;
-    transform: none;
-  }
-  @media (prefers-color-scheme: dark) {
-    .btn-primary,
-    .btn-accent {
-      color: #05161e;
-    }
+    opacity: 0.4;
   }
   .btn-ghost {
     display: inline-flex;
@@ -355,19 +306,19 @@ table,
     gap: 0.3rem;
     border-radius: 999px;
     border: 1px solid var(--border);
-    background: var(--surface-muted);
+    background: var(--surface);
     color: var(--muted);
     padding: 0.2rem 0.65rem;
     font-size: 0.75rem;
     font-weight: 500;
   }
   .chip-accent {
-    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 25%, transparent);
     background: var(--accent-soft);
     color: var(--accent-strong);
   }
   .chip-brass {
-    border-color: color-mix(in srgb, var(--brass) 32%, transparent);
+    border-color: color-mix(in srgb, var(--brass) 28%, transparent);
     background: var(--brass-soft);
     color: var(--brass);
   }
@@ -382,25 +333,23 @@ table,
     letter-spacing: 0.03em;
   }
 
-  /* Preisangabe: große Zahl, ruhige Einheit. */
   .price {
     font-family: var(--font-display), Georgia, serif;
-    font-weight: 500;
+    font-weight: 400;
     font-variant-numeric: tabular-nums;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.018em;
   }
 
-  /* Kennzahl im Dashboard. */
   .stat-value {
     font-family: var(--font-display), Georgia, serif;
-    font-size: 1.75rem;
-    font-weight: 500;
+    font-size: 1.85rem;
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.018em;
     font-variant-numeric: tabular-nums;
   }
   .stat-label {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -409,38 +358,24 @@ table,
 }
 
 @layer utilities {
-  /* Der Verlauf von Wasser zu Himmel, zweimal benutzt: Hero und Bildplatzhalter.
-     Als Utility, damit beide garantiert dieselbe See zeigen. */
-  .bg-sea {
+  /* Himmel und Wasser in hellen Tönen – dieselbe Palette wie die gezeichneten
+     Bilder, damit Flächen und Illustrationen zusammengehören. */
+  .bg-horizon {
     background:
-      radial-gradient(120% 80% at 15% 0%, rgba(69, 207, 196, 0.22) 0%, transparent 55%),
-      radial-gradient(100% 90% at 90% 10%, rgba(154, 118, 59, 0.18) 0%, transparent 50%),
-      linear-gradient(175deg, #0f3a4e 0%, #0b2a3a 45%, #061f2d 100%);
-  }
-  .bg-paper-grain {
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(154, 118, 59, 0.05) 0, transparent 45%),
-      radial-gradient(circle at 80% 70%, rgba(10, 117, 112, 0.05) 0, transparent 45%);
+      radial-gradient(120% 90% at 20% 0%, rgba(10, 111, 106, 0.07) 0%, transparent 60%),
+      radial-gradient(90% 80% at 85% 5%, rgba(148, 112, 58, 0.07) 0%, transparent 55%),
+      linear-gradient(180deg, #ffffff 0%, var(--paper) 70%, #ffffff 100%);
   }
   .text-balance-tight {
     text-wrap: balance;
   }
 }
 
-/* Diagrammtokens. Zwei kategoriale Slots, gegen beide Diagrammflächen geprüft
-   (Nachbarpaar-CVD ΔE 24,7 hell / 26,8 dunkel, Kontrast ≥ 3:1 in beiden). */
+/* Diagrammtokens. Zwei kategoriale Slots, gegen die Diagrammfläche geprüft
+   (Nachbarpaar-CVD ΔE 24,7, Kontrast ≥ 3:1). */
 .viz {
   --series-dynamic: #1f6fb2;
   --series-classic: #c9622c;
-  --viz-grid: #e2dcd0;
+  --viz-grid: #e7e6e0;
   --viz-surface: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  .viz {
-    --series-dynamic: #58a8e6;
-    --series-classic: #e0824a;
-    --viz-grid: #1a3f4f;
-    --viz-surface: #0b2531;
-  }
 }

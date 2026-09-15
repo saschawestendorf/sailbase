@@ -36,9 +36,17 @@ export default async function ChartererPage() {
   }
 
   const openGaps = (stats?.gaps_next_90d ?? []).filter((g) => g.sellable).slice(0, 6);
-  const upcoming = (bookings ?? [])
-    .filter((b) => b.status !== "cancelled" && b.status !== "expired")
-    .slice(0, 8);
+  // Nach vorne sortiert statt nach hinten: was als Nächstes ansteht, ist das,
+  // wofür jemand dieses Dashboard öffnet. Die Liste vom Server läuft rückwärts
+  // durchs Jahr und zeigte sonst zuerst die fernste Buchung.
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const relevant = (bookings ?? []).filter(
+    (b) => b.status !== "cancelled" && b.status !== "expired",
+  );
+  const upcoming = [
+    ...relevant.filter((b) => b.end_date >= todayIso).sort((a, b) => a.start_date.localeCompare(b.start_date)),
+    ...relevant.filter((b) => b.end_date < todayIso).sort((a, b) => b.start_date.localeCompare(a.start_date)),
+  ].slice(0, 10);
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8">
@@ -67,10 +75,14 @@ export default async function ChartererPage() {
             value={money(stats.revenue_cents)}
             hint={`${stats.charter_nights} Chartertage`}
           />
+          {/* Der Vergleich rechnet dieselben Buchungen zum festen Saisontarif nach.
+              Er sagt nichts darüber, ob ein starrer Tarif sie überhaupt bekommen
+              hätte – genau das rechnet die Preisoptimierung je Boot. Das gehört
+              in den Hinweis, sonst liest sich ein Minus wie ein Verlust. */}
           <Stat
-            label="gegenüber statischem Tarif"
+            label="Preis ggü. festem Saisontarif"
             value={signedPercent(stats.dynamic_uplift_cents, stats.static_revenue_cents)}
-            hint={`${money(stats.dynamic_uplift_cents)} Unterschied`}
+            hint={`${money(stats.dynamic_uplift_cents)} bei gleichen Buchungen · was ein starrer Tarif gar nicht verkauft hätte, zeigt die Preisoptimierung`}
           />
           <Stat
             label="Auszahlung offen"
