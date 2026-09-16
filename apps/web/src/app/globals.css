@@ -209,6 +209,69 @@ table,
     border-color: var(--accent);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
   }
+  /* ---- Schieberegler ----
+     Zwei Regler liegen übereinander, damit ein Bereich mit zwei Griffen entsteht.
+     Deshalb schluckt die Spur keine Klicks und nur der Griff nimmt sie an: sonst
+     würde der obere Regler den unteren vollständig abdecken. */
+  .range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: transparent;
+    appearance: none;
+    pointer-events: none;
+  }
+  .range:focus-visible {
+    outline: none;
+  }
+  .range::-webkit-slider-thumb {
+    appearance: none;
+    pointer-events: auto;
+    height: 1.15rem;
+    width: 1.15rem;
+    border-radius: 999px;
+    border: 2px solid var(--accent);
+    background: var(--surface);
+    box-shadow: 0 1px 3px rgb(15 23 32 / 0.18);
+    cursor: grab;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
+  }
+  .range::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+  }
+  .range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  .range::-moz-range-thumb {
+    pointer-events: auto;
+    height: 1.15rem;
+    width: 1.15rem;
+    border-radius: 999px;
+    border: 2px solid var(--accent);
+    background: var(--surface);
+    box-shadow: 0 1px 3px rgb(15 23 32 / 0.18);
+    cursor: grab;
+  }
+  .range:disabled::-webkit-slider-thumb {
+    border-color: var(--border-strong);
+    cursor: not-allowed;
+  }
+  .range:disabled::-moz-range-thumb {
+    border-color: var(--border-strong);
+    cursor: not-allowed;
+  }
+  .range-track {
+    position: absolute;
+    top: 50%;
+    height: 0.3rem;
+    transform: translateY(-50%);
+    border-radius: 999px;
+  }
+
   .label {
     display: block;
     font-size: 0.7rem;

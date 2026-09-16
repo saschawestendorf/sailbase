@@ -5,14 +5,15 @@ import BookingForm from "@/components/BookingForm";
 import Gallery from "@/components/boat/Gallery";
 import Reviews from "@/components/boat/Reviews";
 import PriceExplainer from "@/components/PriceExplainer";
+import PriceGrid from "@/components/PriceGrid";
 import {
   ApiError,
   apiFetch,
-  type CalendarResult,
   getBases,
   getBoat,
   getBoatReviews,
-  getCalendar,
+  getPriceGrid,
+  type PriceGridResult,
   type Quote,
   type Review,
 } from "@/lib/api";
@@ -93,24 +94,35 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
     quoteError = error instanceof ApiError ? error.message : "Preis konnte nicht berechnet werden";
   }
 
-  let calendar: CalendarResult | null = null;
+  // Beim Übernehmen einer Rasterzelle bleiben Crew und Häfen stehen.
+  const boatBaseQuery: [string, string][] = [["persons", String(persons)]];
+  if (pickupBaseId) boatBaseQuery.push(["pickup_base_id", pickupBaseId]);
+  if (dropoffBaseId) boatBaseQuery.push(["dropoff_base_id", dropoffBaseId]);
+
+  // Das Raster für genau dieses Boot: zwei Nächte kürzer bis zwei länger, im
+  // Rahmen dessen, was der Vercharterer zulässt. Damit steht auf der Seite nicht
+  // nur ein Preis, sondern die Antwort auf „ginge es eine Woche später billiger?".
+  const rasterMin = Math.max(boat.min_days, nights - 2);
+  const rasterMax = Math.min(boat.max_days || nights + 2, Math.max(rasterMin, nights + 2));
+  const rasterStart = [today, addDays(startDate, -14)].sort().at(-1)!;
+  let grid: PriceGridResult | null = null;
   try {
-    calendar = await getCalendar(slug, {
-      start: today,
-      days: 45,
-      nights: Math.max(nights || boat.min_days, boat.min_days),
+    grid = await getPriceGrid({
+      window_start: rasterStart,
+      // Das Fenster muss die längste gezeigte Dauer aufnehmen können, sonst
+      // hätte ein langer Törn kein einziges Vergleichsdatum.
+      window_end: addDays(rasterStart, Math.max(60, rasterMax + 7)),
+      focus_nights: nights,
+      min_nights: rasterMin,
+      max_nights: rasterMax,
+      persons,
+      boat_slug: boat.slug,
       pickup_base_id: pickupBaseId,
       dropoff_base_id: dropoffBaseId,
     });
   } catch {
-    calendar = null;
+    grid = null;
   }
-
-  const availableDays = calendar?.days.filter((d) => d.available && d.per_day_cents) ?? [];
-  const cheapest = availableDays.reduce<number | null>(
-    (min, d) => (min === null || (d.per_day_cents ?? 0) < min ? (d.per_day_cents ?? min) : min),
-    null,
-  );
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8">
@@ -248,59 +260,33 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
 
           <Reviews summary={reviewData.summary} reviews={reviewData.reviews} />
 
-          <section className="card p-6 sm:p-7">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
+          {grid && grid.cells.length ? (
+            <PriceGrid
+              /* Neu aufsetzen, sobald der Server eine andere Auswahl liefert. */
+              key={`${grid.window_start}|${startDate}|${nights}`}
+              cells={grid.cells}
+              durations={grid.durations}
+              focusNights={grid.focus_nights}
+              windowStart={grid.window_start}
+              windowEnd={grid.window_end}
+              truncated={grid.truncated}
+              selectedStart={startDate}
+              selectedNights={nights}
+              basePath={`/boats/${boat.slug}`}
+              baseQuery={boatBaseQuery}
+              showBoat={false}
+              title="Preise der nächsten Wochen"
+              hint="Gesamtpreis für diesen Törn. Die Dauer lässt sich durchklicken: der Unterschied steht direkt daneben."
+            />
+          ) : (
+            <section className="card p-6 sm:p-7">
               <h2 className="text-xl">Preise der nächsten Wochen</h2>
-              <p className="text-sm text-muted">
-                Törnlänge {calendar?.nights ?? boat.min_days} Nächte
-                {cheapest ? ` · ab ${money(cheapest)}/Nacht` : ""}
+              <p className="mt-3 text-sm text-muted">
+                Für dieses Boot lässt sich in den nächsten Wochen kein Preis rechnen — der Kalender
+                ist belegt oder der Zeitraum liegt außerhalb der Saison.
               </p>
-            </div>
-            {calendar ? (
-              <div className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-7">
-                {calendar.days.map((day) => {
-                  const active = day.date === startDate;
-                  const href = `/boats/${boat.slug}?start_date=${day.date}&end_date=${addDays(day.date, calendar!.nights)}&persons=${persons}`;
-                  const content = (
-                    <>
-                      <span className="block text-[0.7rem] uppercase tracking-wider text-faint">
-                        {dateLabel(day.date, { day: "2-digit", month: "2-digit" })}
-                      </span>
-                      <span className="tnum mt-0.5 block text-sm font-semibold">
-                        {day.available && day.per_day_cents ? money(day.per_day_cents) : "–"}
-                      </span>
-                    </>
-                  );
-                  if (!day.available) {
-                    return (
-                      <div
-                        key={day.date}
-                        title={day.reason}
-                        className="rounded-xl border border-dashed border-line bg-surface-muted px-2 py-2.5 text-center opacity-70"
-                      >
-                        {content}
-                      </div>
-                    );
-                  }
-                  return (
-                    <Link
-                      key={day.date}
-                      href={href}
-                      className={`rounded-xl border px-2 py-2.5 text-center transition ${
-                        active
-                          ? "border-accent bg-accent-soft text-accent shadow-sm"
-                          : "border-line hover:-translate-y-0.5 hover:border-line-strong hover:shadow-sm"
-                      }`}
-                    >
-                      {content}
-                    </Link>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="mt-3 text-sm text-muted">Kalender derzeit nicht verfügbar.</p>
-            )}
-          </section>
+            </section>
+          )}
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">

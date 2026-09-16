@@ -5,9 +5,7 @@ import SailPlaceholder from "@/components/ui/SailPlaceholder";
 import {
   ApiError,
   type Base,
-  type BoatClass,
   getBases,
-  getBoatClasses,
   getRegions,
   type Region,
 } from "@/lib/api";
@@ -38,10 +36,9 @@ const FIGURES = [
 export default async function HomePage() {
   let regions: Region[] = [];
   let bases: Base[] = [];
-  let boatClasses: BoatClass[] = [];
   let offline = false;
   try {
-    [regions, bases, boatClasses] = await Promise.all([getRegions(), getBases(), getBoatClasses()]);
+    [regions, bases] = await Promise.all([getRegions(), getBases()]);
   } catch (error) {
     offline = error instanceof ApiError;
     if (!offline) throw error;
@@ -92,7 +89,7 @@ export default async function HomePage() {
           </p>
         ) : null}
         <div className="panel-raised p-5 sm:p-7">
-          <SearchForm regions={regions} bases={bases} boatClasses={boatClasses} compact />
+          <SearchForm regions={regions} bases={bases} compact />
         </div>
       </section>
 

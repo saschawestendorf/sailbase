@@ -381,15 +381,48 @@ export type SearchHit = {
 
 export type SearchResult = { count: number; hits: SearchHit[] };
 
-export type CalendarDay = {
-  date: string;
-  available: boolean;
-  per_day_cents: number | null;
-  total_cents: number | null;
-  reason: string;
+/** Eine Zelle des Preisrasters: der günstigste Törn mit diesem Start und dieser Dauer. */
+export type PriceCell = {
+  start_date: string;
+  end_date: string;
+  nights: number;
+  total_cents: number;
+  per_day_cents: number;
+  boat_id: string;
+  boat_slug: string;
+  boat_name: string;
+  boat_count: number;
 };
 
-export type CalendarResult = { boat_id: string; nights: number; days: CalendarDay[] };
+/** Ein Preis dieses einen Boots an diesem Starttag, für die Fokusdauer. */
+export type BoatPrice = {
+  start_date: string;
+  total_cents: number;
+  per_day_cents: number;
+};
+
+/** Ein Boot mit seinen Preisen über die Tage – eine Zeile der Bootsansicht. */
+export type BoatRow = {
+  boat_id: string;
+  slug: string;
+  name: string;
+  length_m: number;
+  base_name: string;
+  character_axis: number | null;
+  cheapest_total_cents: number | null;
+  prices: BoatPrice[];
+};
+
+export type PriceGridResult = {
+  window_start: string;
+  window_end: string;
+  durations: number[];
+  focus_nights: number;
+  cells: PriceCell[];
+  rows: BoatRow[];
+  boats_considered: number;
+  truncated: boolean;
+};
 
 export type Quote = {
   id: string;
@@ -530,11 +563,11 @@ export const getBases = () => apiFetch<Base[]>("/bases", { revalidate: 300 });
 export const getBoatClasses = () => apiFetch<BoatClass[]>("/boat-classes", { revalidate: 300 });
 export const getBoat = (slug: string) => apiFetch<BoatDetail>(`/boats/${encodeURIComponent(slug)}`);
 
-export const getCalendar = (slug: string, params: Query) =>
-  apiFetch<CalendarResult>(`/boats/${encodeURIComponent(slug)}/calendar${toQuery(params)}`);
-
 export const searchBoats = (params: Query) =>
   apiFetch<SearchResult>(`/search${toQuery(params)}`);
+
+export const getPriceGrid = (params: Query) =>
+  apiFetch<PriceGridResult>(`/search/price-grid${toQuery(params)}`);
 
 export const getBooking = (reference: string, email: string) =>
   apiFetch<Booking>(`/bookings/${encodeURIComponent(reference)}${toQuery({ email })}`);

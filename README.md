@@ -120,6 +120,7 @@ Buchungen oder Zahlungen auslösen. Storno, Erstattung, Restzahlung, Kaution und
 benötigen nachvollziehbare Statuswechsel und Zugriffsrechte.
 
 **Stand:** Flexible Angebote, Holds, Verträge, Payment-Provider und Abrechnung existieren.
+Das Preisraster macht den Zeitraum selbst vergleichbar (siehe „Zum Preisraster").
 Produktionsreife des Zahlungsbetriebs und konkurrierender Buchungen ist separat zu prüfen;
 ein vorhandener Provider-Adapter ersetzt diese Prüfung nicht.
 
@@ -199,14 +200,53 @@ strukturierten Daten für feinere Similarity-Scores und Operations-Planung genut
 
 | Seite | Wer | Was dort passiert |
 |---|---|---|
-| `/search` | Kunde | Feste Daten oder ein Zeitfenster mit Dauer von bis; Treffer nach Passung, je Boot mehrere Termine |
-| `/boats/[slug]` | Kunde | Technik mit Quellenangabe, Preiskalender, aufgeschlüsselter Preis, Galerie nach Herkunft, verifizierte Bewertungen |
+| `/search` | Kunde | Feste Daten oder ein Zeitfenster mit Dauer von bis; Preisraster über die Flotte, Treffer nach Passung, je Boot mehrere Termine |
+| `/boats/[slug]` | Kunde | Technik mit Quellenangabe, Preisraster für dieses Boot, aufgeschlüsselter Preis, Galerie nach Herkunft, verifizierte Bewertungen |
 | `/charterer/boats/new` | Vercharterer | Inserat über den Katalog: Modell, Baureihe, Varianten, dann Regeln und Preisrahmen |
 | `/charterer/boats/[id]/pricing` | Vercharterer | Preiskorridor, Strategie und Lückenregel, daneben die Jahresrechnung je verfügbarem Bootstag |
 | `/charterer/bookings/[id]` | Vercharterer | Abwicklung: Vertrag, Papiere, Checklisten mit Fotopflicht, Schäden, Kaution, Auszahlung |
 
 Die Gegenseite der Abwicklung liegt unter `/booking/[reference]`: Zahlungen, Vertrag, Crewliste,
 Bestätigung von Übernahme und Rückgabe und danach die Bewertung mit eigenen Fotos.
+
+### Zur Charakterachse
+
+Der Segelcharakter ist in der Suche ein Schieberegler, keine Schlagwortliste: von seetüchtig und
+klassisch über den Familienfahrtenkreuzer bis zur Sportyacht. Dahinter steht eine Zahl zwischen
+-1 und +1. Jedes Boot bekommt aus seinen Eigenschaften eine Position auf derselben Achse, die
+Passung ist der Abstand.
+
+Der Vorteil: eine Zahl lässt sich abstufen, eine Menge nicht — ein Boot kann *fast* passen.
+Der Preis dafür: die Achse ist eine Einordnung der Plattform, keine Herstellerangabe, und sie
+presst mehrere Eigenschaften in eine Dimension. Ein komfortabler Blauwasserfahrer landet in der
+Mitte, obwohl er beides ist. Die Schlagworte bleiben deshalb am Boot und in der API erhalten;
+die Achse ist eine zusätzliche Sicht, kein Ersatz.
+
+### Zum Preisraster
+
+Ein Preis allein beantwortet die Frage nicht, die vor der Buchung steht: *Wäre eine Woche
+später billiger? Spare ich, wenn ich einen Tag früher zurück bin?* Das Preisraster
+(`GET /search/price-grid`) rechnet dafür jede Kombination aus Starttag und Dauer im Fenster
+durch und behält je Kombination das günstigste passende Boot. Auf der Suchseite läuft es über
+die gefilterte Flotte, auf der Bootsseite über ein einziges Schiff — dieselbe Rechnung, nur
+enger gestellt.
+
+Drei Blickwinkel auf dieselbe Rechnung: **Kalender** (Preis je Abfahrtstag), **Datumsraster**
+(Abfahrt gegen Rückgabe, wie bei Flugpreiskalendern) und **Boote** (jedes Schiff über die Tage,
+damit sichtbar wird, wer den günstigsten Preis macht und was die anderen kosten). Die Bootszeilen
+gelten immer für eine Dauer; alle Dauern je Boot wären ein Vielfaches an Daten für eine Ansicht,
+die ohnehin nur eine zeigt.
+
+Die Farbe vergleicht **innerhalb derselben Dauer**. Ein Vergleich über Dauern hinweg wäre
+keiner: sieben Nächte kosten immer mehr als fünf, grün wäre dann nur ein anderes Wort für
+„kurz". Der ausgewiesene günstigste Törn rechnet dagegen **pro Nacht**, sonst gewänne stets
+die kürzeste Dauer und der Hinweis wäre wertlos.
+
+Zwei Grenzen sind bewusst gesetzt. Die Zahl der Dauern ist gedeckelt, weil mehr Spalten
+niemand mehr liest und jede Rechenzeit kostet. Und die Zahl der bepreisten Kombinationen ist
+gedeckelt, weil ein offenes Fenster über eine wachsende Flotte sonst eine Einladung wäre, den
+Dienst mit einer einzigen Anfrage lahmzulegen. Greift der Deckel, kommt ein gekürztes Raster
+zurück und sagt das auch — lieber eine ehrliche Teilauskunft als eine hängende Seite.
 
 ### Zur Revenue-Vorschau
 
