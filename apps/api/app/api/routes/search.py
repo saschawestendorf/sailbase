@@ -4,7 +4,13 @@ from typing import Annotated
 from fastapi import APIRouter, HTTPException, Query
 
 from app.api.deps import DB, OptionalUser
-from app.schemas.catalog import PriceCellOut, PriceGridOut, SearchHitOut, SearchOut
+from app.schemas.catalog import (
+    BoatRowOut,
+    PriceCellOut,
+    PriceGridOut,
+    SearchHitOut,
+    SearchOut,
+)
 from app.services import pricegrid
 from app.services import reviews as review_service
 from app.services.matching import CrewProfile
@@ -29,8 +35,15 @@ def search_boats(
     boat_class: str | None = None,
     min_length: float | None = Query(default=None, ge=0),
     max_length: float | None = Query(default=None, ge=0),
-    max_price: int | None = Query(default=None, ge=0, description="Gesamtbudget in Cent"),
+    max_price: int | None = Query(default=None, ge=0, description="Obergrenze Gesamtpreis in Cent"),
+    min_price: int | None = Query(default=None, ge=0, description="Untergrenze Gesamtpreis in Cent"),
     character: Annotated[list[str] | None, Query()] = None,
+    character_axis: float | None = Query(
+        default=None,
+        ge=-1,
+        le=1,
+        description="Segelcharakter als Achse: -1 seetüchtig/klassisch, 0 Fahrtenkreuzer, +1 sportlich",
+    ),
     features: Annotated[list[str] | None, Query()] = None,
     tallest_cm: int | None = Query(default=None, ge=100, le=250),
     license_level: int | None = Query(default=None, ge=0, le=5),
@@ -71,6 +84,7 @@ def search_boats(
         experience_nm=eff_exp or 0,
         tallest_person_cm=tallest_cm if tallest_cm is not None else (user.height_cm if user else None),
         preferred_character=character or [],
+        character_axis=character_axis,
         budget_total_cents=max_price,
         wanted_features=features or [],
         min_cabins=min_cabins,
@@ -89,6 +103,8 @@ def search_boats(
         boat_class_slug=boat_class,
         min_length_m=min_length,
         max_length_m=max_length,
+        min_total_cents=min_price,
+        max_total_cents=max_price,
         sort=sort,
         include_unavailable=include_unavailable,
         limit=limit,
@@ -126,6 +142,10 @@ def price_grid(
     max_nights: int | None = Query(default=None, ge=1, le=60),
     persons: int = Query(default=2, ge=1, le=30),
     boat_slug: str | None = Query(default=None, description="Raster für ein einzelnes Boot"),
+    focus_nights: int | None = Query(
+        default=None, ge=1, le=60, description="Dauer, für die die Bootszeilen gerechnet werden"
+    ),
+    max_rows: int = Query(default=12, ge=1, le=30, description="Wie viele Boote als eigene Zeile"),
     region: str | None = None,
     base_id: str | None = None,
     pickup_base_id: str | None = None,
@@ -133,8 +153,15 @@ def price_grid(
     boat_class: str | None = None,
     min_length: float | None = Query(default=None, ge=0),
     max_length: float | None = Query(default=None, ge=0),
-    max_price: int | None = Query(default=None, ge=0, description="Gesamtbudget in Cent"),
+    max_price: int | None = Query(default=None, ge=0, description="Obergrenze Gesamtpreis in Cent"),
+    min_price: int | None = Query(default=None, ge=0, description="Untergrenze Gesamtpreis in Cent"),
     character: Annotated[list[str] | None, Query()] = None,
+    character_axis: float | None = Query(
+        default=None,
+        ge=-1,
+        le=1,
+        description="Segelcharakter als Achse: -1 seetüchtig/klassisch, 0 Fahrtenkreuzer, +1 sportlich",
+    ),
     features: Annotated[list[str] | None, Query()] = None,
     tallest_cm: int | None = Query(default=None, ge=100, le=250),
     license_level: int | None = Query(default=None, ge=0, le=5),
@@ -165,6 +192,7 @@ def price_grid(
         experience_nm=eff_exp or 0,
         tallest_person_cm=tallest_cm if tallest_cm is not None else (user.height_cm if user else None),
         preferred_character=character or [],
+        character_axis=character_axis,
         budget_total_cents=max_price,
         wanted_features=features or [],
         min_cabins=min_cabins,
@@ -180,6 +208,9 @@ def price_grid(
             max_nights=max_nights,
             crew=crew,
             boat_slug=boat_slug,
+            focus_nights=focus_nights,
+            min_price_cents=min_price,
+            max_rows=max_rows,
             region_slug=region,
             base_id=base_id,
             pickup_base_id=pickup_base_id,
@@ -193,7 +224,9 @@ def price_grid(
         window_start=grid.window_start,
         window_end=grid.window_end,
         durations=grid.durations,
+        focus_nights=grid.focus_nights,
         cells=[PriceCellOut(**c.to_dict()) for c in grid.cells],
+        rows=[BoatRowOut(**r.to_dict()) for r in grid.rows],
         boats_considered=grid.boats_considered,
         truncated=grid.truncated,
     )

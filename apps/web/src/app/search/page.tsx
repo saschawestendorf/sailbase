@@ -6,9 +6,7 @@ import SearchForm from "@/components/SearchForm";
 import {
   ApiError,
   type Base,
-  type BoatClass,
   getBases,
-  getBoatClasses,
   getPriceGrid,
   type PriceGridResult,
   getRegions,
@@ -38,10 +36,9 @@ export default async function SearchPage(props: PageProps<"/search">) {
 
   let regions: Region[] = [];
   let bases: Base[] = [];
-  let boatClasses: BoatClass[] = [];
   let catalogError: string | null = null;
   try {
-    [regions, bases, boatClasses] = await Promise.all([getRegions(), getBases(), getBoatClasses()]);
+    [regions, bases] = await Promise.all([getRegions(), getBases()]);
   } catch (err) {
     if (!(err instanceof ApiError)) throw err;
     catalogError = "Die Suchfilter konnten nicht geladen werden. Bitte versuche es erneut.";
@@ -71,6 +68,8 @@ export default async function SearchPage(props: PageProps<"/search">) {
   // Daten wird dafür ein Fenster um den Wunschtermin gelegt und die Dauer um zwei
   // Nächte nach beiden Seiten geöffnet — sonst gäbe es nichts zu vergleichen.
   const wunschNaechte = Math.max(1, nightsBetween(startDate, endDate));
+  // `nights` stellt nur die Bootsansicht um; die Daten der Suche bleiben stehen.
+  const fokusNaechte = Number(first(sp.nights) ?? wunschNaechte);
   const flexibel = Boolean(query.min_nights);
   const gridStart = flexibel
     ? startDate
@@ -80,6 +79,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
     // Das Fenster muss die längste gezeigte Dauer aufnehmen können, sonst hätte
     // ein langer Törn kein einziges Vergleichsdatum.
     window_end: flexibel ? endDate : addDays(gridStart, Math.max(60, wunschNaechte + 9)),
+    focus_nights: String(fokusNaechte),
     min_nights: flexibel ? query.min_nights! : String(Math.max(1, wunschNaechte - 2)),
     max_nights: flexibel ? (query.max_nights ?? query.min_nights!) : String(wunschNaechte + 2),
     persons: query.persons,
@@ -110,7 +110,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
 
   // Beim Übernehmen einer Rasterzelle bleiben alle Filter außer den Daten stehen.
   // Mehrfachwerte bleiben mehrfach – `character` darf nicht zu einem Wert schrumpfen.
-  const DATUMSFELDER = new Set(["start_date", "end_date", "min_nights", "max_nights"]);
+  const DATUMSFELDER = new Set(["start_date", "end_date", "min_nights", "max_nights", "nights"]);
   const gridBaseQuery: [string, string][] = Object.entries(query).flatMap(([k, v]) => {
     if (DATUMSFELDER.has(k)) return [];
     if (Array.isArray(v)) return v.filter(Boolean).map((x) => [k, String(x)] as [string, string]);
@@ -144,7 +144,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-10">
       <div className="card card-raised p-5 sm:p-6">
-        <SearchForm regions={regions} bases={bases} boatClasses={boatClasses} />
+        <SearchForm regions={regions} bases={bases} />
       </div>
       {catalogError ? (
         <p role="alert" className="card mt-4 p-5 text-sm text-warn">
@@ -158,9 +158,11 @@ export default async function SearchPage(props: PageProps<"/search">) {
             /* Neu aufsetzen, sobald der Server eine andere Auswahl liefert: sonst
                bliebe die im Raster gemerkte Auswahl stehen, während die Seite
                darunter schon den neuen Zeitraum zeigt. */
-            key={`${grid.window_start}|${startDate}|${wunschNaechte}`}
+            key={`${grid.window_start}|${startDate}|${wunschNaechte}|${grid.focus_nights}`}
             cells={grid.cells}
+            rows={grid.rows}
             durations={grid.durations}
+            focusNights={grid.focus_nights}
             windowStart={grid.window_start}
             windowEnd={grid.window_end}
             truncated={grid.truncated}

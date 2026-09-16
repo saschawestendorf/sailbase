@@ -3,38 +3,25 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import type { PriceCell } from "@/lib/api";
+import BoatMatrix from "@/components/price/BoatMatrix";
+import DateMatrix from "@/components/price/DateMatrix";
+import { NIVEAU_TEXT, NIVEAUS, niveauVon, PUNKT, ZELLE } from "@/components/price/scale";
+import type { BoatRow, PriceCell } from "@/lib/api";
 import { addDays, dateLabel, money } from "@/lib/format";
 
-/** Wie stark ein Preis vom günstigsten derselben Dauer abweichen darf, um noch
- *  als günstig bzw. normal zu gelten. Die Schwellen sind bewusst grob: sie
- *  sollen eine Richtung zeigen, keine Genauigkeit vortäuschen. */
-const GUENSTIG_BIS = 1.06;
-const NORMAL_BIS = 1.22;
+type Ansicht = "kalender" | "raster" | "boote";
 
-type Niveau = "guenstig" | "normal" | "teuer";
-
-const NIVEAU_ZELLE: Record<Niveau, string> = {
-  guenstig: "border-positive/45 bg-positive-soft text-foreground",
-  normal: "border-line bg-surface text-foreground",
-  teuer: "border-warn/35 bg-warn-soft/50 text-foreground",
-};
-
-const NIVEAU_PUNKT: Record<Niveau, string> = {
-  guenstig: "bg-positive",
-  normal: "bg-line-strong",
-  teuer: "bg-warn",
-};
-
-const NIVEAU_TEXT: Record<Niveau, string> = {
-  guenstig: "günstig",
-  normal: "üblich",
-  teuer: "teuer",
-};
+const ANSICHTEN: { key: Ansicht; label: string; hint: string }[] = [
+  { key: "kalender", label: "Kalender", hint: "Preis je Abfahrtstag" },
+  { key: "raster", label: "Datumsraster", hint: "Abfahrt gegen Rückgabe" },
+  { key: "boote", label: "Boote", hint: "jedes Boot über die Tage" },
+];
 
 export type PriceGridProps = {
   cells: PriceCell[];
+  rows?: BoatRow[];
   durations: number[];
+  focusNights?: number;
   windowStart: string;
   windowEnd: string;
   truncated?: boolean;
@@ -49,7 +36,6 @@ export type PriceGridProps = {
   baseQuery?: [string, string][];
   /** Auf der Suchseite nennt jede Zelle ein Boot, auf der Bootsseite nicht. */
   showBoat?: boolean;
-  /** Überschrift und Erklärtext lassen sich je Seite anpassen. */
   title?: string;
   hint?: string;
 };
@@ -65,7 +51,9 @@ function delta(cents: number): string {
 
 export default function PriceGrid({
   cells,
+  rows = [],
   durations,
+  focusNights,
   windowStart,
   windowEnd,
   truncated = false,
@@ -104,6 +92,7 @@ export default function PriceGrid({
     [cells],
   );
 
+  const [ansicht, setAnsicht] = useState<Ansicht>("kalender");
   const [dauer, setDauer] = useState<number>(() => {
     if (selectedNights && durations.includes(selectedNights)) return selectedNights;
     return bester?.nights ?? durations[0] ?? 7;
@@ -113,10 +102,8 @@ export default function PriceGrid({
     return bester?.start_date ?? startDates[0] ?? windowStart;
   });
 
-  // Referenz für die Farbgebung: der günstigste Preis derselben Dauer. Ein
-  // Vergleich über Dauern hinweg wäre keiner – sieben Nächte kosten immer mehr
-  // als fünf, das sagt über „günstig“ nichts aus.
-  const guenstigsterDerDauer = useMemo(() => {
+  // Bezugswert der Farbgebung: der günstigste Preis derselben Dauer.
+  const bezugJeDauer = useMemo(() => {
     const map = new Map<number, number>();
     for (const c of cells) {
       const vorher = map.get(c.nights);
@@ -124,15 +111,6 @@ export default function PriceGrid({
     }
     return map;
   }, [cells]);
-
-  function niveau(c: PriceCell): Niveau {
-    const basis = guenstigsterDerDauer.get(c.nights);
-    if (!basis) return "normal";
-    const faktor = c.total_cents / basis;
-    if (faktor <= GUENSTIG_BIS) return "guenstig";
-    if (faktor <= NORMAL_BIS) return "normal";
-    return "teuer";
-  }
 
   const gewaehlt = byKey.get(key(start, dauer)) ?? null;
   const letzterStart = startDates.at(-1) ?? null;
@@ -144,6 +122,17 @@ export default function PriceGrid({
     return `${basePath}?${q.toString()}`;
   }
 
+  /** Adresse, die die Bootsansicht auf eine andere Dauer umrechnen lässt. */
+  function nightsHref(nights: number): string {
+    const q = new URLSearchParams(baseQuery);
+    if (gewaehlt) {
+      q.set("start_date", gewaehlt.start_date);
+      q.set("end_date", gewaehlt.end_date);
+    }
+    q.set("nights", String(nights));
+    return `${basePath}?${q.toString()}`;
+  }
+
   if (!cells.length) {
     return (
       <section className="card p-6 sm:p-7">
@@ -151,7 +140,8 @@ export default function PriceGrid({
         <p className="mt-3 text-sm text-muted">
           Für {dateLabel(windowStart, { day: "2-digit", month: "short" })} bis{" "}
           {dateLabel(windowEnd, { day: "2-digit", month: "short" })} lässt sich kein Preis rechnen.
-          Ein größeres Zeitfenster oder eine andere Dauer bringt meist Treffer.
+          Ein größeres Zeitfenster, eine andere Dauer oder ein weiterer Preisbereich bringt meist
+          Treffer.
         </p>
       </section>
     );
@@ -201,13 +191,14 @@ export default function PriceGrid({
 
       {/* Dauer: hier steht die Antwort auf „spare ich, wenn ich einen Tag später ende?“ */}
       <div className="mt-6">
-        <p className="label">Dauer · Unterschied für Start {dateLabel(start, { day: "2-digit", month: "short" })}</p>
+        <p className="label">
+          Dauer · Unterschied für Start {dateLabel(start, { day: "2-digit", month: "short" })}
+        </p>
         <div className="mt-2.5 -mx-1 flex gap-2 overflow-x-auto px-1 pb-1.5">
           {durations.map((n) => {
             const zelle = byKey.get(key(start, n));
             const aktiv = n === dauer;
-            const diff =
-              zelle && gewaehlt ? zelle.total_cents - gewaehlt.total_cents : null;
+            const diff = zelle && gewaehlt ? zelle.total_cents - gewaehlt.total_cents : null;
             return (
               <button
                 key={n}
@@ -248,67 +239,113 @@ export default function PriceGrid({
         </div>
       </div>
 
-      {/* Startdatum: der eigentliche Preiskalender. */}
-      <div className="mt-6">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <p className="label">Übernahme · Gesamtpreis für {dauer} Nächte</p>
-          <div className="flex items-center gap-3 text-[0.7rem] text-muted">
-            {(["guenstig", "normal", "teuer"] as Niveau[]).map((n) => (
-              <span key={n} className="inline-flex items-center gap-1.5">
-                <span className={`h-2 w-2 rounded-full ${NIVEAU_PUNKT[n]}`} aria-hidden />
-                {NIVEAU_TEXT[n]}
-              </span>
-            ))}
-          </div>
+      {/* Drei Blickwinkel auf dieselbe Rechnung. */}
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <div className="flex flex-wrap gap-0.5 rounded-full border border-line bg-surface-muted p-1 text-sm">
+          {ANSICHTEN.filter((a) => a.key !== "boote" || rows.length).map((a) => (
+            <button
+              key={a.key}
+              type="button"
+              onClick={() => setAnsicht(a.key)}
+              aria-pressed={ansicht === a.key}
+              title={a.hint}
+              className={`rounded-full px-3 py-1.5 transition-colors ${
+                ansicht === a.key
+                  ? "bg-surface font-medium text-foreground shadow-sm"
+                  : "text-muted hover:text-foreground"
+              }`}
+            >
+              {a.label}
+            </button>
+          ))}
         </div>
-
-        <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-7">
-          {startDates.map((tag) => {
-            const zelle = byKey.get(key(tag, dauer));
-            const aktiv = tag === start;
-            const label = (
-              <>
-                <span className="block text-[0.7rem] uppercase tracking-wider text-faint">
-                  {dateLabel(tag, { day: "2-digit", month: "2-digit" })}
-                </span>
-                <span className="tnum mt-0.5 block text-sm font-semibold">
-                  {zelle ? money(zelle.total_cents) : "–"}
-                </span>
-              </>
-            );
-            if (!zelle) {
-              return (
-                <div
-                  key={tag}
-                  title={`${dauer} Nächte ab diesem Tag nicht verfügbar`}
-                  className="rounded-xl border border-dashed border-line bg-surface-muted px-2 py-2.5 text-center opacity-70"
-                >
-                  {label}
-                </div>
-              );
-            }
-            const stufe = niveau(zelle);
-            return (
-              <button
-                key={tag}
-                type="button"
-                onClick={() => setStart(tag)}
-                aria-pressed={aktiv}
-                title={
-                  showBoat
-                    ? `${zelle.boat_name}${zelle.boat_count > 1 ? ` und ${zelle.boat_count - 1} weitere` : ""} · ${money(zelle.per_day_cents)}/Nacht`
-                    : `${money(zelle.per_day_cents)}/Nacht`
-                }
-                className={`rounded-xl border px-2 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-sm ${
-                  aktiv ? "border-accent bg-accent-soft shadow-sm" : NIVEAU_ZELLE[stufe]
-                }`}
-              >
-                {label}
-              </button>
-            );
-          })}
+        <div className="flex items-center gap-3 text-[0.7rem] text-muted">
+          {NIVEAUS.map((n) => (
+            <span key={n} className="inline-flex items-center gap-1.5">
+              <span className={`h-2 w-2 rounded-full ${PUNKT[n]}`} aria-hidden />
+              {NIVEAU_TEXT[n]}
+            </span>
+          ))}
         </div>
       </div>
+
+      {ansicht === "kalender" ? (
+        <div className="mt-3">
+          <p className="label">Übernahme · Gesamtpreis für {dauer} Nächte</p>
+          <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-7">
+            {startDates.map((tag) => {
+              const zelle = byKey.get(key(tag, dauer));
+              const aktiv = tag === start;
+              const inhalt = (
+                <>
+                  <span className="block text-[0.7rem] uppercase tracking-wider text-faint">
+                    {dateLabel(tag, { day: "2-digit", month: "2-digit" })}
+                  </span>
+                  <span className="tnum mt-0.5 block text-sm font-semibold">
+                    {zelle ? money(zelle.total_cents) : "–"}
+                  </span>
+                </>
+              );
+              if (!zelle) {
+                return (
+                  <div
+                    key={tag}
+                    title={`${dauer} Nächte ab diesem Tag nicht verfügbar`}
+                    className="rounded-xl border border-dashed border-line bg-surface-muted px-2 py-2.5 text-center opacity-70"
+                  >
+                    {inhalt}
+                  </div>
+                );
+              }
+              const stufe = niveauVon(zelle.total_cents, bezugJeDauer.get(zelle.nights));
+              return (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => setStart(tag)}
+                  aria-pressed={aktiv}
+                  title={
+                    showBoat
+                      ? `${zelle.boat_name}${zelle.boat_count > 1 ? ` und ${zelle.boat_count - 1} weitere` : ""} · ${money(zelle.per_day_cents)}/Nacht`
+                      : `${money(zelle.per_day_cents)}/Nacht`
+                  }
+                  className={`rounded-xl border px-2 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-sm ${
+                    aktiv ? "border-accent bg-accent-soft shadow-sm" : ZELLE[stufe]
+                  }`}
+                >
+                  {inhalt}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+
+      {ansicht === "raster" ? (
+        <DateMatrix
+          cells={cells}
+          anchor={start}
+          selectedNights={dauer}
+          onPick={(c) => {
+            setStart(c.start_date);
+            setDauer(c.nights);
+          }}
+        />
+      ) : null}
+
+      {ansicht === "boote" && rows.length ? (
+        <BoatMatrix
+          rows={rows}
+          focusNights={focusNights ?? dauer}
+          selectedNights={dauer}
+          reloadHref={nightsHref(dauer)}
+          selectedStart={start}
+          onPickStart={(t) => {
+            setStart(t);
+            if (focusNights) setDauer(focusNights);
+          }}
+        />
+      ) : null}
 
       {/* Die Auswahl im Klartext, dann der Weg dorthin. */}
       {gewaehlt ? (
@@ -356,9 +393,8 @@ export default function PriceGrid({
       ) : null}
 
       <p className="mt-3 text-xs leading-relaxed text-faint">
-        Farbe vergleicht innerhalb derselben Dauer: grün heißt günstig für {dauer} Nächte, nicht
-        günstig gegenüber einem kürzeren Törn. Preise sind Gesamtpreise inklusive Nebenkosten und
-        werden beim Buchen erneut bestätigt.
+        Preise sind Gesamtpreise inklusive Nebenkosten und werden beim Buchen erneut bestätigt.
+        {rows.length ? ` Die Bootsansicht zeigt die ${rows.length} günstigsten Schiffe.` : ""}
       </p>
     </section>
   );

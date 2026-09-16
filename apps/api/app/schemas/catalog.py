@@ -183,10 +183,31 @@ class PriceCellOut(BaseModel):
     boat_count: int = 1
 
 
+class BoatPriceOut(BaseModel):
+    start_date: date
+    total_cents: int
+    per_day_cents: int
+
+
+class BoatRowOut(BaseModel):
+    """Ein Boot mit seinen Preisen über die Tage, für die Fokusdauer."""
+
+    boat_id: str
+    slug: str
+    name: str
+    length_m: float
+    base_name: str
+    character_axis: float | None = None
+    cheapest_total_cents: int | None = None
+    prices: list[BoatPriceOut] = Field(default_factory=list)
+
+
 class PriceGridOut(BaseModel):
     window_start: date
     window_end: date
     durations: list[int]
+    focus_nights: int
     cells: list[PriceCellOut] = Field(default_factory=list)
+    rows: list[BoatRowOut] = Field(default_factory=list)
     boats_considered: int = 0
     truncated: bool = False

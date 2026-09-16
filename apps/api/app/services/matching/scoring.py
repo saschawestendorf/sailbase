@@ -17,6 +17,9 @@ class CrewProfile:
     experience_nm: int = 0
     tallest_person_cm: int | None = None
     preferred_character: list[str] = field(default_factory=list)
+    # Schiebereglerposition -1 (seetüchtig/klassisch) .. 0 (Fahrtenkreuzer) .. +1 (sportlich).
+    # Gesetzt schlägt sie die Schlagwortliste: eine Zahl lässt sich abstufen, eine Menge nicht.
+    character_axis: float | None = None
     budget_total_cents: int | None = None
     wanted_features: list[str] = field(default_factory=list)
     min_cabins: int | None = None
@@ -38,6 +41,31 @@ class FitResult:
     score: float
     reasons: list[str]
     blockers: list[str]
+
+
+# Der Segelcharakter als eine Achse, von seetüchtig/klassisch über den
+# Familienfahrtenkreuzer bis zur Sportyacht. Ein Schieberegler braucht eine Zahl,
+# keine Menge von Schlagworten: -1 ist das eine Ende, +1 das andere, 0 die Mitte.
+#
+# Die Werte sind eine Einordnung der Plattform, keine Herstellerangabe. Ein Boot
+# trägt meist mehrere Eigenschaften; seine Position ist deren Mittel.
+CHARACTER_AXIS: dict[str, float] = {
+    BoatCharacter.BLUEWATER.value: -1.0,
+    BoatCharacter.CLASSIC.value: -0.75,
+    BoatCharacter.GOOD_NATURED.value: -0.1,
+    BoatCharacter.COMFORT.value: 0.0,
+    BoatCharacter.SPORTY.value: 1.0,
+}
+
+# Ab welcher Entfernung auf der Achse ein Boot als unpassend gilt. Zwei Boote am
+# selben Ende liegen enger beieinander als eine Sportyacht und ein Fahrtenschiff.
+AXIS_TOLERANZ = 1.2
+
+
+def boat_character_axis(boat: Boat) -> float | None:
+    """Position des Boots auf der Charakterachse, oder None ohne Angabe."""
+    werte = [CHARACTER_AXIS[c] for c in (boat.character or []) if c in CHARACTER_AXIS]
+    return sum(werte) / len(werte) if werte else None
 
 
 DEFAULT_WEIGHTS = ScoreWeights()
@@ -76,7 +104,16 @@ def score(
     # Character
     max_total += weights.character
     chars = set(boat.character or [])
-    if crew.preferred_character:
+    if crew.character_axis is not None:
+        wo = boat_character_axis(boat)
+        if wo is None:
+            total += weights.character * 0.5  # nicht eingeordnet, nicht bestrafen
+        else:
+            naehe = max(0.0, 1.0 - abs(wo - crew.character_axis) / AXIS_TOLERANZ)
+            total += weights.character * naehe
+            if naehe >= 0.75:
+                reasons.append("Segelcharakter passt: " + _axis_label(wo))
+    elif crew.preferred_character:
         wanted = set(crew.preferred_character)
         hit = chars & wanted
         ratio = len(hit) / len(wanted)
@@ -145,6 +182,19 @@ def score(
         total += weights.budget * 0.6
 
     return FitResult(ok=True, score=round(100 * total / max_total, 1), reasons=reasons, blockers=[])
+
+
+def _axis_label(position: float) -> str:
+    """Klartext für eine Achsenposition – das Raster nennt sie, nicht die Zahl."""
+    if position <= -0.6:
+        return "seetüchtig, klassisch"
+    if position <= -0.2:
+        return "gutmütiger Fahrtenkreuzer"
+    if position < 0.3:
+        return "Familienfahrtenkreuzer"
+    if position < 0.7:
+        return "sportlich getrimmt"
+    return "Sportyacht"
 
 
 def _char_label(c: str) -> str:

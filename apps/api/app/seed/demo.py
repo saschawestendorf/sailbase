@@ -785,6 +785,19 @@ def enrich_quotes(db: Session) -> None:
     db.flush()
 
 
+def _erster_freier_zeitraum(
+    db: Session, boat: Boat, *, nights: int, ab_tagen: int, bis_tagen: int
+) -> tuple[date, date] | None:
+    """Der erste Zeitraum im Suchbereich, in dem das Boot wirklich frei ist."""
+    sperren = db.query(AvailabilityBlock).filter(AvailabilityBlock.boat_id == boat.id).all()
+    for versatz in range(ab_tagen, bis_tagen):
+        start = date.today() + timedelta(days=versatz)
+        end = start + timedelta(days=nights)
+        if not any(b.start_date < end and b.end_date > start for b in sperren):
+            return start, end
+    return None
+
+
 def add_one_way_booking(db: Session) -> None:
     """Eine Buchung, die in einem anderen Hafen endet.
 
@@ -802,19 +815,13 @@ def add_one_way_booking(db: Session) -> None:
     if boat is None or not boat.one_way_base_ids:
         return
     dropoff_id = boat.one_way_base_ids[0]
-    start = date.today() + timedelta(days=24)
-    end = start + timedelta(days=6)
-    overlapping = (
-        db.query(AvailabilityBlock)
-        .filter(
-            AvailabilityBlock.boat_id == boat.id,
-            AvailabilityBlock.start_date < end,
-            AvailabilityBlock.end_date > start,
-        )
-        .first()
-    )
-    if overlapping:
+    # Ein fester Abstand zu heute trifft je nach Tag auf eine belegte Woche, und
+    # dann fehlte das One-Way-Beispiel im Bestand — ohne dass es jemand merkt,
+    # bis die Ansicht leer bleibt. Also wird gesucht, nicht geraten.
+    zeitraum = _erster_freier_zeitraum(db, boat, nights=6, ab_tagen=24, bis_tagen=300)
+    if zeitraum is None:
         return
+    start, end = zeitraum
     nights = (end - start).days
     reference = boat.pricing.reference_price_cents if boat.pricing else 25000
     total = reference * nights + boat.cleaning_fee_cents + boat.one_way_fee_cents

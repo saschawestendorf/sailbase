@@ -181,3 +181,97 @@ def test_guenstigster_torn_rechnet_pro_nacht(db, dates):
     fuer_sieben = grid.cheapest_for(7)
     assert fuer_sieben is not None and fuer_sieben.nights == 7
     assert fuer_sieben.total_cents == min(c.total_cents for c in grid.cells if c.nights == 7)
+
+
+def test_bootszeilen_zeigen_dieselben_preise_wie_die_zellen(client, window):
+    """Sonst widerspräche die Bootsansicht dem Raster darüber."""
+    start, end = window
+    data = client.get("/search/price-grid", params=_params(start, end, focus_nights=7)).json()
+    assert data["focus_nights"] == 7
+    assert data["rows"], "Keine Bootszeile"
+
+    zellen = {c["start_date"]: c for c in data["cells"] if c["nights"] == 7}
+    for zeile in data["rows"]:
+        assert zeile["prices"], f"{zeile['name']} hat keine Preise"
+        for preis in zeile["prices"]:
+            zelle = zellen.get(preis["start_date"])
+            assert zelle is not None, "Bootspreis an einem Tag ohne Zelle"
+            # Die Zelle ist das Minimum – kein Boot darf darunter liegen.
+            assert preis["total_cents"] >= zelle["total_cents"]
+        assert zeile["cheapest_total_cents"] == min(p["total_cents"] for p in zeile["prices"])
+
+
+def test_jede_zelle_wird_von_mindestens_einem_boot_gedeckt(client, window):
+    start, end = window
+    data = client.get("/search/price-grid", params=_params(start, end, focus_nights=7, max_rows=30)).json()
+    zellen = {c["start_date"]: c["total_cents"] for c in data["cells"] if c["nights"] == 7}
+    gedeckt = {
+        p["start_date"]
+        for zeile in data["rows"]
+        for p in zeile["prices"]
+        if p["total_cents"] == zellen.get(p["start_date"])
+    }
+    assert gedeckt == set(zellen), "Zellen ohne passendes Boot in den Zeilen"
+
+
+def test_bootszeilen_sind_gedeckelt_und_nach_preis_sortiert(client, window):
+    start, end = window
+    data = client.get("/search/price-grid", params=_params(start, end, max_rows=3)).json()
+    assert len(data["rows"]) <= 3
+    preise = [r["cheapest_total_cents"] for r in data["rows"]]
+    assert preise == sorted(preise), "Nicht nach günstigstem Preis sortiert"
+
+
+def test_preisbereich_greift_nach_unten_und_oben(client, window):
+    start, end = window
+    offen = client.get("/search/price-grid", params=_params(start, end)).json()["cells"]
+    preise = sorted(c["total_cents"] for c in offen)
+    unten, oben = preise[len(preise) // 4], preise[-len(preise) // 4]
+    eng = client.get(
+        "/search/price-grid", params=_params(start, end, min_price=unten, max_price=oben)
+    ).json()["cells"]
+    assert eng, "Der Bereich lässt nichts übrig, obwohl er aus echten Preisen stammt"
+    assert all(unten <= c["total_cents"] <= oben for c in eng)
+    assert len(eng) < len(offen)
+
+
+def test_charakterachse_sortiert_die_flotte_um(client, window):
+    """Der Schieberegler muss die Reihenfolge sichtbar verändern, sonst tut er nichts."""
+    start, end = window
+
+    def erste_boote(achse: float) -> list[str]:
+        r = client.get(
+            "/search",
+            params={
+                "start_date": start.isoformat(),
+                "end_date": (start + timedelta(days=7)).isoformat(),
+                "persons": 2,
+                "license_level": 2,
+                "experience_nm": 2000,
+                "character_axis": achse,
+                "sort": "fit",
+            },
+        )
+        assert r.status_code == 200, r.text
+        return [h["boat"]["slug"] for h in r.json()["hits"]]
+
+    seetuechtig = erste_boote(-1.0)
+    sportlich = erste_boote(1.0)
+    assert seetuechtig and sportlich
+    assert seetuechtig[0] != sportlich[0], "Die Achse ändert nichts an der Passung"
+
+
+def test_die_achse_ordnet_die_boote_wie_erwartet(db):
+    """Eine Sportyacht muss rechts liegen, ein Fahrtenschiff links."""
+    from app.models import Boat
+    from app.services.matching import boat_character_axis
+
+    for boat in db.query(Boat).all():
+        achse = boat_character_axis(boat)
+        if achse is None:
+            continue
+        assert -1.0 <= achse <= 1.0
+        if "sporty" in (boat.character or []) and len(boat.character) == 1:
+            assert achse > 0.5
+        if "bluewater" in (boat.character or []) and "sporty" not in (boat.character or []):
+            assert achse < 0.0

@@ -112,6 +112,7 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
       // Das Fenster muss die längste gezeigte Dauer aufnehmen können, sonst
       // hätte ein langer Törn kein einziges Vergleichsdatum.
       window_end: addDays(rasterStart, Math.max(60, rasterMax + 7)),
+      focus_nights: nights,
       min_nights: rasterMin,
       max_nights: rasterMax,
       persons,
@@ -265,6 +266,7 @@ export default async function BoatPage(props: PageProps<"/boats/[slug]">) {
               key={`${grid.window_start}|${startDate}|${nights}`}
               cells={grid.cells}
               durations={grid.durations}
+              focusNights={grid.focus_nights}
               windowStart={grid.window_start}
               windowEnd={grid.window_end}
               truncated={grid.truncated}

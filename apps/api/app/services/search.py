@@ -25,6 +25,10 @@ class SearchQuery:
     boat_class_slug: str | None = None
     min_length_m: float | None = None
     max_length_m: float | None = None
+    # Preisbereich als Gesamtpreis. Er wirkt auf Angebote, nicht auf Boote: ein
+    # Boot kann in der einen Woche im Rahmen liegen und in der nächsten nicht.
+    min_total_cents: int | None = None
+    max_total_cents: int | None = None
     sort: str = "fit"  # fit | price_asc | price_desc | length_desc
     include_unavailable: bool = False
     offers_per_boat: int = 5
@@ -79,6 +83,14 @@ def candidates(db: Session, q: SearchQuery) -> list[Boat]:
     return list(db.execute(stmt).scalars().unique().all())
 
 
+def _in_price_range(total_cents: int, q: SearchQuery) -> bool:
+    if q.min_total_cents and total_cents < q.min_total_cents:
+        return False
+    if q.max_total_cents and total_cents > q.max_total_cents:
+        return False
+    return True
+
+
 def search(db: Session, q: SearchQuery) -> list[SearchHit]:
     hits: list[SearchHit] = []
     for boat in candidates(db, q):
@@ -129,6 +141,10 @@ def search(db: Session, q: SearchQuery) -> list[SearchHit]:
                 hit.offers = offers
                 if not offers:
                     hit.available, hit.unavailable_reason = False, "Kein passendes Angebot im Zeitraum"
+        if hit.offers and (q.min_total_cents or q.max_total_cents):
+            hit.offers = [o for o in hit.offers if _in_price_range(o.total_cents, q)]
+            if not hit.offers:
+                hit.available, hit.unavailable_reason = False, "Kein Angebot im Preisbereich"
         if hit.offers:
             best = hit.offers[0]
             hit.total_cents, hit.per_day_cents, hit.breakdown = (

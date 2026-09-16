@@ -11,6 +11,12 @@ Zwei Betriebsarten, eine Rechnung:
 * über die Flotte (Suchseite): jede Zelle nennt das günstigste passende Boot,
 * über ein Boot (Bootsseite): dieselbe Rechnung mit `boat_slug` eingegrenzt.
 
+Zusätzlich fällt eine Bootszeile je Schiff ab (`rows`): derselbe Rechengang,
+nur nicht zum Minimum verdichtet. Damit lässt sich nebeneinanderlegen, welches
+Boot an welchem Tag was kostet, statt nur das jeweils günstigste zu sehen. Diese
+Zeilen tragen bewusst nur die **Fokusdauer** — alle Dauern je Boot wären ein
+Vielfaches an Daten für eine Ansicht, die ohnehin eine Dauer zeigt.
+
 Aufwand: Boote × Starttage × Dauern. Das ist absichtlich gedeckelt (siehe
 `MAX_EVALUATIONS`), denn ein offenes Fenster über eine wachsende Flotte wäre
 sonst eine Einladung, den Dienst mit einer einzigen Anfrage lahmzulegen. Wird
@@ -25,7 +31,7 @@ from sqlalchemy.orm import Session
 
 from app.models import Boat
 from app.services import search as search_service
-from app.services.matching import CrewProfile, hard_filter
+from app.services.matching import CrewProfile, boat_character_axis, hard_filter
 from app.services.offers import OfferContext
 
 # Obergrenze für bepreiste Kombinationen je Anfrage. 20.000 sind bei der
@@ -47,6 +53,10 @@ class GridQuery:
     max_nights: int
     crew: CrewProfile
     boat_slug: str | None = None
+    # Dauer, für die die Bootszeilen gerechnet werden. Ohne Angabe die kürzeste.
+    focus_nights: int | None = None
+    # Untergrenze des Preisbereichs; die Obergrenze steckt in crew.budget_total_cents.
+    min_price_cents: int | None = None
     region_slug: str | None = None
     base_id: str | None = None
     pickup_base_id: str | None = None
@@ -55,6 +65,16 @@ class GridQuery:
     min_length_m: float | None = None
     max_length_m: float | None = None
     max_boats: int = 60
+    # Wie viele Boote als eigene Zeile zurückkommen. Mehr liest niemand
+    # nebeneinander, und jede Zeile kostet Übertragung.
+    max_rows: int = 12
+
+    @property
+    def fokus(self) -> int:
+        durations = self.durations
+        if self.focus_nights in durations:
+            return self.focus_nights  # type: ignore[return-value]
+        return durations[0] if durations else max(1, self.min_nights)
 
     @property
     def durations(self) -> list[int]:
@@ -92,11 +112,59 @@ class Cell:
 
 
 @dataclass
+class BoatPrice:
+    """Was dieses eine Boot an diesem Starttag kostet."""
+
+    start_date: date
+    total_cents: int
+    per_day_cents: int
+
+    def to_dict(self) -> dict:
+        return {
+            "start_date": self.start_date.isoformat(),
+            "total_cents": self.total_cents,
+            "per_day_cents": self.per_day_cents,
+        }
+
+
+@dataclass
+class BoatRow:
+    """Ein Boot mit seinen Preisen über die Tage – eine Zeile der Bootsansicht."""
+
+    boat_id: str
+    slug: str
+    name: str
+    length_m: float
+    base_name: str
+    character_axis: float | None
+    prices: list[BoatPrice] = field(default_factory=list)
+
+    @property
+    def cheapest(self) -> BoatPrice | None:
+        return min(self.prices, key=lambda p: p.total_cents) if self.prices else None
+
+    def to_dict(self) -> dict:
+        guenstigster = self.cheapest
+        return {
+            "boat_id": self.boat_id,
+            "slug": self.slug,
+            "name": self.name,
+            "length_m": self.length_m,
+            "base_name": self.base_name,
+            "character_axis": self.character_axis,
+            "cheapest_total_cents": guenstigster.total_cents if guenstigster else None,
+            "prices": [p.to_dict() for p in self.prices],
+        }
+
+
+@dataclass
 class PriceGrid:
     window_start: date
     window_end: date
     durations: list[int]
+    focus_nights: int
     cells: list[Cell] = field(default_factory=list)
+    rows: list[BoatRow] = field(default_factory=list)
     boats_considered: int = 0
     evaluations: int = 0
     truncated: bool = False
@@ -145,7 +213,13 @@ def _boats(db: Session, q: GridQuery) -> list[Boat]:
 
 def build(db: Session, q: GridQuery, today: date | None = None) -> PriceGrid:
     durations = q.durations
-    grid = PriceGrid(window_start=q.window_start, window_end=q.window_end, durations=durations)
+    fokus = q.fokus
+    grid = PriceGrid(
+        window_start=q.window_start,
+        window_end=q.window_end,
+        durations=durations,
+        focus_nights=fokus,
+    )
     window_days = (q.window_end - q.window_start).days
     if window_days <= 0 or not durations:
         return grid
@@ -153,6 +227,7 @@ def build(db: Session, q: GridQuery, today: date | None = None) -> PriceGrid:
     boats = _boats(db, q)
     grid.boats_considered = len(boats)
     best: dict[tuple[date, int], Cell] = {}
+    rows: list[BoatRow] = []
 
     for boat in boats:
         ctx = OfferContext(
@@ -164,6 +239,14 @@ def build(db: Session, q: GridQuery, today: date | None = None) -> PriceGrid:
             pickup_base_id=q.pickup_base_id,
             dropoff_base_id=q.dropoff_base_id,
         )
+        zeile = BoatRow(
+            boat_id=boat.id,
+            slug=boat.slug,
+            name=boat.name,
+            length_m=boat.length_m,
+            base_name=boat.base.name if boat.base else "",
+            character_axis=boat_character_axis(boat),
+        )
         for offset in range(window_days):
             day = q.window_start + timedelta(days=offset)
             for nights in durations:
@@ -172,7 +255,9 @@ def build(db: Session, q: GridQuery, today: date | None = None) -> PriceGrid:
                     break
                 if grid.evaluations >= MAX_EVALUATIONS:
                     grid.truncated = True
-                    return _finish(grid, best)
+                    if zeile.prices:
+                        rows.append(zeile)
+                    return _finish(grid, best, rows, q.max_rows)
                 grid.evaluations += 1
                 ok, _reason = ctx.is_free(day, end)
                 if not ok:
@@ -183,10 +268,16 @@ def build(db: Session, q: GridQuery, today: date | None = None) -> PriceGrid:
                     continue
                 if not offer:
                     continue
-                # Budget gilt pro Zelle, nicht pro Boot: dasselbe Boot kann in der
-                # einen Woche im Rahmen liegen und in der nächsten darüber.
-                if q.crew.budget_total_cents and res.total_cents > q.crew.budget_total_cents:
+                if not _im_preisbereich(res.total_cents, q):
                     continue
+                if nights == fokus:
+                    zeile.prices.append(
+                        BoatPrice(
+                            start_date=day,
+                            total_cents=res.total_cents,
+                            per_day_cents=res.per_day_cents,
+                        )
+                    )
                 key = (day, nights)
                 current = best.get(key)
                 if current is None:
@@ -214,11 +305,35 @@ def build(db: Session, q: GridQuery, today: date | None = None) -> PriceGrid:
                             boat_name=boat.name,
                             boat_count=current.boat_count,
                         )
-    return _finish(grid, best)
+        if zeile.prices:
+            rows.append(zeile)
+    return _finish(grid, best, rows, q.max_rows)
 
 
-def _finish(grid: PriceGrid, best: dict[tuple[date, int], Cell]) -> PriceGrid:
+def _im_preisbereich(total_cents: int, q: GridQuery) -> bool:
+    """Der Preisbereich gilt je Zelle, nicht je Boot.
+
+    Dasselbe Boot kann in der einen Woche im Rahmen liegen und in der nächsten
+    darüber — ein Filter auf Bootsebene würde es fälschlich ganz ausschließen.
+    """
+    if q.min_price_cents and total_cents < q.min_price_cents:
+        return False
+    if q.crew.budget_total_cents and total_cents > q.crew.budget_total_cents:
+        return False
+    return True
+
+
+def _finish(
+    grid: PriceGrid,
+    best: dict[tuple[date, int], Cell],
+    rows: list[BoatRow],
+    max_rows: int,
+) -> PriceGrid:
     grid.cells = sorted(best.values(), key=lambda c: (c.start_date, c.nights))
+    # Die günstigsten Boote zuerst: wer die Ansicht öffnet, sucht den Preis, und
+    # eine Liste nach Zufall wäre für den Vergleich wertlos.
+    rows.sort(key=lambda r: (r.cheapest.total_cents if r.cheapest else 10**12, r.name))
+    grid.rows = rows[: max(1, max_rows)]
     return grid
 
 
